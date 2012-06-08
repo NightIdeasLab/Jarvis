@@ -1,0 +1,33 @@
+Jarvis for Mac OS X
+
+This software is still in beta version.
+
+This is a work in progress.
+Some stuff are not working and I hope i will have time to fix them.
+Check the ChangeLog file to see what is working. http://goo.gl/0GUKo
+
+The code is written by physicistjedi i just upload it to Github, make some modifications to make it work and added other stuff.
+The original page http://goo.gl/MSthr
+
+This my morning alarm clock. Design question here is not how it looks like, or how it sounds like. The question is what do you want to hear in the morning in your bed. Currently it gathers and reads the following:
+* Greetings
+* Time and date
+* Calendar events
+* To-do list
+* Weather conditions
+* Unread email count and VIP email count
+* Location of tracked packages
+* News headlines
+* Daily quotations
+
+For obvious reasons it is called Jarvis.
+
+Icon by Yellow Icon
+
+Minimum Mac OS X version is 10.5 Leopard
+
+
+Disclaimer
+
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
