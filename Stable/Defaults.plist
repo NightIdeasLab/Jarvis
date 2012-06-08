@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AutoUpdateBeta</key>
+	<false/>
+	<key>CheckDownload</key>
+	<false/>
+	<key>CheckQuit</key>
+	<true/>
+	<key>CreatorLocation</key>
+	<string>~/Desktop</string>
+	<key>WarningDonate</key>
+	<true/>
+	<key>WarningInfo</key>
+	<true/>
+	<key>FirstLaunch</key>
+	<integer>0</integer>
+</dict>
+</plist>
