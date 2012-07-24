@@ -10,6 +10,7 @@
 		001976911475820E003C43BE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001976901475820E003C43BE /* Sparkle.framework */; };
 		0019769414758296003C43BE /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 001976901475820E003C43BE /* Sparkle.framework */; };
 		001976961475866C003C43BE /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 001976951475866C003C43BE /* dsa_pub.pem */; };
+		00220CA915A6FB14000EC846 /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 00220CA815A6FB14000EC846 /* TODO */; };
 		002624FB14BE27DF000FEECB /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 002624FA14BE27DF000FEECB /* COPYING */; };
 		0029C49D150CFC600010022B /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0029C49C150CFC600010022B /* PreferencesController.m */; };
 		0029C4A1150CFCD90010022B /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0029C4A0150CFCD90010022B /* Preferences.xib */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		001976901475820E003C43BE /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		001976951475866C003C43BE /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		00220CA815A6FB14000EC846 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		002624FA14BE27DF000FEECB /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
 		0029C49B150CFC600010022B /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
 		0029C49C150CFC600010022B /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
@@ -67,7 +69,6 @@
 		008B706F15823F090018923E /* NSString+SymlinksAndAliases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SymlinksAndAliases.m"; sourceTree = "<group>"; };
 		008B707115823F090018923E /* PFMoveApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFMoveApplication.m; sourceTree = "<group>"; };
 		008B70751582432D0018923E /* PFMoveApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFMoveApplication.h; sourceTree = "<group>"; };
-		008D3A2814769BB800D907BC /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = "<group>"; };
 		00915D78150D077500BDD115 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		00915D7B150D078900BDD115 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		00915D7C150D078900BDD115 /* SecurityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityFoundation.framework; path = System/Library/Frameworks/SecurityFoundation.framework; sourceTree = SDKROOT; };
@@ -124,7 +125,7 @@
 			children = (
 				00BE164514D34073005C3E34 /* htdocs */,
 				00A32EF814790FEF00BC1EB2 /* JarvisHelp */,
-				008D3A2814769BB800D907BC /* TODO */,
+				00220CA815A6FB14000EC846 /* TODO */,
 				002624FA14BE27DF000FEECB /* COPYING */,
 				001976951475866C003C43BE /* dsa_pub.pem */,
 				0271667F0EF3761000B62633 /* Jarvis.icns */,
@@ -287,6 +288,7 @@
 				00BE164614D34073005C3E34 /* htdocs in Resources */,
 				0029C4A1150CFCD90010022B /* Preferences.xib in Resources */,
 				0029C4AA150D05C30010022B /* Defaults.plist in Resources */,
+				00220CA915A6FB14000EC846 /* TODO in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
