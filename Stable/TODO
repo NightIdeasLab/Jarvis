@@ -2,6 +2,7 @@ A TODO list
 
 a) Important/Urgent
 
+- Fix send Automatic System Profiler from Preference Panel.
 - To separate everything in little parts.
 - To make that when i click on the dock icon (if i close the main window) the app should reopen. Same for the windows because in this moment you close it and you cannot reopen it.
 - Add a feedback panel
