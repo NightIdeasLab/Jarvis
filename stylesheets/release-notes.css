@@ -1,0 +1,70 @@
+#main-feature h2 span {
+	font-size: 70px;
+}
+
+#main-feature h2 {
+	line-height: 0.9;
+}
+
+#main-feature em {
+	display: block;
+	color: #777;
+	font-size: 19px;
+	padding-bottom: 3px;
+}
+
+#main-feature {
+	margin-right: 300px;
+}
+
+#main-content {
+	background: url(../images/big-divider.png) no-repeat 0 0;
+	margin-bottom: 60px;
+	padding-top: 40px;
+}
+
+#sidebar {
+    left: auto;
+    font-size: 150%;
+    line-height: 1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    right: 0px;
+    top: 375px;
+    width: 270px;
+}
+#side-menu {
+    display: none;
+}
+
+#main-content ul {
+	padding: 1em;
+}
+
+#sidebar ul {
+	padding: 0;
+	margin-left: 20px;
+}
+
+#sidebar li {
+	padding-bottom: 5px;
+}
+
+#sidebar h4 {
+	margin: 0;
+}
+
+#sidebar .sidebar-section {
+	margin-bottom: 20px;
+}
+
+div.expander-closed,
+div.expander-open {
+	margin-right: 300px;
+}
+
+#main-feature p {
+	font-size: 20px;
+}

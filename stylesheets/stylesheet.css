@@ -71,6 +71,7 @@ header h2 {
 #downloads .btn {
   display: inline-block;
   text-align: center;
+  text-decoration: none
   margin: 0;
 }
 
