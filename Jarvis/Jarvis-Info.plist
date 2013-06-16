@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleHelpBookFolder</key>
+	<string>JarvisHelp</string>
+	<key>CFBundleHelpBookName</key>
+	<string>Jarvis Help</string>
+	<key>CFBundleIconFile</key>
+	<string>Jarvis</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.NightIdeasLab.${PRODUCT_NAME:rfc1034identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>NSPrincipalClass</key>
+	<string>NSApplication</string>
+	<key>NSMainNibFile</key>
+	<string>App</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.4.3</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>4A3</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 1987-2013 Night Ideas Lab Inc. All rights reserved.</string>
+	<key>JRFeedbackURL</key>
+	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
+	<key>SUAllowsAutomaticUpdates</key>
+	<string>YES</string>
+	<key>SUEnableSystemProfiling</key>
+	<string>YES</string>
+	<key>SUFeedURL</key>
+	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
+	<key>UIRequiresPersistentWiFi</key>
+	<true/>
+</dict>
+</plist>

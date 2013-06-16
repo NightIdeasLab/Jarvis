@@ -1,0 +1,25 @@
+A TODO list
+
+a) Important|Urgent|Bugs
+
+- To separate everything in little parts.
+- Same for the windows because in this moment you close it and you cannot reopen it. (Solved I need to recreate the About an ChangeLog from scratch because they do not have a delegate in the File Owner)
+- Implement a automatic refresh for everything.
+- Add automatic location for the weather, 2 options use the system location or select one and add even a refresh rate with growl notifications if weather changed.
+- Test/fix the tracking, and add even a refresh rate with growl notifications if tracking changed.
+- Retrieve even the Priority of a Reminder.
+- To make a better rss feed reader and add even a refresh rate with growl notifications if the news change.
+- Create a menu bar icon and menu and a preferences option to show/hide the menu bar item or hide de icon in the dock.
+
+b) Features
+
+- To add a photo that will show the exact weather (sunny=sun, rainy=cloud with drops) or extract it from yahoo weather
+- To make tabs for twitter/Facebook
+- The startup/logged in time (the total processes running, etc)
+
+d) Unknown
+
+- To add an experiment tab and add some experimental features
+- Add iCloud sync (preferences, accounts)
+- Integrate it with Notification Center (Mountain Lion)
+- Add localizations
