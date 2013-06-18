@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
+		005BFCFC176FADCD00A2BE50 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */; };
+		005BFD00176FAF0A00A2BE50 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */; };
+		005BFD01176FAF0A00A2BE50 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
 		0094D444176A27340052079F /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D439176A27340052079F /* PrefUpdate.png */; };
@@ -41,8 +44,6 @@
 		00C7E6EC176B86C1008C2823 /* htdocs in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6EB176B86C1008C2823 /* htdocs */; };
 		00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6ED176B86FF008C2823 /* JarvisHelp */; };
 		00C7E6F1176B87FB008C2823 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6F0176B87FB008C2823 /* COPYING */; };
-		00CD5585176B9E260057FC4A /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD5582176B9E260057FC4A /* PreferencesController.m */; };
-		00CD5586176B9E260057FC4A /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CD5583176B9E260057FC4A /* PreferencesController.xib */; };
 		00CD5589176B9E520057FC4A /* LoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD5588176B9E520057FC4A /* LoginItems.m */; };
 		00CD558F176B9E5E0057FC4A /* JRFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD558B176B9E5E0057FC4A /* JRFeedbackController.m */; };
 		00CD5590176B9E5E0057FC4A /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CD558C176B9E5E0057FC4A /* JRFeedbackProvider.xib */; };
@@ -65,6 +66,11 @@
 
 /* Begin PBXFileReference section */
 		005491AD176A0590008A191D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		005BFCFA176FADCD00A2BE50 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBPrefsWindowController.h; path = Preferences/DBPrefsWindowController.h; sourceTree = "<group>"; };
+		005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = Preferences/DBPrefsWindowController.m; sourceTree = "<group>"; };
+		005BFCFD176FAF0A00A2BE50 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesController.h; path = Preferences/PreferencesController.h; sourceTree = "<group>"; };
+		005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesController.m; path = Preferences/PreferencesController.m; sourceTree = "<group>"; };
+		005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesController.xib; path = Preferences/PreferencesController.xib; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
 		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
 		0094D439176A27340052079F /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefUpdate.png; sourceTree = "<group>"; };
@@ -106,9 +112,6 @@
 		00C7E6ED176B86FF008C2823 /* JarvisHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JarvisHelp; sourceTree = "<group>"; };
 		00C7E6F0176B87FB008C2823 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = Jarvis/COPYING; sourceTree = "<group>"; };
 		00CD5580176B9E260057FC4A /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "Preference pane.rtf"; path = "Preferences/Preference pane.rtf"; sourceTree = "<group>"; };
-		00CD5581176B9E260057FC4A /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesController.h; path = Preferences/PreferencesController.h; sourceTree = "<group>"; };
-		00CD5582176B9E260057FC4A /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesController.m; path = Preferences/PreferencesController.m; sourceTree = "<group>"; };
-		00CD5583176B9E260057FC4A /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesController.xib; path = Preferences/PreferencesController.xib; sourceTree = "<group>"; };
 		00CD5587176B9E520057FC4A /* LoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginItems.h; path = Helpers/LoginItems.h; sourceTree = "<group>"; };
 		00CD5588176B9E520057FC4A /* LoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginItems.m; path = Helpers/LoginItems.m; sourceTree = "<group>"; };
 		00CD558A176B9E5E0057FC4A /* JRFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRFeedbackController.h; path = FeedBack/JRFeedbackController.h; sourceTree = "<group>"; };
@@ -146,9 +149,11 @@
 			isa = PBXGroup;
 			children = (
 				00CD5580176B9E260057FC4A /* Preference pane.rtf */,
-				00CD5581176B9E260057FC4A /* PreferencesController.h */,
-				00CD5582176B9E260057FC4A /* PreferencesController.m */,
-				00CD5583176B9E260057FC4A /* PreferencesController.xib */,
+				005BFCFD176FAF0A00A2BE50 /* PreferencesController.h */,
+				005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */,
+				005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */,
+				005BFCFA176FADCD00A2BE50 /* DBPrefsWindowController.h */,
+				005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -376,8 +381,8 @@
 				00C7E6EC176B86C1008C2823 /* htdocs in Resources */,
 				00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */,
 				00C7E6F1176B87FB008C2823 /* COPYING in Resources */,
-				00CD5586176B9E260057FC4A /* PreferencesController.xib in Resources */,
 				00CD5590176B9E5E0057FC4A /* JRFeedbackProvider.xib in Resources */,
+				005BFD01176FAF0A00A2BE50 /* PreferencesController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +395,11 @@
 			files = (
 				00AF0DE91769FBBC00C00AE3 /* main.m in Sources */,
 				00AF0DF01769FBBC00C00AE3 /* AppDelegate.m in Sources */,
-				00CD5585176B9E260057FC4A /* PreferencesController.m in Sources */,
 				00CD5589176B9E520057FC4A /* LoginItems.m in Sources */,
 				00CD558F176B9E5E0057FC4A /* JRFeedbackController.m in Sources */,
 				00CD5591176B9E5E0057FC4A /* NSURLRequest+postForm.m in Sources */,
+				005BFCFC176FADCD00A2BE50 /* DBPrefsWindowController.m in Sources */,
+				005BFD00176FAF0A00A2BE50 /* PreferencesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

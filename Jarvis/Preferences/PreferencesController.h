@@ -2,25 +2,28 @@
 //  PreferencesController.h
 //  Jarvis
 //
-//  Created by Gabriel Ulici on 6/13/13.
+//  Created by Gabriel Ulici on 6/17/13.
 //  Copyright (c) 2013 Night Ideas Lab Inc. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DBPrefsWindowController.h"
 
-#define DEFAULT_REFRESH_INTERVAL 30*60; // default to 30 minutes if none specified
+@interface PreferencesController : DBPrefsWindowController
+{
+    NSUserDefaults * fDefaults;
+    IBOutlet NSTextField *updateDateField;
+    IBOutlet NSTextField *profileDateField;
+}
 
-typedef enum {
-    NotificationTypeUserNotificationCenter = 0,
-    NotificationTypeGrowl = 1,
-    NotificationTypeDisabled = 2
-} NotificationType;
-
-@interface PreferencesController : NSWindowController
-
-- (id)initPreferencesController;
-- (void)showPreferences;
-- (IBAction)selectGeneralTab:(id)sender;
-- (IBAction)selectUpdateTab:(id)sender;
+@property (strong, nonatomic) IBOutlet NSView *generalPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *speechPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *timeAndDatePreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *icalAndRemaindersPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *weatherPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *emailPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *newsPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *quotationPreferenceView;
+@property (strong, nonatomic) IBOutlet NSView *updatePreferenceView;
 
 @end

@@ -8,6 +8,8 @@
 
 Inspired by the movie “Iron Man” starring Robert Downey Jr, i want to recreate a computer system like Jarvis.
 
+Jarvis is a digital life assistant that assists with your daily life by acting as an alarm clock, informing you of the latest news headlines and the forecast of the weather for the next 5 days amongst other things.
+
 For the moment the application can do:
 
 * Greetings

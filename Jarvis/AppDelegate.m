@@ -9,13 +9,15 @@
 #import "AppDelegate.h"
 #import <IOKit/IOMessage.h>
 
-#define DONATE_URL  @"http://nightideaslab.github.com/Jarvis/donate.html"
+#define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 #define woeidCode @"721943" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
 NSSpeechSynthesizer *synth;
 
 @implementation AppDelegate
+
+@synthesize preferencesController = _preferencesController;
 
 - (void)dealloc
 {
@@ -158,10 +160,28 @@ NSSpeechSynthesizer *synth;
 
 - (IBAction)openPreferences:(id)sender {
     
-    if (!self.preferencesController)
-        self.preferencesController = [[PreferencesController alloc] initPreferencesController];
+//    if (!self.preferencesController)
+//        self.preferencesController = [[PreferencesController alloc] initPreferencesController];
+//    
+//	[self.preferencesController showPreferences];
     
-	[self.preferencesController showPreferences];
+    //activate app
+    [NSApp activateIgnoringOtherApps:YES];
+    
+    //instantiate preferences window controller
+    if (_preferencesController) {
+        [_preferencesController release];
+        _preferencesController = nil;
+    }
+    //init from nib but the real initialization happens in the
+    //PreferencesWindowController setupToolbar method
+    _preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
+    
+    [_preferencesController showWindow:self];
+    //[[PreferencesWindowController sharedPrefsWindowController] showWindow:self];
+    
+    
+    
 }
 - (IBAction)sendFeedBack:(id)sender {
     [JRFeedbackController showFeedback];
@@ -191,12 +211,12 @@ NSSpeechSynthesizer *synth;
 
 - (IBAction)Homepage:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/3ctJU"]];
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/UIeKn"]];
 }
 
 - (IBAction)Issue:(id)sender
 {
-    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/1ye2X"]];
+    [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/4TCve"]];
 }
 
 - (IBAction)ChangeLog:(id)sender
@@ -247,14 +267,14 @@ NSSpeechSynthesizer *synth;
 	NSCalendarDate *date = [NSCalendarDate calendarDate];
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	
-	if([date hourOfDay]<4) text = NSLocalizedString(@"Good night.\n", @"Greeting in the night");
-	else if([date hourOfDay]<12) text = NSLocalizedString(@"Good morning.\n", @"Greeting in the morning");
-	else if([date hourOfDay]<18) text = NSLocalizedString(@"Good afternoon.\n", @"Greeting in the afternoon");
-	else text = NSLocalizedString(@"Good evening.\n", @"Greeting in the evening");
+	if([date hourOfDay]<4) text = NSLocalizedString(@"Good night, ", @"Greeting in the night");
+	else if([date hourOfDay]<12) text = NSLocalizedString(@"Good morning, ", @"Greeting in the morning");
+	else if([date hourOfDay]<18) text = NSLocalizedString(@"Good afternoon, ", @"Greeting in the afternoon");
+	else text = NSLocalizedString(@"Good evening, ", @"Greeting in the evening");
     
     //Reading the username
-    //    text = [text stringByAppendingString: NSUserName()];
-    //   text = [text stringByAppendingString:@".\n"];
+    text = [text stringByAppendingString: NSUserName()];
+    text = [text stringByAppendingString:@".\n"];
     
 	
 	text = [text stringByAppendingString: NSLocalizedString(@"It is ", @"Declares the time. Ex. It is 19:30")];
@@ -271,13 +291,12 @@ NSSpeechSynthesizer *synth;
     
     // iCal events
     text = [text stringByAppendingString:@"\n"];
-    text = [text stringByAppendingString:NSLocalizedString(@"iCal Events: \n", @"The name for the iCal Events")];
 	NSCalendarDate *endDate = [[NSCalendarDate dateWithYear:[date yearOfCommonEra] month:[date monthOfYear] day:[date dayOfMonth] hour:23 minute:59 second:59 timeZone:nil] retain];
 	NSPredicate *predicate = [CalCalendarStore eventPredicateWithStartDate:date endDate:endDate calendars:[[CalCalendarStore defaultCalendarStore] calendars]];
 	NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
-        text = [text stringByAppendingString:NSLocalizedString(@"You do not have any appoiments today!!!\n", @"This message will appear if you do not have any apoiments")];
+        text = [text stringByAppendingString:NSLocalizedString(@"You do not have any apoiments today!!!\n", @"This message will appear if you do not have any apoiments")];
     }
     else
     {
@@ -305,14 +324,11 @@ NSSpeechSynthesizer *synth;
     }
     // iCal Reminders
 	text = [text stringByAppendingString:@"\n"];
-    text = [text stringByAppendingString:NSLocalizedString(@"Reminders: \n", @"")];
-    
 	predicate = [CalCalendarStore taskPredicateWithCalendars:[[CalCalendarStore defaultCalendarStore] calendars]];
 	NSArray *tasks = [[CalCalendarStore defaultCalendarStore] tasksWithPredicate:predicate];
     if ([tasks count] == 0)
     {
    		text = [text stringByAppendingString:NSLocalizedString(@"You do not have any reminders today!!!\n", @"")];
-        text = [text stringByAppendingString:@".\n"];
     }
     else
     {
@@ -352,7 +368,7 @@ NSSpeechSynthesizer *synth;
 	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
 	weatherContent = weatherPage;
     
-    text = [text stringByAppendingString:NSLocalizedString(@"Forecast: \n", @"")];
+    text = [text stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
     if(weatherContent != nil)
 	{
 		if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)

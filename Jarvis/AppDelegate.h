@@ -37,6 +37,7 @@
 
 @property (nonatomic, strong) PreferencesController *preferencesController;
 
+
 - (NSWindow *)windowLM;
 
 @end
