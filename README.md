@@ -15,7 +15,7 @@ For the moment the application can do:
 * Greetings
 * Time and date
 * Calendar events
-* To-do list
+* Reminders
 * Weather conditions with a 5 day forecast (from Yahoo!)
 * Unread email count and VIP email count (from Apple Mail app)
 * News headlines (from NYTimes)
