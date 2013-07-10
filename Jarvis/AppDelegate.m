@@ -13,23 +13,24 @@
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 #define woeidCode @"721943" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
+
 NSSpeechSynthesizer *synth;
 
 @implementation AppDelegate
 
 @synthesize preferencesController = _preferencesController;
 
-- (void)dealloc
-{
+- (void)dealloc {
+    // should kill variables on exit
     [super dealloc];
 }
 
-+ (void) initialize
-{
++ (void) initialize {
     //make sure another Jarvis.app isn't running already
     NSArray * apps = [NSRunningApplication runningApplicationsWithBundleIdentifier: [[NSBundle mainBundle] bundleIdentifier]];
-    if ([apps count] > 1)
-    {
+    
+    if ([apps count] > 1) {
+        
         NSAlert * alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle: NSLocalizedString(@"OK", "Jarvis already running alert -> button")];
         [alert setMessageText: NSLocalizedString(@"Jarvis is already running.",
@@ -44,43 +45,43 @@ NSSpeechSynthesizer *synth;
         //kill ourselves right away
         exit(0);
     }
+    
     [[NSUserDefaults standardUserDefaults] registerDefaults: [NSDictionary dictionaryWithContentsOfFile:
                                                               [[NSBundle mainBundle] pathForResource: @"Defaults" ofType: @"plist"]]];
 }
 
-- (NSWindow *)windowLM
-{
+- (NSWindow *)windowLM {
+    // return the main window
 	return windowLM;
 }
 
-- (id) init
-{
-    if ((self = [super init]))
-    {
+- (id) init {
+    if ((self = [super init])) {
+        
+        // initializing the preference plist
         fDefaults = [NSUserDefaults standardUserDefaults];
         
-        //upgrading from old version clear recent items
+        // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
-        //        fPrefsController = [PrefsController alloc];
+
+        // initializing the update system
         [[SUUpdater sharedUpdater] setDelegate: self];
-        fQuitRequested = NO;
+        //fQuitRequested = NO; // i have no idea
     }
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
+    
     [windowLM makeKeyAndOrderFront:self];
-    //[windowLM makeKeyAndOrderFront: nil];
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
-	//[self setVolume:0.8];
 	synth = [[NSSpeechSynthesizer alloc] init];
 	[self jarvis];
 }
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+
     [NSApp setServicesProvider: self];
     
     //register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
@@ -88,15 +89,15 @@ NSSpeechSynthesizer *synth;
                                                      forEventClass: kCoreEventClass andEventID: kAEOpenContents];
     
     //shamelessly ask for donations
-    if ([fDefaults boolForKey: @"WarningDonate"])
-    {
+    if ([fDefaults boolForKey: @"WarningDonate"]) {
+        
         const BOOL firstLaunch = [fDefaults boolForKey: @"FirstLaunch"];
         
         NSDate * lastDonateDate = [fDefaults objectForKey: @"DonateAskDate"];
         const BOOL timePassed = !lastDonateDate || (-1 * [lastDonateDate timeIntervalSinceNow]) >= DONATE_NAG_TIME;
         
-        if (!firstLaunch && timePassed)
-        {
+        if (!firstLaunch && timePassed) {
+            
             [fDefaults setObject: [NSDate date] forKey: @"DonateAskDate"];
             
             NSAlert * alert = [[NSAlert alloc] init];
@@ -130,17 +131,18 @@ NSSpeechSynthesizer *synth;
             [alert release];
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
-        if (!firstLaunch)
-        {
+        // Just a test need to remove adds a int into the app preference file
+        if (!firstLaunch) {
+            
             [fDefaults setInteger:721943 forKey: @"LocationCode"];
         }
     }
 }
 
-- (BOOL) applicationShouldHandleReopen: (NSApplication *) app hasVisibleWindows: (BOOL) visibleWindows
-{
-    if(visibleWindows == NO)
-    {
+- (BOOL) applicationShouldHandleReopen: (NSApplication *) app hasVisibleWindows: (BOOL) visibleWindows {
+    // If we close the main window this will
+    // make it reapear if we press the dock icon
+    if(visibleWindows == NO) {
        [windowLM makeKeyAndOrderFront:self];
 	}
 	return YES;
@@ -154,16 +156,11 @@ NSSpeechSynthesizer *synth;
 	
     //PFMoveToApplicationsFolderIfNecessary();
 	
-	[windowLM center];
+	//[windowLM center];
 	[windowLM makeKeyAndOrderFront:self];
 }
 
 - (IBAction)openPreferences:(id)sender {
-    
-//    if (!self.preferencesController)
-//        self.preferencesController = [[PreferencesController alloc] initPreferencesController];
-//    
-//	[self.preferencesController showPreferences];
     
     //activate app
     [NSApp activateIgnoringOtherApps:YES];
@@ -173,34 +170,34 @@ NSSpeechSynthesizer *synth;
         [_preferencesController release];
         _preferencesController = nil;
     }
+    
     //init from nib but the real initialization happens in the
     //PreferencesWindowController setupToolbar method
     _preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
     
     [_preferencesController showWindow:self];
     //[[PreferencesWindowController sharedPrefsWindowController] showWindow:self];
-    
-    
-    
 }
+
 - (IBAction)sendFeedBack:(id)sender {
+    
+    //activates the FeedBack Window
     [JRFeedbackController showFeedback];
 }
 
-- (NSMenu *) applicationDockMenu: (NSApplication *) sender
-{
+- (NSMenu *) applicationDockMenu: (NSApplication *) sender {
     
     NSMenu * menu = [[NSMenu alloc] init];
     
-    [menu addItemWithTitle: NSLocalizedString(@"Start Speaking", "Dock item") action: @selector(update:) keyEquivalent: @""];
-    [menu addItemWithTitle: NSLocalizedString(@"Stop Speaking", "Dock item") action: @selector(stopSpeech:) keyEquivalent: @""];
+    [menu addItemWithTitle: NSLocalizedString(@"Speaking", "Dock item") action: @selector(update:) keyEquivalent: @""];
+    [menu addItemWithTitle: NSLocalizedString(@"Mute", "Dock item") action: @selector(stopSpeech:) keyEquivalent: @""];
     [menu addItemWithTitle: NSLocalizedString(@"Refresh", "Dock item") action: @selector(update:) keyEquivalent: @""];
     
     return [menu autorelease];
 }
 
-- (IBAction)update:(id)sender;
-{
+- (IBAction)update:(id)sender; {
+    
 	[synth stopSpeaking];
 	[outText setString:@"Updating your report..."];
 	[outText setNeedsDisplay:YES];
@@ -209,41 +206,35 @@ NSSpeechSynthesizer *synth;
 	[self jarvis];
 }
 
-- (IBAction)Homepage:(id)sender
-{
+- (IBAction)Homepage:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/UIeKn"]];
 }
 
-- (IBAction)Issue:(id)sender
-{
+- (IBAction)Issue:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: @"http://goo.gl/4TCve"]];
 }
 
-- (IBAction)ChangeLog:(id)sender
-{
+- (IBAction)ChangeLog:(id)sender {
 //    if (! myChangeLogController ) {
 //		myChangeLogController	= [[ChangeLogController alloc] init];
 //	} // end if
 //    [[myChangeLogController window] makeKeyAndOrderFront:self];
 }
 
-- (IBAction)Donate:(id)sender
-{
+- (IBAction)Donate:(id)sender {
     [self linkDonate: self];
 }
 
-- (void) showMainWindow: (id) sender
-{
+- (void) showMainWindow: (id) sender {
     [windowLM makeKeyAndOrderFront: nil];
 }
 
-- (void) linkDonate: (id) sender
-{
+- (void) linkDonate: (id) sender {
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: DONATE_URL]];
 }
 
-- (void)jarvis
-{
+- (void)jarvis {
+    
     //////////////////////////////
     // Personalization parameters:
     // VIP names and email addresses
@@ -322,6 +313,7 @@ NSSpeechSynthesizer *synth;
             text = [text stringByAppendingString:@".\n"];
         }
     }
+    
     // iCal Reminders
 	text = [text stringByAppendingString:@"\n"];
 	predicate = [CalCalendarStore taskPredicateWithCalendars:[[CalCalendarStore defaultCalendarStore] calendars]];
@@ -343,7 +335,8 @@ NSSpeechSynthesizer *synth;
     //Weather conditions
 	NSString * weatherText = [[NSString alloc] init];
 	NSString * weatherPage = [[NSString alloc] init];
-   	NSString * locationName = [[NSString alloc] init];
+   	NSString * cityName = [[NSString alloc] init];
+    NSString * countryName = [[NSString alloc] init];
 	NSString * weatherContent = [[NSString alloc] init];
 	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
 	weatherContent = weatherPage;
@@ -351,13 +344,16 @@ NSSpeechSynthesizer *synth;
 	{
 		if ([[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] count]>1)
 		{
-            locationName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
-            locationName = [[locationName componentsSeparatedByString:@"</title>"] objectAtIndex:0];
+            cityName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
+            cityName = [[cityName componentsSeparatedByString:@","] objectAtIndex:0];
+            countryName = [[weatherContent componentsSeparatedByString:@"country=\""] objectAtIndex:1];
+            countryName = [[countryName componentsSeparatedByString:@"\"/>"] objectAtIndex:0];
             weatherText = [[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] objectAtIndex:1];
             weatherText = [[weatherText componentsSeparatedByString:@"<BR />"] objectAtIndex:0];
-            text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@ are : ", @""),locationName]];
             
-            //Removing white spaces from the begining o end of the sting retrived
+            text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@, %@ is : ", @""),cityName, countryName]];
+            
+            //Removing white spaces from the begining or end of the sting retrived
             NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
                                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
@@ -365,6 +361,9 @@ NSSpeechSynthesizer *synth;
             text = [text stringByAppendingString:@".\n"];
 		}
 	}
+
+    
+    //Forecast for the next 5 days
 	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
 	weatherContent = weatherPage;
     
@@ -376,9 +375,10 @@ NSSpeechSynthesizer *synth;
             weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
             weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
             
-            //Removing white spaces from the begining o end of the sting retrived
+            //Removing white spaces from the begining or end of the sting retrived
             NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
                                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
             //removing the <br /> from the text
             NSString *trimmedString1 = [trimmedString
                                         stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
@@ -553,56 +553,8 @@ NSSpeechSynthesizer *synth;
 	[synth startSpeakingString:text];	//for speaking the text
 }
 
-- (IBAction)stopSpeech:(id)sender
-{
+- (IBAction)stopSpeech:(id)sender {
     [synth stopSpeaking];
 }
-
-/*
- //Copy-pasted from .arri
- //@ http://www.cocoadev.com/index.pl?SoundVolume
- - (void)setVolume:(float)involume {
- OSStatus		err;
- AudioDeviceID	device;
- UInt32			size;
- Boolean			canset	= false;
- UInt32			channels[2];
- //float			volume[2];
- 
- // get default device
- size = sizeof device;
- err = AudioHardwareGetProperty(kAudioHardwarePropertyDefaultOutputDevice, &size, &device);
- if(err!=noErr) {
- NSLog(@"audio-volume error get device");
- return;
- }
- 
- 
- // try set master-channel (0) volume
- size = sizeof canset;
- err = AudioDeviceGetPropertyInfo(device, 0, false, kAudioDevicePropertyVolumeScalar, &size, &canset);
- if(err==noErr && canset==true) {
- size = sizeof involume;
- err = AudioDeviceSetProperty(device, NULL, 0, false, kAudioDevicePropertyVolumeScalar, size, &involume);
- return;
- }
- 
- // else, try seperate channels
- // get channels
- size = sizeof(channels);
- err = AudioDeviceGetProperty(device, 0, false, kAudioDevicePropertyPreferredChannelsForStereo, &size,&channels);
- if(err!=noErr) {
- NSLog(@"error getting channel-numbers");
- return;
- }
- 
- // set volume
- size = sizeof(float);
- err = AudioDeviceSetProperty(device, 0, channels[0], false, kAudioDevicePropertyVolumeScalar, size, &involume);
- if(noErr!=err) NSLog(@"error setting volume of channel %d",channels[0]);
- err = AudioDeviceSetProperty(device, 0, channels[1], false, kAudioDevicePropertyVolumeScalar, size, &involume);
- if(noErr!=err) NSLog(@"error setting volume of channel %d",channels[1]);
- 
- }*/
 
 @end
