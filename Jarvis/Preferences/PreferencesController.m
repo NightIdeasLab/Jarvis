@@ -27,13 +27,6 @@
     [super dealloc];
 }
 
-- (id)init
-{
-    fDefaults = [NSUserDefaults standardUserDefaults];
-    //return NSLocalizedString(@"PreferencesView", @"Do not localize this");
-    return self;
-}
-
 - (void)setupToolbar{
     [self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title") image: [NSImage imageNamed: @"PrefGeneral"]];
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title") image: [NSImage imageNamed: @"PrefUpdate"]];
@@ -49,8 +42,14 @@
 
 - (void) awakeFromNib
 {
-    [updateDateField setStringValue: [NSString stringWithFormat: @"%@", [fDefaults objectForKey:@"SULastCheckTime"]]];
-    [profileDateField setStringValue: [NSString stringWithFormat: @"%@", [fDefaults objectForKey:@"SULastProfileSubmissionDate"]]];
+    // reading from the plist file
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // retriving the dates from plist file
+    [updateDateField setStringValue: [NSString stringWithFormat: @"%@", [defaults objectForKey:@"SULastCheckTime"]]];
+    [profileDateField setStringValue: [NSString stringWithFormat: @"%@", [defaults objectForKey:@"SULastProfileSubmissionDate"]]];
+
+    
 }
 
 @end

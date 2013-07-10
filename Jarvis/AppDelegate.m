@@ -13,6 +13,8 @@
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 #define woeidCode @"721943" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
+bool internetSlow = YES; // Sometimes my internet connection suckes and in this way i can still work :)
+
 
 NSSpeechSynthesizer *synth;
 
@@ -22,6 +24,8 @@ NSSpeechSynthesizer *synth;
 
 - (void)dealloc {
     // should kill variables on exit
+    [windowLM release];
+    [_preferencesController release];
     [super dealloc];
 }
 
@@ -51,7 +55,7 @@ NSSpeechSynthesizer *synth;
 }
 
 - (NSWindow *)windowLM {
-    // return the main window
+    // returns the main window
 	return windowLM;
 }
 
@@ -94,6 +98,7 @@ NSSpeechSynthesizer *synth;
         const BOOL firstLaunch = [fDefaults boolForKey: @"FirstLaunch"];
         
         NSDate * lastDonateDate = [fDefaults objectForKey: @"DonateAskDate"];
+
         const BOOL timePassed = !lastDonateDate || (-1 * [lastDonateDate timeIntervalSinceNow]) >= DONATE_NAG_TIME;
         
         if (!firstLaunch && timePassed) {
@@ -265,7 +270,7 @@ NSSpeechSynthesizer *synth;
     
     //Reading the username
     text = [text stringByAppendingString: NSUserName()];
-    text = [text stringByAppendingString:@".\n"];
+    text = [text stringByAppendingString:@". "];
     
 	
 	text = [text stringByAppendingString: NSLocalizedString(@"It is ", @"Declares the time. Ex. It is 19:30")];
@@ -331,7 +336,9 @@ NSSpeechSynthesizer *synth;
             text = [text stringByAppendingString:@".\n"];
         }
     }
-	
+    
+if (!internetSlow)
+{
     //Weather conditions
 	NSString * weatherText = [[NSString alloc] init];
 	NSString * weatherPage = [[NSString alloc] init];
@@ -386,7 +393,7 @@ NSSpeechSynthesizer *synth;
             text = [text stringByAppendingString:trimmedString1];
 		}
 	}
-    
+}
     
     //Unread email count
 	NSDictionary* errorDict;
@@ -520,7 +527,9 @@ NSSpeechSynthesizer *synth;
      text = [text stringByAppendingString:allNews];
      }
      }*/
-    
+
+if (!internetSlow)
+{
     //NYTimes latest
     NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
 	if(quoteContent1!=nil)
@@ -543,7 +552,8 @@ NSSpeechSynthesizer *synth;
 		text = [text stringByAppendingString:[[[[quoteContent componentsSeparatedByString:@"<title>"] objectAtIndex:3] componentsSeparatedByString:@"</title>"] objectAtIndex:0]];
 		text = [text stringByAppendingString:@".\n"];
 	}
-	
+}
+    
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	
     //Output

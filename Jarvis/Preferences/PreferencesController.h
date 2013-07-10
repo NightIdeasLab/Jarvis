@@ -11,7 +11,6 @@
 
 @interface PreferencesController : DBPrefsWindowController
 {
-    NSUserDefaults * fDefaults;
     IBOutlet NSTextField *updateDateField;
     IBOutlet NSTextField *profileDateField;
 }

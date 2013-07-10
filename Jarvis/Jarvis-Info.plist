@@ -38,6 +38,8 @@
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
 	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
+	<key>SUAutomaticallyUpdate</key>
+	<string>YES</string>
 	<key>SUAllowsAutomaticUpdates</key>
 	<string>YES</string>
 	<key>SUEnableSystemProfiling</key>
