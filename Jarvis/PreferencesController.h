@@ -10,10 +10,6 @@
 #import "DBPrefsWindowController.h"
 
 @interface PreferencesController : DBPrefsWindowController
-{
-    IBOutlet NSTextField *updateDateField;
-    IBOutlet NSTextField *profileDateField;
-}
 
 @property (strong, nonatomic) IBOutlet NSView *generalPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *speechPreferenceView;
@@ -24,5 +20,15 @@
 @property (strong, nonatomic) IBOutlet NSView *newsPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *quotationPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *updatePreferenceView;
+@property (strong, nonatomic) IBOutlet NSTextField *updateDateField;
+@property (strong, nonatomic) IBOutlet NSTextField *profileDateField;
+@property (strong, nonatomic) IBOutlet NSTextField *locationField;
+@property (strong, nonatomic) IBOutlet NSTextField *myLabel;
+
+
+// Weather
+
+// Finds the WOEID code for the location that the user inputs
+- (IBAction)findLocation:(id)sender;
 
 @end

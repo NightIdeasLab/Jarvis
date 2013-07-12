@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
-		005BFCFC176FADCD00A2BE50 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */; };
-		005BFD00176FAF0A00A2BE50 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */; };
-		005BFD01176FAF0A00A2BE50 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
 		0094D444176A27340052079F /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D439176A27340052079F /* PrefUpdate.png */; };
@@ -38,6 +35,8 @@
 		00AF0DE91769FBBC00C00AE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DE81769FBBC00C00AE3 /* main.m */; };
 		00AF0DF01769FBBC00C00AE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */; };
 		00AF0DF31769FBBD00C00AE3 /* App.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00AF0DF11769FBBD00C00AE3 /* App.xib */; };
+		00BD8A16178F37750042CCA5 /* PrefWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BD8A14178F37750042CCA5 /* PrefWeather.png */; };
+		00BD8A17178F37750042CCA5 /* PrefWeather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */; };
 		00C7E6DE176B84D5008C2823 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6DD176B84D5008C2823 /* Defaults.plist */; };
 		00C7E6E3176B8592008C2823 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6DF176B8592008C2823 /* dsa_pub.pem */; };
 		00C7E6E4176B8592008C2823 /* Jarvis.icns in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6E0176B8592008C2823 /* Jarvis.icns */; };
@@ -45,9 +44,13 @@
 		00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6ED176B86FF008C2823 /* JarvisHelp */; };
 		00C7E6F1176B87FB008C2823 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6F0176B87FB008C2823 /* COPYING */; };
 		00CD5589176B9E520057FC4A /* LoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD5588176B9E520057FC4A /* LoginItems.m */; };
-		00CD558F176B9E5E0057FC4A /* JRFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD558B176B9E5E0057FC4A /* JRFeedbackController.m */; };
-		00CD5590176B9E5E0057FC4A /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00CD558C176B9E5E0057FC4A /* JRFeedbackProvider.xib */; };
-		00CD5591176B9E5E0057FC4A /* NSURLRequest+postForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD558E176B9E5E0057FC4A /* NSURLRequest+postForm.m */; };
+		00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C7671790704500246636 /* DBPrefsWindowController.m */; };
+		00E2C76D1790704500246636 /* Preference pane.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C7681790704500246636 /* Preference pane.rtf */; };
+		00E2C76E1790704500246636 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C76A1790704500246636 /* PreferencesController.m */; };
+		00E2C76F1790704500246636 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C76B1790704500246636 /* PreferencesController.xib */; };
+		00E2C775179070BB00246636 /* JRFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C771179070BB00246636 /* JRFeedbackController.m */; };
+		00E2C776179070BB00246636 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C772179070BB00246636 /* JRFeedbackProvider.xib */; };
+		00E2C777179070BB00246636 /* NSURLRequest+postForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C774179070BB00246636 /* NSURLRequest+postForm.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,11 +69,6 @@
 
 /* Begin PBXFileReference section */
 		005491AD176A0590008A191D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
-		005BFCFA176FADCD00A2BE50 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBPrefsWindowController.h; path = Preferences/DBPrefsWindowController.h; sourceTree = "<group>"; };
-		005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPrefsWindowController.m; path = Preferences/DBPrefsWindowController.m; sourceTree = "<group>"; };
-		005BFCFD176FAF0A00A2BE50 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesController.h; path = Preferences/PreferencesController.h; sourceTree = "<group>"; };
-		005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesController.m; path = Preferences/PreferencesController.m; sourceTree = "<group>"; };
-		005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PreferencesController.xib; path = Preferences/PreferencesController.xib; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
 		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
 		0094D439176A27340052079F /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefUpdate.png; sourceTree = "<group>"; };
@@ -104,6 +102,8 @@
 		00AF0DEE1769FBBC00C00AE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		00AF0DF21769FBBD00C00AE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/App.xib; sourceTree = "<group>"; };
+		00BD8A14178F37750042CCA5 /* PrefWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefWeather.png; sourceTree = "<group>"; };
+		00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefWeather@2x.png"; sourceTree = "<group>"; };
 		00C7E6DD176B84D5008C2823 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		00C7E6DF176B8592008C2823 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Jarvis/dsa_pub.pem; sourceTree = "<group>"; };
 		00C7E6E0176B8592008C2823 /* Jarvis.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Jarvis.icns; sourceTree = "<group>"; };
@@ -111,14 +111,19 @@
 		00C7E6EB176B86C1008C2823 /* htdocs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = htdocs; path = Jarvis/htdocs; sourceTree = "<group>"; };
 		00C7E6ED176B86FF008C2823 /* JarvisHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JarvisHelp; sourceTree = "<group>"; };
 		00C7E6F0176B87FB008C2823 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = Jarvis/COPYING; sourceTree = "<group>"; };
-		00CD5580176B9E260057FC4A /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; name = "Preference pane.rtf"; path = "Preferences/Preference pane.rtf"; sourceTree = "<group>"; };
 		00CD5587176B9E520057FC4A /* LoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginItems.h; path = Helpers/LoginItems.h; sourceTree = "<group>"; };
 		00CD5588176B9E520057FC4A /* LoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginItems.m; path = Helpers/LoginItems.m; sourceTree = "<group>"; };
-		00CD558A176B9E5E0057FC4A /* JRFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JRFeedbackController.h; path = FeedBack/JRFeedbackController.h; sourceTree = "<group>"; };
-		00CD558B176B9E5E0057FC4A /* JRFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRFeedbackController.m; path = FeedBack/JRFeedbackController.m; sourceTree = "<group>"; };
-		00CD558C176B9E5E0057FC4A /* JRFeedbackProvider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JRFeedbackProvider.xib; path = FeedBack/JRFeedbackProvider.xib; sourceTree = "<group>"; };
-		00CD558D176B9E5E0057FC4A /* NSURLRequest+postForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURLRequest+postForm.h"; path = "FeedBack/NSURLRequest+postForm.h"; sourceTree = "<group>"; };
-		00CD558E176B9E5E0057FC4A /* NSURLRequest+postForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURLRequest+postForm.m"; path = "FeedBack/NSURLRequest+postForm.m"; sourceTree = "<group>"; };
+		00E2C7661790704500246636 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
+		00E2C7671790704500246636 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
+		00E2C7681790704500246636 /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Preference pane.rtf"; sourceTree = "<group>"; };
+		00E2C7691790704500246636 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
+		00E2C76A1790704500246636 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
+		00E2C76B1790704500246636 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
+		00E2C770179070BB00246636 /* JRFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRFeedbackController.h; sourceTree = "<group>"; };
+		00E2C771179070BB00246636 /* JRFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRFeedbackController.m; sourceTree = "<group>"; };
+		00E2C772179070BB00246636 /* JRFeedbackProvider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRFeedbackProvider.xib; sourceTree = "<group>"; };
+		00E2C773179070BB00246636 /* NSURLRequest+postForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+postForm.h"; sourceTree = "<group>"; };
+		00E2C774179070BB00246636 /* NSURLRequest+postForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+postForm.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,12 +153,12 @@
 		0010FA2C1769FC4200FB4265 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
-				00CD5580176B9E260057FC4A /* Preference pane.rtf */,
-				005BFCFD176FAF0A00A2BE50 /* PreferencesController.h */,
-				005BFCFE176FAF0A00A2BE50 /* PreferencesController.m */,
-				005BFCFF176FAF0A00A2BE50 /* PreferencesController.xib */,
-				005BFCFA176FADCD00A2BE50 /* DBPrefsWindowController.h */,
-				005BFCFB176FADCD00A2BE50 /* DBPrefsWindowController.m */,
+				00E2C7681790704500246636 /* Preference pane.rtf */,
+				00E2C7691790704500246636 /* PreferencesController.h */,
+				00E2C76A1790704500246636 /* PreferencesController.m */,
+				00E2C76B1790704500246636 /* PreferencesController.xib */,
+				00E2C7661790704500246636 /* DBPrefsWindowController.h */,
+				00E2C7671790704500246636 /* DBPrefsWindowController.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -166,6 +171,8 @@
 				0094D438176A27340052079F /* PrefGeneral@2x.png */,
 				0094D439176A27340052079F /* PrefUpdate.png */,
 				0094D43A176A27340052079F /* PrefUpdate@2x.png */,
+				00BD8A14178F37750042CCA5 /* PrefWeather.png */,
+				00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -302,11 +309,11 @@
 		00CD557F176B9D200057FC4A /* FeedBack */ = {
 			isa = PBXGroup;
 			children = (
-				00CD558A176B9E5E0057FC4A /* JRFeedbackController.h */,
-				00CD558B176B9E5E0057FC4A /* JRFeedbackController.m */,
-				00CD558C176B9E5E0057FC4A /* JRFeedbackProvider.xib */,
-				00CD558D176B9E5E0057FC4A /* NSURLRequest+postForm.h */,
-				00CD558E176B9E5E0057FC4A /* NSURLRequest+postForm.m */,
+				00E2C770179070BB00246636 /* JRFeedbackController.h */,
+				00E2C771179070BB00246636 /* JRFeedbackController.m */,
+				00E2C772179070BB00246636 /* JRFeedbackProvider.xib */,
+				00E2C773179070BB00246636 /* NSURLRequest+postForm.h */,
+				00E2C774179070BB00246636 /* NSURLRequest+postForm.m */,
 			);
 			name = FeedBack;
 			sourceTree = "<group>";
@@ -381,8 +388,11 @@
 				00C7E6EC176B86C1008C2823 /* htdocs in Resources */,
 				00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */,
 				00C7E6F1176B87FB008C2823 /* COPYING in Resources */,
-				00CD5590176B9E5E0057FC4A /* JRFeedbackProvider.xib in Resources */,
-				005BFD01176FAF0A00A2BE50 /* PreferencesController.xib in Resources */,
+				00BD8A16178F37750042CCA5 /* PrefWeather.png in Resources */,
+				00BD8A17178F37750042CCA5 /* PrefWeather@2x.png in Resources */,
+				00E2C76D1790704500246636 /* Preference pane.rtf in Resources */,
+				00E2C76F1790704500246636 /* PreferencesController.xib in Resources */,
+				00E2C776179070BB00246636 /* JRFeedbackProvider.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,10 +406,10 @@
 				00AF0DE91769FBBC00C00AE3 /* main.m in Sources */,
 				00AF0DF01769FBBC00C00AE3 /* AppDelegate.m in Sources */,
 				00CD5589176B9E520057FC4A /* LoginItems.m in Sources */,
-				00CD558F176B9E5E0057FC4A /* JRFeedbackController.m in Sources */,
-				00CD5591176B9E5E0057FC4A /* NSURLRequest+postForm.m in Sources */,
-				005BFCFC176FADCD00A2BE50 /* DBPrefsWindowController.m in Sources */,
-				005BFD00176FAF0A00A2BE50 /* PreferencesController.m in Sources */,
+				00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */,
+				00E2C76E1790704500246636 /* PreferencesController.m in Sources */,
+				00E2C775179070BB00246636 /* JRFeedbackController.m in Sources */,
+				00E2C777179070BB00246636 /* NSURLRequest+postForm.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

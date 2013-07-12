@@ -14,7 +14,7 @@
  the feedback is sent.
  NOTE: you must add an entry to your Growl Dict plist to register this new message
  */
-#define USE_GROWL 0
+#define USE_GROWL FALSE
 
 typedef enum {
     JRFeedbackController_BugReport,

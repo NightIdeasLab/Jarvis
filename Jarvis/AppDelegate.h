@@ -30,9 +30,9 @@
     NSString * fConfigDirectory;
     NSUserDefaults * fDefaults;
     BOOL fQuitRequested;
-    IBOutlet id outText; // do not link
-    IBOutlet id window; // do not link
-    IBOutlet NSWindow *windowLM; // do not link
+    IBOutlet id outText;
+    IBOutlet id window;
+    IBOutlet NSWindow *windowLM;
 }
 
 @property (nonatomic, strong) PreferencesController *preferencesController;

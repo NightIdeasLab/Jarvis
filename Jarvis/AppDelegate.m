@@ -7,13 +7,14 @@
 //
 
 #import "AppDelegate.h"
+#import <Sparkle/Sparkle.h>
 #import <IOKit/IOMessage.h>
 
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 #define woeidCode @"721943" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
-bool internetSlow = YES; // Sometimes my internet connection suckes and in this way i can still work :)
+#define SLOW_INTERNET 1 // Sometimes my internet connection suckes and in this way i can still work :)
 
 
 NSSpeechSynthesizer *synth;
@@ -70,7 +71,7 @@ NSSpeechSynthesizer *synth;
         [NSApp setDelegate: self];
 
         // initializing the update system
-        [[SUUpdater sharedUpdater] setDelegate: self];
+        [[SUUpdater sharedUpdater] setDelegate: self]; // trows a c++ exception
         //fQuitRequested = NO; // i have no idea
     }
     return self;
@@ -80,7 +81,7 @@ NSSpeechSynthesizer *synth;
     
     [windowLM makeKeyAndOrderFront:self];
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
-	synth = [[NSSpeechSynthesizer alloc] init];
+	synth = [[NSSpeechSynthesizer alloc] init]; // trows a c++ exception
 	[self jarvis];
 }
 
@@ -275,13 +276,13 @@ NSSpeechSynthesizer *synth;
 	
 	text = [text stringByAppendingString: NSLocalizedString(@"It is ", @"Declares the time. Ex. It is 19:30")];
 	if([date minuteOfHour]<10)
-		text = [text stringByAppendingString:[NSString stringWithFormat:@"%d:0%d.\n", [date hourOfDay], [date minuteOfHour]]];
+		text = [text stringByAppendingString:[NSString stringWithFormat:@"%ld:0%ld.\n", [date hourOfDay], [date minuteOfHour]]];
 	else
-		text = [text stringByAppendingString:[NSString stringWithFormat:@"%d:%d.\n", [date hourOfDay], [date minuteOfHour]]];
+		text = [text stringByAppendingString:[NSString stringWithFormat:@"%ld:%ld.\n", [date hourOfDay], [date minuteOfHour]]];
 	
 	text = [text stringByAppendingString:NSLocalizedString(@"Today is ", @"Declares the day")];
 	text = [text stringByAppendingString:[[dateFormatter standaloneMonthSymbols] objectAtIndex:[date monthOfYear]-1]];
-	text = [text stringByAppendingString:[NSString stringWithFormat:@" %d, ", [date dayOfMonth]]];
+	text = [text stringByAppendingString:[NSString stringWithFormat:@" %ld, ", [date dayOfMonth]]];
 	text = [text stringByAppendingString:[[dateFormatter standaloneWeekdaySymbols] objectAtIndex:[date dayOfWeek]%7]];
 	text = [text stringByAppendingString:@".\n"];
     
@@ -311,9 +312,9 @@ NSSpeechSynthesizer *synth;
                 text = [text stringByAppendingString:NSLocalizedString(@", at ", @"")];
                 NSCalendarDate *eventDate = [[[events objectAtIndex:i] startDate] dateWithCalendarFormat:nil timeZone:nil];
                 if([eventDate minuteOfHour]<10)
-                    text = [text stringByAppendingString:[NSString stringWithFormat:@"%d:0%d", [eventDate hourOfDay], [eventDate minuteOfHour]]];
+                    text = [text stringByAppendingString:[NSString stringWithFormat:@"%ld:0%ld", [eventDate hourOfDay], [eventDate minuteOfHour]]];
                 else
-                    text = [text stringByAppendingString:[NSString stringWithFormat:@"%d:%d", [eventDate hourOfDay], [eventDate minuteOfHour]]];
+                    text = [text stringByAppendingString:[NSString stringWithFormat:@"%ld:%ld", [eventDate hourOfDay], [eventDate minuteOfHour]]];
             }
             text = [text stringByAppendingString:@".\n"];
         }
@@ -337,8 +338,8 @@ NSSpeechSynthesizer *synth;
         }
     }
     
-if (!internetSlow)
-{
+#if !SLOW_INTERNET
+    
     //Weather conditions
 	NSString * weatherText = [[NSString alloc] init];
 	NSString * weatherPage = [[NSString alloc] init];
@@ -393,7 +394,7 @@ if (!internetSlow)
             text = [text stringByAppendingString:trimmedString1];
 		}
 	}
-}
+#endif
     
     //Unread email count
 	NSDictionary* errorDict;
@@ -423,7 +424,7 @@ if (!internetSlow)
 	text = [text stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
 	
     //VIP email count
-	int mailCount;
+	unsigned long mailCount;
 	NSString * senderList = [[returnDescriptor stringValue] lowercaseString];
 	for(int i=0; i<[vipNames count]; i++)
 	{
@@ -528,8 +529,7 @@ if (!internetSlow)
      }
      }*/
 
-if (!internetSlow)
-{
+#if !SLOW_INTERNET
     //NYTimes latest
     NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
 	if(quoteContent1!=nil)
@@ -552,7 +552,8 @@ if (!internetSlow)
 		text = [text stringByAppendingString:[[[[quoteContent componentsSeparatedByString:@"<title>"] objectAtIndex:3] componentsSeparatedByString:@"</title>"] objectAtIndex:0]];
 		text = [text stringByAppendingString:@".\n"];
 	}
-}
+    
+#endif
     
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	

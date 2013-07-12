@@ -52,7 +52,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
         && !(reachabilityFlags & kSCNetworkFlagsInterventionRequired);
     
     if (!showFeedbackWindow) {
-        int alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Host Not Reachable", @"JRFeedbackProvider", nil)
+        NSInteger alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Host Not Reachable", @"JRFeedbackProvider", nil)
                                            defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
                                          alternateButton:NSLocalizedStringFromTable(@"Cancel", @"JRFeedbackProvider", nil)
                                              otherButton:nil
@@ -121,7 +121,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     if (me) {
         [nameTextField setStringValue:[NSString stringWithFormat:@"%@ %@", [me valueForProperty:kABFirstNameProperty], [me valueForProperty:kABLastNameProperty]]];
         ABMutableMultiValue *emailAddresses = [me valueForProperty:kABEmailProperty];
-        unsigned addyIndex = 0, addyCount = [emailAddresses count];
+        NSUInteger addyIndex = 0, addyCount = [emailAddresses count];
         if (addyCount) {
             for (; addyIndex < addyCount; addyIndex++) {
                 [emailAddressComboBox addItemWithObjectValue:[emailAddresses valueAtIndex:addyIndex]];

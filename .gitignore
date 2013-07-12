@@ -12,14 +12,15 @@ bin-release/
 .DS_Store
 
 # Xcode
-.DS_Store
 build/
 *.pbxuser
 !default.pbxuser
+*.mode1
 *.mode1v3
 !default.mode1v3
 *.mode2v3
 !default.mode2v3
+*.perspective
 *.perspectivev3
 !default.perspectivev3
 *.xcworkspace
@@ -29,3 +30,21 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+
+# XCode (and ancestors) per-user config (very noisy, and not relevant)
+project.xcworkspace/
+# Generated files
+VersionX-revision.h
+# build products
+*.[oa]
+
+# Other source repository archive directories (protects when importing)
+.hg
+.svn
+CVS
+
+# automatic backup files
+*~.nib
+*.swp
+*~
