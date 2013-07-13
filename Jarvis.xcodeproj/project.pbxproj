@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0048C85E1791782D00B7C2A3 /* WeatherMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C85D1791782D00B7C2A3 /* WeatherMethod.m */; };
+		0048C86117917BBB00B7C2A3 /* CalendarMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86017917BBB00B7C2A3 /* CalendarMethod.m */; };
+		0048C8641791853B00B7C2A3 /* TimeAndDateMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */; };
+		0048C86717918E3D00B7C2A3 /* EmailMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86617918E3D00B7C2A3 /* EmailMethod.m */; };
+		0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */; };
+		0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */; };
 		005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
@@ -68,6 +74,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0048C85C1791782D00B7C2A3 /* WeatherMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMethod.h; sourceTree = "<group>"; };
+		0048C85D1791782D00B7C2A3 /* WeatherMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherMethod.m; sourceTree = "<group>"; };
+		0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMethod.h; sourceTree = "<group>"; };
+		0048C86017917BBB00B7C2A3 /* CalendarMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarMethod.m; sourceTree = "<group>"; };
+		0048C8621791853B00B7C2A3 /* TimeAndDateMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeAndDateMethod.h; sourceTree = "<group>"; };
+		0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeAndDateMethod.m; sourceTree = "<group>"; };
+		0048C86517918E3D00B7C2A3 /* EmailMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailMethod.h; sourceTree = "<group>"; };
+		0048C86617918E3D00B7C2A3 /* EmailMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailMethod.m; sourceTree = "<group>"; };
+		0048C868179190AA00B7C2A3 /* PackageTrackerMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageTrackerMethod.h; sourceTree = "<group>"; };
+		0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageTrackerMethod.m; sourceTree = "<group>"; };
+		0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsAndQuoteMethod.h; sourceTree = "<group>"; };
+		0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsAndQuoteMethod.m; sourceTree = "<group>"; };
 		005491AD176A0590008A191D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
 		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
@@ -255,6 +273,18 @@
 			children = (
 				00AF0DEE1769FBBC00C00AE3 /* AppDelegate.h */,
 				00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */,
+				0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */,
+				0048C86017917BBB00B7C2A3 /* CalendarMethod.m */,
+				0048C86517918E3D00B7C2A3 /* EmailMethod.h */,
+				0048C86617918E3D00B7C2A3 /* EmailMethod.m */,
+				0048C868179190AA00B7C2A3 /* PackageTrackerMethod.h */,
+				0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */,
+				0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */,
+				0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */,
+				0048C85C1791782D00B7C2A3 /* WeatherMethod.h */,
+				0048C85D1791782D00B7C2A3 /* WeatherMethod.m */,
+				0048C8621791853B00B7C2A3 /* TimeAndDateMethod.h */,
+				0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */,
 				00AF0DF11769FBBD00C00AE3 /* App.xib */,
 				0010FA2C1769FC4200FB4265 /* Preferences */,
 				00CD557E176B9BC60057FC4A /* ThirdParty */,
@@ -410,6 +440,12 @@
 				00E2C76E1790704500246636 /* PreferencesController.m in Sources */,
 				00E2C775179070BB00246636 /* JRFeedbackController.m in Sources */,
 				00E2C777179070BB00246636 /* NSURLRequest+postForm.m in Sources */,
+				0048C85E1791782D00B7C2A3 /* WeatherMethod.m in Sources */,
+				0048C86117917BBB00B7C2A3 /* CalendarMethod.m in Sources */,
+				0048C8641791853B00B7C2A3 /* TimeAndDateMethod.m in Sources */,
+				0048C86717918E3D00B7C2A3 /* EmailMethod.m in Sources */,
+				0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */,
+				0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,12 +532,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
+				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -513,6 +551,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",

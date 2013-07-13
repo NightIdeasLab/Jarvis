@@ -52,7 +52,7 @@
         [updateDateField setObjectValue:updateDate];
     }
     else {
-        [updateDateField setStringValue:@"Never"];
+        [updateDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where no check for update")];
     }
     
     
@@ -60,7 +60,7 @@
         [profileDateField setObjectValue:profileDate];
     }
     else {
-        [profileDateField setStringValue:@"Never"];
+        [profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
     }
     
     [defaults release];
@@ -89,17 +89,28 @@
 - (IBAction)findLocation:(id)sender {
     // retrives the City and Country
     NSString *locationText = [locationField stringValue];
-    NSString *message = [[NSString alloc] initWithFormat:@"Your location is: %@", locationText];
+    NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
+
+    // separa NSString in mai single pointers
+//    NSString *list = @"Norman, Stanley, Fletcher";
+//    NSArray *listItems = [list componentsSeparatedByString:@", "];
     
     if ([locationText length] >0) {
         // Displays the user his location
-        [myLabel setStringValue:message];
+        [myLabel setStringValue:messageForLabel];
     }
     else {
         // If the user will not write a city and country then we will display this message
-        [myLabel setStringValue:@"Please enter a City and Country."];
+        [myLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
     }
     
-    [message release];
+    [messageForLabel release];
+    
+//    if (!firstLaunch) {
+//        
+//        [fDefaults setInteger:721943 forKey: @"LocationCode"];
+//    }
+    
+    
 }
 @end

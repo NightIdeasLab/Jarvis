@@ -2,8 +2,7 @@ A TODO list
 
 a) Important|Urgent|Bugs
 
-- To separate everything in little parts.
-- Same for the windows because in this moment you close it and you cannot reopen it. (Solved I need to recreate the About an ChangeLog from scratch because they do not have a delegate in the File Owner)
+- Weather forecast is not really that nice. Change it a bit!
 - Implement a automatic refresh for everything.
 - Add automatic location for the weather, 2 options use the system location or select one and add even a refresh rate with growl notifications if weather changed.
 - Test/fix the tracking, and add even a refresh rate with growl notifications if tracking changed.

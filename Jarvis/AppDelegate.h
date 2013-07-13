@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Night Ideas Lab Inc. All rights reserved.
 //
 
-
 // Frameworks
 #import <AppKit/AppKit.h>
 #import <AudioToolbox/AudioServices.h>
@@ -21,9 +20,13 @@
 #import <Sparkle/Sparkle.h>
 
 // Local Classes
+#import "CalendarMethod.h"
+#import "EmailMethod.h"
 #import "JRFeedbackController.h"
 #import "PreferencesController.h"
-
+#import "NewsAndQuoteMethod.h"
+#import "TimeAndDateMethod.h"
+#import "WeatherMethod.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
@@ -37,7 +40,19 @@
 
 @property (nonatomic, strong) PreferencesController *preferencesController;
 
-
 - (NSWindow *)windowLM;
+
+- (IBAction) openPreferences: (id) sender;
+- (IBAction) sendFeedBack: (id) sender;
+- (IBAction) openHomepage: (id) sender;
+- (IBAction) openIssue: (id) sender;
+- (IBAction) openChangeLog: (id) sender;
+- (IBAction) openDonate: (id) sender;
+- (IBAction) updateJarvis: (id) sender;
+- (IBAction) stopSpeech: (id) sender;
+- (void) linkDonate: (id) sender;
+- (void) jarvis;
+
+
 
 @end
