@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003EBB751794A48A004C2A89 /* googleMaps.html in Resources */ = {isa = PBXBuildFile; fileRef = 003EBB741794A48A004C2A89 /* googleMaps.html */; };
 		0048C85E1791782D00B7C2A3 /* WeatherMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C85D1791782D00B7C2A3 /* WeatherMethod.m */; };
 		0048C86117917BBB00B7C2A3 /* CalendarMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86017917BBB00B7C2A3 /* CalendarMethod.m */; };
 		0048C8641791853B00B7C2A3 /* TimeAndDateMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */; };
@@ -76,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		003EBB741794A48A004C2A89 /* googleMaps.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = googleMaps.html; path = Jarvis/googleMaps.html; sourceTree = "<group>"; };
 		0048C85C1791782D00B7C2A3 /* WeatherMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMethod.h; sourceTree = "<group>"; };
 		0048C85D1791782D00B7C2A3 /* WeatherMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherMethod.m; sourceTree = "<group>"; };
 		0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMethod.h; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			children = (
 				00C7E6EB176B86C1008C2823 /* htdocs */,
 				00C7E6ED176B86FF008C2823 /* JarvisHelp */,
+				003EBB741794A48A004C2A89 /* googleMaps.html */,
 				00C7E6DF176B8592008C2823 /* dsa_pub.pem */,
 				00C7E6F0176B87FB008C2823 /* COPYING */,
 			);
@@ -441,6 +444,7 @@
 				00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */,
 				00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */,
 				00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */,
+				003EBB751794A48A004C2A89 /* googleMaps.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

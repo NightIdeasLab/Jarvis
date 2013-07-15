@@ -294,7 +294,7 @@ NSSpeechSynthesizer *synth;
     //Output
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:text];
-	[synth startSpeakingString:text];	//for speaking the text
+	//[synth startSpeakingString:text];	//for speaking the text
     // TODO: figure out when is best to release text. because if i write it where the app will crash
 }
 

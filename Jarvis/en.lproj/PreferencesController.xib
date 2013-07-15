@@ -499,6 +499,32 @@
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
+					<object class="NSButton" id="245566704">
+						<reference key="NSNextResponder" ref="835522929"/>
+						<int key="NSvFlags">268</int>
+						<string key="NSFrame">{{99, 359}, {327, 18}}</string>
+						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="896297187"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="NSEnabled">YES</bool>
+						<object class="NSButtonCell" key="NSCell" id="905820069">
+							<int key="NSCellFlags">-2080374784</int>
+							<int key="NSCellFlags2">268435456</int>
+							<string key="NSContents">Set location automatically using current location</string>
+							<reference key="NSSupport" ref="866047434"/>
+							<string key="NSCellIdentifier">_NS:9</string>
+							<reference key="NSControlView" ref="245566704"/>
+							<int key="NSButtonFlags">1211912448</int>
+							<int key="NSButtonFlags2">2</int>
+							<reference key="NSNormalImage" ref="1043003115"/>
+							<reference key="NSAlternateImage" ref="390045057"/>
+							<string key="NSAlternateContents"/>
+							<string key="NSKeyEquivalent"/>
+							<int key="NSPeriodicDelay">200</int>
+							<int key="NSPeriodicInterval">25</int>
+						</object>
+					</object>
 					<object class="WebView" id="577916144">
 						<reference key="NSNextResponder" ref="835522929"/>
 						<int key="NSvFlags">256</int>
@@ -519,7 +545,7 @@
 							<string>public.url</string>
 							<string>public.url-name</string>
 						</set>
-						<string key="NSFrame">{{20, 20}, {485, 295}}</string>
+						<string key="NSFrame">{{20, 20}, {485, 278}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -540,9 +566,10 @@
 					<object class="NSTextField" id="1007402968">
 						<reference key="NSNextResponder" ref="835522929"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{17, 323}, {491, 17}}</string>
+						<string key="NSFrame">{{17, 306}, {491, 17}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="577916144"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="614106681">
@@ -559,7 +586,7 @@
 					<object class="NSTextField" id="896297187">
 						<reference key="NSNextResponder" ref="835522929"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{20, 348}, {269, 22}}</string>
+						<string key="NSFrame">{{32, 331}, {332, 22}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="867521477"/>
@@ -594,7 +621,7 @@
 					<object class="NSButton" id="867521477">
 						<reference key="NSNextResponder" ref="835522929"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{421, 349}, {84, 19}}</string>
+						<string key="NSFrame">{{409, 332}, {84, 19}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1007402968"/>
@@ -623,7 +650,7 @@
 				<string key="NSFrameSize">{525, 390}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="896297187"/>
+				<reference key="NSNextKeyView" ref="245566704"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
 			</object>
@@ -1082,14 +1109,6 @@
 					<int key="connectionID">355</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">myLabel</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1007402968"/>
-					</object>
-					<int key="connectionID">356</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">findLocation:</string>
 						<reference key="source" ref="1001"/>
@@ -1112,6 +1131,14 @@
 						<reference key="destination" ref="577916144"/>
 					</object>
 					<int key="connectionID">396</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">locationLabel</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="1007402968"/>
+					</object>
+					<int key="connectionID">404</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1268,10 +1295,11 @@
 						<int key="objectID">10</int>
 						<reference key="object" ref="835522929"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="867521477"/>
-							<reference ref="896297187"/>
-							<reference ref="1007402968"/>
 							<reference ref="577916144"/>
+							<reference ref="245566704"/>
+							<reference ref="896297187"/>
+							<reference ref="867521477"/>
+							<reference ref="1007402968"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Weather</string>
@@ -1806,6 +1834,19 @@
 						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="835522929"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">399</int>
+						<reference key="object" ref="245566704"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="905820069"/>
+						</array>
+						<reference key="parent" ref="835522929"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">400</int>
+						<reference key="object" ref="905820069"/>
+						<reference key="parent" ref="245566704"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1813,6 +1854,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="-3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="10.userInterfaceItemIdentifier">weather</string>
 				<string key="108.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="109.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1871,7 +1913,9 @@
 				<integer value="1" key="371.IBDateFormatterBehaviorMetadataKey"/>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="384.IBPluginDependency">com.apple.WebKitIBPlugin</string>
+				<string key="399.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="400.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="44.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -1903,7 +1947,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">396</int>
+			<int key="maxID">408</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1918,22 +1962,26 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PreferencesController</string>
 					<string key="superclassName">DBPrefsWindowController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">findLocation:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">findLocation:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="findLocation:">id</string>
+						<string key="openInDefaultBrowser:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="findLocation:">
 							<string key="name">findLocation:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="openInDefaultBrowser:">
+							<string key="name">openInDefaultBrowser:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="emailPreferenceView">NSView</string>
 						<string key="generalPreferenceView">NSView</string>
 						<string key="icalAndRemaindersPreferenceView">NSView</string>
 						<string key="locationField">NSTextField</string>
+						<string key="locationLabel">NSTextField</string>
 						<string key="mapWebView">WebView</string>
 						<string key="myLabel">NSTextField</string>
 						<string key="newsPreferenceView">NSView</string>
@@ -1960,6 +2008,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="locationField">
 							<string key="name">locationField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationLabel">
+							<string key="name">locationLabel</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="mapWebView">

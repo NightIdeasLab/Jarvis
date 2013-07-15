@@ -10,6 +10,7 @@
 
 @implementation PreferencesController
 
+// Preferences Toolbar
 @synthesize generalPreferenceView = _generalPreferenceView;
 @synthesize speechPreferenceView = _speechPreferenceView;
 @synthesize timeAndDatePreferenceView = _timeAndDatePreferenceView;
@@ -19,11 +20,15 @@
 @synthesize newsPreferenceView = _newsPreferenceView;
 @synthesize quotationPreferenceView = _quotationPreferenceView;
 @synthesize updatePreferenceView = _updatePreferenceView;
+
+// Update
 @synthesize updateDateField;
 @synthesize profileDateField;
+
+// Weather
 @synthesize locationField;
-@synthesize myLabel;
 @synthesize mapWebView;
+@synthesize locationLabel;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -33,7 +38,7 @@
     [updateDateField release];
     [profileDateField release];
     [locationField release];
-    [myLabel release];
+    [locationLabel release];
     [super dealloc];
 }
 
@@ -64,21 +69,19 @@
         [profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
     }
     
-    // Loading the map
-    NSURLRequest *firstRequest =
-    [NSURLRequest requestWithURL:[NSURL URLWithString: @"https://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=36.094886,79.013672&amp;t=m&amp;z=4&amp;output=embed"]];
-    
-    // <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=36.094886,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe><br /></small>
-    
-    
-   [self.mapWebView.mainFrame loadRequest:firstRequest];
-    
-//    NSString *resourcesPath = [[NSBundle mainBundle] resourcePath];
-//	NSString *htmlPath = [resourcesPath stringByAppendingString:@"/htdocs/ChangeLog.html"];
-//	[[fChangeLogWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
-    
+    // TODO: load the weather stuff only when the wether view is active
+    /* 	Weather Stuff retriving the location */
+	locationManager = [[CLLocationManager alloc] init];
+	locationManager.delegate = self;
+	[locationManager startUpdatingLocation];
     
     [defaults release];
+}
+
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+    
+
 }
 
 #pragma mark -
@@ -90,7 +93,7 @@
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title") image: [NSImage imageNamed: @"PrefUpdate"]];
     
     //[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
-
+    
     //[self addFlexibleSpacer]; //added a space between the icons
     
     // Optional configuration settings.
@@ -105,27 +108,117 @@
     // retrives the City and Country
     NSString *locationText = [locationField stringValue];
     NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
-
+    
     // separa NSString in mai single pointers
-//    NSString *list = @"Norman, Stanley, Fletcher";
-//    NSArray *listItems = [list componentsSeparatedByString:@", "];
+    //    NSString *list = @"Norman, Stanley, Fletcher";
+    //    NSArray *listItems = [list componentsSeparatedByString:@", "];
     
     if ([locationText length] >0) {
         // Displays the user his location
-        [myLabel setStringValue:messageForLabel];
+        [locationLabel setStringValue:messageForLabel];
     }
     else {
         // If the user will not write a city and country then we will display this message
-        [myLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
+        [locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
     }
     
     [messageForLabel release];
     
-//    if (!firstLaunch) {
-//        
-//        [fDefaults setInteger:721943 forKey: @"LocationCode"];
-//    }
+    //    if (!firstLaunch) {
+    //
+    //        [fDefaults setInteger:721943 forKey: @"LocationCode"];
+    //    }
     
     
 }
+
+#pragma -
+#pragma Find Location
+
++ (double)latitudeRangeForLocation:(CLLocation *)aLocation
+{
+	const double M = 6367000.0; // approximate average meridional radius of curvature of earth
+	const double metersToLatitude = 1.0 / ((M_PI / 180.0) * M);
+	const double accuracyToWindowScale = 2.0;
+	
+    NSLog(@"aLocation: %@",aLocation);
+	return aLocation.horizontalAccuracy * metersToLatitude * accuracyToWindowScale;
+}
+
++ (double)longitudeRangeForLocation:(CLLocation *)aLocation
+{
+	double latitudeRange =
+    [PreferencesController latitudeRangeForLocation:aLocation];
+	
+	return latitudeRange * cos(aLocation.coordinate.latitude * M_PI / 180.0);
+}
+
+- (IBAction)openInDefaultBrowser:(id)sender
+{
+	CLLocation *currentLocation = locationManager.location;
+	
+	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
+                                                      @"http://maps.google.com/maps?ll=%f,%f&amp;spn=%f,%f",
+                                                      currentLocation.coordinate.latitude,
+                                                      currentLocation.coordinate.longitude,
+                                                      [PreferencesController latitudeRangeForLocation:currentLocation],
+                                                      [PreferencesController longitudeRangeForLocation:currentLocation]]];
+    
+	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+	didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+	// Ignore updates where nothing we care about changed
+	if (newLocation.coordinate.longitude == oldLocation.coordinate.longitude &&
+		newLocation.coordinate.latitude == oldLocation.coordinate.latitude &&
+		newLocation.horizontalAccuracy == oldLocation.horizontalAccuracy)
+	{
+		return;
+	}
+    
+	// Load the HTML for displaying the Google map from a file and replace the
+	// format placeholders with our location data
+	NSString *htmlString = [NSString stringWithFormat:
+                            [NSString
+                             stringWithContentsOfFile:
+                             [[NSBundle mainBundle]
+                              pathForResource:@"googleMaps" ofType:@"html"]
+                             encoding:NSUTF8StringEncoding
+                             error:NULL],
+                            newLocation.coordinate.latitude,
+                            newLocation.coordinate.longitude,
+                            [PreferencesController latitudeRangeForLocation:newLocation],
+                            [PreferencesController longitudeRangeForLocation:newLocation]];
+	
+	// Load the HTML in the WebView and set the labels
+	[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
+	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
+                                   newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+	[[mapWebView mainFrame]
+     loadHTMLString:
+     [NSString stringWithFormat:
+      NSLocalizedString(@"Location manager failed with error: %@", nil),
+      [error localizedDescription]]
+     baseURL:nil];
+	[locationLabel setStringValue:@""];
+}
+
+
+#pragma -
+#pragma Other Functions
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	[locationManager stopUpdatingLocation];
+	[locationManager release];
+}
+
+
 @end
