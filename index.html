@@ -1,93 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8">
+    <title>Jarvis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+                                   
     
-    <title>Jarvis by NightIdeasLab</title>
-  </head>
-
-  <body>
-
-    <header>
-      <div class="container">
-        <h1>Jarvis</h1>
-        <h2>A Jarvis (Iron Man) implementation for Mac OS X</h2>
-        
-        <section id="downloads">
-          <a href="index.html" class="btn"> Home </a>
-          <a href="news.html" class="btn"> News </a>
-          <a href="contact.html" class="btn"> Contact </a>
-          <a href="donate.html" class="btn"> Donate </a>
-          <a href="questions.html" class="btn"> Q&A </a>     
-          <a href="https://github.com/NightIdeasLab/Jarvis" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h3>About Jarvis.</h3>
-   <center> 
-   		<a href="https://github.com/NightIdeasLab/Jarvis/raw/master/Jarvis%20screenshot.png" target="_blank">
-	   		<img border="0" width="300" src="images/Jarvis_screenshot_small.png">
-	   	</a>
-   </center>
-    
-    <p>This my morning default application. Design question here is not how it looks like, or how it sounds like. The question is what do you want to hear in the morning when you open your computer.
-    <br/>
-    <br/>
-    Currently it gathers and reads the following:
-   <ul>
-    <li>Greetings.</li>
-    <li>Time and date.</li>
-    <li>Calendar events.</li>
-    <li>Reminders (from iCal).</li>
-    <li>Weather conditions. (for Yahoo Weather)</li>
-    <li>Unread email count and VIP email count.</li>
-    <li>Location of tracked packages. (for the moment this is not working)</li>
-    <li>News headlines from NYTimes.</li>
-    <li>Daily quotations.</li>
-  </ul>
-
-For obvious reasons it is called Jarvis.
-<br/>
-Icon by Yellow Icon</p>
-    
-    <h3>Authors and Contributors</h3>
-
-    <p>The main contributor of Jarvis is Gabriel Ulici (<a href="https://github.com/GabrielUlici" class="user-mention">@Gabe</a>), the 		original coder was <a href="http://physicistjedi.deviantart.com/">physicistjedi</a>. Jarvis uses code developed by Andy Matuschak /Sparkle/ (<a href="https://github.com/andymatuschak/" class="user-mention">@Andy Matuschak</a>), Andy Kim /LetsMove/ (<a href="https://github.com/potionfactory" class="user-mention">@potionfactory</a>).</p>
-    
-    <h3>Donate</h3>
-    <p>You can donate <a href="donate.html">here</a>.</p>
-    <br/>
-    	    
-      </section>
-    </div>
-    
-        <div class="footer">
-     <center> © 2011 - 2012 <a href="http://nightideaslab.github.com/">Night Ideas Lab</a> <center />
-    </div>
-
     <script type="text/javascript">
+	    
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-32509532-1']);
+		_gaq.push(['_trackPageview']);
 
-	    var _gaq = _gaq || [];
-	    _gaq.push(['_setAccount', 'UA-32509532-1']);
-	    _gaq.push(['_trackPageview']);
-
-	    (function()
-	    {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		(function()
+		{
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		 })();
 
 	</script>
+    
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Jarvis</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="./index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="./news.html">News</a>
+              </li>
+              <li class="">
+                <a href="./questions.html">Q&A</a>
+              </li>
+              <li class="">
+                <a href="./contact.html">Contact</a>
+              </li>
+              <li class="">
+                <a href="./download.html">Download</a>
+              </li>
+              <li class="">
+                <a href="./donate.html">Donate</a>
+              </li>
+              <li class="">
+                <a href="./credits.html">Credits</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Masthead
+================================================== -->
+<div class="jumbotron masthead">
+  <div class="container">
+    <h1>Jarvis</h1>
+    <p>A Digital Assistant for Mac OS X</p>
+    <p>
+      <a href="assets/Jarvis.zip" class="btn btn-primary btn-large" onclick="_gaq.push(['_trackEvent', 'External Links', 'Download', 'Download 0.4.1.1']);">Download Jarvis</a>
+    </p>
+    <ul class="masthead-links">
+      <li>
+        <a href="https://github.com/NightIdeasLab/Jarvis" onclick="_gaq.push(['_trackEvent', 'External Links', 'Git Project', 'GitHub project']);">GitHub project</a>
+      </li>
+     <!-- <li>
+        <a href="./getting-started.html#examples">Screen Shot</a>
+      </li>-->
+      <li>
+        Version 0.4.1.1
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="bs-docs-social">
+  <div class="container">
+    <ul class="bs-docs-social-buttons">
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=NightIdeasLab&repo=Jarvis&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+      </li>
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=NightIdeasLab&repo=Jarvis&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe>
+      </li>
+      <li class="follow-btn">
+        <a href="https://twitter.com/Jarvis_App" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @Jarvis_App</a>
+      </li>
+      <li class="tweet-btn">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nightideaslab.github.com/Jarvis/" data-count="horizontal" data-via="Jarvis_App" data-related="mdo:Jarvis OSX app">Tweet</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="marketing">
+
+    <h1>Introducing Jarvis.</h1>
+   <!-- <p class="marketing-byline">Need reasons to love Jarvis? Look no further.</p> -->
+   
+   <br>
+   <br>
+
+    <div class="row-fluid">
+      <div class="span4">
+        <img class="marketing-img" src="assets/img/time&calendar.png">
+        <h2>Time & Calendar.</h2>
+        <p>Jarvis will inform about the current time & date, about your daily iCal events and reminders.</p>
+      </div>
+      <div class="span4">
+        <img class="marketing-img" src="assets/img/weather&email.png">
+        <h2>Weather & Email.</h2>
+        <p>Jarvis will provide you with the weather for the current day and a 5 day forecast, will notify you if you have new emails.</p>
+      </div>
+      <div class="span4">
+        <img class="marketing-img" src="assets/img/news.png">
+        <h2>News & Quote .</h2>
+        <p>You need to keep in touch with the latest news headlines and to know the daily quote.</p>
+      </div>
+    </div>
+<!--
+    <hr class="soften">
+
+    <h1>Built with Bootstrap.</h1>
+    <p class="marketing-byline">For even more sites built with Bootstrap, <a href="http://builtwithbootstrap.tumblr.com/" target="_blank">visit the unofficial Tumblr</a> or <a href="./getting-started.html#examples">browse the examples</a>.</p>
+    <div class="row-fluid">
+      <ul class="thumbnails example-sites">
+        <li class="span3">
+          <a class="thumbnail" href="http://soundready.fm/" target="_blank">
+            <img src="assets/img/example-sites/soundready.png" alt="SoundReady.fm">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://kippt.com/" target="_blank">
+            <img src="assets/img/example-sites/kippt.png" alt="Kippt">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://www.gathercontent.com/" target="_blank">
+            <img src="assets/img/example-sites/gathercontent.png" alt="Gather Content">
+          </a>
+        </li>
+        <li class="span3">
+          <a class="thumbnail" href="http://www.jshint.com/" target="_blank">
+            <img src="assets/img/example-sites/jshint.png" alt="JS Hint">
+          </a>
+        </li>
+      </ul>
+     </div>
+-->
+  </div>
+
+</div>
+
+
+
+     <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Copyright © 1987-
+        	<script language="JavaScript" type="text/javascript">
+				now = new Date
+				theYear=now.getFullYear()
+				document.write(theYear)
+			</script>
+            <a href="http://nightideaslab.github.io/" target="_blank">Night Ideas Lab Inc</a>. All rights reserved.</p>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+
+    <script src="assets/js/holder/holder.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+
+    <script src="assets/js/application.js"></script>
 
   </body>
 </html>

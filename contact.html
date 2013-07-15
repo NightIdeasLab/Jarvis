@@ -1,41 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="utf-8">
+    <title>Contact · Jarvis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+    <script type="text/javascript">
+         var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-32509532-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function()
+		{
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		 })();
+    </script>
+    <script>
+    function openTwitter()
+     {
+	 	window.open("https://twitter.com/Jarvis_App","_self")
+	 }
+	 
+	 function openFacebook()
+     {
+	 	window.open("https://www.facebook.com/pages/Night-Ideas-Lab-Inc-NIL/317572421612923?ref=hl","_self")
+	 }
+	 
+    </script>
     
-    <title>Jarvis by NightIdeasLab</title>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
-    <header>
-      <div class="container">
-        <h1>Jarvis</h1>
-        <h2>A Jarvis (Iron Man) implementation for Mac OS X</h2>
-        
-        <section id="downloads">
-          <a href="index.html" class="btn"> Home </a>
-          <a href="news.html" class="btn"> News </a>
-          <a href="contact.html" class="btn"> Contact </a>
-          <a href="donate.html" class="btn"> Donate </a>
-          <a href="questions.html" class="btn"> Q&A </a>
-          <a href="https://github.com/NightIdeasLab/Jarvis" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Jarvis</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="./index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="./news.html">News</a>
+              </li>
+              <li class="">
+                <a href="./questions.html">Q&A</a>
+              </li>
+              <li class="active">
+                <a href="./contact.html">Contact</a>
+              </li>
+              <li class="">
+                <a href="./download.html">Download</a>
+              </li>
+              <li class="">
+                <a href="./donate.html">Donate</a>
+              </li>
+              <li class="">
+                <a href="./credits.html">Credits</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </header>
+    </div>
 
-    <div class="container">
-      <section id="main_content">
+<!-- Masthead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+  <div class="container">
+    <h1>Contact and Support</h1>
+  </div>
+</header>
 
-    <h3>Support or Contact</h3>
 
-    <p>Having trouble with Jarvis? Check out the <a href="https://github.com/NightIdeasLab/Jarvis/wiki">wiki</a>, or the <a href="https://github.com/NightIdeasLab/Jarvis/issues">issues</a> page, or contact us as by <script type="text/javascript">
+  <div class="container-fluid">
+  
+    <!-- Docs nav
+    ================================================== -->
+    <div class="row-fluid">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+        	<center><h3><p> Social Networks</p></h3>
+			        
+          <button onclick="openTwitter()" id="startBtn" class="btn btn-large btn-primary" style="width: 200px; height: 40px">Twitter</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button onclick="openTwitter()" id="startBtn" class="btn btn-large btn-inverse" style="width: 200px; height: 40px">Facebook</button>
+          </center>
+          
+          <!--
+          <address>
+	          <strong>Twitter, Inc.</strong><br>
+	          795 Folsom Ave, Suite 600<br>
+	          San Francisco, CA 94107<br>
+	          <abbr title="Phone">P:</abbr> (123) 456-7890
+	      </address>
+ 
+	      <address>
+		      <strong>Full Name</strong><br>
+		      <a href="mailto:#">first.last@example.com</a>
+		  </address>  -->
+
+
+        </ul>
+      </div>
+      <div class="span9">
+       
+
+        <!-- Customize form
+        ================================================== -->
+        <form>
+          <section class="download" id="components">
+            <div class="page-header">
+              
+              
+             <h3> <p>Having trouble with Jarvis? Check out the <a href="https://github.com/NightIdeasLab/Jarvis/wiki">wiki</a>, or the <a href="https://github.com/NightIdeasLab/Jarvis/issues">issues</a> page, or contact us as by <script type="text/javascript">
 //<![CDATA[
 <!--
 var x="function f(x){var i,o=\"\",l=x.length;for(i=l-1;i>=0;i--) {try{o+=x.c" +
@@ -55,49 +163,141 @@ var x="function f(x){var i,o=\"\",l=x.length;for(i=l-1;i>=0;i--) {try{o+=x.c" +
 while(x=eval(x));
 //-->
 //]]>
-</script> and we’ll help you sort it out.</p>
+</script> or the contact form below and we’ll help you sort it out.</p></h3>
 
-    <h3>Download</h3>
-    	<p>
-    		You can download the latest version of this project as an application from
-    		<a href="https://github.com/NightIdeasLab/Jarvis/downloads">here</a>.
-    	</p>
-    	
-    	<p>
-    		Or you can download this project source code in either
-    		<a href="https://github.com/NightIdeasLab/Jarvis/zipball/master">zip</a> or
-    		<a href="https://github.com/NightIdeasLab/Jarvis/tarball/master">tar</a> formats.
-    	</p>
-    	
-    	<p>Or you can also clone the project  with <a href="http://git-scm.com">Git</a> by running:
-    		<pre>$ git clone git://github.com/NightIdeasLab/Jarvis</pre>
-    	</p>
+       
+        </form>
+
+<form id="emf-form" target="_self" enctype="multipart/form-data" method="post" action="http://www.emailmeform.com/builder/form/AY7i0Tpddr3a" name="emf-form">
+  <table style="text-align:left;" cellpadding="2" cellspacing="0" border="0" bgcolor="transparent">
+    <tr>
+      <td style="" colspan="2">
+        <font face="Verdana" size="2" color="#000000"><b style="font-size:20px;">Contact Form</b><br />
+        <label style="font-size:15px;"></label><br /></font>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td id="td_element_label_0" style="" align="">
+        <font face="Verdana" size="2" color="#000000"><b>Name</b></font> <span style="color:red;"><small>*</small></span>
+      </td>
+    </tr>
+    <tr>
+      <td id="td_element_field_0" style="">
+        <input id="element_0" name="element_0" value="" size="60" class="validate[required]" type="text" style="width: 250px" />
+        <div style="padding-bottom:8px;color:#000000;"></div>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td id="td_element_label_1" style="" align="">
+        <font face="Verdana" size="2" color="#000000"><b>Email</b></font> <span style="color:red;"><small>*</small></span>
+      </td>
+    </tr>
+    <tr>
+      <td id="td_element_field_1" style="">
+        <input id="element_1" name="element_1" class="validate[required,custom[email]]" value="" size="30" type="text" style="width: 250px"/>
+        <div style="padding-bottom:8px;color:#000000;"></div>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td id="td_element_label_2" style="" align="">
+        <font face="Verdana" size="2" color="#000000"><b>Subject</b></font> <span style="color:red;"><small>*</small></span>
+      </td>
+    </tr>
+    <tr>
+      <td id="td_element_field_2" style="">
+        <input id="element_2" name="element_2" value="" size="30" class="validate[required]" type="text" style="width: 250px"/>
+        <div style="padding-bottom:8px;color:#000000;"></div>
+      </td>
+    </tr>
+    <tr valign="top">
+      <td id="td_element_label_3" style="" align="">
+        <font face="Verdana" size="2" color="#000000"><b>Message</b></font> <span style="color:red;"><small>*</small></span>
+      </td>
+    </tr>
+    <tr>
+      <td id="td_element_field_3" style="">
+        <textarea id="element_3" name="element_3" cols="60" rows="10" class="validate[required]" style="width: 435px">
+</textarea>
+        <div style="padding-bottom:8px;color:#000000;"></div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <script type="text/javascript">
+//<![CDATA[
+        var RecaptchaOptions = {
+                theme: 'clean',
+                custom_theme_widget: 'emf-recaptcha_widget'
+                };
+        //]]>
+        </script> <script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LchicQSAAAAAGksQmNaDZMw3aQITPqZEsX77lT9">
+</script> <noscript><iframe src="https://www.google.com/recaptcha/api/noscript?k=6LchicQSAAAAAGksQmNaDZMw3aQITPqZEsX77lT9" height="300" width="500" frameborder="0"></iframe><br />
+        <textarea name="recaptcha_challenge_field" rows="3" cols="40">
+</textarea> <input type="hidden" name="recaptcha_response_field" value="manual_challenge" /></noscript>
+<div style="padding-bottom:10px;color:#000000;"></div>
+      </td>
+    </tr>
     
-    <h3>Donate</h3>
-    	<p>You can donate <a href="https://github.com/NightIdeasLab/Jarvis/donate.html">here</a>.</p>
-    	<br/>
-    	    
-      </section>
+    <tr>
+      <td colspan="2" align="left">
+        <input name="element_counts" value="4" type="hidden" /> <input name="embed" value="forms" type="hidden" /><input type="button" class="btn btn-large btn-success" value="Send email" type="submit" />&nbsp;&nbsp;<input type="button" class="btn btn-large btn-danger"  value="Clear" type="reset" />
+      </td>
+    </tr>
+  </table>
+</form>
+<div style="margin-top:0px;text-align:center">
+  <script type="text/javascript">
+//<![CDATA[
+  generate_css_for_emf_ad();
+  //]]>
+  </script>
+
+</div>
+      </div>
     </div>
-    
-        <div class="footer">
-     <center> © 2011 - 2012 <a href="http://nightideaslab.github.com/">Night Ideas Lab</a> <center />
-    </div>
+  </div>
 
-    <script type="text/javascript">
 
-	    var _gaq = _gaq || [];
-	    _gaq.push(['_setAccount', 'UA-32509532-1']);
-	    _gaq.push(['_trackPageview']);
+     <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Copyright © 1987-
+        	<script language="JavaScript" type="text/javascript">
+				now = new Date
+				theYear=now.getFullYear()
+				document.write(theYear)
+			</script>
+            <a href="http://nightideaslab.github.io/" target="_blank">Night Ideas Lab Inc</a>. All rights reserved.</p>
+      </div>
+    </footer>
 
-	    (function()
-	    {
-		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		 })();
 
-	</script>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+
+    <script src="assets/js/holder/holder.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+
+    <script src="assets/js/application.js"></script>
+
 
   </body>
 </html>
