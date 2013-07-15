@@ -66,7 +66,7 @@
 		else if (mailCount>1) text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them are from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
 	}
     
-    // [text autorelease]; // if this is decommented, it will crash the app
+    // [text autorelease]; // FIXME: if this is decommented, it will crash the app
     return text;
     
 }

@@ -21,6 +21,7 @@
 
 // Local Classes
 #import "CalendarMethod.h"
+#import "ChangeLogController.h"
 #import "EmailMethod.h"
 #import "JRFeedbackController.h"
 #import "PreferencesController.h"
@@ -39,6 +40,7 @@
 }
 
 @property (nonatomic, strong) PreferencesController *preferencesController;
+@property (nonatomic, strong) ChangeLogController *changeLogController;
 
 - (NSWindow *)windowLM;
 

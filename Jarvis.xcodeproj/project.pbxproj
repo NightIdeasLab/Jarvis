@@ -15,6 +15,7 @@
 		0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */; };
 		005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
+		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
 		0094D444176A27340052079F /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D439176A27340052079F /* PrefUpdate.png */; };
@@ -53,10 +54,11 @@
 		00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C7671790704500246636 /* DBPrefsWindowController.m */; };
 		00E2C76D1790704500246636 /* Preference pane.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C7681790704500246636 /* Preference pane.rtf */; };
 		00E2C76E1790704500246636 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C76A1790704500246636 /* PreferencesController.m */; };
-		00E2C76F1790704500246636 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C76B1790704500246636 /* PreferencesController.xib */; };
 		00E2C775179070BB00246636 /* JRFeedbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C771179070BB00246636 /* JRFeedbackController.m */; };
-		00E2C776179070BB00246636 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C772179070BB00246636 /* JRFeedbackProvider.xib */; };
 		00E2C777179070BB00246636 /* NSURLRequest+postForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C774179070BB00246636 /* NSURLRequest+postForm.m */; };
+		00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F017934622001E1F98 /* ChangeLogController.xib */; };
+		00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F31793463C001E1F98 /* PreferencesController.xib */; };
+		00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F617934649001E1F98 /* JRFeedbackProvider.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +89,8 @@
 		0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsAndQuoteMethod.h; sourceTree = "<group>"; };
 		0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsAndQuoteMethod.m; sourceTree = "<group>"; };
 		005491AD176A0590008A191D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
+		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
 		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
 		0094D439176A27340052079F /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefUpdate.png; sourceTree = "<group>"; };
@@ -136,12 +140,13 @@
 		00E2C7681790704500246636 /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Preference pane.rtf"; sourceTree = "<group>"; };
 		00E2C7691790704500246636 /* PreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesController.h; sourceTree = "<group>"; };
 		00E2C76A1790704500246636 /* PreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesController.m; sourceTree = "<group>"; };
-		00E2C76B1790704500246636 /* PreferencesController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesController.xib; sourceTree = "<group>"; };
 		00E2C770179070BB00246636 /* JRFeedbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRFeedbackController.h; sourceTree = "<group>"; };
 		00E2C771179070BB00246636 /* JRFeedbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRFeedbackController.m; sourceTree = "<group>"; };
-		00E2C772179070BB00246636 /* JRFeedbackProvider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRFeedbackProvider.xib; sourceTree = "<group>"; };
 		00E2C773179070BB00246636 /* NSURLRequest+postForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+postForm.h"; sourceTree = "<group>"; };
 		00E2C774179070BB00246636 /* NSURLRequest+postForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLRequest+postForm.m"; sourceTree = "<group>"; };
+		00F6E1EF17934622001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ChangeLogController.xib; sourceTree = "<group>"; };
+		00F6E1F21793463C001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesController.xib; sourceTree = "<group>"; };
+		00F6E1F517934649001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JRFeedbackProvider.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +179,7 @@
 				00E2C7681790704500246636 /* Preference pane.rtf */,
 				00E2C7691790704500246636 /* PreferencesController.h */,
 				00E2C76A1790704500246636 /* PreferencesController.m */,
-				00E2C76B1790704500246636 /* PreferencesController.xib */,
+				00F6E1F31793463C001E1F98 /* PreferencesController.xib */,
 				00E2C7661790704500246636 /* DBPrefsWindowController.h */,
 				00E2C7671790704500246636 /* DBPrefsWindowController.m */,
 			);
@@ -273,19 +278,11 @@
 			children = (
 				00AF0DEE1769FBBC00C00AE3 /* AppDelegate.h */,
 				00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */,
-				0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */,
-				0048C86017917BBB00B7C2A3 /* CalendarMethod.m */,
-				0048C86517918E3D00B7C2A3 /* EmailMethod.h */,
-				0048C86617918E3D00B7C2A3 /* EmailMethod.m */,
-				0048C868179190AA00B7C2A3 /* PackageTrackerMethod.h */,
-				0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */,
-				0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */,
-				0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */,
-				0048C85C1791782D00B7C2A3 /* WeatherMethod.h */,
-				0048C85D1791782D00B7C2A3 /* WeatherMethod.m */,
-				0048C8621791853B00B7C2A3 /* TimeAndDateMethod.h */,
-				0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */,
 				00AF0DF11769FBBD00C00AE3 /* App.xib */,
+				008541B117925BEF0005A433 /* ChangeLogController.h */,
+				008541B217925BEF0005A433 /* ChangeLogController.m */,
+				00F6E1F017934622001E1F98 /* ChangeLogController.xib */,
+				00CF29B017934BCF008A5EBD /* Utility Classes */,
 				0010FA2C1769FC4200FB4265 /* Preferences */,
 				00CD557E176B9BC60057FC4A /* ThirdParty */,
 				00CD557F176B9D200057FC4A /* FeedBack */,
@@ -341,11 +338,30 @@
 			children = (
 				00E2C770179070BB00246636 /* JRFeedbackController.h */,
 				00E2C771179070BB00246636 /* JRFeedbackController.m */,
-				00E2C772179070BB00246636 /* JRFeedbackProvider.xib */,
+				00F6E1F617934649001E1F98 /* JRFeedbackProvider.xib */,
 				00E2C773179070BB00246636 /* NSURLRequest+postForm.h */,
 				00E2C774179070BB00246636 /* NSURLRequest+postForm.m */,
 			);
 			name = FeedBack;
+			sourceTree = "<group>";
+		};
+		00CF29B017934BCF008A5EBD /* Utility Classes */ = {
+			isa = PBXGroup;
+			children = (
+				0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */,
+				0048C86017917BBB00B7C2A3 /* CalendarMethod.m */,
+				0048C86517918E3D00B7C2A3 /* EmailMethod.h */,
+				0048C86617918E3D00B7C2A3 /* EmailMethod.m */,
+				0048C868179190AA00B7C2A3 /* PackageTrackerMethod.h */,
+				0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */,
+				0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */,
+				0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */,
+				0048C85C1791782D00B7C2A3 /* WeatherMethod.h */,
+				0048C85D1791782D00B7C2A3 /* WeatherMethod.m */,
+				0048C8621791853B00B7C2A3 /* TimeAndDateMethod.h */,
+				0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */,
+			);
+			name = "Utility Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +375,7 @@
 				00AF0DD71769FBBC00C00AE3 /* Resources */,
 				005491AC176A053B008A191D /* Copy Frameworks */,
 				00AF0DD61769FBBC00C00AE3 /* Frameworks */,
+				000AB2A41792F86300EA9AD6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -421,12 +438,29 @@
 				00BD8A16178F37750042CCA5 /* PrefWeather.png in Resources */,
 				00BD8A17178F37750042CCA5 /* PrefWeather@2x.png in Resources */,
 				00E2C76D1790704500246636 /* Preference pane.rtf in Resources */,
-				00E2C76F1790704500246636 /* PreferencesController.xib in Resources */,
-				00E2C776179070BB00246636 /* JRFeedbackProvider.xib in Resources */,
+				00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */,
+				00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */,
+				00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		000AB2A41792F86300EA9AD6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|TODO|FIXME\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		00AF0DD51769FBBC00C00AE3 /* Sources */ = {
@@ -446,6 +480,7 @@
 				0048C86717918E3D00B7C2A3 /* EmailMethod.m in Sources */,
 				0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */,
 				0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */,
+				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -466,6 +501,30 @@
 				00AF0DF21769FBBD00C00AE3 /* en */,
 			);
 			name = App.xib;
+			sourceTree = "<group>";
+		};
+		00F6E1F017934622001E1F98 /* ChangeLogController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00F6E1EF17934622001E1F98 /* en */,
+			);
+			name = ChangeLogController.xib;
+			sourceTree = "<group>";
+		};
+		00F6E1F31793463C001E1F98 /* PreferencesController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00F6E1F21793463C001E1F98 /* en */,
+			);
+			name = PreferencesController.xib;
+			sourceTree = "<group>";
+		};
+		00F6E1F617934649001E1F98 /* JRFeedbackProvider.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00F6E1F517934649001E1F98 /* en */,
+			);
+			name = JRFeedbackProvider.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

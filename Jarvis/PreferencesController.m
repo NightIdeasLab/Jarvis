@@ -23,6 +23,7 @@
 @synthesize profileDateField;
 @synthesize locationField;
 @synthesize myLabel;
+@synthesize mapWebView;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -63,11 +64,25 @@
         [profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
     }
     
+    // Loading the map
+    NSURLRequest *firstRequest =
+    [NSURLRequest requestWithURL:[NSURL URLWithString: @"https://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=36.094886,79.013672&amp;t=m&amp;z=4&amp;output=embed"]];
+    
+    // <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=36.094886,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe><br /></small>
+    
+    
+   [self.mapWebView.mainFrame loadRequest:firstRequest];
+    
+//    NSString *resourcesPath = [[NSBundle mainBundle] resourcePath];
+//	NSString *htmlPath = [resourcesPath stringByAppendingString:@"/htdocs/ChangeLog.html"];
+//	[[fChangeLogWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
+    
+    
     [defaults release];
 }
 
 #pragma mark -
-#pragma mark Configuration
+#pragma mark Toolbar Configuration
 
 - (void)setupToolbar{
     [self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title") image: [NSImage imageNamed: @"PrefGeneral"]];

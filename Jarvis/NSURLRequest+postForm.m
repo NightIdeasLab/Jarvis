@@ -47,7 +47,7 @@
     //--
     // Create the mime multipart boundary.
     
-    // TODO scan `values` to ensure uniqueness of `boundary`. Loop+regen UUID if collision is discovered.
+    // todo scan `values` to ensure uniqueness of `boundary`. Loop+regen UUID if collision is discovered.
     CFUUIDRef cfUuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString * uuid = (id)CFUUIDCreateString(kCFAllocatorDefault, cfUuid);
     CFRelease(cfUuid);
@@ -69,7 +69,7 @@
 #endif
 		[formData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 
-        // TODO escape keys with quotes in them.
+        // todo escape keys with quotes in them.
         [formData jr_appendFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n", key];
         
         id value = [values objectForKey:key];

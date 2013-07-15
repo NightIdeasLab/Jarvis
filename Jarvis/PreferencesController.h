@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <WebKit/WebKit.h>
 #import "DBPrefsWindowController.h"
 
 @interface PreferencesController : DBPrefsWindowController
@@ -24,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet NSTextField *profileDateField;
 @property (strong, nonatomic) IBOutlet NSTextField *locationField;
 @property (strong, nonatomic) IBOutlet NSTextField *myLabel;
+@property (assign) IBOutlet WebView *mapWebView;
 
 
 // Weather

@@ -17,12 +17,14 @@
     NSCalendarDate *date = [NSCalendarDate calendarDate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
-    if([date hourOfDay]<4) text = NSLocalizedString(@"Good night, ", @"Greeting in the night");
-    else if([date hourOfDay]<12) text = NSLocalizedString(@"Good morning, ", @"Greeting in the morning");
-    else if([date hourOfDay]<18) text = NSLocalizedString(@"Good afternoon, ", @"Greeting in the afternoon");
-    else text = NSLocalizedString(@"Good evening, ", @"Greeting in the evening");
+    if([date hourOfDay]<4) text = NSLocalizedString(@"Good night", @"Greeting in the night");
+    else if([date hourOfDay]<12) text = NSLocalizedString(@"Good morning", @"Greeting in the morning");
+    else if([date hourOfDay]<18) text = NSLocalizedString(@"Good afternoon", @"Greeting in the afternoon");
+    else text = NSLocalizedString(@"Good evening", @"Greeting in the evening");
     
     //Reading the username
+    // TODO: read this only if the user want it
+    text = [text stringByAppendingString:@", "];
     text = [text stringByAppendingString: NSUserName()];
     text = [text stringByAppendingString:@". "];
     

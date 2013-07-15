@@ -46,6 +46,7 @@
     
     
     //Forecast for the next 5 days
+    // FIXME: the forcast is really ugly, redo it :)
 	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
 	weatherContent = weatherPage;
     
@@ -76,5 +77,64 @@
     [text autorelease];
     return text;
 }
+
+/* OLD CODE FOR THE WEATHER
+ //Weather conditions
+ NSString * weatherText = [[NSString alloc] init];
+ NSString * weatherPage = [[NSString alloc] init];
+ NSString * weatherContent = [[NSString alloc] init];
+ weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.accuweather.com/en-us/it/lazio/rome/quick-look.aspx?cityid=",zipCode]] encoding: NSUTF8StringEncoding error:nil];
+ weatherContent = weatherPage;
+ if(weatherContent!=nil)
+ {
+ if ([[weatherContent componentsSeparatedByString:@"<div id=\"quicklook_current_temps\">"] count]>1)
+ {
+ weatherText = [[weatherContent componentsSeparatedByString:@"<div id=\"quicklook_current_temps\">"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@"&"] objectAtIndex:0];
+ text = [text stringByAppendingString:[NSString stringWithFormat:@"\nWeather in %@ is ",locationName]];
+ text = [text stringByAppendingString:weatherText];
+ text = [text stringByAppendingString:@" degrees.\n"];
+ }
+ }
+ weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.accuweather.com/en-us/it/lazio/rome/quick-look.aspx?cityid=",zipCode]] encoding: NSUTF8StringEncoding error:nil];
+ weatherContent = weatherPage;
+ if(weatherContent!=nil)
+ {
+ weatherContent = [[weatherContent componentsSeparatedByString:@"Low:&nbsp;"] objectAtIndex:0];
+ if([[weatherContent componentsSeparatedByString:@"High:"] count]>1)
+ {
+ weatherText = [[weatherContent componentsSeparatedByString:@"High:"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@";\">"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@"</div>"] objectAtIndex:0];
+ text = [text stringByAppendingString:weatherText];
+ text = [text stringByAppendingString:@".\n"];
+ 
+ 
+ text = [text stringByAppendingString:@"Temperature, will raise up to "];
+ weatherText = [[weatherContent componentsSeparatedByString:@"High:"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@"&"] objectAtIndex:0];
+ text = [text stringByAppendingString:weatherText];
+ text = [text stringByAppendingString:@" degrees.\n"];
+ }
+ else
+ {
+ weatherContent = weatherPage;
+ if(weatherContent!=nil)
+ {
+ weatherText = [[weatherContent componentsSeparatedByString:@"Low:&nbsp;"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@";\">"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@"</div>"] objectAtIndex:0];
+ text = [text stringByAppendingString:weatherText];
+ text = [text stringByAppendingString:@".\n"];
+ 
+ text = [text stringByAppendingString:@"Temperature, will fall down to "];
+ weatherText = [[weatherContent componentsSeparatedByString:@"Low:&nbsp;"] objectAtIndex:1];
+ weatherText = [[weatherText componentsSeparatedByString:@"&"] objectAtIndex:0];
+ text = [text stringByAppendingString:weatherText];
+ text = [text stringByAppendingString:@" degrees.\n"];
+ }
+ }
+ }
+ */
 
 @end

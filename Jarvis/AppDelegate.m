@@ -20,6 +20,7 @@ NSSpeechSynthesizer *synth;
 @implementation AppDelegate
 
 @synthesize preferencesController = _preferencesController;
+@synthesize changeLogController = _changeLogController;
 
 - (NSWindow *) windowLM {
     // returns the main window
@@ -30,6 +31,7 @@ NSSpeechSynthesizer *synth;
     // should kill variables on exit
     [windowLM release];
     [_preferencesController release];
+    [_changeLogController release];
     [super dealloc];
 }
 
@@ -67,21 +69,23 @@ NSSpeechSynthesizer *synth;
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
-
+        
         // initializing the update system
-        [[SUUpdater sharedUpdater] setDelegate: self]; // trows a c++ exception
+        [[SUUpdater sharedUpdater] setDelegate: self]; // FIXME: trows a c++ exception
     }
     return self;
 }
 
 - (void) awakeFromNib {
     
+    [windowLM makeKeyAndOrderFront:self];
+    
 #if DEBUG
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
 #endif
     
     // allocationg the SpeechSyntesizer
-	synth = [[NSSpeechSynthesizer alloc] init]; // trows a c++ exception
+	synth = [[NSSpeechSynthesizer alloc] init]; // FIXME: trows a c++ exception
 	[self jarvis];
 }
 
@@ -92,26 +96,24 @@ NSSpeechSynthesizer *synth;
 	// any first run UI by putting it after this call.
 	
     //PFMoveToApplicationsFolderIfNecessary();
+    [windowLM makeKeyAndOrderFront:self];
 }
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
-
-    // Putting the app on top of other windows
-    [windowLM makeKeyAndOrderFront:self];
     
     [NSApp setServicesProvider: self];
     
-    //register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
+    // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:)
                                                      forEventClass: kCoreEventClass andEventID: kAEOpenContents];
     
-    //shamelessly ask for donations
+    // shamelessly ask for donations
     if ([fDefaults boolForKey: @"WarningDonate"]) {
         
         const BOOL firstLaunch = [fDefaults boolForKey: @"FirstLaunch"];
         
         NSDate * lastDonateDate = [fDefaults objectForKey: @"DonateAskDate"];
-
+        
         const BOOL timePassed = !lastDonateDate || (-1 * [lastDonateDate timeIntervalSinceNow]) >= DONATE_NAG_TIME;
         
         if (!firstLaunch && timePassed) {
@@ -156,7 +158,7 @@ NSSpeechSynthesizer *synth;
     // If we close the main window this will
     // make it reappear if we press the dock icon
     if(visibleWindows == NO) {
-       [windowLM makeKeyAndOrderFront:self];
+        [windowLM makeKeyAndOrderFront:self];
 	}
 	return YES;
 }
@@ -174,21 +176,20 @@ NSSpeechSynthesizer *synth;
 
 - (IBAction) openPreferences: (id) sender {
     
-    //activate app
+    // activate app
     [NSApp activateIgnoringOtherApps:YES];
     
-    //instantiate preferences window controller
+    // instantiate preferences window controller
     if (_preferencesController) {
         [_preferencesController release];
         _preferencesController = nil;
     }
     
-    //init from nib but the real initialization happens in the
-    //PreferencesWindowController setupToolbar method
+    // init from nib but the real initialization happens in the
+    // PreferencesWindowController setupToolbar method
     _preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
     
     [_preferencesController showWindow:self];
-    //[[PreferencesWindowController sharedPrefsWindowController] showWindow:self];
 }
 
 - (IBAction) sendFeedBack: (id) sender {
@@ -205,10 +206,14 @@ NSSpeechSynthesizer *synth;
 }
 
 - (IBAction) openChangeLog: (id) sender {
-//    if (! myChangeLogController ) {
-//		myChangeLogController	= [[ChangeLogController alloc] init];
-//	} // end if
-//    [[myChangeLogController window] makeKeyAndOrderFront:self];
+    
+    if (_changeLogController) {
+        [_changeLogController release];
+        _changeLogController = nil;
+    }
+    _changeLogController = [[ChangeLogController alloc] initWithWindowNibName:@"ChangeLogController"];
+    
+    [_changeLogController showWindow:nil];
 }
 
 - (IBAction) openDonate: (id) sender {
@@ -268,7 +273,7 @@ NSSpeechSynthesizer *synth;
 #if !SLOW_INTERNET
     
     NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
-        
+    
     // NYTimes
     text = [text stringByAppendingString:[newsAndQuote retriveNYTimes]];
     
@@ -281,12 +286,16 @@ NSSpeechSynthesizer *synth;
     
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
 	
+    // If set to YES then the mainwindow will
+    // be on top of the other windows and there
+    // is no way to send it to the back
+	[window setFloatingPanel:NO];
+    
     //Output
-	[window setFloatingPanel:YES];
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:text];
 	[synth startSpeakingString:text];	//for speaking the text
-    // TODO figure out when is best to release text. because if i write it where the app will crash
+    // TODO: figure out when is best to release text. because if i write it where the app will crash
 }
 
 @end
