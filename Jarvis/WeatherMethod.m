@@ -13,6 +13,10 @@
 
 - (NSString *) retriveWeather {
     
+    // TODO: check if there exists a woiedCOde in the UserDefaults if yes use that one
+    //       else use a default location ^_^
+    
+    
     //Weather conditions
     NSString *text = [[NSString alloc] init];
 	NSString *weatherText = [[NSString alloc] initWithString:@""];

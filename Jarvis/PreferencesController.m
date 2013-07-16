@@ -30,6 +30,8 @@
 @synthesize mapWebView;
 @synthesize locationManager;
 @synthesize locationLabel;
+@synthesize findLocationButton;
+@synthesize automaticLocationCheckBok;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -78,6 +80,8 @@
 	locationManager = [[CLLocationManager alloc] init];
 	locationManager.delegate = self;
 	[locationManager startUpdatingLocation];
+    
+    [self changeStateAutomaticLocation:self];
     
     [defaults release];
 }
@@ -130,16 +134,29 @@
     
 }
 
-#pragma -
-#pragma WOIED
+#pragma mark -
+#pragma mark WOIED
 
-- (NSInteger *)getWOIEDfromlatitude: (double) latitude andLongitude: (double) longitude {
-    NSLog(@"Latitude: %f and longitude: %f", latitude, longitude);
+- (NSInteger *)getWOEIDfromlatitude: (double) latitude andLongitude: (double) longitude {
+
+    NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
+    NSString *woeidCode = [[NSString alloc] initWithString:@""];
+    NSString *woeidContent = [[NSString alloc] initWithString:@""];
+	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
+                     [NSString stringWithFormat:
+                      @"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=%@&lat=%f&lon=%f",flickrKEY,latitude, longitude]] encoding: NSUTF8StringEncoding error:nil];
+
+    if(woeidContent != nil)
+	{
+		
+        woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
+        woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
+    } else {
+        NSLog(@"Thw woeid cannot be retrived!!!");
+    }
     
-    NSString *weatherContent = [[NSString alloc] initWithString:@""];
-	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=ca5edb0f6f046f0e9e1ee43dd49277e4&lat=41.868163&lon=12.587606"]] encoding: NSUTF8StringEncoding error:nil];
 
-    NSLog(@"Flickr respornce: %@",weatherContent);
+    NSLog(@"Flickr woeid respornce: %@",woeidCode);
     
     
     
@@ -151,8 +168,8 @@
     return 0;
 }
 
-#pragma -
-#pragma Find Location
+#pragma mark -
+#pragma mark Find Location
 
 + (double)latitudeRangeForLocation:(CLLocation *)aLocation
 {
@@ -201,7 +218,7 @@
 	[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
 	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
                                    newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
-    [self getWOIEDfromlatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude];
+    [self getWOEIDfromlatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -217,8 +234,8 @@
 }
 
 
-#pragma -
-#pragma Other Functions
+#pragma mark -
+#pragma mark Other Functions
 - (void)windowWillTerminate:(NSNotification *)aNotification
 {
 	[locationManager stopUpdatingLocation];
@@ -237,6 +254,20 @@
                                                       [PreferencesController longitudeRangeForLocation:currentLocation]]];
     
 	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
+}
+
+
+- (IBAction)changeStateAutomaticLocation:(id)sender {
+    
+    if ([automaticLocationCheckBok state] == 1) {
+        [locationField setEnabled:NO];
+        [findLocationButton setEnabled:NO];
+        
+    } else {
+        [locationField setEnabled:YES];
+        [findLocationButton setEnabled:YES];
+    }
+  
 }
 
 @end

@@ -15,8 +15,8 @@
     
 }
 
-#pragma -
-#pragma Preference var
+#pragma mark -
+#pragma mark Preference var
 @property (strong, nonatomic) IBOutlet NSView *generalPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *speechPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *timeAndDatePreferenceView;
@@ -27,23 +27,27 @@
 @property (strong, nonatomic) IBOutlet NSView *quotationPreferenceView;
 @property (strong, nonatomic) IBOutlet NSView *updatePreferenceView;
 
-#pragma -
-#pragma Update var
+#pragma mark -
+#pragma mark Update var
 @property (strong, nonatomic) IBOutlet NSTextField *updateDateField;
 @property (strong, nonatomic) IBOutlet NSTextField *profileDateField;
 
-#pragma -
-#pragma Weather var
-@property (copy) NSString* identifier;
+#pragma mark -
+#pragma mark Weather var
 @property (strong, nonatomic) IBOutlet NSTextField *locationField;
 @property (assign) IBOutlet WebView *mapWebView;
 @property (strong, atomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet NSTextField *locationLabel;
+@property (assign) IBOutlet NSButton *findLocationButton;
 
+@property (assign) IBOutlet NSButton *automaticLocationCheckBok;
 
 // Weather
 
 // Finds the WOEID code for the location that the user inputs
+
+- (IBAction)changeStateAutomaticLocation:(id)sender;
+
 - (IBAction)findLocation:(id)sender;
 
 - (IBAction)openInDefaultBrowser:(id)sender;

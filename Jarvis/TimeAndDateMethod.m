@@ -24,8 +24,11 @@
     
     //Reading the username
     // TODO: read this only if the user want it
+    NSString *userName = NSUserName();
+    //NSString *fullUserName = NSFullUserName();
+    
     text = [text stringByAppendingString:@", "];
-    text = [text stringByAppendingString: NSUserName()];
+    text = [text stringByAppendingString: userName];
     text = [text stringByAppendingString:@". "];
     
     
@@ -40,6 +43,8 @@
     text = [text stringByAppendingString:[NSString stringWithFormat:@" %ld, ", [date dayOfMonth]]];
     text = [text stringByAppendingString:[[dateFormatter standaloneWeekdaySymbols] objectAtIndex:[date dayOfWeek]%7]];
     text = [text stringByAppendingString:@".\n\n"];
+    
+    [text autorelease];
     
     return text;
     

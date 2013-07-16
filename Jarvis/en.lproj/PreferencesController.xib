@@ -676,7 +676,7 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomView" id="627184792">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="615283167">
@@ -684,6 +684,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{172, 72}, {130, 32}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="932291200"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -705,22 +706,24 @@
 					<object class="NSTextField" id="932013598">
 						<reference key="NSNextResponder" ref="627184792"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{307, 8}, {99, 17}}</string>
+						<string key="NSFrame">{{175, 8}, {281, 17}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="1029886497">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">-1874852864</int>
+							<int key="NSCellFlags2">-2009070592</int>
 							<string key="NSContents">LastProfileDate</string>
 							<reference key="NSSupport" ref="866047434"/>
 							<object class="NSDateFormatter" key="NSFormatter" id="753292373">
 								<dictionary class="NSMutableDictionary" key="NS.attributes">
 									<integer value="4" key="dateStyle"/>
 									<integer value="1040" key="formatterBehavior"/>
-									<integer value="2" key="timeStyle"/>
+									<integer value="1" key="timeStyle"/>
 								</dictionary>
-								<string key="NS.format">EEEE, MMMM d, y h:mm:ss a</string>
+								<string key="NS.format">EEEE, MMMM d, y h:mm a</string>
 								<bool key="NS.natural">NO</bool>
 							</object>
 							<string key="NSCellIdentifier">_NS:1535</string>
@@ -732,14 +735,15 @@
 					<object class="NSTextField" id="45230044">
 						<reference key="NSNextResponder" ref="627184792"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{307, 33}, {117, 17}}</string>
+						<string key="NSFrame">{{175, 33}, {281, 17}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="105148566"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSTextFieldCell" key="NSCell" id="409403028">
 							<int key="NSCellFlags">68157504</int>
-							<int key="NSCellFlags2">-1874852864</int>
+							<int key="NSCellFlags2">-2009070592</int>
 							<string key="NSContents">UpdateCheckDate</string>
 							<reference key="NSSupport" ref="866047434"/>
 							<object class="NSDateFormatter" key="NSFormatter" id="577167991">
@@ -747,9 +751,9 @@
 									<integer value="4" key="dateStyle"/>
 									<boolean value="NO" key="doesRelativeDateFormatting"/>
 									<integer value="1040" key="formatterBehavior"/>
-									<integer value="2" key="timeStyle"/>
+									<integer value="1" key="timeStyle"/>
 								</dictionary>
-								<string key="NS.format">EEEE, MMMM d, y h:mm:ss a</string>
+								<string key="NS.format">EEEE, MMMM d, y h:mm a</string>
 								<bool key="NS.natural">NO</bool>
 							</object>
 							<string key="NSCellIdentifier">_NS:1535</string>
@@ -763,6 +767,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{42, 8}, {111, 17}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="932013598"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -782,6 +787,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{42, 33}, {106, 17}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="45230044"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -801,6 +807,7 @@
 						<int key="NSvFlags">12</int>
 						<string key="NSFrame">{{6, 63}, {449, 5}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="564928053"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
@@ -825,6 +832,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{161, 112}, {153, 18}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="615283167"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -850,6 +858,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{123, 144}, {228, 18}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="553369025"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -875,6 +884,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{124, 175}, {124, 17}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="403914360"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -894,6 +904,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{259, 169}, {92, 26}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="558438645"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -974,6 +985,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{125, 206}, {225, 18}}</string>
 						<reference key="NSSuperview" ref="627184792"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="272435406"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -996,6 +1008,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{473, 242}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="999957157"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -1139,6 +1153,30 @@
 						<reference key="destination" ref="1007402968"/>
 					</object>
 					<int key="connectionID">404</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">automaticLocationCheckBok</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="245566704"/>
+					</object>
+					<int key="connectionID">410</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">changeStateAutomaticLocation:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="245566704"/>
+					</object>
+					<int key="connectionID">411</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">findLocationButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="867521477"/>
+					</object>
+					<int key="connectionID">412</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1333,10 +1371,10 @@
 							<reference ref="553369025"/>
 							<reference ref="932291200"/>
 							<reference ref="615283167"/>
-							<reference ref="932013598"/>
-							<reference ref="45230044"/>
 							<reference ref="564928053"/>
 							<reference ref="105148566"/>
+							<reference ref="45230044"/>
+							<reference ref="932013598"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Update</string>
@@ -1947,7 +1985,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">408</int>
+			<int key="maxID">412</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1963,10 +2001,15 @@
 					<string key="className">PreferencesController</string>
 					<string key="superclassName">DBPrefsWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeStateAutomaticLocation:">id</string>
 						<string key="findLocation:">id</string>
 						<string key="openInDefaultBrowser:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeStateAutomaticLocation:">
+							<string key="name">changeStateAutomaticLocation:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="findLocation:">
 							<string key="name">findLocation:</string>
 							<string key="candidateClassName">id</string>
@@ -1977,13 +2020,14 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="automaticLocationCheckBok">NSButton</string>
 						<string key="emailPreferenceView">NSView</string>
+						<string key="findLocationButton">NSButton</string>
 						<string key="generalPreferenceView">NSView</string>
 						<string key="icalAndRemaindersPreferenceView">NSView</string>
 						<string key="locationField">NSTextField</string>
 						<string key="locationLabel">NSTextField</string>
 						<string key="mapWebView">WebView</string>
-						<string key="myLabel">NSTextField</string>
 						<string key="newsPreferenceView">NSView</string>
 						<string key="profileDateField">NSTextField</string>
 						<string key="quotationPreferenceView">NSView</string>
@@ -1994,9 +2038,17 @@
 						<string key="weatherPreferenceView">NSView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="automaticLocationCheckBok">
+							<string key="name">automaticLocationCheckBok</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="emailPreferenceView">
 							<string key="name">emailPreferenceView</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="findLocationButton">
+							<string key="name">findLocationButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="generalPreferenceView">
 							<string key="name">generalPreferenceView</string>
@@ -2017,10 +2069,6 @@
 						<object class="IBToOneOutletInfo" key="mapWebView">
 							<string key="name">mapWebView</string>
 							<string key="candidateClassName">WebView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="myLabel">
-							<string key="name">myLabel</string>
-							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="newsPreferenceView">
 							<string key="name">newsPreferenceView</string>
