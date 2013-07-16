@@ -7,7 +7,7 @@
 //
 
 #import "WeatherMethod.h"
-#define woeidCode @"721943" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
+#define woeidCode @"12843574" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
 @implementation WeatherMethod
 
@@ -16,12 +16,10 @@
     //Weather conditions
     NSString *text = [[NSString alloc] init];
 	NSString *weatherText = [[NSString alloc] initWithString:@""];
-	NSString *weatherPage = [[NSString alloc] initWithString:@""];
    	NSString *cityName = [[NSString alloc] initWithString:@""];
     NSString *countryName = [[NSString alloc] initWithString:@""];
 	NSString *weatherContent = [[NSString alloc] initWithString:@""];
-	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
-	weatherContent = weatherPage;
+	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
 	if(weatherContent != nil)
 	{
 		if ([[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] count]>1)
@@ -47,8 +45,7 @@
     
     //Forecast for the next 5 days
     // FIXME: the forcast is really ugly, redo it :)
-	weatherPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
-	weatherContent = weatherPage;
+	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
     
     text = [text stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
     if(weatherContent != nil)

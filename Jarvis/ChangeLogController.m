@@ -15,8 +15,6 @@
 	if((self = [super initWithWindow:nil])){
         // for the moment nothing :)
         
-        
-        
 	}
 	return self;
 }

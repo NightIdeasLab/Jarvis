@@ -28,6 +28,7 @@
 // Weather
 @synthesize locationField;
 @synthesize mapWebView;
+@synthesize locationManager;
 @synthesize locationLabel;
 
 #pragma mark -
@@ -39,6 +40,8 @@
     [profileDateField release];
     [locationField release];
     [locationLabel release];
+    [locationManager stopUpdatingLocation];
+	[locationManager release];
     [super dealloc];
 }
 
@@ -70,18 +73,13 @@
     }
     
     // TODO: load the weather stuff only when the wether view is active
+    //       and releasing them when switching from it
     /* 	Weather Stuff retriving the location */
 	locationManager = [[CLLocationManager alloc] init];
 	locationManager.delegate = self;
 	[locationManager startUpdatingLocation];
     
     [defaults release];
-}
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    
-
 }
 
 #pragma mark -
@@ -133,6 +131,27 @@
 }
 
 #pragma -
+#pragma WOIED
+
+- (NSInteger *)getWOIEDfromlatitude: (double) latitude andLongitude: (double) longitude {
+    NSLog(@"Latitude: %f and longitude: %f", latitude, longitude);
+    
+    NSString *weatherContent = [[NSString alloc] initWithString:@""];
+	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=ca5edb0f6f046f0e9e1ee43dd49277e4&lat=41.868163&lon=12.587606"]] encoding: NSUTF8StringEncoding error:nil];
+
+    NSLog(@"Flickr respornce: %@",weatherContent);
+    
+    
+    
+    
+    
+    
+    
+    
+    return 0;
+}
+
+#pragma -
 #pragma Find Location
 
 + (double)latitudeRangeForLocation:(CLLocation *)aLocation
@@ -141,7 +160,6 @@
 	const double metersToLatitude = 1.0 / ((M_PI / 180.0) * M);
 	const double accuracyToWindowScale = 2.0;
 	
-    NSLog(@"aLocation: %@",aLocation);
 	return aLocation.horizontalAccuracy * metersToLatitude * accuracyToWindowScale;
 }
 
@@ -151,20 +169,6 @@
     [PreferencesController latitudeRangeForLocation:aLocation];
 	
 	return latitudeRange * cos(aLocation.coordinate.latitude * M_PI / 180.0);
-}
-
-- (IBAction)openInDefaultBrowser:(id)sender
-{
-	CLLocation *currentLocation = locationManager.location;
-	
-	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
-                                                      @"http://maps.google.com/maps?ll=%f,%f&amp;spn=%f,%f",
-                                                      currentLocation.coordinate.latitude,
-                                                      currentLocation.coordinate.longitude,
-                                                      [PreferencesController latitudeRangeForLocation:currentLocation],
-                                                      [PreferencesController longitudeRangeForLocation:currentLocation]]];
-    
-	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -197,6 +201,7 @@
 	[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
 	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
                                    newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+    [self getWOIEDfromlatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude];
 }
 
 - (void)locationManager:(CLLocationManager *)manager
@@ -214,11 +219,24 @@
 
 #pragma -
 #pragma Other Functions
-- (void)applicationWillTerminate:(NSNotification *)aNotification
+- (void)windowWillTerminate:(NSNotification *)aNotification
 {
 	[locationManager stopUpdatingLocation];
 	[locationManager release];
 }
 
+- (IBAction)openInDefaultBrowser:(id)sender
+{
+	CLLocation *currentLocation = locationManager.location;
+	
+	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
+                                                      @"http://maps.google.com/maps?ll=%f,%f&amp;spn=%f,%f",
+                                                      currentLocation.coordinate.latitude,
+                                                      currentLocation.coordinate.longitude,
+                                                      [PreferencesController latitudeRangeForLocation:currentLocation],
+                                                      [PreferencesController longitudeRangeForLocation:currentLocation]]];
+    
+	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
+}
 
 @end

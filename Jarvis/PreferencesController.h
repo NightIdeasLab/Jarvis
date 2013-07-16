@@ -12,7 +12,7 @@
 #import "DBPrefsWindowController.h"
 
 @interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate > {
-    CLLocationManager *locationManager;
+    
 }
 
 #pragma -
@@ -36,8 +36,8 @@
 #pragma Weather var
 @property (copy) NSString* identifier;
 @property (strong, nonatomic) IBOutlet NSTextField *locationField;
-@property (strong, nonatomic) IBOutlet NSTextField *myLabel;
 @property (assign) IBOutlet WebView *mapWebView;
+@property (strong, atomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet NSTextField *locationLabel;
 
 
