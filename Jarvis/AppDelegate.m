@@ -32,6 +32,7 @@ NSSpeechSynthesizer *synth;
     [windowLM release];
     [_preferencesController release];
     [_changeLogController release];
+	[outText release];
     [super dealloc];
 }
 
@@ -216,8 +217,9 @@ NSSpeechSynthesizer *synth;
     [self linkDonate: self];
 }
 
+// FIXME: It has a leak release the text
 - (IBAction) updateJarvis: (id) sender {
-    
+
 	[synth stopSpeaking];
 	[outText setString:@"Updating your report..."];
 	[outText setNeedsDisplay:YES];
@@ -235,18 +237,18 @@ NSSpeechSynthesizer *synth;
 }
 
 - (void) jarvis {
-	NSString *text = [[NSString alloc] init];
+	NSString *outputText = [[NSString alloc] init];
     
     TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
     
-    text = [text stringByAppendingString:[timeAndDate retriveTimeAndDate]];
+    outputText = [outputText stringByAppendingString:[timeAndDate retriveTimeAndDate]];
     
     [timeAndDate release];
 	
     CalendarMethod *calendar = [[CalendarMethod alloc] init];
     
-   	text = [text stringByAppendingString:[calendar retriveiCalEvents]];
-    text = [text stringByAppendingString:[calendar retriveReminders]];
+   	outputText = [outputText stringByAppendingString:[calendar retriveiCalEvents]];
+    outputText = [outputText stringByAppendingString:[calendar retriveReminders]];
     
     [calendar release];
     
@@ -254,7 +256,7 @@ NSSpeechSynthesizer *synth;
     
     WeatherMethod *weather = [[WeatherMethod alloc] init];
     
-    text = [text stringByAppendingString:[weather retriveWeather]];
+    outputText = [outputText stringByAppendingString:[weather retriveWeather]];
     
     [weather release];
     
@@ -262,7 +264,7 @@ NSSpeechSynthesizer *synth;
     
     EmailMethod *email = [[EmailMethod alloc] init];
     
-    text = [text stringByAppendingString:[email retriveEmail]];
+    outputText = [outputText stringByAppendingString:[email retriveEmail]];
     
     [email release];
     
@@ -271,10 +273,10 @@ NSSpeechSynthesizer *synth;
     NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
     
     // NYTimes
-    text = [text stringByAppendingString:[newsAndQuote retriveNYTimes]];
+    outputText = [outputText stringByAppendingString:[newsAndQuote retriveNYTimes]];
     
     // Daily Quote
-    text = [text stringByAppendingString:[newsAndQuote retriveDailyQuote]];
+    outputText = [outputText stringByAppendingString:[newsAndQuote retriveDailyQuote]];
     
     [newsAndQuote release];
     
@@ -289,9 +291,12 @@ NSSpeechSynthesizer *synth;
     
     //Output
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
-	[outText setString:text];
-	//[synth startSpeakingString:text];	//for speaking the text
+	[outText setString:outputText];
+#if !DEBUG
+	[synth startSpeakingString:outputText];	//for speaking the text
+#endif
     // TODO: figure out when is best to release text. because if i write it where the app will crash
+
 }
 
 @end

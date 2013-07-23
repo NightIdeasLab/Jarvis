@@ -48,3 +48,14 @@ CVS
 *~.nib
 *.swp
 *~
+About/20120215-mh7681yx19ff77j8a5ydnncd7b.jpg
+
+About/code for the about winodw.txt
+
+scripts/build_release.sh
+
+scripts/deploy.sh
+
+scripts/sign_update.rb
+
+scripts/sparkle_deploy.sh

@@ -13,8 +13,7 @@
 
 - (id)initWithWindow:(NSWindow *)window{
 	if((self = [super initWithWindow:nil])){
-        // for the moment nothing :)
-        
+        // for the moment nothing :)        
 	}
 	return self;
 }
@@ -22,6 +21,8 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+
+	[windowCL setFloatingPanel:NO];
     
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     // sets a webview to be trasparent
@@ -30,7 +31,9 @@
     NSString *resourcesPath = [[NSBundle mainBundle] resourcePath];
     NSString *htmlPath = [resourcesPath stringByAppendingString:@"/htdocs/ChangeLog.html"];
     [[changeLogWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
-    
+
+	
+
     /* this way i can load a normal file not as the htdocs */
    // NSURL *mainWebPageURL = [[NSBundle mainBundle] URLForResource:@"ChangeLog" withExtension:@"html"];
     

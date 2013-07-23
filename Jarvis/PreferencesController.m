@@ -36,159 +36,190 @@
 #pragma mark -
 #pragma mark Class Methods
 
-- (void)dealloc
-{
-    [updateDateField release];
-    [profileDateField release];
-    [locationField release];
-    [locationLabel release];
-    [locationManager stopUpdatingLocation];
+// FIXME: Close the location manager when the pref window closes
+
+- (void)dealloc {
+	[updateDateField release];
+	[profileDateField release];
+	[locationField release];
+	[locationLabel release];
+	[locationManager stopUpdatingLocation];
 	[locationManager release];
-    [super dealloc];
+	[super dealloc];
 }
 
-- (void) awakeFromNib
-{
-    // reading from the plist file
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // retriving  the last update date and
-    // last profile sent date from plist file
-    NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
-    NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
-    
-    // checking and setting the last update date
-    // and last profile sent date into the interface
-    if ([profileDate.description length] > 0) {
-        [updateDateField setObjectValue:updateDate];
-    }
-    else {
-        [updateDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where no check for update")];
-    }
-    
-    
-    if ([profileDate.description length] > 0) {
-        [profileDateField setObjectValue:profileDate];
-    }
-    else {
-        [profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
-    }
-    
-    // TODO: load the weather stuff only when the wether view is active
-    //       and releasing them when switching from it
-    /* 	Weather Stuff retriving the location */
+- (void) awakeFromNib {
+	// reading from the plist file
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	// retriving  the last update date and
+	// last profile sent date from plist file
+	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
+	NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
+
+	// checking and setting the last update date
+	// and last profile sent date into the interface
+	if ([profileDate.description length] > 0) {
+		[updateDateField setObjectValue:updateDate];
+	}
+	else {
+		[updateDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where no check for update")];
+	}
+
+	if ([profileDate.description length] > 0) {
+		[profileDateField setObjectValue:profileDate];
+	}
+	else {
+		[profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
+	}
+
+	// TODO: load the weather stuff only when the wether view is active
+	//       and releasing them when switching from it
+	/* 	Weather Stuff retriving the location */
 	locationManager = [[CLLocationManager alloc] init];
 	locationManager.delegate = self;
 	[locationManager startUpdatingLocation];
-    
-    [self changeStateAutomaticLocation:self];
-    
-    [defaults release];
+
+	[self changeStateAutomaticLocation:self];
+
+	
+
+	[defaults release];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	[locationManager stopUpdatingLocation];
+	[locationManager release];
 }
 
 #pragma mark -
 #pragma mark Toolbar Configuration
 
 - (void)setupToolbar{
-    [self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title") image: [NSImage imageNamed: @"PrefGeneral"]];
-    [self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title") image: [NSImage imageNamed: @"PrefWeather"]];
-    [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title") image: [NSImage imageNamed: @"PrefUpdate"]];
-    
-    //[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
-    
-    //[self addFlexibleSpacer]; //added a space between the icons
-    
-    // Optional configuration settings.
-    [self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
-    [self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
+	[self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title")
+			image: [NSImage imageNamed:@"PrefGeneral"]];
+	[self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
+			image: [NSImage imageNamed:@"PrefWeather"]];
+    [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
+			image: [NSImage imageNamed:@"PrefUpdate"]];
+
+	//[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
+
+	//[self addFlexibleSpacer]; //added a space between the icons
+
+	// Optional configuration settings.
+	[self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
+	[self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
 }
 
 #pragma mark -
 #pragma mark Weather Methods
-
-- (IBAction)findLocation:(id)sender {
-    // retrives the City and Country
-    NSString *locationText = [locationField stringValue];
-    NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
-    
-    // separa NSString in mai single pointers
-    //    NSString *list = @"Norman, Stanley, Fletcher";
-    //    NSArray *listItems = [list componentsSeparatedByString:@", "];
-    
-    if ([locationText length] >0) {
-        // Displays the user his location
-        [locationLabel setStringValue:messageForLabel];
-    }
-    else {
-        // If the user will not write a city and country then we will display this message
-        [locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
-    }
-    
-    [messageForLabel release];
-    
-    //    if (!firstLaunch) {
-    //
-    //        [fDefaults setInteger:721943 forKey: @"LocationCode"];
-    //    }
-    
-    
-}
 
 #pragma mark -
 #pragma mark WOIED
 
 - (NSInteger *)getWOEIDfromlatitude: (double) latitude andLongitude: (double) longitude {
 
-    NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
-    NSString *woeidCode = [[NSString alloc] initWithString:@""];
-    NSString *woeidContent = [[NSString alloc] initWithString:@""];
+	NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
+	NSString *woeidCode = [[NSString alloc] initWithString:@""];
+	NSString *woeidContent = [[NSString alloc] initWithString:@""];
 	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
-                     [NSString stringWithFormat:
-                      @"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=%@&lat=%f&lon=%f",flickrKEY,latitude, longitude]] encoding: NSUTF8StringEncoding error:nil];
+													  [NSString stringWithFormat:
+													   @"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=%@&lat=%f&lon=%f",flickrKEY,latitude, longitude]] encoding:NSUTF8StringEncoding error:nil];
 
-    if(woeidContent != nil)
-	{
-		
-        woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
-        woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
-    } else {
-        NSLog(@"Thw woeid cannot be retrived!!!");
-    }
-    
+	if(woeidContent != nil) {
+		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
+		woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
+	}
+	else {
+		NSLog(@"The woeid cannot be retrived!!!");
+	}
 
-    NSLog(@"Flickr woeid respornce: %@",woeidCode);
-    
-    
-    
-    
-    
-    
-    
-    
+	NSLog(@"Flickr woeid responce: %@",woeidCode);
+
     return 0;
 }
 
-#pragma mark -
-#pragma mark Find Location
+- (IBAction)findLocation:(id)sender {
+	// retrives the City and Country
+	NSString *locationText = [locationField stringValue];
+	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
 
-+ (double)latitudeRangeForLocation:(CLLocation *)aLocation
-{
+	if ([locationText length] >0) {
+		// Displays the user his location
+		[locationLabel setStringValue:messageForLabel];
+		[self getWOEIDFromCityAndCountry:locationText];
+	}
+	else {
+		// If the user will not write a city and country then we will display this message
+		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
+	}
+
+
+	[messageForLabel release];
+
+	//    if (!firstLaunch) {
+	//
+	//        [fDefaults setInteger:721943 forKey: @"LocationCode"];
+	//    }
+
+}
+
+- (NSInteger *)getWOEIDFromCityAndCountry: (NSString *) cityAndCountry {
+	// TODO: remove the white spaces in cityAndCountry and replace it with %20 the normal HTML white space
+	cityAndCountry =[cityAndCountry stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+
+	NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
+	NSString *woeidCode = [[NSString alloc] initWithString:@""];
+	NSString *latitudeCode = [[NSString alloc] initWithString:@""];
+	NSString *longitudeCode = [[NSString alloc] initWithString:@""];
+	NSString *woeidContent = [[NSString alloc] initWithString:@""];
+	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
+													  [NSString stringWithFormat:
+													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
+															NSUTF8StringEncoding error:nil];
+
+	NSLog(@"woeidcontent: %@", woeidContent);
+
+	if(woeidContent != nil) {
+		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
+		woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
+		latitudeCode = [[woeidContent componentsSeparatedByString:@"latitude=\""] objectAtIndex:1];
+		latitudeCode = [[latitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
+		longitudeCode = [[woeidContent componentsSeparatedByString:@"longitude=\""] objectAtIndex:1];
+		longitudeCode = [[longitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
+    }
+	else {
+		NSLog(@"Thw woeid cannot be retrived!!!");
+	}
+
+	NSLog(@"Flickr woeid respornce: %@",woeidCode);
+	NSLog(@"Flickr latitude respornce: %@",latitudeCode);
+	NSLog(@"Flickr longitude respornce: %@",longitudeCode);
+
+	return 0;
+}
+
+#pragma mark -
+#pragma mark WOIED functions  for LAT & LON
+
++ (double)latitudeRangeForLocation:(CLLocation *)aLocation {
 	const double M = 6367000.0; // approximate average meridional radius of curvature of earth
 	const double metersToLatitude = 1.0 / ((M_PI / 180.0) * M);
-	const double accuracyToWindowScale = 2.0;
-	
+	const double accuracyToWindowScale = 4.0;
+
 	return aLocation.horizontalAccuracy * metersToLatitude * accuracyToWindowScale;
 }
 
-+ (double)longitudeRangeForLocation:(CLLocation *)aLocation
-{
++ (double)longitudeRangeForLocation:(CLLocation *)aLocation {
 	double latitudeRange =
     [PreferencesController latitudeRangeForLocation:aLocation];
-	
+
 	return latitudeRange * cos(aLocation.coordinate.latitude * M_PI / 180.0);
 }
 
-- (void)locationManager:(CLLocationManager *)manager
+- (void) locationManager:(CLLocationManager *)manager
 	didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation
 {
@@ -199,75 +230,77 @@
 	{
 		return;
 	}
-    
+
 	// Load the HTML for displaying the Google map from a file and replace the
 	// format placeholders with our location data
 	NSString *htmlString = [NSString stringWithFormat:
-                            [NSString
-                             stringWithContentsOfFile:
-                             [[NSBundle mainBundle]
-                              pathForResource:@"googleMaps" ofType:@"html"]
-                             encoding:NSUTF8StringEncoding
-                             error:NULL],
-                            newLocation.coordinate.latitude,
-                            newLocation.coordinate.longitude,
-                            [PreferencesController latitudeRangeForLocation:newLocation],
-                            [PreferencesController longitudeRangeForLocation:newLocation]];
-	
+							[NSString
+							 stringWithContentsOfFile:
+							 [[NSBundle mainBundle]
+							  pathForResource:@"googleMaps" ofType:@"html"]
+							 encoding:NSUTF8StringEncoding
+							 error:NULL],
+							newLocation.coordinate.latitude,
+							newLocation.coordinate.longitude,
+							newLocation.coordinate.latitude,
+							newLocation.coordinate.longitude,
+							[PreferencesController latitudeRangeForLocation:newLocation],
+							[PreferencesController longitudeRangeForLocation:newLocation]];
+
+
 	// Load the HTML in the WebView and set the labels
 	[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
 	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
-                                   newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
-    [self getWOEIDfromlatitude:newLocation.coordinate.latitude andLongitude:newLocation.coordinate.longitude];
+								   newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-       didFailWithError:(NSError *)error
+- (void) locationManager:(CLLocationManager *)manager
+	   didFailWithError:(NSError *)error
 {
 	[[mapWebView mainFrame]
-     loadHTMLString:
-     [NSString stringWithFormat:
-      NSLocalizedString(@"Location manager failed with error: %@", nil),
-      [error localizedDescription]]
-     baseURL:nil];
+	 loadHTMLString:
+	 [NSString stringWithFormat:
+	  NSLocalizedString(@"Location manager failed with error: %@", nil),
+	  [error localizedDescription]]
+	 baseURL:nil];
 	[locationLabel setStringValue:@""];
 }
 
-
 #pragma mark -
 #pragma mark Other Functions
-- (void)windowWillTerminate:(NSNotification *)aNotification
-{
+
+- (void)windowWillTerminate:(NSNotification *)aNotification {
 	[locationManager stopUpdatingLocation];
 	[locationManager release];
 }
 
-- (IBAction)openInDefaultBrowser:(id)sender
-{
+- (IBAction)openInDefaultBrowser:(id)sender {
 	CLLocation *currentLocation = locationManager.location;
-	
+
 	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
-                                                      @"http://maps.google.com/maps?ll=%f,%f&amp;spn=%f,%f",
-                                                      currentLocation.coordinate.latitude,
-                                                      currentLocation.coordinate.longitude,
-                                                      [PreferencesController latitudeRangeForLocation:currentLocation],
-                                                      [PreferencesController longitudeRangeForLocation:currentLocation]]];
-    
+													  @"http://maps.google.com/maps?q=%f,%f&ll=%f,%fspn=%f,%f",
+													  currentLocation.coordinate.latitude,
+													  currentLocation.coordinate.longitude,
+													  currentLocation.coordinate.latitude,
+													  currentLocation.coordinate.longitude,
+													  [PreferencesController latitudeRangeForLocation:currentLocation],
+													  [PreferencesController longitudeRangeForLocation:currentLocation]]];
+
 	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
 }
 
-
 - (IBAction)changeStateAutomaticLocation:(id)sender {
-    
+
     if ([automaticLocationCheckBok state] == 1) {
         [locationField setEnabled:NO];
         [findLocationButton setEnabled:NO];
-        
+
     } else {
         [locationField setEnabled:YES];
         [findLocationButton setEnabled:YES];
     }
-  
+
 }
 
 @end

@@ -24,7 +24,7 @@
 							  , nil];
     
     //Unread email count
-    NSString *text = [[NSString alloc] init];    
+    NSString *outputEmailText = [[NSString alloc] init];    
 	NSDictionary* errorDict;
     NSAppleEventDescriptor* returnDescriptor = NULL;
 	NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:
@@ -48,8 +48,8 @@
 	
     returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
 	[scriptObject release];
-	text = [text stringByAppendingString:@"\n"];
-	text = [text stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
+	outputEmailText = [outputEmailText stringByAppendingString:@"\n"];
+	outputEmailText = [outputEmailText stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
 	
     //VIP email count
 	unsigned long mailCount;
@@ -62,12 +62,12 @@
 			if([senderList rangeOfString:[[vipAddresses objectAtIndex:i] objectAtIndex:j]].location != NSNotFound)
 			{mailCount = mailCount + [[senderList componentsSeparatedByString: [[vipAddresses objectAtIndex:i] objectAtIndex:j]] count] - 1;}
 		}
-		if (mailCount==1) text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them is from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
-		else if (mailCount>1) text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them are from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
+		if (mailCount==1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them is from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
+		else if (mailCount>1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them are from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
 	}
     
     // [text autorelease]; // FIXME: if this is decommented, it will crash the app
-    return text;
+    return outputEmailText;
     
 }
 

@@ -13,12 +13,12 @@
 
 - (NSString *) retriveWeather {
     
-    // TODO: check if there exists a woiedCOde in the UserDefaults if yes use that one
+    // TODO: check if there exists a woiedCode in the UserDefaults if yes use that one
     //       else use a default location ^_^
     
     
     //Weather conditions
-    NSString *text = [[NSString alloc] init];
+    NSString *outputWeatherText = [[NSString alloc] init];
 	NSString *weatherText = [[NSString alloc] initWithString:@""];
    	NSString *cityName = [[NSString alloc] initWithString:@""];
     NSString *countryName = [[NSString alloc] initWithString:@""];
@@ -35,14 +35,14 @@
             weatherText = [[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] objectAtIndex:1];
             weatherText = [[weatherText componentsSeparatedByString:@"<BR />"] objectAtIndex:0];
             
-            text = [text stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@, %@ is : ", @""),cityName, countryName]];
+            outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@, %@ is : ", @""),cityName, countryName]];
             
             //Removing white spaces from the begining or end of the sting retrived
             NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
                                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
             
-            text = [text stringByAppendingString:trimmedString];
-            text = [text stringByAppendingString:@".\n\n"];
+            outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString];
+            outputWeatherText = [outputWeatherText stringByAppendingString:@".\n\n"];
 		}
 	}
     
@@ -51,16 +51,14 @@
     // FIXME: the forcast is really ugly, redo it :)
 	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
     
-    text = [text stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
+    outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
     if(weatherContent != nil)
 	{
 		if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)
 		{
             weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
             weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
-            
-            NSLog(@"text from website: %@", weatherText);
-            
+
             //Removing white spaces from the begining or end of the sting retrived
             NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
                                        [NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -69,14 +67,14 @@
             NSString *trimmedString1 = [trimmedString
                                         stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
             
-            text = [text stringByAppendingString:trimmedString1];
+            outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString1];
 		}
 	}
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
-    [text autorelease];
-    return text;
+    [outputWeatherText autorelease];
+    return outputWeatherText;
 }
 
 /* OLD CODE FOR THE WEATHER

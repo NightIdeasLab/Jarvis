@@ -9,7 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
 
-@interface ChangeLogController : NSWindowController
+@interface ChangeLogController : NSWindowController {
+	IBOutlet id windowCL;
+}
+
 @property (assign) IBOutlet WebView *changeLogWebView;
 
 @end
