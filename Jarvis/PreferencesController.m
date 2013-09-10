@@ -36,8 +36,6 @@
 #pragma mark -
 #pragma mark Class Methods
 
-// FIXME: Close the location manager when the pref window closes
-
 - (void)dealloc {
 	[updateDateField release];
 	[profileDateField release];
@@ -52,14 +50,22 @@
 	// reading from the plist file
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	// retriving  the last update date and
+	// retriving the last update date and
 	// last profile sent date from plist file
 	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
 	NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
 
+	// retriving latidude and
+	// longitude from plist file
+	double latitude = [defaults doubleForKey:@"Latitude"];
+	double longitude = [defaults doubleForKey:@"Longitude"];
+
+	if ((latitude != 0) && (longitude != 0)) {
+	NSLog(@"latitude : %f", latitude);
+	}
 	// checking and setting the last update date
 	// and last profile sent date into the interface
-	if ([profileDate.description length] > 0) {
+	if ([updateDate.description length] > 0) {
 		[updateDateField setObjectValue:updateDate];
 	}
 	else {
@@ -73,14 +79,15 @@
 		[profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
 	}
 
+	// FIXME: Close the location manager when the pref window closes
 	// TODO: load the weather stuff only when the wether view is active
 	//       and releasing them when switching from it
 	/* 	Weather Stuff retriving the location */
-	locationManager = [[CLLocationManager alloc] init];
-	locationManager.delegate = self;
-	[locationManager startUpdatingLocation];
+//	locationManager = [[CLLocationManager alloc] init];
+//	locationManager.delegate = self;
+//	[locationManager startUpdatingLocation];
 
-	[self changeStateAutomaticLocation:self];
+//	[self changeStateAutomaticLocation:self];
 
 	
 
@@ -191,14 +198,34 @@
 		longitudeCode = [[longitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
     }
 	else {
-		NSLog(@"Thw woeid cannot be retrived!!!");
+		NSLog(@"The woeid cannot be retrived!!!");
 	}
 
+	[self saveCodeData:woeidCode longitude:longitudeCode latitude:latitudeCode];
+
+#if DEBUG
 	NSLog(@"Flickr woeid respornce: %@",woeidCode);
 	NSLog(@"Flickr latitude respornce: %@",latitudeCode);
 	NSLog(@"Flickr longitude respornce: %@",longitudeCode);
+#endif
+	
+	double latitudeDouble = [latitudeCode doubleValue];
+
+	double longitudeDouble = [longitudeCode doubleValue];
+
+	[self updateMapWithLatitude: latitudeDouble AndLongitude: longitudeDouble];
 
 	return 0;
+}
+
+- (void)saveCodeData:(NSString *) aWoeidCode longitude:(NSString *) aLongitudeCode latitude:(NSString *) aLatitudeCode{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+    [defaults setObject:aWoeidCode forKey: @"woeidCode"];
+	[defaults setObject:aLongitudeCode forKey: @"longitudeCode"];
+	[defaults setObject:aLatitudeCode forKey: @"latitudeCode"];
+
+	[defaults synchronize];
 }
 
 #pragma mark -
@@ -231,27 +258,35 @@
 		return;
 	}
 
-	// Load the HTML for displaying the Google map from a file and replace the
-	// format placeholders with our location data
-	NSString *htmlString = [NSString stringWithFormat:
-							[NSString
-							 stringWithContentsOfFile:
-							 [[NSBundle mainBundle]
-							  pathForResource:@"googleMaps" ofType:@"html"]
-							 encoding:NSUTF8StringEncoding
-							 error:NULL],
-							newLocation.coordinate.latitude,
-							newLocation.coordinate.longitude,
-							newLocation.coordinate.latitude,
-							newLocation.coordinate.longitude,
-							[PreferencesController latitudeRangeForLocation:newLocation],
-							[PreferencesController longitudeRangeForLocation:newLocation]];
+	//NSLog(@"Latitude: %f , longitude: %f , and new location : %@", newLocation.coordinate.latitude,newLocation.coordinate.longitude,newLocation);
+
+[self updateMapWithLatitude:newLocation.coordinate.latitude AndLongitude:newLocation.coordinate.longitude];
+
+}
+
+-(void) updateMapWithLatitude: (double) latitude  AndLongitude: (double) longitude
+{
+// Load the HTML for displaying the Google map from a file and replace the
+// format placeholders with our location data
+NSString *htmlString = [NSString stringWithFormat:
+						[NSString
+						 stringWithContentsOfFile:
+						 [[NSBundle mainBundle]
+						  pathForResource:@"googleMaps" ofType:@"html"]
+						 encoding:NSUTF8StringEncoding
+						 error:NULL],
+						latitude,
+						longitude,
+						latitude,
+						longitude];
 
 
-	// Load the HTML in the WebView and set the labels
-	[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
-	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f",
-								   newLocation.coordinate.latitude, newLocation.coordinate.longitude]];
+// Load the HTML in the WebView and set the labels
+[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
+
+#ifdef DEBUG
+	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f", latitude, longitude]];
+#endif
 
 }
 

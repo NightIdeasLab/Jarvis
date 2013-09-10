@@ -13,7 +13,7 @@
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
-#define SLOW_INTERNET 1 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
+#define SLOW_INTERNET 0 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
 
 NSSpeechSynthesizer *synth;
 
@@ -100,8 +100,22 @@ NSSpeechSynthesizer *synth;
     [windowLM makeKeyAndOrderFront:self];
 }
 
+- (void)defaultsChanged:(NSNotification *)notification {
+    // Get the user defaults
+    NSUserDefaults *defaults = (NSUserDefaults *)[notification object];
+
+    // Do something with it
+    NSLog(@"%@", [defaults objectForKey:@"woeidCode"]);
+}
+
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
-    
+
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self
+               selector:@selector(defaultsChanged:)
+                   name:NSUserDefaultsDidChangeNotification
+                 object:nil];
+
     [NSApp setServicesProvider: self];
     
     // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)

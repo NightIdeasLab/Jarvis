@@ -40,9 +40,9 @@
 	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
 	<key>SUAutomaticallyUpdate</key>
 	<string>YES</string>
-	<key>SUAllowsAutomaticUpdates</key>
+	<key>SUEnableAutomaticChecks</key>
 	<string>YES</string>
-	<key>SUEnableSystemProfiling</key>
+	<key>SUSendProfileInfo</key>
 	<string>YES</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>

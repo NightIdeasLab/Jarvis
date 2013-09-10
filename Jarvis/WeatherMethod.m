@@ -7,72 +7,76 @@
 //
 
 #import "WeatherMethod.h"
-#define woeidCode @"12843574" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
+//#define woeidCodeWeather @"12843574" //this is the code for weather you can find yours at http://sigizmund.info/woeidinfo/
 
 @implementation WeatherMethod
 
 - (NSString *) retriveWeather {
-    
-    // TODO: check if there exists a woiedCode in the UserDefaults if yes use that one
-    //       else use a default location ^_^
-    
-    
+
+	// reading from the plist file
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
     //Weather conditions
     NSString *outputWeatherText = [[NSString alloc] init];
 	NSString *weatherText = [[NSString alloc] initWithString:@""];
    	NSString *cityName = [[NSString alloc] initWithString:@""];
     NSString *countryName = [[NSString alloc] initWithString:@""];
 	NSString *weatherContent = [[NSString alloc] initWithString:@""];
-	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
-	if(weatherContent != nil)
-	{
-		if ([[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] count]>1)
+	NSString *woeidCodeWeather = [defaults stringForKey: @"woeidCode"];
+	NSLog(@"woeidCode: %@",woeidCodeWeather);
+	if(woeidCodeWeather != nil) {
+		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCodeWeather]] encoding: NSUTF8StringEncoding error:nil];
+		if(weatherContent != nil)
 		{
-            cityName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
-            cityName = [[cityName componentsSeparatedByString:@","] objectAtIndex:0];
-            countryName = [[weatherContent componentsSeparatedByString:@"country=\""] objectAtIndex:1];
-            countryName = [[countryName componentsSeparatedByString:@"\"/>"] objectAtIndex:0];
-            weatherText = [[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] objectAtIndex:1];
-            weatherText = [[weatherText componentsSeparatedByString:@"<BR />"] objectAtIndex:0];
-            
-            outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@, %@ is : ", @""),cityName, countryName]];
-            
-            //Removing white spaces from the begining or end of the sting retrived
-            NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
-                                       [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            
-            outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString];
-            outputWeatherText = [outputWeatherText stringByAppendingString:@".\n\n"];
+			if ([[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] count]>1)
+			{
+				cityName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
+				cityName = [[cityName componentsSeparatedByString:@","] objectAtIndex:0];
+				countryName = [[weatherContent componentsSeparatedByString:@"country=\""] objectAtIndex:1];
+				countryName = [[countryName componentsSeparatedByString:@"\"/>"] objectAtIndex:0];
+				weatherText = [[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] objectAtIndex:1];
+				weatherText = [[weatherText componentsSeparatedByString:@"<BR />"] objectAtIndex:0];
+				
+				outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nWeather in %@, %@ is : ", @""),cityName, countryName]];
+				
+				//Removing white spaces from the begining or end of the sting retrived
+				NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
+										   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+				
+				outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString];
+				outputWeatherText = [outputWeatherText stringByAppendingString:@".\n\n"];
+			}
 		}
-	}
-    
-    
-    //Forecast for the next 5 days
-    // FIXME: the forcast is really ugly, redo it :)
-	weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCode]] encoding: NSUTF8StringEncoding error:nil];
-    
-    outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
-    if(weatherContent != nil)
-	{
-		if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)
+		
+		
+		//Forecast for the next 5 days
+		// FIXME: the forcast is really ugly, redo it :)
+		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCodeWeather]] encoding: NSUTF8StringEncoding error:nil];
+		
+		outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
+		if(weatherContent != nil)
 		{
-            weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
-            weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
+			if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)
+			{
+				weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
+				weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
 
-            //Removing white spaces from the begining or end of the sting retrived
-            NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
-                                       [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            
-            //removing the <br /> from the text
-            NSString *trimmedString1 = [trimmedString
-                                        stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
-            
-            outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString1];
+				//Removing white spaces from the begining or end of the sting retrived
+				NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
+										   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+				
+				//removing the <br /> from the text
+				NSString *trimmedString1 = [trimmedString
+											stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+				
+				outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString1];
+			}
 		}
+    } else {
+		outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"\nPlease setup the weather!!!\n", @"")];
 	}
-    
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-        
+	
     [outputWeatherText autorelease];
     return outputWeatherText;
 }
