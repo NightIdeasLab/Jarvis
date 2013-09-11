@@ -15,7 +15,7 @@
     // iCal events
     NSString *outputCalendarText = [[NSString alloc] init];
     NSCalendarDate *date = [NSCalendarDate calendarDate];
-    NSCalendarDate *endDate = [[NSCalendarDate dateWithYear:[date yearOfCommonEra] month:[date monthOfYear] day:[date dayOfMonth] hour:23 minute:59 second:59 timeZone:nil] retain];
+    NSCalendarDate *endDate = [NSCalendarDate dateWithYear:[date yearOfCommonEra] month:[date monthOfYear] day:[date dayOfMonth] hour:23 minute:59 second:59 timeZone:nil];
     NSPredicate *predicate = [CalCalendarStore eventPredicateWithStartDate:date endDate:endDate calendars:[[CalCalendarStore defaultCalendarStore] calendars]];
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
@@ -47,7 +47,7 @@
         }
     }
     
-    [outputCalendarText autorelease];
+
     return outputCalendarText;
     
 }
@@ -72,7 +72,6 @@
         }
     }
     
-    [outputRemindersText autorelease];
     return outputRemindersText;
     
 }

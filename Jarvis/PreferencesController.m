@@ -35,7 +35,7 @@
 
 #pragma mark -
 #pragma mark Class Methods
-
+/*
 - (void)dealloc {
 	[updateDateField release];
 	[profileDateField release];
@@ -44,7 +44,7 @@
 	[locationManager stopUpdatingLocation];
 	[locationManager release];
 	[super dealloc];
-}
+}*/
 
 - (void) awakeFromNib {
 	// reading from the plist file
@@ -91,13 +91,13 @@
 
 	
 
-	[defaults release];
+	//[defaults release];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	[locationManager stopUpdatingLocation];
-	[locationManager release];
+	//[locationManager release];
 }
 
 #pragma mark -
@@ -128,9 +128,9 @@
 
 - (NSInteger *)getWOEIDfromlatitude: (double) latitude andLongitude: (double) longitude {
 
-	NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
-	NSString *woeidCode = [[NSString alloc] initWithString:@""];
-	NSString *woeidContent = [[NSString alloc] initWithString:@""];
+	NSString *flickrKEY = @"ca5edb0f6f046f0e9e1ee43dd49277e4";
+	NSString *woeidCode = @"";
+	NSString *woeidContent = @"";
 	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
 													  [NSString stringWithFormat:
 													   @"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=%@&lat=%f&lon=%f",flickrKEY,latitude, longitude]] encoding:NSUTF8StringEncoding error:nil];
@@ -164,7 +164,7 @@
 	}
 
 
-	[messageForLabel release];
+	//[messageForLabel release];
 
 	//    if (!firstLaunch) {
 	//
@@ -177,11 +177,11 @@
 	// TODO: remove the white spaces in cityAndCountry and replace it with %20 the normal HTML white space
 	cityAndCountry =[cityAndCountry stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
 
-	NSString *flickrKEY = [[NSString alloc] initWithString:@"ca5edb0f6f046f0e9e1ee43dd49277e4"];
-	NSString *woeidCode = [[NSString alloc] initWithString:@""];
-	NSString *latitudeCode = [[NSString alloc] initWithString:@""];
-	NSString *longitudeCode = [[NSString alloc] initWithString:@""];
-	NSString *woeidContent = [[NSString alloc] initWithString:@""];
+	NSString *flickrKEY = @"ca5edb0f6f046f0e9e1ee43dd49277e4";
+	NSString *woeidCode = @"";
+	NSString *latitudeCode = @"";
+	NSString *longitudeCode = @"";
+	NSString *woeidContent = @"";
 	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
 													  [NSString stringWithFormat:
 													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
@@ -307,7 +307,7 @@ NSString *htmlString = [NSString stringWithFormat:
 
 - (void)windowWillTerminate:(NSNotification *)aNotification {
 	[locationManager stopUpdatingLocation];
-	[locationManager release];
+	//[locationManager release];
 }
 
 - (IBAction)openInDefaultBrowser:(id)sender {

@@ -47,7 +47,6 @@
 								   "];
 	
     returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
-	[scriptObject release];
 	outputEmailText = [outputEmailText stringByAppendingString:@"\n"];
 	outputEmailText = [outputEmailText stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
 	

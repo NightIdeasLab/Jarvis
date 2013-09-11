@@ -26,8 +26,7 @@
 	}
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    [outputNewsText autorelease];
+
     return outputNewsText;
     
 }
@@ -48,7 +47,6 @@
     
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
-    [outputQuoteText autorelease];
     return outputQuoteText;
     
 }

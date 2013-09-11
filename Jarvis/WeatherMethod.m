@@ -18,12 +18,11 @@
 	
     //Weather conditions
     NSString *outputWeatherText = [[NSString alloc] init];
-	NSString *weatherText = [[NSString alloc] initWithString:@""];
-   	NSString *cityName = [[NSString alloc] initWithString:@""];
-    NSString *countryName = [[NSString alloc] initWithString:@""];
-	NSString *weatherContent = [[NSString alloc] initWithString:@""];
+	NSString *weatherText = @"";
+   	NSString *cityName = @"";
+    NSString *countryName = @"";
+	NSString *weatherContent = @"";
 	NSString *woeidCodeWeather = [defaults stringForKey: @"woeidCode"];
-	NSLog(@"woeidCode: %@",woeidCodeWeather);
 	if(woeidCodeWeather != nil) {
 		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=c",woeidCodeWeather]] encoding: NSUTF8StringEncoding error:nil];
 		if(weatherContent != nil)
@@ -77,7 +76,7 @@
 	}
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 	
-    [outputWeatherText autorelease];
+    //[outputWeatherText autorelease];
     return outputWeatherText;
 }
 

@@ -53,7 +53,7 @@
 - (IBAction) updateJarvis: (id) sender;
 - (IBAction) stopSpeech: (id) sender;
 - (void) linkDonate: (id) sender;
-- (void) jarvis;
+- (void) jarvis: (BOOL) speech;
 
 
 

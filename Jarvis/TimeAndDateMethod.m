@@ -44,7 +44,6 @@
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:[[dateFormatter standaloneWeekdaySymbols] objectAtIndex:[date dayOfWeek]%7]];
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:@".\n\n"];
     
-    [outputTimeAndDateText autorelease];
     
     return outputTimeAndDateText;
     

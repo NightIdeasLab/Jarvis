@@ -26,7 +26,7 @@ NSSpeechSynthesizer *synth;
     // returns the main window
 	return windowLM;
 }
-
+/*
 - (void) dealloc {
     // should kill variables on exit
     [windowLM release];
@@ -35,7 +35,7 @@ NSSpeechSynthesizer *synth;
 	[outText release];
     [super dealloc];
 }
-
+*/
 + (void) initialize {
     //make sure another Jarvis.app isn't running already
     NSArray * apps = [NSRunningApplication runningApplicationsWithBundleIdentifier: [[NSBundle mainBundle] bundleIdentifier]];
@@ -51,7 +51,7 @@ NSSpeechSynthesizer *synth;
         [alert setAlertStyle: NSCriticalAlertStyle];
         
         [alert runModal];
-        [alert release];
+//        [alert release];
         
         //kill ourselves right away
         exit(0);
@@ -87,7 +87,7 @@ NSSpeechSynthesizer *synth;
     
     // allocationg the SpeechSyntesizer
 	synth = [[NSSpeechSynthesizer alloc] init]; // FIXME: trows a c++ exception
-	[self jarvis];
+	[self jarvis:YES];
 }
 
 - (void) applicationWillFinishLaunching: (NSNotification *) aNotification {
@@ -100,21 +100,7 @@ NSSpeechSynthesizer *synth;
     [windowLM makeKeyAndOrderFront:self];
 }
 
-- (void)defaultsChanged:(NSNotification *)notification {
-    // Get the user defaults
-    NSUserDefaults *defaults = (NSUserDefaults *)[notification object];
-
-    // Do something with it
-    NSLog(@"%@", [defaults objectForKey:@"woeidCode"]);
-}
-
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
-
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    [center addObserver:self
-               selector:@selector(defaultsChanged:)
-                   name:NSUserDefaultsDidChangeNotification
-                 object:nil];
 
     [NSApp setServicesProvider: self];
     
@@ -163,7 +149,7 @@ NSSpeechSynthesizer *synth;
             if (allowNeverAgain)
                 [fDefaults setBool: ([[alert suppressionButton] state] != NSOnState) forKey: @"WarningDonate"];
             
-            [alert release];
+            //[alert release];
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
@@ -186,13 +172,13 @@ NSSpeechSynthesizer *synth;
     [menu addItemWithTitle: NSLocalizedString(@"Mute", "Dock item") action: @selector(stopSpeech:) keyEquivalent: @""];
     [menu addItemWithTitle: NSLocalizedString(@"Refresh", "Dock item") action: @selector(updateJarvis:) keyEquivalent: @""];
     
-    return [menu autorelease];
+    return menu;
 }
 
 - (IBAction) openPreferences: (id) sender {
     // instantiate preferences window controller
     if (_preferencesController) {
-        [_preferencesController release];
+        //[_preferencesController release];
         _preferencesController = nil;
     }
     
@@ -219,7 +205,7 @@ NSSpeechSynthesizer *synth;
 - (IBAction) openChangeLog: (id) sender {
     
     if (_changeLogController) {
-        [_changeLogController release];
+        //[_changeLogController release];
         _changeLogController = nil;
     }
     _changeLogController = [[ChangeLogController alloc] initWithWindowNibName:@"ChangeLogController"];
@@ -239,7 +225,17 @@ NSSpeechSynthesizer *synth;
 	[outText setNeedsDisplay:YES];
 	[outText displayIfNeeded];
 	[outText setNeedsDisplay:NO];
-	[self jarvis];
+	[self jarvis:YES];
+}
+
+- (void) updateJarvisNOSpeech {
+
+	[synth stopSpeaking];
+	[outText setString:@"Updating your report..."];
+	[outText setNeedsDisplay:YES];
+	[outText displayIfNeeded];
+	[outText setNeedsDisplay:NO];
+	[self jarvis:YES];
 }
 
 - (IBAction) stopSpeech: (id) sender {
@@ -250,21 +246,21 @@ NSSpeechSynthesizer *synth;
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: DONATE_URL]];
 }
 
-- (void) jarvis {
+- (void) jarvis: (BOOL) speck {
 	NSString *outputText = [[NSString alloc] init];
     
     TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
     
     outputText = [outputText stringByAppendingString:[timeAndDate retriveTimeAndDate]];
     
-    [timeAndDate release];
+    //[timeAndDate release];
 	
     CalendarMethod *calendar = [[CalendarMethod alloc] init];
     
    	outputText = [outputText stringByAppendingString:[calendar retriveiCalEvents]];
     outputText = [outputText stringByAppendingString:[calendar retriveReminders]];
     
-    [calendar release];
+    //[calendar release];
     
 #if !SLOW_INTERNET
     
@@ -272,7 +268,7 @@ NSSpeechSynthesizer *synth;
     
     outputText = [outputText stringByAppendingString:[weather retriveWeather]];
     
-    [weather release];
+    //[weather release];
     
 #endif
     
@@ -280,7 +276,7 @@ NSSpeechSynthesizer *synth;
     
     outputText = [outputText stringByAppendingString:[email retriveEmail]];
     
-    [email release];
+    //[email release];
     
 #if !SLOW_INTERNET
     
@@ -292,7 +288,7 @@ NSSpeechSynthesizer *synth;
     // Daily Quote
     outputText = [outputText stringByAppendingString:[newsAndQuote retriveDailyQuote]];
     
-    [newsAndQuote release];
+    //[newsAndQuote release];
     
 #endif
     
@@ -306,9 +302,10 @@ NSSpeechSynthesizer *synth;
     //Output
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:outputText];
-#if !DEBUG
-	[synth startSpeakingString:outputText];	//for speaking the text
-#endif
+
+	if (speck) {
+		[synth startSpeakingString:outputText];	//for speaking the text
+	}
     // TODO: figure out when is best to release text. because if i write it where the app will crash
 
 }

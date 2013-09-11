@@ -51,7 +51,6 @@
 		00C7E6EC176B86C1008C2823 /* htdocs in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6EB176B86C1008C2823 /* htdocs */; };
 		00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6ED176B86FF008C2823 /* JarvisHelp */; };
 		00C7E6F1176B87FB008C2823 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6F0176B87FB008C2823 /* COPYING */; };
-		00D4A7A617973BBD0036DF14 /* LoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD5588176B9E520057FC4A /* LoginItems.m */; };
 		00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C7671790704500246636 /* DBPrefsWindowController.m */; };
 		00E2C76D1790704500246636 /* Preference pane.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C7681790704500246636 /* Preference pane.rtf */; };
 		00E2C76E1790704500246636 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C76A1790704500246636 /* PreferencesController.m */; };
@@ -135,8 +134,6 @@
 		00C7E6EB176B86C1008C2823 /* htdocs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = htdocs; path = Jarvis/htdocs; sourceTree = "<group>"; };
 		00C7E6ED176B86FF008C2823 /* JarvisHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JarvisHelp; sourceTree = "<group>"; };
 		00C7E6F0176B87FB008C2823 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = Jarvis/COPYING; sourceTree = "<group>"; };
-		00CD5587176B9E520057FC4A /* LoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginItems.h; path = Helpers/LoginItems.h; sourceTree = "<group>"; };
-		00CD5588176B9E520057FC4A /* LoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginItems.m; path = Helpers/LoginItems.m; sourceTree = "<group>"; };
 		00E2C7661790704500246636 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		00E2C7671790704500246636 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		00E2C7681790704500246636 /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Preference pane.rtf"; sourceTree = "<group>"; };
@@ -218,8 +215,6 @@
 		00A04B9E176A15B500A3F3CE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				00CD5587176B9E520057FC4A /* LoginItems.h */,
-				00CD5588176B9E520057FC4A /* LoginItems.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -484,7 +479,6 @@
 				0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */,
 				0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */,
 				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
-				00D4A7A617973BBD0036DF14 /* LoginItems.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,7 +535,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
@@ -574,7 +568,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;

@@ -101,16 +101,17 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     NSString *separator = @"\n\n--\n\n";
     
     NSRange separatorRange = [[text string] rangeOfString:separator];
-    sectionStrings[JRFeedbackController_BugReport] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
+    //sectionStrings[JRFeedbackController_BugReport] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
+
     [text deleteCharactersInRange:NSMakeRange(0, separatorRange.location + [separator length])];
     //NSLog(@"bugReport: <%@>", [sectionStrings[JRFeedbackController_BugReport] string]);
     
     separatorRange = [[text string] rangeOfString:separator];
-    sectionStrings[JRFeedbackController_FeatureRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
+    //sectionStrings[JRFeedbackController_FeatureRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
     [text deleteCharactersInRange:NSMakeRange(0, separatorRange.location + [separator length])];
     //NSLog(@"featureRequest: <%@>", [sectionStrings[JRFeedbackController_FeatureRequest] string]);
     
-    sectionStrings[JRFeedbackController_SupportRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, [text length])] retain];
+    //sectionStrings[JRFeedbackController_SupportRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, [text length])] retain];
     //NSLog(@"supportRequest: <%@>", [sectionStrings[JRFeedbackController_SupportRequest] string]);
     
     [text setAttributedString:sectionStrings[JRFeedbackController_BugReport]];
@@ -139,7 +140,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 }
 
 - (IBAction)switchSectionAction:(NSSegmentedControl*)sender {
-    [sectionStrings[currentSection] release];
+    //[sectionStrings[currentSection] release];
     sectionStrings[currentSection] = [[textView textStorage] copy];
     
     currentSection = [sender selectedSegment];
@@ -156,7 +157,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     [sendButton setEnabled:NO];
     [cancelButton setEnabled:NO];
     
-    [sectionStrings[currentSection] release];
+    //[sectionStrings[currentSection] release];
     sectionStrings[currentSection] = [[textView textStorage] copy];
     [textView setEditable:NO];
     
@@ -173,27 +174,27 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 }
 
 - (void)system_profilerThread:(id)ignored {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSString *systemProfile = nil;
     {
         NSPipe *inputPipe = [NSPipe pipe];
         NSPipe *outputPipe = [NSPipe pipe];
         
-        NSTask *scriptTask = [[[NSTask alloc] init] autorelease];
+        NSTask *scriptTask = [[NSTask alloc] init];
         [scriptTask setLaunchPath:@"/usr/sbin/system_profiler"];
         [scriptTask setArguments:[NSArray arrayWithObjects:@"-detailLevel", @"mini", nil]];
         [scriptTask setStandardOutput:outputPipe];
         [scriptTask launch];
         
         [[inputPipe fileHandleForWriting] closeFile];
-        systemProfile = [[[NSString alloc] initWithData:[[outputPipe fileHandleForReading] readDataToEndOfFile]
-                                               encoding:NSUTF8StringEncoding] autorelease];
+        systemProfile = [[NSString alloc] initWithData:[[outputPipe fileHandleForReading] readDataToEndOfFile]
+                                               encoding:NSUTF8StringEncoding];
     }
     [self performSelectorOnMainThread:@selector(postFeedback:)
                            withObject:systemProfile
                         waitUntilDone:NO];
-    [pool drain];
+  //  [pool drain];
 }
 
 - (void)postFeedback:(NSString*)systemProfile {
@@ -225,7 +226,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     if (gFeedbackController) {
         assert(gFeedbackController == self);
         [[gFeedbackController window] orderOut:self];
-        [gFeedbackController release];
+        //[gFeedbackController release];
         gFeedbackController = nil;
     }
 }
@@ -262,7 +263,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 		withInformativeText:(NSString *)text 
 			  andAlertStyle:(NSAlertStyle)alertStyle
 {
-	NSAlert *thankYouAlert = [[[NSAlert alloc] init] autorelease];
+	NSAlert *thankYouAlert = [[NSAlert alloc] init];
 	[thankYouAlert addButtonWithTitle:@"OK"];
 	[thankYouAlert setMessageText:message];
 	[thankYouAlert setInformativeText:text];
