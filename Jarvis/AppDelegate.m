@@ -34,6 +34,7 @@ NSSpeechSynthesizer *synth;
     [_changeLogController release];
 	[outText release];
     [super dealloc];
+	[self removeObserver:self forKeyPath:@"woeidCode"];
 }
 */
 + (void) initialize {
@@ -66,7 +67,12 @@ NSSpeechSynthesizer *synth;
         
         // initializing the preference plist
         fDefaults = [NSUserDefaults standardUserDefaults];
-        
+
+		[[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"woeidCode" options:( NSKeyValueObservingOptionOld |
+																				 NSKeyValueObservingOptionNew )
+												   context:NULL];
+
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
@@ -75,6 +81,28 @@ NSSpeechSynthesizer *synth;
         [[SUUpdater sharedUpdater] setDelegate: self]; // FIXME: trows a c++ exception
     }
     return self;
+}
+
+
+// KVO handler
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
+					   change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"woeidCode"])
+    {
+        NSString *oldC = [change objectForKey:NSKeyValueChangeOldKey];
+        NSString *newC = [change objectForKey:NSKeyValueChangeNewKey];
+
+	#if DEBUG
+		NSLog(@"old C: %@", oldC);
+		NSLog(@"new C: %@", newC);
+	#endif
+
+		if (newC != oldC) {
+			//[self jarvis:NO];
+			[self updateJarvisNOSpeech];
+		}
+    }
 }
 
 - (void) awakeFromNib {
@@ -103,7 +131,7 @@ NSSpeechSynthesizer *synth;
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
 
     [NSApp setServicesProvider: self];
-    
+
     // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:)
                                                      forEventClass: kCoreEventClass andEventID: kAEOpenContents];

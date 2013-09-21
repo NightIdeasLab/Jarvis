@@ -61,7 +61,7 @@
 	double longitude = [defaults doubleForKey:@"Longitude"];
 
 	if ((latitude != 0) && (longitude != 0)) {
-	NSLog(@"latitude : %f", latitude);
+		NSLog(@"latitude : %f", latitude);
 	}
 	// checking and setting the last update date
 	// and last profile sent date into the interface
@@ -143,7 +143,7 @@
 		NSLog(@"The woeid cannot be retrived!!!");
 	}
 
-	NSLog(@"Flickr woeid responce: %@",woeidCode);
+	//NSLog(@"Flickr woeid responce: %@",woeidCode);
 
     return 0;
 }
@@ -186,8 +186,9 @@
 													  [NSString stringWithFormat:
 													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
 															NSUTF8StringEncoding error:nil];
-
+/*
 	NSLog(@"woeidcontent: %@", woeidContent);
+*/
 
 	if(woeidContent != nil) {
 		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
@@ -203,11 +204,11 @@
 
 	[self saveCodeData:woeidCode longitude:longitudeCode latitude:latitudeCode];
 
-#if DEBUG
+/*
 	NSLog(@"Flickr woeid respornce: %@",woeidCode);
 	NSLog(@"Flickr latitude respornce: %@",latitudeCode);
 	NSLog(@"Flickr longitude respornce: %@",longitudeCode);
-#endif
+*/
 	
 	double latitudeDouble = [latitudeCode doubleValue];
 
