@@ -10,5 +10,13 @@
 	<integer>0</integer>
 	<key>DefaultLocation</key>
 	<integer>721943</integer>
+	<key>ReadUserName</key>
+	<true/>
+	<key>UserName</key>
+	<string>Short</string>
+	<key>TemperatureStyle</key>
+	<string>c</string>
+	<key>TimeStyle</key>
+	<string>24</string>
 </dict>
 </plist>

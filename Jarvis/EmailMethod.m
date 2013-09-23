@@ -10,7 +10,7 @@
 
 @implementation EmailMethod
 
-- (NSString *) retriveEmail {
+- (NSString *) retrieveEmail {
     
     //////////////////////////////
     // Personalization parameters:

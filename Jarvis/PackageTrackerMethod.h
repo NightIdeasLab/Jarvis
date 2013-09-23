@@ -10,6 +10,6 @@
 
 @interface PackageTrackerMethod : NSObject
 
-- (NSString *) retrivePackages;
+- (NSString *) retrievePackages;
 
 @end

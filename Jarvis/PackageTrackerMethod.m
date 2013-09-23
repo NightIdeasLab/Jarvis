@@ -10,7 +10,7 @@
 
 @implementation PackageTrackerMethod
 
-- (NSString *) retrivePackages {
+- (NSString *) retrievePackages {
     
     /*
     // Junecloud username and password for package tracking Does Not Work

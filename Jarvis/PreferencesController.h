@@ -26,6 +26,14 @@
 @property (assign, nonatomic) IBOutlet NSView *updatePreferenceView;
 
 #pragma mark -
+#pragma mark General var
+@property (assign) IBOutlet NSButton *readUserName;
+@property (assign, nonatomic) IBOutlet NSTextField *customName;
+@property (assign) IBOutlet NSButton *customNamePopUp;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *popUpNameButton;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *popUpTimeStyleButton;
+
+#pragma mark -
 #pragma mark Update var
 @property (assign, nonatomic) IBOutlet NSTextField *updateDateField;
 @property (assign, nonatomic) IBOutlet NSTextField *profileDateField;
@@ -37,18 +45,29 @@
 @property (assign, atomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) IBOutlet NSTextField *locationLabel;
 @property (assign) IBOutlet NSButton *findLocationButton;
+@property (unsafe_unretained) IBOutlet NSPopUpButton *popUpTemperatureButton;
+@property (assign) IBOutlet NSButton *temperaturePopUp;
 
-@property (assign) IBOutlet NSButton *automaticLocationCheckBok;
+@property (assign) IBOutlet NSButton *automaticLocationCheckBox;
+
+// General
+- (IBAction)changeStateOfName:(id)sender;
+
+- (IBAction)readUserName:(NSButton *)sender;
+
+- (IBAction)readCustomName:(id)sender;
 
 // Weather
 
 // Finds the WOEID code for the location that the user inputs
-
 - (IBAction)changeStateAutomaticLocation:(id)sender;
 
 - (IBAction)findLocation:(id)sender;
 
 - (IBAction)openInDefaultBrowser:(id)sender;
 
+- (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender;
+
+- (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
 
 @end

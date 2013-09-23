@@ -21,6 +21,13 @@
 @synthesize quotationPreferenceView = _quotationPreferenceView;
 @synthesize updatePreferenceView = _updatePreferenceView;
 
+// General
+@synthesize readUserName;
+@synthesize customNamePopUp;
+@synthesize customName;
+@synthesize popUpNameButton;
+@synthesize popUpTimeStyleButton;
+
 // Update
 @synthesize updateDateField;
 @synthesize profileDateField;
@@ -31,20 +38,12 @@
 @synthesize locationManager;
 @synthesize locationLabel;
 @synthesize findLocationButton;
-@synthesize automaticLocationCheckBok;
+@synthesize automaticLocationCheckBox;
+@synthesize temperaturePopUp;
+@synthesize popUpTemperatureButton;
 
 #pragma mark -
 #pragma mark Class Methods
-/*
-- (void)dealloc {
-	[updateDateField release];
-	[profileDateField release];
-	[locationField release];
-	[locationLabel release];
-	[locationManager stopUpdatingLocation];
-	[locationManager release];
-	[super dealloc];
-}*/
 
 - (void) awakeFromNib {
 	// reading from the plist file
@@ -89,9 +88,29 @@
 
 //	[self changeStateAutomaticLocation:self];
 
-	
+	if ([defaults boolForKey: @"ReadUserName"]) {
+		[readUserName setState:1];
 
-	//[defaults release];
+		[self changeStateOfName:self];
+
+		NSString *userNameState = [defaults stringForKey: @"UserName"];
+
+		if ([userNameState isEqualToString:@"Short"]) {
+			[popUpNameButton selectItemAtIndex:0];
+			[customName setEnabled:NO];
+		} else if ([userNameState isEqualToString:@"Full"]) {
+			[popUpNameButton selectItemAtIndex:1];
+			[customName setEnabled:NO];
+		} else {
+			[popUpNameButton selectItemAtIndex:2];
+			[customName setEnabled:YES];
+			[customName setStringValue:userNameState];
+		}
+	} else {
+		[readUserName setState:0];
+		[self changeStateOfName:self];
+	}
+	
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
@@ -140,7 +159,7 @@
 		woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
 	}
 	else {
-		NSLog(@"The woeid cannot be retrived!!!");
+		NSLog(@"The woeid cannot be retrieved!!!");
 	}
 
 	//NSLog(@"Flickr woeid responce: %@",woeidCode);
@@ -149,7 +168,7 @@
 }
 
 - (IBAction)findLocation:(id)sender {
-	// retrives the City and Country
+	// retrieves the City and Country
 	NSString *locationText = [locationField stringValue];
 	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
 
@@ -162,14 +181,6 @@
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
-
-
-	//[messageForLabel release];
-
-	//    if (!firstLaunch) {
-	//
-	//        [fDefaults setInteger:721943 forKey: @"LocationCode"];
-	//    }
 
 }
 
@@ -199,7 +210,7 @@
 		longitudeCode = [[longitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
     }
 	else {
-		NSLog(@"The woeid cannot be retrived!!!");
+		NSLog(@"The woeid cannot be retrieved!!!");
 	}
 
 	[self saveCodeData:woeidCode longitude:longitudeCode latitude:latitudeCode];
@@ -328,7 +339,7 @@ NSString *htmlString = [NSString stringWithFormat:
 
 - (IBAction)changeStateAutomaticLocation:(id)sender {
 
-    if ([automaticLocationCheckBok state] == 1) {
+    if ([automaticLocationCheckBox state] == 1) {
         [locationField setEnabled:NO];
         [findLocationButton setEnabled:NO];
 
@@ -338,5 +349,74 @@ NSString *htmlString = [NSString stringWithFormat:
     }
 
 }
+
+- (IBAction)changeStateOfName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([readUserName state] == 1) {
+		[customNamePopUp setEnabled:YES];
+		[defaults setBool:YES forKey: @"ReadUserName"];
+		[popUpNameButton selectItemAtIndex:0];
+    } else {
+		[customName setEnabled:NO];
+		[customNamePopUp setEnabled:NO];
+		[defaults setBool:NO forKey: @"ReadUserName"];
+		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
+			[defaults setObject:@"None" forKey: @"UserName"];
+		}
+
+    }
+}
+
+- (IBAction)readUserName:(NSButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
+
+	if (indexOfPopUp == 0 ) {
+		[defaults setObject:@"Short" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 1 ) {
+		[defaults setObject:@"Full" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 2) {
+		[customName setEnabled:YES];
+	}
+	
+}
+
+- (IBAction)readCustomName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	NSString *customNameText = [customName stringValue];
+
+	if ([customNameText length] >0) {
+		[defaults setObject:customNameText forKey: @"UserName"];
+	}
+}
+
+- (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
+
+	if (indexOfTemperaturePopUp == 0 ) {
+		[defaults setObject:@"c" forKey: @"TemperatureStyle"];
+	} else if (indexOfTemperaturePopUp == 1 ) {
+		[defaults setObject:@"f" forKey: @"TemperatureStyle"];
+	}
+}
+
+- (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfTimePopUp = [popUpTimeStyleButton indexOfSelectedItem];
+
+	if (indexOfTimePopUp == 0 ) {
+		[defaults setObject:@"24" forKey: @"TimeStyle"];
+	} else if (indexOfTimePopUp == 1 ) {
+		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
+	}
+}
+
 
 @end

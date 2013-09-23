@@ -11,7 +11,7 @@
 
 @interface CalendarMethod : NSObject
 
-- (NSString *) retriveiCalEvents;
-- (NSString *) retriveReminders;
+- (NSString *) retrieveiCalEvents;
+- (NSString *) retrieveReminders;
 
 @end

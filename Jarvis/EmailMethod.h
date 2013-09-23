@@ -13,6 +13,6 @@
 
 @interface EmailMethod : NSObject
 
-- (NSString *) retriveEmail;
+- (NSString *) retrieveEmail;
 
 @end

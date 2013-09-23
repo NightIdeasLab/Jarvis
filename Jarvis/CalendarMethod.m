@@ -10,7 +10,7 @@
 
 @implementation CalendarMethod
 
-- (NSString *) retriveiCalEvents {
+- (NSString *) retrieveiCalEvents {
     
     // iCal events
     NSString *outputCalendarText = [[NSString alloc] init];
@@ -20,7 +20,7 @@
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
-        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"You do not have any apoiments today!!!\n\n", @"This message will appear if you do not have any apoiments")];
+        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"You do not have any appointments today!!!\n\n", @"This message will appear if you do not have any appointments")];
     }
     else
     {
@@ -52,7 +52,7 @@
     
 }
 
-- (NSString *) retriveReminders {
+- (NSString *) retrieveReminders {
     
     // Reminders
     NSString *outputRemindersText = [[NSString alloc] init];

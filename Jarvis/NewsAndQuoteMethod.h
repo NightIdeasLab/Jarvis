@@ -10,8 +10,8 @@
 
 @interface NewsAndQuoteMethod : NSObject
 
-- (NSString *) retriveNYTimes;
+- (NSString *) retrieveNYTimes;
 
-- (NSString *) retriveDailyQuote;
+- (NSString *) retrieveDailyQuote;
 
 @end

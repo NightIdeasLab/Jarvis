@@ -10,14 +10,14 @@
 
 @implementation NewsAndQuoteMethod
 
-- (NSString *) retriveNYTimes {
+- (NSString *) retrieveNYTimes {
     
     //NYTimes latest
     NSString *outputNewsText = [[NSString alloc] init];
     NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
 	if(quoteContent1!=nil)
 	{
-		outputNewsText = [outputNewsText stringByAppendingString:NSLocalizedString(@"\nToday's Headlines from NYTimes:\n", @"")];
+		outputNewsText = [outputNewsText stringByAppendingString:NSLocalizedString(@"\nToday's headlines from the New York Times:\n", @"")];
 		outputNewsText = [outputNewsText stringByAppendingString:[[[[quoteContent1 componentsSeparatedByString:@"<title>"] objectAtIndex:3] componentsSeparatedByString:@"</title>"] objectAtIndex:0]];
         //text = [text stringByAppendingString:[[[[quoteContent componentsSeparatedByString:@"<link>"] objectAtIndex:3] componentsSeparatedByString:@"</link>"] objectAtIndex:0]];
 		outputNewsText = [outputNewsText stringByAppendingString:@".\n"];
@@ -31,7 +31,7 @@
     
 }
 
-- (NSString *) retriveDailyQuote {
+- (NSString *) retrieveDailyQuote {
     
     //Daily quotation
     NSString *outputQuoteText = [[NSString alloc] init];

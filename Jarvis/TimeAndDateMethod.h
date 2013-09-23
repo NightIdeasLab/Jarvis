@@ -10,6 +10,6 @@
 
 @interface TimeAndDateMethod : NSObject
 
-- (NSString *) retriveTimeAndDate;
+- (NSString *) retrieveTimeAndDate;
 
 @end

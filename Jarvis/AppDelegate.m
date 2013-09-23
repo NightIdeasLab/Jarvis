@@ -26,17 +26,7 @@ NSSpeechSynthesizer *synth;
     // returns the main window
 	return windowLM;
 }
-/*
-- (void) dealloc {
-    // should kill variables on exit
-    [windowLM release];
-    [_preferencesController release];
-    [_changeLogController release];
-	[outText release];
-    [super dealloc];
-	[self removeObserver:self forKeyPath:@"woeidCode"];
-}
-*/
+
 + (void) initialize {
     //make sure another Jarvis.app isn't running already
     NSArray * apps = [NSRunningApplication runningApplicationsWithBundleIdentifier: [[NSBundle mainBundle] bundleIdentifier]];
@@ -52,7 +42,6 @@ NSSpeechSynthesizer *synth;
         [alert setAlertStyle: NSCriticalAlertStyle];
         
         [alert runModal];
-//        [alert release];
         
         //kill ourselves right away
         exit(0);
@@ -73,6 +62,21 @@ NSSpeechSynthesizer *synth;
 																				 NSKeyValueObservingOptionNew )
 												   context:NULL];
 
+		[[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"UserName" options:( NSKeyValueObservingOptionOld |
+																				 NSKeyValueObservingOptionNew )
+												   context:NULL];
+
+		[[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"TemperatureStyle" options:( NSKeyValueObservingOptionOld |
+																				NSKeyValueObservingOptionNew )
+												   context:NULL];
+
+		[[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"TimeStyle" options:( NSKeyValueObservingOptionOld |
+																				NSKeyValueObservingOptionNew )
+												   context:NULL];
+
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
@@ -88,21 +92,31 @@ NSSpeechSynthesizer *synth;
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
 					   change:(NSDictionary *)change context:(void *)context
 {
+	// detect the change for the weather code
     if([keyPath isEqualToString:@"woeidCode"])
     {
-        NSString *oldC = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString *newC = [change objectForKey:NSKeyValueChangeNewKey];
+        NSString *oldWoeidCode = [change objectForKey:NSKeyValueChangeOldKey];
+        NSString *newWoeidCode = [change objectForKey:NSKeyValueChangeNewKey];
 
 	#if DEBUG
-		NSLog(@"old C: %@", oldC);
-		NSLog(@"new C: %@", newC);
+		NSLog(@"old C: %@", oldWoeidCode);
+		NSLog(@"new C: %@", newWoeidCode);
 	#endif
 
-		if (newC != oldC) {
+		if (newWoeidCode != oldWoeidCode) {
 			//[self jarvis:NO];
 			[self updateJarvisNOSpeech];
 		}
     }
+
+	// detect the change for the user name
+	if([keyPath isEqualToString:@"UserName"]) [self updateJarvisNOSpeech];
+
+	// detect the change for the time style
+	if([keyPath isEqualToString:@"TimeStyle"]) [self updateJarvisNOSpeech];
+
+	// detect the change for the temperature style
+	if([keyPath isEqualToString:@"TemperatureStyle"]) [self updateJarvisNOSpeech];
 }
 
 - (void) awakeFromNib {
@@ -274,19 +288,19 @@ NSSpeechSynthesizer *synth;
     [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: DONATE_URL]];
 }
 
-- (void) jarvis: (BOOL) speck {
+- (void) jarvis: (BOOL) speak {
 	NSString *outputText = [[NSString alloc] init];
     
     TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
     
-    outputText = [outputText stringByAppendingString:[timeAndDate retriveTimeAndDate]];
+    outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
     
     //[timeAndDate release];
 	
     CalendarMethod *calendar = [[CalendarMethod alloc] init];
     
-   	outputText = [outputText stringByAppendingString:[calendar retriveiCalEvents]];
-    outputText = [outputText stringByAppendingString:[calendar retriveReminders]];
+   	outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
+    outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
     
     //[calendar release];
     
@@ -294,7 +308,7 @@ NSSpeechSynthesizer *synth;
     
     WeatherMethod *weather = [[WeatherMethod alloc] init];
     
-    outputText = [outputText stringByAppendingString:[weather retriveWeather]];
+    outputText = [outputText stringByAppendingString:[weather retrieveWeather]];
     
     //[weather release];
     
@@ -302,7 +316,7 @@ NSSpeechSynthesizer *synth;
     
     EmailMethod *email = [[EmailMethod alloc] init];
     
-    outputText = [outputText stringByAppendingString:[email retriveEmail]];
+    outputText = [outputText stringByAppendingString:[email retrieveEmail]];
     
     //[email release];
     
@@ -311,10 +325,10 @@ NSSpeechSynthesizer *synth;
     NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
     
     // NYTimes
-    outputText = [outputText stringByAppendingString:[newsAndQuote retriveNYTimes]];
+    outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
     
     // Daily Quote
-    outputText = [outputText stringByAppendingString:[newsAndQuote retriveDailyQuote]];
+    outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
     
     //[newsAndQuote release];
     
@@ -331,10 +345,9 @@ NSSpeechSynthesizer *synth;
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:outputText];
 
-	if (speck) {
+	if (speak) {
 		[synth startSpeakingString:outputText];	//for speaking the text
 	}
-    // TODO: figure out when is best to release text. because if i write it where the app will crash
 
 }
 
