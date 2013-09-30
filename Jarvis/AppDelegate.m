@@ -76,6 +76,10 @@ NSSpeechSynthesizer *synth;
 												forKeyPath:@"TimeStyle" options:( NSKeyValueObservingOptionOld |
 																				NSKeyValueObservingOptionNew )
 												   context:NULL];
+		[[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"ForecastWeather" options:( NSKeyValueObservingOptionOld |
+																				 NSKeyValueObservingOptionNew )
+												   context:NULL];
 
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
@@ -117,6 +121,10 @@ NSSpeechSynthesizer *synth;
 
 	// detect the change for the temperature style
 	if([keyPath isEqualToString:@"TemperatureStyle"]) [self updateJarvisNOSpeech];
+
+	// detect the change for the forecast
+	if([keyPath isEqualToString:@"ForecastWeather"]) [self updateJarvisNOSpeech];
+
 }
 
 - (void) awakeFromNib {

@@ -41,6 +41,7 @@
 @synthesize automaticLocationCheckBox;
 @synthesize temperaturePopUp;
 @synthesize popUpTemperatureButton;
+@synthesize forecastButton;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -94,7 +95,8 @@
 		[self changeStateOfName:self];
 
 		NSString *userNameState = [defaults stringForKey: @"UserName"];
-
+		BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+		
 		if ([userNameState isEqualToString:@"Short"]) {
 			[popUpNameButton selectItemAtIndex:0];
 			[customName setEnabled:NO];
@@ -105,6 +107,12 @@
 			[popUpNameButton selectItemAtIndex:2];
 			[customName setEnabled:YES];
 			[customName setStringValue:userNameState];
+		}
+
+		if (forecastState == YES) {
+			[forecastButton setState:1];
+		} else {
+			[forecastButton setState:0];
 		}
 	} else {
 		[readUserName setState:0];
@@ -416,6 +424,17 @@ NSString *htmlString = [NSString stringWithFormat:
 	} else if (indexOfTimePopUp == 1 ) {
 		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
 	}
+}
+
+- (IBAction)forecastYesOrNo:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([forecastButton state] == 1) {
+		[defaults setBool:YES forKey: @"ForecastWeather"];
+	} else {
+		[defaults setBool:NO forKey: @"ForecastWeather"];
+	}
+	
 }
 
 

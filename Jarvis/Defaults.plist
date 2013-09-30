@@ -18,5 +18,7 @@
 	<string>c</string>
 	<key>TimeStyle</key>
 	<string>24</string>
+	<key>ForecastWeather</key>
+	<string>YES</string>
 </dict>
 </plist>

@@ -25,6 +25,8 @@
 	NSString *weatherContent = @"";
 	NSString *woeidCodeWeather = [defaults stringForKey: @"woeidCode"];
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
+	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+	
 	if(woeidCodeWeather != nil) {
 		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%@", woeidCodeWeather, temperatureType]] encoding: NSUTF8StringEncoding error:nil];
 		if(weatherContent != nil)
@@ -51,34 +53,36 @@
 										   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				
 				outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString];
-				outputWeatherText = [outputWeatherText stringByAppendingString:@".\n\n"];
+				outputWeatherText = [outputWeatherText stringByAppendingString:@".\n"];
 			}
 		}
 		
-		
-		//Forecast for the next 5 days
-		// FIXME: the forcast is really ugly, redo it :)
-		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%@", woeidCodeWeather, temperatureType]] encoding: NSUTF8StringEncoding error:nil];
-		
-		outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
-		if(weatherContent != nil)
-		{
-			if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)
-			{
-				weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
-				weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
+		if (forecastState == YES) {
+			//Forecast for the next 5 days
+			// FIXME: the forcast is really ugly, redo it :)
+			weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%@", woeidCodeWeather, temperatureType]] encoding: NSUTF8StringEncoding error:nil];
 
-				//Removing white spaces from the beginning or end of the string retrieved
-				NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
-										   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-				
-				//removing the <br /> from the text
-				NSString *trimmedString1 = [trimmedString
-											stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
-				
-				outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString1];
+			outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];
+			if(weatherContent != nil)
+			{
+				if ([[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] count]>1)
+				{
+					weatherText = [[weatherContent componentsSeparatedByString:@"<BR /><b>Forecast:</b><BR />"] objectAtIndex:1];
+					weatherText = [[weatherText componentsSeparatedByString:@"<a href="] objectAtIndex:0];
+
+					//Removing white spaces from the beginning or end of the string retrieved
+					NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
+											   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
+					//removing the <br /> from the text
+					NSString *trimmedString1 = [trimmedString
+												stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+
+					outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString1];
+				}
 			}
 		}
+		
     } else {
 		outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"\nPlease setup the weather!!!\n", @"")];
 	}

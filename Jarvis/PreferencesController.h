@@ -49,6 +49,7 @@
 @property (assign) IBOutlet NSButton *temperaturePopUp;
 
 @property (assign) IBOutlet NSButton *automaticLocationCheckBox;
+@property (unsafe_unretained) IBOutlet NSButton *forecastButton;
 
 // General
 - (IBAction)changeStateOfName:(id)sender;
@@ -69,5 +70,7 @@
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender;
 
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
+
+- (IBAction)forecastYesOrNo:(id)sender;
 
 @end

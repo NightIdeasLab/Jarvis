@@ -53,6 +53,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{105, 141}, {100, 26}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -120,6 +121,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 147}, {74, 17}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="945472763"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -155,6 +157,7 @@
 						<int key="NSvFlags">12</int>
 						<string key="NSFrame">{{12, 170}, {388, 5}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="367007900"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
@@ -187,6 +190,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{265, 192}, {127, 22}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="910059738"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -213,6 +217,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{134, 189}, {113, 26}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="540387785"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -278,6 +283,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{18, 194}, {113, 18}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="256969520"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -306,6 +312,7 @@
 				</array>
 				<string key="NSFrameSize">{412, 231}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="266138715"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -340,6 +347,7 @@
 						<int key="NSvFlags">12</int>
 						<string key="NSFrame">{{20, 329}, {485, 5}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1007402968"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
@@ -364,6 +372,7 @@
 						<int key="NSvFlags">12</int>
 						<string key="NSFrame">{{20, 373}, {485, 5}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="465621355"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="NSOffsets">{0, 0}</string>
@@ -388,6 +397,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{367, 353}, {60, 17}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="723640280"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -407,6 +417,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{448, 347}, {60, 26}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="783279099"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -464,11 +475,12 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{18, 351}, {172, 18}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="184602818"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="317935561">
-							<int key="NSCellFlags">-1543503872</int>
+							<int key="NSCellFlags">-2080374784</int>
 							<int key="NSCellFlags2">268435456</int>
 							<string key="NSContents">Include 5-days forecast</string>
 							<reference key="NSSupport" ref="866047434"/>
@@ -489,6 +501,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{99, 420}, {327, 18}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="896297187"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -531,6 +544,7 @@
 						</set>
 						<string key="NSFrame">{{20, 20}, {485, 278}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<string key="FrameName"/>
@@ -551,6 +565,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{17, 306}, {491, 17}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="577916144"/>
 						<string key="NSReuseIdentifierKey">_NS:1535</string>
 						<bool key="NSEnabled">YES</bool>
@@ -570,6 +585,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{20, 390}, {370, 22}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="867521477"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -591,6 +607,7 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{421, 391}, {84, 19}}</string>
 						<reference key="NSSuperview" ref="835522929"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="913156480"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
@@ -616,6 +633,7 @@
 				</array>
 				<string key="NSFrameSize">{525, 451}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="245566704"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -642,7 +660,7 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomView" id="627184792">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSButton" id="615283167">
@@ -962,7 +980,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{473, 242}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="999957157"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -1625,6 +1642,22 @@
 						<reference key="destination" ref="945472763"/>
 					</object>
 					<int key="connectionID">474</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">forecastButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="465621355"/>
+					</object>
+					<int key="connectionID">475</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">forecastYesOrNo:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="465621355"/>
+					</object>
+					<int key="connectionID">476</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2689,9 +2722,231 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">474</int>
+			<int key="maxID">476</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">DBPrefsWindowController</string>
+					<string key="superclassName">NSWindowController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/DBPrefsWindowController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PreferencesController</string>
+					<string key="superclassName">DBPrefsWindowController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeStateAutomaticLocation:">id</string>
+						<string key="changeStateOfName:">id</string>
+						<string key="changeTemperatureStyle:">NSPopUpButton</string>
+						<string key="changeTimeStyle:">NSPopUpButton</string>
+						<string key="findLocation:">id</string>
+						<string key="forecastYesOrNo:">id</string>
+						<string key="openInDefaultBrowser:">id</string>
+						<string key="readCustomName:">id</string>
+						<string key="readUserName:">NSButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeStateAutomaticLocation:">
+							<string key="name">changeStateAutomaticLocation:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="changeStateOfName:">
+							<string key="name">changeStateOfName:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="changeTemperatureStyle:">
+							<string key="name">changeTemperatureStyle:</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBActionInfo" key="changeTimeStyle:">
+							<string key="name">changeTimeStyle:</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBActionInfo" key="findLocation:">
+							<string key="name">findLocation:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="forecastYesOrNo:">
+							<string key="name">forecastYesOrNo:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="openInDefaultBrowser:">
+							<string key="name">openInDefaultBrowser:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="readCustomName:">
+							<string key="name">readCustomName:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="readUserName:">
+							<string key="name">readUserName:</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="automaticLocationCheckBox">NSButton</string>
+						<string key="customName">NSTextField</string>
+						<string key="customNamePopUp">NSButton</string>
+						<string key="emailPreferenceView">NSView</string>
+						<string key="findLocationButton">NSButton</string>
+						<string key="forecastButton">NSButton</string>
+						<string key="generalPreferenceView">NSView</string>
+						<string key="icalAndRemaindersPreferenceView">NSView</string>
+						<string key="locationField">NSTextField</string>
+						<string key="locationLabel">NSTextField</string>
+						<string key="mapWebView">WebView</string>
+						<string key="newsPreferenceView">NSView</string>
+						<string key="popUpNameButton">NSPopUpButton</string>
+						<string key="popUpTemperatureButton">NSPopUpButton</string>
+						<string key="popUpTimeStyleButton">NSPopUpButton</string>
+						<string key="profileDateField">NSTextField</string>
+						<string key="quotationPreferenceView">NSView</string>
+						<string key="readUserName">NSButton</string>
+						<string key="speechPreferenceView">NSView</string>
+						<string key="temperaturePopUp">NSButton</string>
+						<string key="timeAndDatePreferenceView">NSView</string>
+						<string key="updateDateField">NSTextField</string>
+						<string key="updatePreferenceView">NSView</string>
+						<string key="weatherPreferenceView">NSView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="automaticLocationCheckBox">
+							<string key="name">automaticLocationCheckBox</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="customName">
+							<string key="name">customName</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="customNamePopUp">
+							<string key="name">customNamePopUp</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="emailPreferenceView">
+							<string key="name">emailPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="findLocationButton">
+							<string key="name">findLocationButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="forecastButton">
+							<string key="name">forecastButton</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="generalPreferenceView">
+							<string key="name">generalPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="icalAndRemaindersPreferenceView">
+							<string key="name">icalAndRemaindersPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationField">
+							<string key="name">locationField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="locationLabel">
+							<string key="name">locationLabel</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="mapWebView">
+							<string key="name">mapWebView</string>
+							<string key="candidateClassName">WebView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="newsPreferenceView">
+							<string key="name">newsPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="popUpNameButton">
+							<string key="name">popUpNameButton</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="popUpTemperatureButton">
+							<string key="name">popUpTemperatureButton</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="popUpTimeStyleButton">
+							<string key="name">popUpTimeStyleButton</string>
+							<string key="candidateClassName">NSPopUpButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="profileDateField">
+							<string key="name">profileDateField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="quotationPreferenceView">
+							<string key="name">quotationPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="readUserName">
+							<string key="name">readUserName</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="speechPreferenceView">
+							<string key="name">speechPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="temperaturePopUp">
+							<string key="name">temperaturePopUp</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="timeAndDatePreferenceView">
+							<string key="name">timeAndDatePreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="updateDateField">
+							<string key="name">updateDateField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="updatePreferenceView">
+							<string key="name">updatePreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="weatherPreferenceView">
+							<string key="name">weatherPreferenceView</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PreferencesController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SUUpdater</string>
+					<string key="superclassName">NSObject</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">checkForUpdates:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">checkForUpdates:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">checkForUpdates:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">delegate</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">delegate</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">delegate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SUUpdater.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
