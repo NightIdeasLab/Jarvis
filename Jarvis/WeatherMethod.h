@@ -11,6 +11,7 @@
 @interface WeatherMethod : NSObject
 
 
-- (NSString *) retrieveWeather;
+//- (NSString *) retrieveWeather;
+-(NSDictionary *) retrieveWeather;
 
 @end

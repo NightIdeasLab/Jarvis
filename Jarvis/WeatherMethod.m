@@ -11,8 +11,8 @@
 
 @implementation WeatherMethod
 
-- (NSString *) retrieveWeather {
-
+//- (NSString *) retrieveWeather {
+-(NSDictionary *) retrieveWeather {
 	// reading from the plist file
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
@@ -25,6 +25,7 @@
 	NSString *weatherContent = @"";
 	NSString *woeidCodeWeather = [defaults stringForKey: @"woeidCode"];
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
+	NSString *weatherImage = @"";
 	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 	
 	if(woeidCodeWeather != nil) {
@@ -33,6 +34,9 @@
 		{
 			if ([[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] count]>1)
 			{
+				weatherImage = [[weatherContent componentsSeparatedByString:@"<img src=\""] objectAtIndex:1];
+				weatherImage = [[weatherImage componentsSeparatedByString:@"\"/><br />"] objectAtIndex:0];
+	
 				cityName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
 				cityName = [[cityName componentsSeparatedByString:@","] objectAtIndex:0];
                 stateName = [[weatherContent componentsSeparatedByString:@"region=\""] objectAtIndex:1];
@@ -87,9 +91,10 @@
 		outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"\nPlease setup the weather!!!\n", @"")];
 	}
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-	
-    //[outputWeatherText autorelease];
-    return outputWeatherText;
+
+	return [[NSDictionary alloc] initWithObjectsAndKeys:outputWeatherText, @"outputWeatherText", weatherImage, @"weatherImage", nil];
+
+    //return outputWeatherText;
 }
 
 /* OLD CODE FOR THE WEATHER

@@ -21,6 +21,7 @@ NSSpeechSynthesizer *synth;
 
 @synthesize preferencesController = _preferencesController;
 @synthesize changeLogController = _changeLogController;
+@synthesize weatherImage;
 
 - (NSWindow *) windowLM {
     // returns the main window
@@ -302,31 +303,30 @@ NSSpeechSynthesizer *synth;
     TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
     
     outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
-    
-    //[timeAndDate release];
-	
+
     CalendarMethod *calendar = [[CalendarMethod alloc] init];
     
    	outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
     outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
     
-    //[calendar release];
-    
 #if !SLOW_INTERNET
     
     WeatherMethod *weather = [[WeatherMethod alloc] init];
-    
-    outputText = [outputText stringByAppendingString:[weather retrieveWeather]];
-    
-    //[weather release];
-    
+
+	NSDictionary *result = [weather retrieveWeather];
+
+    outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
+
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
+	NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+	NSImage *tempImage = [[NSImage alloc] initWithData:data];
+	[weatherImage setImage:tempImage];
+
 #endif
-    
+
     EmailMethod *email = [[EmailMethod alloc] init];
     
     outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-    
-    //[email release];
     
 #if !SLOW_INTERNET
     
@@ -337,8 +337,6 @@ NSSpeechSynthesizer *synth;
     
     // Daily Quote
     outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
-    
-    //[newsAndQuote release];
     
 #endif
     

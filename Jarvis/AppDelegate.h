@@ -41,6 +41,7 @@
 
 @property (nonatomic, strong) PreferencesController *preferencesController;
 @property (nonatomic, strong) ChangeLogController *changeLogController;
+@property (unsafe_unretained) IBOutlet NSImageView *weatherImage;
 
 - (NSWindow *)windowLM;
 
