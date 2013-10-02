@@ -21,7 +21,7 @@ For the moment the application can do:
 * News headlines (from NYTimes)
 * Daily quotations (from BrainyQuote.com)
 
-Minimum Mac OS X version is 10.5 Leopard
+Minimum Mac OS X version is 10.6 Snow Leopard
 
 The original code was written by [physicistjedi](http://goo.gl/MSthr).
 
