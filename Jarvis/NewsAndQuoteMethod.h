@@ -14,4 +14,8 @@
 
 - (NSString *) retrieveDailyQuote;
 
+- (NSString *) getNYTimes;
+
+- (NSString *) getDailyQuote;
+
 @end

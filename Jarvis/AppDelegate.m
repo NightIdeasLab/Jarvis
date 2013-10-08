@@ -303,30 +303,32 @@ NSSpeechSynthesizer *synth;
     TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
     
     outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
-
+    
+#if !SLOW_INTERNET
+    
+    WeatherMethod *weather = [[WeatherMethod alloc] init];
+    
+	NSDictionary *result = [weather retrieveWeather];
+    
+    outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
+    
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
+	NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+	NSImage *tempImage = [[NSImage alloc] initWithData:data];
+	[weatherImage setImage:tempImage];
+    
+#endif
+    
+    EmailMethod *email = [[EmailMethod alloc] init];
+    
+    outputText = [outputText stringByAppendingString:[email retrieveEmail]];
+    
+    
     CalendarMethod *calendar = [[CalendarMethod alloc] init];
     
    	outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
     outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
     
-#if !SLOW_INTERNET
-    
-    WeatherMethod *weather = [[WeatherMethod alloc] init];
-
-	NSDictionary *result = [weather retrieveWeather];
-
-    outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
-
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
-	NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-	NSImage *tempImage = [[NSImage alloc] initWithData:data];
-	[weatherImage setImage:tempImage];
-
-#endif
-
-    EmailMethod *email = [[EmailMethod alloc] init];
-    
-    outputText = [outputText stringByAppendingString:[email retrieveEmail]];
     
 #if !SLOW_INTERNET
     
@@ -350,11 +352,12 @@ NSSpeechSynthesizer *synth;
     //Output
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:outputText];
-
+    
 	if (speak) {
 		[synth startSpeakingString:outputText];	//for speaking the text
 	}
-
+    
 }
+
 
 @end

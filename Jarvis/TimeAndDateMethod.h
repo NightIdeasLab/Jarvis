@@ -11,5 +11,6 @@
 @interface TimeAndDateMethod : NSObject
 
 - (NSString *) retrieveTimeAndDate;
+- (NSString *) getTimeAndDate;
 
 @end

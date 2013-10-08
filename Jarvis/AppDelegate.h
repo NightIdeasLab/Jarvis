@@ -28,6 +28,7 @@
 #import "NewsAndQuoteMethod.h"
 #import "TimeAndDateMethod.h"
 #import "WeatherMethod.h"
+#import "InitialGreetingView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {

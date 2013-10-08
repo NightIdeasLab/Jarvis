@@ -14,5 +14,6 @@
 @interface EmailMethod : NSObject
 
 - (NSString *) retrieveEmail;
+- (NSString *) getEmail;
 
 @end

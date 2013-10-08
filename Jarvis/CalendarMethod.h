@@ -14,4 +14,7 @@
 - (NSString *) retrieveiCalEvents;
 - (NSString *) retrieveReminders;
 
+- (NSString *) getiCalEvents;
+- (NSString *) getReminders;
+
 @end

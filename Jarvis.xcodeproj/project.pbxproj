@@ -59,6 +59,7 @@
 		00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F017934622001E1F98 /* ChangeLogController.xib */; };
 		00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F31793463C001E1F98 /* PreferencesController.xib */; };
 		00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F6E1F617934649001E1F98 /* JRFeedbackProvider.xib */; };
+		8AF5D3D91803B67B00CA2AB2 /* InitialGreetingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF5D3D81803B67B00CA2AB2 /* InitialGreetingView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -146,6 +147,8 @@
 		00F6E1EF17934622001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ChangeLogController.xib; sourceTree = "<group>"; };
 		00F6E1F21793463C001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PreferencesController.xib; sourceTree = "<group>"; };
 		00F6E1F517934649001E1F98 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JRFeedbackProvider.xib; sourceTree = "<group>"; };
+		8AF5D3D71803B67B00CA2AB2 /* InitialGreetingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialGreetingView.h; sourceTree = "<group>"; };
+		8AF5D3D81803B67B00CA2AB2 /* InitialGreetingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialGreetingView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +361,8 @@
 				0048C869179190AA00B7C2A3 /* PackageTrackerMethod.m */,
 				0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */,
 				0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */,
+				8AF5D3D71803B67B00CA2AB2 /* InitialGreetingView.h */,
+				8AF5D3D81803B67B00CA2AB2 /* InitialGreetingView.m */,
 			);
 			name = "Utility Classes";
 			sourceTree = "<group>";
@@ -479,6 +484,7 @@
 				0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */,
 				0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */,
 				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
+				8AF5D3D91803B67B00CA2AB2 /* InitialGreetingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

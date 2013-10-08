@@ -12,6 +12,6 @@
 
 
 //- (NSString *) retrieveWeather;
--(NSDictionary *) retrieveWeather;
-
+- (NSDictionary *) retrieveWeather;
+- (NSDictionary *) getWeather;
 @end
