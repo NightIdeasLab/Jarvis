@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		003EBB751794A48A004C2A89 /* googleMaps.html in Resources */ = {isa = PBXBuildFile; fileRef = 003EBB741794A48A004C2A89 /* googleMaps.html */; };
+		00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 00485F7A188ADA2400EA4CC3 /* Name.pdf */; };
 		0048C85E1791782D00B7C2A3 /* WeatherMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C85D1791782D00B7C2A3 /* WeatherMethod.m */; };
 		0048C86117917BBB00B7C2A3 /* CalendarMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86017917BBB00B7C2A3 /* CalendarMethod.m */; };
 		0048C8641791853B00B7C2A3 /* TimeAndDateMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C8631791853B00B7C2A3 /* TimeAndDateMethod.m */; };
@@ -16,6 +17,10 @@
 		0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */; };
 		005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
+		006537C118917049005648C0 /* AboutContent.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 006537C018917049005648C0 /* AboutContent.rtf */; };
+		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
+		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
+		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
@@ -77,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		003EBB741794A48A004C2A89 /* googleMaps.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = googleMaps.html; path = Jarvis/googleMaps.html; sourceTree = "<group>"; };
+		00485F7A188ADA2400EA4CC3 /* Name.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Name.pdf; sourceTree = "<group>"; };
 		0048C85C1791782D00B7C2A3 /* WeatherMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMethod.h; sourceTree = "<group>"; };
 		0048C85D1791782D00B7C2A3 /* WeatherMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherMethod.m; sourceTree = "<group>"; };
 		0048C85F17917BBB00B7C2A3 /* CalendarMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarMethod.h; sourceTree = "<group>"; };
@@ -90,6 +96,12 @@
 		0048C86B1791925C00B7C2A3 /* NewsAndQuoteMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsAndQuoteMethod.h; sourceTree = "<group>"; };
 		0048C86C1791925C00B7C2A3 /* NewsAndQuoteMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsAndQuoteMethod.m; sourceTree = "<group>"; };
 		005491AD176A0590008A191D /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Frameworks/Sparkle.framework; sourceTree = "<group>"; };
+		006537C018917049005648C0 /* AboutContent.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = AboutContent.rtf; sourceTree = "<group>"; };
+		006537C218917067005648C0 /* AboutPanel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutPanel.xib; sourceTree = "<group>"; };
+		006537C318917067005648C0 /* AboutPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPanelController.h; sourceTree = "<group>"; };
+		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
+		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
+		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
@@ -189,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				0094D43B176A27340052079F /* Service Icons */,
+				00485F7A188ADA2400EA4CC3 /* Name.pdf */,
 				0094D437176A27340052079F /* PrefGeneral.png */,
 				0094D438176A27340052079F /* PrefGeneral@2x.png */,
 				0094D439176A27340052079F /* PrefUpdate.png */,
@@ -215,6 +228,8 @@
 		00A04B9E176A15B500A3F3CE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				006537C618917067005648C0 /* NSFancyPanel.h */,
+				006537C718917067005648C0 /* NSFancyPanel.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -279,6 +294,10 @@
 				008541B117925BEF0005A433 /* ChangeLogController.h */,
 				008541B217925BEF0005A433 /* ChangeLogController.m */,
 				00F6E1F017934622001E1F98 /* ChangeLogController.xib */,
+				006537C218917067005648C0 /* AboutPanel.xib */,
+				006537C318917067005648C0 /* AboutPanelController.h */,
+				006537C418917067005648C0 /* AboutPanelController.m */,
+				006537C018917049005648C0 /* AboutContent.rtf */,
 				00CF29B017934BCF008A5EBD /* Utility Classes */,
 				0010FA2C1769FC4200FB4265 /* Preferences */,
 				00CD557E176B9BC60057FC4A /* ThirdParty */,
@@ -440,6 +459,9 @@
 				00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */,
 				00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */,
 				003EBB751794A48A004C2A89 /* googleMaps.html in Resources */,
+				00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */,
+				006537C118917049005648C0 /* AboutContent.rtf in Resources */,
+				006537C818917067005648C0 /* AboutPanel.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +501,8 @@
 				0048C86A179190AA00B7C2A3 /* PackageTrackerMethod.m in Sources */,
 				0048C86D1791925D00B7C2A3 /* NewsAndQuoteMethod.m in Sources */,
 				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
+				006537C918917067005648C0 /* AboutPanelController.m in Sources */,
+				006537CB18917067005648C0 /* NSFancyPanel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

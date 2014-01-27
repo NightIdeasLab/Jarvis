@@ -28,6 +28,7 @@ NSSpeechSynthesizer *synth;
 	return windowLM;
 }
 
+
 + (void) initialize {
     //make sure another Jarvis.app isn't running already
     NSArray * apps = [NSRunningApplication runningApplicationsWithBundleIdentifier: [[NSBundle mainBundle] bundleIdentifier]];
@@ -226,6 +227,15 @@ NSSpeechSynthesizer *synth;
     return menu;
 }
 
+- (IBAction)openAboutPanel:(id)sender {
+    //	Hide the scroller, in case they’re previously shown it.
+    //	In a real application, you wouldn’t need to do this.
+    [[AboutPanelController sharedInstance] setShowsScroller: NO];
+    
+    //	Show the panel
+    [[AboutPanelController sharedInstance] showPanel];
+}
+
 - (IBAction) openPreferences: (id) sender {
     // instantiate preferences window controller
     if (_preferencesController) {
@@ -348,6 +358,7 @@ NSSpeechSynthesizer *synth;
 	[window setFloatingPanel:NO];
     
     //Output
+    [outText setFont:[NSFont fontWithName:@"HelveticaNeue-Light" size:12]];
 	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
 	[outText setString:outputText];
 
