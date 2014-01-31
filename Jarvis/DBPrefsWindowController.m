@@ -30,7 +30,6 @@
    return @"Preferences";
 }
 
-
 #pragma mark -
 #pragma mark Setup & Teardown
 
@@ -71,7 +70,6 @@
     [[[self window] contentView] addSubview:self.contentSubview];
     [[self window] setShowsToolbarButton:NO];
 }
-
 
 #pragma mark -
 #pragma mark Configuration
@@ -117,7 +115,6 @@
                              selector:@selector(toggleActivePreferenceView:)];
 }
 
-
 #pragma mark -
 #pragma mark Overriding Methods
 
@@ -153,7 +150,6 @@
 
     [super showWindow:sender];
 }
-
 
 #pragma mark -
 #pragma mark Toolbar
@@ -223,7 +219,6 @@
     [[[self window] toolbar] setSelectedItemIdentifier:identifier];
     [self displayViewForIdentifier:identifier animate:animate];
 }
-
 
 #pragma mark -
 #pragma mark Cross-Fading Methods
