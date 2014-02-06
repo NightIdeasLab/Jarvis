@@ -38,6 +38,8 @@
 //	Stop scrolling and hide the panel.
 - (void)hidePanel;
 
+- (IBAction)closePanel:(id)sender;
+
 //	This method exists only because this is a developer example.
 //	You wouldn’t want it in a real application.
 - (void)setShowsScroller:(BOOL)newSetting;

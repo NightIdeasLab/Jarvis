@@ -1,7 +1,7 @@
 #import "AboutPanelController.h"
 
 //	Another approach would be to allow changing these through NSUserDefaults
-#define	SCROLL_DELAY_SECONDS	0.03	// time between animation frames
+#define	SCROLL_DELAY_SECONDS	0.1	// time between animation frames
 #define SCROLL_AMOUNT_PIXELS	1.00	// amount to scroll in each animation frame
 
 //	We pad this many blank lines at the end of the text, so the visible part
@@ -144,6 +144,11 @@
     // is hidden).
     //
     [[textScrollView documentView] scrollPoint:NSMakePoint(0.0, newAmount)];
+    
+    // to know how may lines are in the document
+    //NSLog(@"lines: %f", newAmount);
+    
+    if (newAmount == 204) {[self stopScrollingAnimation];};
 
     // If anything overlaps the text we just scrolled, it won’t get redraw by the
     // scrolling, so force everything in that part of the panel to redraw.
@@ -231,6 +236,13 @@
 {
     [self stopScrollingAnimation];
 
+    [panelToDisplay orderOut: nil];
+}
+
+- (IBAction)closePanel:(id)sender
+{
+    [self stopScrollingAnimation];
+    
     [panelToDisplay orderOut: nil];
 }
 
