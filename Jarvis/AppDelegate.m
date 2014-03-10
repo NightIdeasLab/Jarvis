@@ -363,7 +363,7 @@ NSSpeechSynthesizer *synth;
 	[outText setString:outputText];
 
 	if (speak) {
-		[synth startSpeakingString:outputText];	//for speaking the text
+		//[synth startSpeakingString:outputText];	//for speaking the text
 	}
 
 }

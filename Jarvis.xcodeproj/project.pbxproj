@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003EBB751794A48A004C2A89 /* googleMaps.html in Resources */ = {isa = PBXBuildFile; fileRef = 003EBB741794A48A004C2A89 /* googleMaps.html */; };
 		00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 00485F7A188ADA2400EA4CC3 /* Name.pdf */; };
 		0048C85E1791782D00B7C2A3 /* WeatherMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C85D1791782D00B7C2A3 /* WeatherMethod.m */; };
 		0048C86117917BBB00B7C2A3 /* CalendarMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0048C86017917BBB00B7C2A3 /* CalendarMethod.m */; };
@@ -21,6 +20,8 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
+		006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
+		006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
@@ -73,6 +74,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */,
 				005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -81,7 +83,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		003EBB741794A48A004C2A89 /* googleMaps.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = googleMaps.html; path = Jarvis/googleMaps.html; sourceTree = "<group>"; };
 		00485F7A188ADA2400EA4CC3 /* Name.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Name.pdf; sourceTree = "<group>"; };
 		0048C85C1791782D00B7C2A3 /* WeatherMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherMethod.h; sourceTree = "<group>"; };
 		0048C85D1791782D00B7C2A3 /* WeatherMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherMethod.m; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
+		006829C518CCC65B00113D48 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Frameworks/MapKit.framework; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				0094D44F176A27D10052079F /* CoreLocation.framework in Frameworks */,
 				0094D45B176A27FC0052079F /* CoreServices.framework in Frameworks */,
 				0094D459176A27F30052079F /* IOKit.framework in Frameworks */,
+				006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */,
 				0094D455176A27E70052079F /* Security.framework in Frameworks */,
 				0094D457176A27E70052079F /* SecurityInterface.framework in Frameworks */,
 				0094D456176A27E70052079F /* SecurityFoundation.framework in Frameworks */,
@@ -264,6 +267,7 @@
 				0094D44E176A27D10052079F /* CoreLocation.framework */,
 				0094D45A176A27FC0052079F /* CoreServices.framework */,
 				0094D458176A27F30052079F /* IOKit.framework */,
+				006829C518CCC65B00113D48 /* MapKit.framework */,
 				0094D452176A27E70052079F /* Security.framework */,
 				0094D453176A27E70052079F /* SecurityFoundation.framework */,
 				0094D454176A27E70052079F /* SecurityInterface.framework */,
@@ -328,7 +332,6 @@
 			children = (
 				00C7E6EB176B86C1008C2823 /* htdocs */,
 				00C7E6ED176B86FF008C2823 /* JarvisHelp */,
-				003EBB741794A48A004C2A89 /* googleMaps.html */,
 				00C7E6DF176B8592008C2823 /* dsa_pub.pem */,
 				00C7E6F0176B87FB008C2823 /* COPYING */,
 			);
@@ -458,7 +461,6 @@
 				00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */,
 				00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */,
 				00F6E1EE17934622001E1F98 /* ChangeLogController.xib in Resources */,
-				003EBB751794A48A004C2A89 /* googleMaps.html in Resources */,
 				00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */,
 				006537C118917049005648C0 /* AboutContent.rtf in Resources */,
 				006537C818917067005648C0 /* AboutPanel.xib in Resources */,
