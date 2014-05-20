@@ -36,6 +36,10 @@
 		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		 })();
+
+		 var pageURL = document.location.toString().toLowerCase();
+//		 var lastElement = parseInt(pageURL.length) - 1;
+		 console.log(pageURL);
     </script>
   </head>
 
@@ -94,7 +98,7 @@
 
          <!--Thank you
         ================================================== -->
-        <section id="thanks-you">
+        <section id="thanks-you" style="display:none;">
           <div class="page-header">
             <h1><small>Almost finished...</small></h1>
           </div>
@@ -105,6 +109,18 @@
 
         </section>
 
+		 <!--Thank you
+        ================================================== -->
+        <section id="thanks-you-confermed" style="display:none;">
+          <div class="page-header">
+            <h1><small>Subscription Confirmed</small></h1>
+          </div>
+
+		  <p>Your subscription to our list has been confirmed.</p>
+
+		  <p>Thank you for subscribing!</p>
+
+        </section>
 
       </div>
 
