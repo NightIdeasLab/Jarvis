@@ -38,8 +38,12 @@
 		 })();
 
 		 var pageURL = document.location.toString().toLowerCase();
-//		 var lastElement = parseInt(pageURL.length) - 1;
-		 console.log(pageURL);
+
+		 if (pageURL == 'http://nightideaslab.github.io/jarvis/thank_you.html') {
+			 document.getElementById('thanks-you').style.display = 'block'
+		 } else if (pageURL == 'http://nightideaslab.github.io/jarvis/thank_you.html#done') {
+			 document.getElementById('thanks-you-confermed').style.display = 'block'
+		 }
     </script>
   </head>
 
@@ -143,6 +147,16 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+     <script type="text/javascript">
+      	 var pageURL = document.location.toString().toLowerCase();
+
+		 if (pageURL == 'http://nightideaslab.github.io/jarvis/thank_you.html') {
+			 document.getElementById('thanks-you').style.display = 'block'
+		 } else if (pageURL == 'http://nightideaslab.github.io/jarvis/thank_you.html#done') {
+			 document.getElementById('thanks-you-confermed').style.display = 'block'
+		 }
+    </script>
+
     <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/bootstrap-transition.js"></script>
