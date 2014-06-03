@@ -7,6 +7,7 @@ Version 0.4.3
 - To add a photo that will show the exact weather (sunny=sun, rainy=cloud with drops) or extract it from yahoo weather
 - To add an experiment tab and add some experimental features
 - Weather forecast is not really that nice. Change it a bit!
+- feedback panel is not working.
 
 Version 0.4.4
 - To make a better rss feed reader and add even a refresh rate with growl notifications if the news change.
