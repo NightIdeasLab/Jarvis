@@ -13,7 +13,7 @@
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
-#define SLOW_INTERNET 1 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
+#define SLOW_INTERNET 0 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
 
 NSSpeechSynthesizer *synth;
 
