@@ -21,11 +21,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.2.2</string>
+	<string>0.4.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4B2A</string>
+	<string>4A3</string>
 	<key>JRFeedbackURL</key>
 	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
 	<key>LSApplicationCategoryType</key>
