@@ -49,7 +49,7 @@
 - (void) awakeFromNib {
 	// reading from the plist file
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+        
 	// retriving the last update date and
 	// last profile sent date from plist file
 	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
@@ -57,11 +57,13 @@
 
 	// retriving latidude and
 	// longitude from plist file
-	double latitude = [defaults doubleForKey:@"Latitude"];
-	double longitude = [defaults doubleForKey:@"Longitude"];
+	double latitude = [defaults doubleForKey:@"latitudeCode"];
+	double longitude = [defaults doubleForKey:@"longitudeCode"];
 
 	if ((latitude != 0) && (longitude != 0)) {
 		NSLog(@"latitude : %f", latitude);
+        
+        [mapWebView setShowsUserLocation: YES];
 	}
 	// checking and setting the last update date
 	// and last profile sent date into the interface
@@ -123,8 +125,7 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-	[locationManager stopUpdatingLocation];
-	//[locationManager release];
+	
 }
 
 #pragma mark -
@@ -205,9 +206,6 @@
 													  [NSString stringWithFormat:
 													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
 															NSUTF8StringEncoding error:nil];
-/*
-	NSLog(@"woeidcontent: %@", woeidContent);
-*/
 
 	if(woeidContent != nil) {
 		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
@@ -286,23 +284,25 @@
 
 -(void) updateMapWithLatitude: (double) latitude  AndLongitude: (double) longitude
 {
-// Load the HTML for displaying the Google map from a file and replace the
-// format placeholders with our location data
-NSString *htmlString = [NSString stringWithFormat:
-						[NSString
-						 stringWithContentsOfFile:
-						 [[NSBundle mainBundle]
-						  pathForResource:@"googleMaps" ofType:@"html"]
-						 encoding:NSUTF8StringEncoding
-						 error:NULL],
-						latitude,
-						longitude,
-						latitude,
-						longitude];
-
-
-// Load the HTML in the WebView and set the labels
-[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
+ 
+//    
+//// Load the HTML for displaying the Google map from a file and replace the
+//// format placeholders with our location data
+//NSString *htmlString = [NSString stringWithFormat:
+//						[NSString
+//						 stringWithContentsOfFile:
+//						 [[NSBundle mainBundle]
+//						  pathForResource:@"googleMaps" ofType:@"html"]
+//						 encoding:NSUTF8StringEncoding
+//						 error:NULL],
+//						latitude,
+//						longitude,
+//						latitude,
+//						longitude];
+//
+//
+//// Load the HTML in the WebView and set the labels
+//[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
 
 #ifdef DEBUG
 	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f", latitude, longitude]];
@@ -313,12 +313,12 @@ NSString *htmlString = [NSString stringWithFormat:
 - (void) locationManager:(CLLocationManager *)manager
 	   didFailWithError:(NSError *)error
 {
-	[[mapWebView mainFrame]
-	 loadHTMLString:
-	 [NSString stringWithFormat:
-	  NSLocalizedString(@"Location manager failed with error: %@", nil),
-	  [error localizedDescription]]
-	 baseURL:nil];
+//	[[mapWebView mainFrame]
+//	 loadHTMLString:
+//	 [NSString stringWithFormat:
+//	  NSLocalizedString(@"Location manager failed with error: %@", nil),
+//	  [error localizedDescription]]
+//	 baseURL:nil];
 	[locationLabel setStringValue:@""];
 }
 

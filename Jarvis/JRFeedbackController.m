@@ -1,9 +1,9 @@
 /*******************************************************************************
-    JRFeedbackController.m
-        Copyright (c) 2008-2009 Jonathan 'Wolf' Rentzsch: <http://rentzsch.com>
-        Some rights reserved: <http://opensource.org/licenses/mit-license.php>
-
-    ***************************************************************************/
+ JRFeedbackController.m
+ Copyright (c) 2008-2009 Jonathan 'Wolf' Rentzsch: <http://rentzsch.com>
+ Some rights reserved: <http://opensource.org/licenses/mit-license.php>
+ 
+ ***************************************************************************/
 
 #import "JRFeedbackController.h"
 #import <AddressBook/AddressBook.h>
@@ -12,7 +12,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 
 #if USE_GROWL
-	#import <Growl/GrowlApplicationBridge.h>
+#import <Growl/GrowlApplicationBridge.h>
 #endif
 
 JRFeedbackController *gFeedbackController = nil;
@@ -35,29 +35,29 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 
 + (void)showFeedbackWithBugDetails:(NSString *)details {
     SCNetworkConnectionFlags reachabilityFlags;
-    const char *hostname = [[[JRFeedbackController postURL] host] UTF8String];  
+    const char *hostname = [[[JRFeedbackController postURL] host] UTF8String];
 #ifdef MAC_OS_X_VERSION_10_6
     SCNetworkReachabilityRef reachability = SCNetworkReachabilityCreateWithName(NULL, hostname);
     Boolean reachabilityResult = SCNetworkReachabilityGetFlags(reachability, &reachabilityFlags);
     CFRelease(reachability);
-#else  
+#else
     Boolean reachabilityResult = SCNetworkCheckReachabilityByName(hostname, &reachabilityFlags);
 #endif
-  
-//    NSLog(@"reachabilityFlags: %lx", reachabilityFlags);
+    
+    //    NSLog(@"reachabilityFlags: %lx", reachabilityFlags);
     BOOL showFeedbackWindow = reachabilityResult
-        && (reachabilityFlags & kSCNetworkFlagsReachable)
-        && !(reachabilityFlags & kSCNetworkFlagsConnectionRequired)
-        && !(reachabilityFlags & kSCNetworkFlagsConnectionAutomatic)
-        && !(reachabilityFlags & kSCNetworkFlagsInterventionRequired);
+    && (reachabilityFlags & kSCNetworkFlagsReachable)
+    && !(reachabilityFlags & kSCNetworkFlagsConnectionRequired)
+    && !(reachabilityFlags & kSCNetworkFlagsConnectionAutomatic)
+    && !(reachabilityFlags & kSCNetworkFlagsInterventionRequired);
     
     if (!showFeedbackWindow) {
         NSInteger alertResult = [[NSAlert alertWithMessageText:NSLocalizedStringFromTable(@"Feedback Host Not Reachable", @"JRFeedbackProvider", nil)
-                                           defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
-                                         alternateButton:NSLocalizedStringFromTable(@"Cancel", @"JRFeedbackProvider", nil)
-                                             otherButton:nil
-                               informativeTextWithFormat:NSLocalizedStringFromTable(@"Unreachable Explanation", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
-                            ] runModal];
+                                                 defaultButton:NSLocalizedStringFromTable(@"Proceed Anyway", @"JRFeedbackProvider", nil)
+                                               alternateButton:NSLocalizedStringFromTable(@"Cancel", @"JRFeedbackProvider", nil)
+                                                   otherButton:nil
+                                     informativeTextWithFormat:NSLocalizedStringFromTable(@"Unreachable Explanation", @"JRFeedbackProvider", nil), [[JRFeedbackController postURL] host]
+                                  ] runModal];
         if (NSAlertDefaultReturn == alertResult) {
             showFeedbackWindow = YES;
         }
@@ -79,7 +79,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 - (id)init {
     self = [super initWithWindowNibName:@"JRFeedbackProvider"];
     if (self) {
-        //[self window];
+        [self window];
         includeContactInfo = YES;
     }
     return self;
@@ -101,17 +101,17 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
     NSString *separator = @"\n\n--\n\n";
     
     NSRange separatorRange = [[text string] rangeOfString:separator];
-    //sectionStrings[JRFeedbackController_BugReport] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
-
+    sectionStrings[JRFeedbackController_BugReport] = [text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)];
+    
     [text deleteCharactersInRange:NSMakeRange(0, separatorRange.location + [separator length])];
     //NSLog(@"bugReport: <%@>", [sectionStrings[JRFeedbackController_BugReport] string]);
     
     separatorRange = [[text string] rangeOfString:separator];
-    //sectionStrings[JRFeedbackController_FeatureRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)] retain];
+    sectionStrings[JRFeedbackController_FeatureRequest] = [text attributedSubstringFromRange:NSMakeRange(0, separatorRange.location)];
     [text deleteCharactersInRange:NSMakeRange(0, separatorRange.location + [separator length])];
     //NSLog(@"featureRequest: <%@>", [sectionStrings[JRFeedbackController_FeatureRequest] string]);
     
-    //sectionStrings[JRFeedbackController_SupportRequest] = [[text attributedSubstringFromRange:NSMakeRange(0, [text length])] retain];
+    sectionStrings[JRFeedbackController_SupportRequest] = [text attributedSubstringFromRange:NSMakeRange(0, [text length])];
     //NSLog(@"supportRequest: <%@>", [sectionStrings[JRFeedbackController_SupportRequest] string]);
     
     [text setAttributedString:sectionStrings[JRFeedbackController_BugReport]];
@@ -174,27 +174,30 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 }
 
 - (void)system_profilerThread:(id)ignored {
-//    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    NSString *systemProfile = nil;
-    {
-        NSPipe *inputPipe = [NSPipe pipe];
-        NSPipe *outputPipe = [NSPipe pipe];
+    @autoreleasepool {
         
-        NSTask *scriptTask = [[NSTask alloc] init];
-        [scriptTask setLaunchPath:@"/usr/sbin/system_profiler"];
-        [scriptTask setArguments:[NSArray arrayWithObjects:@"-detailLevel", @"mini", nil]];
-        [scriptTask setStandardOutput:outputPipe];
-        [scriptTask launch];
+        //    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         
-        [[inputPipe fileHandleForWriting] closeFile];
-        systemProfile = [[NSString alloc] initWithData:[[outputPipe fileHandleForReading] readDataToEndOfFile]
-                                               encoding:NSUTF8StringEncoding];
+        NSString *systemProfile = nil;
+        {
+            NSPipe *inputPipe = [NSPipe pipe];
+            NSPipe *outputPipe = [NSPipe pipe];
+            
+            NSTask *scriptTask = [[NSTask alloc] init];
+            [scriptTask setLaunchPath:@"/usr/sbin/system_profiler"];
+            [scriptTask setArguments:[NSArray arrayWithObjects:@"-detailLevel", @"mini", nil]];
+            [scriptTask setStandardOutput:outputPipe];
+            [scriptTask launch];
+            
+            [[inputPipe fileHandleForWriting] closeFile];
+            systemProfile = [[NSString alloc] initWithData:[[outputPipe fileHandleForReading] readDataToEndOfFile]
+                                                  encoding:NSUTF8StringEncoding];
+        }
+        [self performSelectorOnMainThread:@selector(postFeedback:)
+                               withObject:systemProfile
+                            waitUntilDone:NO];
     }
-    [self performSelectorOnMainThread:@selector(postFeedback:)
-                           withObject:systemProfile
-                        waitUntilDone:NO];
-  //  [pool drain];
+    //  [pool drain];
 }
 
 - (void)postFeedback:(NSString*)systemProfile {
@@ -259,8 +262,8 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[self closeFeedback];//moved from connectionDidFinishLoading:
 }
 
-- (void)displayAlertMessage:(NSString *)message 
-		withInformativeText:(NSString *)text 
+- (void)displayAlertMessage:(NSString *)message
+		withInformativeText:(NSString *)text
 			  andAlertStyle:(NSAlertStyle)alertStyle
 {
 	NSAlert *thankYouAlert = [[NSAlert alloc] init];
@@ -269,13 +272,13 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[thankYouAlert setInformativeText:text];
 	[thankYouAlert setAlertStyle:alertStyle];
 	
-	//	stop the animation of the progress indicator, so user doesn't think 
+	//	stop the animation of the progress indicator, so user doesn't think
 	//	something is still going on
 	[progress stopAnimation:self];
 	
 	//	disply thank you
     [thankYouAlert beginSheetModalForWindow:[gFeedbackController window]
-							  modalDelegate:self 
+							  modalDelegate:self
 							 didEndSelector:@selector(alertDidEnd:returnCode:contextInfo:)
 								contextInfo:nil];
 }
@@ -287,7 +290,7 @@ NSString *JRFeedbackType[JRFeedbackController_SectionCount] = {
 	[self displayAlertMessage:@"An Error Occured"
 		  withInformativeText:@"There was a problem sending your feedback.  Please try again at another time"
 				andAlertStyle:NSInformationalAlertStyle];
-
+    
 }
 
 - (void)windowWillClose:(NSNotification*)notification {
