@@ -308,6 +308,7 @@ NSSpeechSynthesizer *synth;
 
 - (void) jarvis: (BOOL) speak {
     @autoreleasepool {
+        
         NSString *outputText = [[NSString alloc] init];
         
         TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
@@ -363,7 +364,7 @@ NSSpeechSynthesizer *synth;
         [outText setString:outputText];
 
         if (speak) {
-            [synth startSpeakingString:outputText];	//for speaking the text
+           // [synth startSpeakingString:outputText];	//for speaking the text
         }
     }
 }

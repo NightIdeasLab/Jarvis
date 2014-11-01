@@ -57,6 +57,7 @@
 		00C7E6EC176B86C1008C2823 /* htdocs in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6EB176B86C1008C2823 /* htdocs */; };
 		00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6ED176B86FF008C2823 /* JarvisHelp */; };
 		00C7E6F1176B87FB008C2823 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6F0176B87FB008C2823 /* COPYING */; };
+		00D54DC61A03B3FF00448DD3 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */; };
 		00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C7671790704500246636 /* DBPrefsWindowController.m */; };
 		00E2C76D1790704500246636 /* Preference pane.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C7681790704500246636 /* Preference pane.rtf */; };
 		00E2C76E1790704500246636 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C76A1790704500246636 /* PreferencesController.m */; };
@@ -148,6 +149,7 @@
 		00C7E6EB176B86C1008C2823 /* htdocs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = htdocs; path = Jarvis/htdocs; sourceTree = "<group>"; };
 		00C7E6ED176B86FF008C2823 /* JarvisHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JarvisHelp; sourceTree = "<group>"; };
 		00C7E6F0176B87FB008C2823 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = Jarvis/COPYING; sourceTree = "<group>"; };
+		00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		00E2C7661790704500246636 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		00E2C7671790704500246636 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		00E2C7681790704500246636 /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Preference pane.rtf"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00D54DC61A03B3FF00448DD3 /* ApplicationServices.framework in Frameworks */,
 				0094D451176A27D80052079F /* AddressBook.framework in Frameworks */,
 				0094D45D176A28050052079F /* CalendarStore.framework in Frameworks */,
 				00AF0DDD1769FBBC00C00AE3 /* Cocoa.framework in Frameworks */,
@@ -260,6 +263,7 @@
 		00AF0DDB1769FBBC00C00AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */,
 				0094D450176A27D80052079F /* AddressBook.framework */,
 				0094D45C176A28050052079F /* CalendarStore.framework */,
 				00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */,
