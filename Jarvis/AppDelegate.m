@@ -13,7 +13,7 @@
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
-#define SLOW_INTERNET 0 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
+#define SLOW_INTERNET 0 // 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
 
 NSSpeechSynthesizer *synth;
 
@@ -87,7 +87,7 @@ NSSpeechSynthesizer *synth;
         [NSApp setDelegate: self];
         
         // initializing the update system
-        [[SUUpdater sharedUpdater] setDelegate: self]; // FIXME: trows a c++ exception
+        [[SUUpdater sharedUpdater] setDelegate: self];
     }
     return self;
 }
@@ -137,7 +137,7 @@ NSSpeechSynthesizer *synth;
 #endif
     
     // allocationg the SpeechSyntesizer
-	synth = [[NSSpeechSynthesizer alloc] init]; // FIXME: trows a c++ exception
+	synth = [[NSSpeechSynthesizer alloc] init];
 	[self jarvis:YES];
 }
 
@@ -200,7 +200,6 @@ NSSpeechSynthesizer *synth;
             if (allowNeverAgain)
                 [fDefaults setBool: ([[alert suppressionButton] state] != NSOnState) forKey: @"WarningDonate"];
             
-            //[alert release];
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
@@ -240,8 +239,7 @@ NSSpeechSynthesizer *synth;
     if (_preferencesController) {
         //[_preferencesController release];
         _preferencesController = nil;
-    }
-    
+    }    
     // init from nib but the real initialization happens in the
     // PreferencesWindowController setupToolbar method
     _preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
@@ -265,7 +263,6 @@ NSSpeechSynthesizer *synth;
 - (IBAction) openChangeLog: (id) sender {
     
     if (_changeLogController) {
-        //[_changeLogController release];
         _changeLogController = nil;
     }
     _changeLogController = [[ChangeLogController alloc] initWithWindowNibName:@"ChangeLogController"];
@@ -321,7 +318,6 @@ NSSpeechSynthesizer *synth;
         outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
         
     #if !SLOW_INTERNET
-        
         WeatherMethod *weather = [[WeatherMethod alloc] init];
 
         NSDictionary *result = [weather retrieveWeather];
@@ -332,15 +328,11 @@ NSSpeechSynthesizer *synth;
         NSData *data = [[NSData alloc] initWithContentsOfURL:url];
         NSImage *tempImage = [[NSImage alloc] initWithData:data];
         [weatherImage setImage:tempImage];
-
     #endif
-
         EmailMethod *email = [[EmailMethod alloc] init];
         
         outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-        
     #if !SLOW_INTERNET
-        
         NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
         
         // NYTimes
@@ -348,9 +340,7 @@ NSSpeechSynthesizer *synth;
         
         // Daily Quote
         outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
-        
     #endif
-        
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
         // If set to YES then the mainwindow will
@@ -368,5 +358,4 @@ NSSpeechSynthesizer *synth;
         }
     }
 }
-
 @end

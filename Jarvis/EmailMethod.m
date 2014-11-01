@@ -87,10 +87,10 @@
                 if (mailCount==1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them is from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
                 else if (mailCount>1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them are from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
             }
-            return outputEmailText;
         }
     } else {
-        return outputEmailText = [outputEmailText stringByAppendingString:NSLocalizedString(@"\nPlease setup the mail!!!\n", @"")];
+        outputEmailText = [outputEmailText stringByAppendingString:NSLocalizedString(@"\nPlease setup the mail!!!\n", @"")];
     }
+    return outputEmailText;
 }
 @end

@@ -14,7 +14,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // Time and date
-    NSString *outputTimeAndDateText = [[NSString alloc] init]; // FIXME: i never read this var ??
+    NSString *outputTimeAndDateText = [[NSString alloc] init];
     NSCalendarDate *date = [NSCalendarDate calendarDate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSString *userNameChoise = [defaults stringForKey: @"UserName"];
@@ -45,7 +45,6 @@
 		[dateFormatter setDateFormat:@"h:mm a"];  // am/pm style
 	}
 	
-
 	outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString: NSLocalizedString(@"The current time is ", @"Declares the time. Ex. It is 19:30")];
 
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:[dateFormatter stringFromDate:[NSDate date]]];
@@ -59,8 +58,6 @@
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:[NSString stringWithFormat:@" %ld", [date dayOfMonth]]];
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:@".\n\n"];
     
-    
     return outputTimeAndDateText;
-    
 }
 @end
