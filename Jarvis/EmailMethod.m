@@ -43,11 +43,10 @@
     NSArray *mailPrefsAppleScript = (__bridge NSArray *)CFPreferencesCopyValue((CFStringRef)@"MailSections", (CFStringRef)@"com.apple.mail", kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
     
     NSLog(@"APPLE PrefsAppleScript: %@", mailPrefsAppleScript);
-    
+    NSString *outputEmailText = [[NSString alloc] init];    
     if(smtpList != NULL){
             
         //Unread email count
-        NSString *outputEmailText = [[NSString alloc] init];    
         NSDictionary* errorDict;
         NSAppleEventDescriptor* returnDescriptor = NULL;
         NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:
@@ -90,6 +89,8 @@
             }
             return outputEmailText;
         }
+    } else {
+        return outputEmailText = [outputEmailText stringByAppendingString:NSLocalizedString(@"\nPlease setup the mail!!!\n", @"")];
     }
 }
 @end
