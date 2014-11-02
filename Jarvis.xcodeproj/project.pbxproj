@@ -631,6 +631,7 @@
 				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -649,6 +650,7 @@
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
