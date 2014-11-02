@@ -43,6 +43,12 @@
 @synthesize popUpTemperatureButton;
 @synthesize forecastButton;
 
+// Service button
+@synthesize iCalButton;
+@synthesize weatherButton;
+@synthesize mailButton;
+@synthesize newsButton;
+
 #pragma mark -
 #pragma mark Class Methods
 
@@ -60,6 +66,11 @@
 	double latitude = [defaults doubleForKey:@"latitudeCode"];
 	double longitude = [defaults doubleForKey:@"longitudeCode"];
 
+    BOOL useCal = [defaults boolForKey:@"UseCal"];
+    BOOL useWeather = [defaults boolForKey:@"UseWeather"];
+    BOOL useMail = [defaults boolForKey:@"UseMail"];
+    BOOL useNewsQuotes = [defaults boolForKey:@"UseNewsQuotes"];
+    
 	if ((latitude != 0) && (longitude != 0)) {
 		NSLog(@"latitude : %f", latitude);
         
@@ -120,6 +131,28 @@
 		[readUserName setState:0];
 		[self changeStateOfName:self];
 	}
+    
+    if (useCal == YES) {
+        [iCalButton setState:1];
+    } else {
+        [iCalButton setState:0];
+    }
+    if (useWeather == YES) {
+        [weatherButton setState:1];
+    } else {
+        [weatherButton setState:0];
+    }
+    if (useMail == YES) {
+        [mailButton setState:1];
+    } else {
+        [mailButton setState:0];
+        // TODO disable even the vips emails
+    }
+    if (useNewsQuotes == YES) {
+        [newsButton setState:1];
+    } else {
+        [newsButton setState:0];
+    }
 	
 }
 
@@ -134,11 +167,13 @@
 - (void)setupToolbar{
 	[self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title")
 			image: [NSImage imageNamed:@"PrefGeneral"]];
+    [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title")
+			image: [NSImage imageNamed:@"PrefAccount"]];
 	[self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
 			image: [NSImage imageNamed:@"PrefWeather"]];
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
 			image: [NSImage imageNamed:@"PrefUpdate"]];
-
+    
 	//[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
 
 	//[self addFlexibleSpacer]; //added a space between the icons
@@ -372,8 +407,8 @@
 		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
 			[defaults setObject:@"None" forKey: @"UserName"];
 		}
-
     }
+    [defaults synchronize];
 }
 
 - (IBAction)readUserName:(NSButton *)sender {
@@ -391,7 +426,7 @@
 	} else if (indexOfPopUp == 2) {
 		[customName setEnabled:YES];
 	}
-	
+    [defaults synchronize];
 }
 
 - (IBAction)readCustomName:(id)sender {
@@ -402,6 +437,7 @@
 	if ([customNameText length] >0) {
 		[defaults setObject:customNameText forKey: @"UserName"];
 	}
+    [defaults synchronize];
 }
 
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
@@ -413,6 +449,7 @@
 	} else if (indexOfTemperaturePopUp == 1 ) {
 		[defaults setObject:@"f" forKey: @"TemperatureStyle"];
 	}
+    [defaults synchronize];
 }
 
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
@@ -424,6 +461,7 @@
 	} else if (indexOfTimePopUp == 1 ) {
 		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
 	}
+    [defaults synchronize];
 }
 
 - (IBAction)forecastYesOrNo:(id)sender {
@@ -434,8 +472,37 @@
 	} else {
 		[defaults setBool:NO forKey: @"ForecastWeather"];
 	}
-	
+	[defaults synchronize];
 }
 
-
+- (IBAction)changeStateServices:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([sender tag] == 1) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseCal"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseCal"];
+        }
+    } else if ([sender tag] == 2) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseWeather"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseWeather"];
+        }
+    } else if ([sender tag] == 3) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseMail"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseMail"];
+        }
+    } else if ([sender tag] == 4) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseNewsQuotes"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseNewsQuotes"];
+        }
+    }
+    
+    [defaults synchronize];
+}
 @end

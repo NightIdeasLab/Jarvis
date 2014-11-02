@@ -53,6 +53,10 @@
 
 @property (assign) IBOutlet NSButton *automaticLocationCheckBox;
 @property (unsafe_unretained) IBOutlet NSButton *forecastButton;
+@property (unsafe_unretained) IBOutlet NSButton *iCalButton;
+@property (unsafe_unretained) IBOutlet NSButton *weatherButton;
+@property (unsafe_unretained) IBOutlet NSButton *mailButton;
+@property (unsafe_unretained) IBOutlet NSButton *newsButton;
 
 // General
 - (IBAction)changeStateOfName:(id)sender;
@@ -75,5 +79,7 @@
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
 
 - (IBAction)forecastYesOrNo:(id)sender;
+
+- (IBAction)changeStateServices:(id)sender;
 
 @end

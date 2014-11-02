@@ -22,6 +22,8 @@
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
 		006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
+		007A32071A06D803007AA895 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32051A06D803007AA895 /* PrefAccount.png */; };
+		007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32061A06D803007AA895 /* PrefAccount@2x.png */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
@@ -105,6 +107,8 @@
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
 		006829C518CCC65B00113D48 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Frameworks/MapKit.framework; sourceTree = "<group>"; };
+		007A32051A06D803007AA895 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefAccount.png; sourceTree = "<group>"; };
+		007A32061A06D803007AA895 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefAccount@2x.png"; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
@@ -210,10 +214,12 @@
 				00485F7A188ADA2400EA4CC3 /* Name.pdf */,
 				0094D437176A27340052079F /* PrefGeneral.png */,
 				0094D438176A27340052079F /* PrefGeneral@2x.png */,
-				0094D439176A27340052079F /* PrefUpdate.png */,
-				0094D43A176A27340052079F /* PrefUpdate@2x.png */,
+				007A32051A06D803007AA895 /* PrefAccount.png */,
+				007A32061A06D803007AA895 /* PrefAccount@2x.png */,
 				00BD8A14178F37750042CCA5 /* PrefWeather.png */,
 				00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */,
+				0094D439176A27340052079F /* PrefUpdate.png */,
+				0094D43A176A27340052079F /* PrefUpdate@2x.png */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -468,6 +474,8 @@
 				00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */,
 				006537C118917049005648C0 /* AboutContent.rtf in Resources */,
 				006537C818917067005648C0 /* AboutPanel.xib in Resources */,
+				007A32071A06D803007AA895 /* PrefAccount.png in Resources */,
+				007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

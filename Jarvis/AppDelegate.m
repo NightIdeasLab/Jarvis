@@ -13,7 +13,7 @@
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
-#define SLOW_INTERNET 1 // 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
+#define SLOW_INTERNET 0 // 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
 
 NSSpeechSynthesizer *synth;
 
@@ -81,7 +81,22 @@ NSSpeechSynthesizer *synth;
 												forKeyPath:@"ForecastWeather" options:( NSKeyValueObservingOptionOld |
 																				 NSKeyValueObservingOptionNew )
 												   context:NULL];
-
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"UseCal" options:( NSKeyValueObservingOptionOld |
+                                                                                       NSKeyValueObservingOptionNew )
+												   context:NULL];
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"UseWeather" options:( NSKeyValueObservingOptionOld |
+                                                                                       NSKeyValueObservingOptionNew )
+												   context:NULL];
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"UseMail" options:( NSKeyValueObservingOptionOld |
+                                                                                       NSKeyValueObservingOptionNew )
+												   context:NULL];
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+												forKeyPath:@"UseNewsQuotes" options:( NSKeyValueObservingOptionOld |
+                                                                                       NSKeyValueObservingOptionNew )
+												   context:NULL];
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
@@ -110,23 +125,12 @@ NSSpeechSynthesizer *synth;
 	#endif
 
 		if (newWoeidCode != oldWoeidCode) {
-			//[self jarvis:NO];
 			[self updateJarvisNOSpeech];
 		}
     }
 
 	// detect the change for the user name
-	if([keyPath isEqualToString:@"UserName"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the time style
-	if([keyPath isEqualToString:@"TimeStyle"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the temperature style
-	if([keyPath isEqualToString:@"TemperatureStyle"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the forecast
-	if([keyPath isEqualToString:@"ForecastWeather"]) [self updateJarvisNOSpeech];
-
+	if([keyPath isEqualToString:@"UserName"] || [keyPath isEqualToString:@"TimeStyle"] || [keyPath isEqualToString:@"TemperatureStyle"] || [keyPath isEqualToString:@"ForecastWeather"] || [keyPath isEqualToString:@"UseCal"] || [keyPath isEqualToString:@"UseWeather"] || [keyPath isEqualToString:@"UseNewsQuotes"] || [keyPath isEqualToString:@"UseMail"]) [self updateJarvisNOSpeech];
 }
 
 - (void) awakeFromNib {
@@ -310,7 +314,10 @@ NSSpeechSynthesizer *synth;
         
         defaults = [NSUserDefaults standardUserDefaults];
     
-        const BOOL userEmail = [defaults boolForKey: @"UseMail"];
+        const BOOL useCal = [defaults boolForKey: @"UseCal"];
+        const BOOL useWeather = [defaults boolForKey: @"UseWeather"];
+        const BOOL useMail = [defaults boolForKey: @"UseMail"];
+        const BOOL useNews = [defaults boolForKey: @"UseNewsQuotes"];
     
         const BOOL checkForActiveAccount = [defaults boolForKey: @"checkForActiveAccount"];
     
@@ -319,25 +326,27 @@ NSSpeechSynthesizer *synth;
         TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
         
         outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
-
-        CalendarMethod *calendar = [[CalendarMethod alloc] init];
+        if (useCal) {
+            CalendarMethod *calendar = [[CalendarMethod alloc] init];
         
-        outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
-        outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
-        
+            outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
+            outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
+        }
     #if !SLOW_INTERNET
-        WeatherMethod *weather = [[WeatherMethod alloc] init];
+        if (useWeather) {
+            WeatherMethod *weather = [[WeatherMethod alloc] init];
 
-        NSDictionary *result = [weather retrieveWeather];
+            NSDictionary *result = [weather retrieveWeather];
 
-        outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
+            outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
 
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
-        NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-        NSImage *tempImage = [[NSImage alloc] initWithData:data];
-        [weatherImage setImage:tempImage];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
+            NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+            NSImage *tempImage = [[NSImage alloc] initWithData:data];
+            [weatherImage setImage:tempImage];
+        }
     #endif
-        if (userEmail) {
+        if (useMail) {
             EmailMethod *email = [[EmailMethod alloc] init];
         
             outputText = [outputText stringByAppendingString:[email retrieveEmail]];
@@ -347,13 +356,15 @@ NSSpeechSynthesizer *synth;
             [email checkForActiveAccount];
         }
     #if !SLOW_INTERNET
-        NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
+        if (useNews){
+            NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
         
-        // NYTimes
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
+            // NYTimes
+            outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
         
-        // Daily Quote
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
+            // Daily Quote
+            outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
+        }
     #endif
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         
@@ -368,7 +379,9 @@ NSSpeechSynthesizer *synth;
         [outText setString:outputText];
 
         if (speak) {
+        #if !DEBUG
             [synth startSpeakingString:outputText];	//for speaking the text
+        #endif
         }
     }
 }
