@@ -310,7 +310,9 @@ NSSpeechSynthesizer *synth;
         defaults = [NSUserDefaults standardUserDefaults];
     
         const BOOL userEmail = [defaults boolForKey: @"UseMail"];
-        
+    
+        const BOOL checkForActiveAccount = [defaults boolForKey: @"checkForActiveAccount"];
+    
         NSString *outputText = [[NSString alloc] init];
         
         TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
@@ -338,7 +340,7 @@ NSSpeechSynthesizer *synth;
             EmailMethod *email = [[EmailMethod alloc] init];
         
             outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-        } else {
+        } else if (!checkForActiveAccount) {
             EmailMethod *email = [[EmailMethod alloc] init];
             
             [email checkForActiveAccount];

@@ -77,21 +77,18 @@
 -(void)checkForActiveAccount {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    const BOOL checkForActiveAccount = [defaults boolForKey: @"checkForActiveAccount"];
-    
-    if (!checkForActiveAccount) {
-        NSAppleScript* script= [[NSAppleScript alloc] initWithSource:@"tell application \"Mail\" \nname of every account \nend tell"];
-        NSDictionary* scriptError = nil;
-        NSAppleEventDescriptor* descriptor=[script executeAndReturnError:&scriptError];
-        if(scriptError)
-        {
-            [defaults setBool:NO forKey: @"UseMail"];
-            [defaults synchronize];
-        } else if (descriptor){
-            [defaults setBool:YES forKey: @"UseMail"];
-            [defaults synchronize];
-        }
-        [defaults setBool:YES forKey: @"checkForActiveAccount"];
+    NSAppleScript* script= [[NSAppleScript alloc] initWithSource:@"tell application \"Mail\" \nname of every account \nend tell"];
+    NSDictionary* scriptError = nil;
+    NSAppleEventDescriptor* descriptor=[script executeAndReturnError:&scriptError];
+    if(scriptError)
+    {
+        [defaults setBool:NO forKey: @"UseMail"];
+        [defaults synchronize];
+    } else if (descriptor){
+        [defaults setBool:YES forKey: @"UseMail"];
+        [defaults synchronize];
     }
+    [defaults setBool:YES forKey: @"checkForActiveAccount"];
+
 }
 @end
