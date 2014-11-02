@@ -25,7 +25,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4B3</string>
+	<string>4C1</string>
 	<key>JRFeedbackURL</key>
 	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
 	<key>LSApplicationCategoryType</key>
@@ -39,11 +39,11 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>SUAllowsAutomaticUpdates</key>
-	<string>YES</string>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
-	<string>YES</string>
+	<true/>
 	<key>SUEnableSystemProfiling</key>
-	<string>YES</string>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
 	<key>SUPublicDSAKeyFile</key>

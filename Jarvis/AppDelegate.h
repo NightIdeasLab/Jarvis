@@ -34,6 +34,7 @@
 {
     NSString * fConfigDirectory;
     NSUserDefaults * fDefaults;
+    NSUserDefaults * defaults;
     BOOL fQuitRequested;
     IBOutlet id outText;
     IBOutlet id window;

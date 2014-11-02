@@ -304,7 +304,12 @@ NSSpeechSynthesizer *synth;
 }
 
 - (void) jarvis: (BOOL) speak {
+    
     @autoreleasepool {
+        
+        defaults = [NSUserDefaults standardUserDefaults];
+    
+        const BOOL userEmail = [defaults boolForKey: @"UseMail"];
         
         NSString *outputText = [[NSString alloc] init];
         
@@ -329,9 +334,15 @@ NSSpeechSynthesizer *synth;
         NSImage *tempImage = [[NSImage alloc] initWithData:data];
         [weatherImage setImage:tempImage];
     #endif
-        EmailMethod *email = [[EmailMethod alloc] init];
+        if (userEmail) {
+            EmailMethod *email = [[EmailMethod alloc] init];
         
-        outputText = [outputText stringByAppendingString:[email retrieveEmail]];
+            outputText = [outputText stringByAppendingString:[email retrieveEmail]];
+        } else {
+            EmailMethod *email = [[EmailMethod alloc] init];
+            
+            [email checkForActiveAccount];
+        }
     #if !SLOW_INTERNET
         NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
         
@@ -354,7 +365,7 @@ NSSpeechSynthesizer *synth;
         [outText setString:outputText];
 
         if (speak) {
-           // [synth startSpeakingString:outputText];	//for speaking the text
+            [synth startSpeakingString:outputText];	//for speaking the text
         }
     }
 }
