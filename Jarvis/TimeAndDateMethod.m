@@ -56,7 +56,7 @@
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:@", "];
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:[[dateFormatter standaloneMonthSymbols] objectAtIndex:[date monthOfYear]-1]];
     outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:[NSString stringWithFormat:@" %ld", [date dayOfMonth]]];
-    outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:@".\n\n"];
+    outputTimeAndDateText = [outputTimeAndDateText stringByAppendingString:@".\n"];
     
     return outputTimeAndDateText;
 }

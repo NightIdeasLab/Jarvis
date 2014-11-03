@@ -28,9 +28,21 @@
 @synthesize popUpNameButton;
 @synthesize popUpTimeStyleButton;
 
-// Update
-@synthesize updateDateField;
-@synthesize profileDateField;
+// Service button
+@synthesize iCalButton;
+@synthesize weatherButton;
+@synthesize mailButton;
+@synthesize newsButton;
+
+// Mail
+@synthesize nameVIP1;
+@synthesize emailVIP1;
+@synthesize nameVIP2;
+@synthesize emailVIP2;
+@synthesize nameVIP3;
+@synthesize emailVIP3;
+@synthesize nameVIP4;
+@synthesize emailVIP4;
 
 // Weather
 @synthesize locationField;
@@ -43,11 +55,9 @@
 @synthesize popUpTemperatureButton;
 @synthesize forecastButton;
 
-// Service button
-@synthesize iCalButton;
-@synthesize weatherButton;
-@synthesize mailButton;
-@synthesize newsButton;
+// Update
+@synthesize updateDateField;
+@synthesize profileDateField;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -180,6 +190,125 @@
 	// Optional configuration settings.
 	[self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
 	[self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
+}
+
+#pragma mark -
+#pragma mark General Methods
+
+- (IBAction)changeStateOfName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([readUserName state] == 1) {
+		[customNamePopUp setEnabled:YES];
+		[defaults setBool:YES forKey: @"ReadUserName"];
+		[popUpNameButton selectItemAtIndex:0];
+    } else {
+		[customName setEnabled:NO];
+		[customNamePopUp setEnabled:NO];
+		[defaults setBool:NO forKey: @"ReadUserName"];
+		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
+			[defaults setObject:@"None" forKey: @"UserName"];
+		}
+    }
+    [defaults synchronize];
+}
+
+- (IBAction)readUserName:(NSButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
+    
+	if (indexOfPopUp == 0 ) {
+		[defaults setObject:@"Short" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 1 ) {
+		[defaults setObject:@"Full" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 2) {
+		[customName setEnabled:YES];
+	}
+    [defaults synchronize];
+}
+
+- (IBAction)readCustomName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+	NSString *customNameText = [customName stringValue];
+    
+	if ([customNameText length] >0) {
+		[defaults setObject:customNameText forKey: @"UserName"];
+	}
+    [defaults synchronize];
+}
+
+- (IBAction)changeStateServices:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([sender tag] == 1) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseCal"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseCal"];
+        }
+    } else if ([sender tag] == 2) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseWeather"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseWeather"];
+        }
+    } else if ([sender tag] == 3) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseMail"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseMail"];
+        }
+    } else if ([sender tag] == 4) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseNewsQuotes"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseNewsQuotes"];
+        }
+    }
+    [defaults synchronize];
+}
+
+#pragma mark -
+#pragma mark Mail Methods
+
+- (IBAction)saveVips:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    for(int i=1; i<=4; i++){
+        if (i == 1) {
+            NSString *vipEmail1 = [emailVIP1 stringValue];
+            NSString *nameEmail1 = [nameVIP1 stringValue];
+            if (([vipEmail1 length] > 0) && [nameEmail1 length] > 0) {
+                [defaults setObject:vipEmail1 forKey: @"emailVIP1"];
+                [defaults setObject:nameEmail1 forKey: @"nameVIP1"];
+            }
+        } else if (i == 2) {
+            NSString *vipEmail2 = [emailVIP2 stringValue];
+            NSString *nameEmail2 = [nameVIP2 stringValue];
+            if (([vipEmail2 length] > 0) && [nameEmail2 length] > 0) {
+                [defaults setObject:vipEmail2 forKey: @"emailVIP2"];
+                [defaults setObject:nameEmail2 forKey: @"nameVIP2"];
+            }
+        } else if (i == 3) {
+            NSString *vipEmail3 = [emailVIP3 stringValue];
+            NSString *nameEmail3 = [nameVIP3 stringValue];
+            if (([vipEmail3 length] > 0) && [nameEmail3 length] > 0) {
+                [defaults setObject:vipEmail3 forKey: @"emailVIP3"];
+                [defaults setObject:nameEmail3 forKey: @"nameVIP3"];
+            }
+        } else if (i == 4) {
+            NSString *vipEmail4 = [emailVIP4 stringValue];
+            NSString *nameEmail4 = [nameVIP4 stringValue];
+            if (([vipEmail4 length] > 0) && [nameEmail4 length] > 0) {
+                [defaults setObject:vipEmail4 forKey: @"emailVIP4"];
+                [defaults setObject:nameEmail4 forKey: @"nameVIP4"];
+            }
+        }
+    }
+    [defaults synchronize];
 }
 
 #pragma mark -
@@ -392,53 +521,6 @@
 
 }
 
-- (IBAction)changeStateOfName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([readUserName state] == 1) {
-		[customNamePopUp setEnabled:YES];
-		[defaults setBool:YES forKey: @"ReadUserName"];
-		[popUpNameButton selectItemAtIndex:0];
-    } else {
-		[customName setEnabled:NO];
-		[customNamePopUp setEnabled:NO];
-		[defaults setBool:NO forKey: @"ReadUserName"];
-		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
-			[defaults setObject:@"None" forKey: @"UserName"];
-		}
-    }
-    [defaults synchronize];
-}
-
-- (IBAction)readUserName:(NSButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
-
-	if (indexOfPopUp == 0 ) {
-		[defaults setObject:@"Short" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 1 ) {
-		[defaults setObject:@"Full" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 2) {
-		[customName setEnabled:YES];
-	}
-    [defaults synchronize];
-}
-
-- (IBAction)readCustomName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-	NSString *customNameText = [customName stringValue];
-
-	if ([customNameText length] >0) {
-		[defaults setObject:customNameText forKey: @"UserName"];
-	}
-    [defaults synchronize];
-}
-
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
@@ -472,36 +554,5 @@
 		[defaults setBool:NO forKey: @"ForecastWeather"];
 	}
 	[defaults synchronize];
-}
-
-- (IBAction)changeStateServices:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([sender tag] == 1) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseCal"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseCal"];
-        }
-    } else if ([sender tag] == 2) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseWeather"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseWeather"];
-        }
-    } else if ([sender tag] == 3) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseMail"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseMail"];
-        }
-    } else if ([sender tag] == 4) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseNewsQuotes"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseNewsQuotes"];
-        }
-    }
-    
-    [defaults synchronize];
 }
 @end
