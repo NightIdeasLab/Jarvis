@@ -64,38 +64,8 @@ NSSpeechSynthesizer *synth;
 												   context:NULL];
 
 		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UserName" options:( NSKeyValueObservingOptionOld |
+												forKeyPath:@"PreferenceCloseTimeStamp" options:( NSKeyValueObservingOptionOld |
 																				 NSKeyValueObservingOptionNew )
-												   context:NULL];
-
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"TemperatureStyle" options:( NSKeyValueObservingOptionOld |
-																				NSKeyValueObservingOptionNew )
-												   context:NULL];
-
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"TimeStyle" options:( NSKeyValueObservingOptionOld |
-																				NSKeyValueObservingOptionNew )
-												   context:NULL];
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"ForecastWeather" options:( NSKeyValueObservingOptionOld |
-																				 NSKeyValueObservingOptionNew )
-												   context:NULL];
-        [[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UseCal" options:( NSKeyValueObservingOptionOld |
-                                                                                       NSKeyValueObservingOptionNew )
-												   context:NULL];
-        [[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UseWeather" options:( NSKeyValueObservingOptionOld |
-                                                                                       NSKeyValueObservingOptionNew )
-												   context:NULL];
-        [[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UseMail" options:( NSKeyValueObservingOptionOld |
-                                                                                       NSKeyValueObservingOptionNew )
-												   context:NULL];
-        [[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UseNewsQuotes" options:( NSKeyValueObservingOptionOld |
-                                                                                       NSKeyValueObservingOptionNew )
 												   context:NULL];
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
@@ -129,8 +99,12 @@ NSSpeechSynthesizer *synth;
 		}
     }
 
-	// detect the change for the user name
-	if([keyPath isEqualToString:@"UserName"] || [keyPath isEqualToString:@"TimeStyle"] || [keyPath isEqualToString:@"TemperatureStyle"] || [keyPath isEqualToString:@"ForecastWeather"] || [keyPath isEqualToString:@"UseCal"] || [keyPath isEqualToString:@"UseWeather"] || [keyPath isEqualToString:@"UseNewsQuotes"] || [keyPath isEqualToString:@"UseMail"]) [self updateJarvisNOSpeech];
+	// detect the close the preference window
+	if([keyPath isEqualToString:@"PreferenceCloseTimeStamp"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+           [self updateJarvisNOSpeech];
+        });
+    }
 }
 
 - (void) awakeFromNib {

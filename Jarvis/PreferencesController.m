@@ -153,7 +153,6 @@
     } else {
         [newsButton setState:0];
     }
-	
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
