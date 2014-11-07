@@ -51,7 +51,6 @@
 						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{88, 18}, {111, 18}}</string>
 						<reference key="NSSuperview" ref="192239659"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<int key="NSTag">4</int>
 						<bool key="NSEnabled">YES</bool>
@@ -477,7 +476,7 @@
 				<string key="NSClassName">NSView</string>
 			</object>
 			<object class="NSCustomView" id="835522929">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">268</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="NSCustomView" id="184880320">
@@ -731,7 +730,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{525, 451}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="245566704"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="NSClassName">NSView</string>
@@ -2286,6 +2284,14 @@
 					<int key="connectionID">613</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">saveButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="357072705"/>
+					</object>
+					<int key="connectionID">614</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">checkForUpdates:</string>
 						<reference key="source" ref="744648567"/>
@@ -3727,7 +3733,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">613</int>
+			<int key="maxID">614</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3839,6 +3845,7 @@
 						<string key="profileDateField">NSTextField</string>
 						<string key="quotationPreferenceView">NSView</string>
 						<string key="readUserName">NSButton</string>
+						<string key="saveButton">NSButton</string>
 						<string key="speechPreferenceView">NSView</string>
 						<string key="temperaturePopUp">NSButton</string>
 						<string key="timeAndDatePreferenceView">NSView</string>
@@ -3962,6 +3969,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="readUserName">
 							<string key="name">readUserName</string>
+							<string key="candidateClassName">NSButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="saveButton">
+							<string key="name">saveButton</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="speechPreferenceView">

@@ -76,7 +76,6 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
-    NSLog(@"timestamp: %f", timeInMiliseconds);
     [defaults setFloat:timeInMiliseconds forKey: @"PreferenceCloseTimeStamp"];
     NSWindow *win = [notification object];
     win = nil;

@@ -50,6 +50,7 @@
 @property (unsafe_unretained) IBOutlet NSTextField *emailVIP3;
 @property (unsafe_unretained) IBOutlet NSTextField *nameVIP4;
 @property (unsafe_unretained) IBOutlet NSTextField *emailVIP4;
+@property (unsafe_unretained) IBOutlet NSButton *saveButton;
 
 #pragma mark -
 #pragma mark Weather var

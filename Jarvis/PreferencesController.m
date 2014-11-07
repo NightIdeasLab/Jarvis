@@ -43,7 +43,7 @@
 @synthesize emailVIP3;
 @synthesize nameVIP4;
 @synthesize emailVIP4;
-
+@synthesize saveButton;
 // Weather
 @synthesize locationField;
 @synthesize mapWebView;
@@ -154,20 +154,31 @@
     }
     if (useMail == YES) {
         [mailButton setState:1];
+        // setting the VIPs name and email addresses
+        if ([defaults objectForKey:@"emailVIP1"] != NULL) [emailVIP1 setStringValue:[defaults objectForKey:@"emailVIP1"]];
+        if ([defaults objectForKey:@"nameVIP1"] != NULL) [nameVIP1 setStringValue:[defaults objectForKey:@"nameVIP1"]];
+        if ([defaults objectForKey:@"emailVIP2"] != NULL) [emailVIP2 setStringValue:[defaults objectForKey:@"emailVIP2"]];
+        if ([defaults objectForKey:@"nameVIP2"] != NULL) [nameVIP2 setStringValue:[defaults objectForKey:@"nameVIP2"]];
+        if ([defaults objectForKey:@"emailVIP3"] != NULL) [emailVIP3 setStringValue:[defaults objectForKey:@"emailVIP3"]];
+        if ([defaults objectForKey:@"nameVIP3"] != NULL) [nameVIP3 setStringValue:[defaults objectForKey:@"nameVIP3"]];
+        if ([defaults objectForKey:@"emailVIP4"] != NULL) [emailVIP4 setStringValue:[defaults objectForKey:@"emailVIP4"]];
+        if ([defaults objectForKey:@"nameVIP4"] != NULL) [nameVIP4 setStringValue:[defaults objectForKey:@"nameVIP4"]];
     } else {
         [mailButton setState:0];
-        // TODO disable even the vips emails
+        [emailVIP1 setEnabled:NO];
+        [emailVIP2 setEnabled:NO];
+        [emailVIP3 setEnabled:NO];
+        [emailVIP4 setEnabled:NO];
+        [nameVIP1 setEnabled:NO];
+        [nameVIP2 setEnabled:NO];
+        [nameVIP3 setEnabled:NO];
+        [nameVIP4 setEnabled:NO];
     }
     if (useNewsQuotes == YES) {
         [newsButton setState:1];
     } else {
         [newsButton setState:0];
     }
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification
-{
-	
 }
 
 #pragma mark -
@@ -277,37 +288,20 @@
 
 - (IBAction)saveVips:(id)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    for(int i=1; i<=4; i++){
-        if (i == 1) {
-            NSString *vipEmail1 = [emailVIP1 stringValue];
-            NSString *nameEmail1 = [nameVIP1 stringValue];
-            if (([vipEmail1 length] > 0) && [nameEmail1 length] > 0) {
-                [defaults setObject:vipEmail1 forKey: @"emailVIP1"];
-                [defaults setObject:nameEmail1 forKey: @"nameVIP1"];
-            }
-        } else if (i == 2) {
-            NSString *vipEmail2 = [emailVIP2 stringValue];
-            NSString *nameEmail2 = [nameVIP2 stringValue];
-            if (([vipEmail2 length] > 0) && [nameEmail2 length] > 0) {
-                [defaults setObject:vipEmail2 forKey: @"emailVIP2"];
-                [defaults setObject:nameEmail2 forKey: @"nameVIP2"];
-            }
-        } else if (i == 3) {
-            NSString *vipEmail3 = [emailVIP3 stringValue];
-            NSString *nameEmail3 = [nameVIP3 stringValue];
-            if (([vipEmail3 length] > 0) && [nameEmail3 length] > 0) {
-                [defaults setObject:vipEmail3 forKey: @"emailVIP3"];
-                [defaults setObject:nameEmail3 forKey: @"nameVIP3"];
-            }
-        } else if (i == 4) {
-            NSString *vipEmail4 = [emailVIP4 stringValue];
-            NSString *nameEmail4 = [nameVIP4 stringValue];
-            if (([vipEmail4 length] > 0) && [nameEmail4 length] > 0) {
-                [defaults setObject:vipEmail4 forKey: @"emailVIP4"];
-                [defaults setObject:nameEmail4 forKey: @"nameVIP4"];
-            }
-        }
-    }
+    
+    if ([[emailVIP1 stringValue] length] > 0) [defaults setObject:[emailVIP1 stringValue] forKey: @"emailVIP1"];
+    if ([[nameVIP1 stringValue] length] > 0) [defaults setObject:[nameVIP1 stringValue] forKey: @"nameVIP1"];
+    if ([[emailVIP2 stringValue] length] > 0) [defaults setObject:[emailVIP2 stringValue] forKey: @"emailVIP2"];
+    if ([[nameVIP2 stringValue] length] > 0) [defaults setObject:[nameVIP2 stringValue] forKey: @"nameVIP2"];
+    if ([[emailVIP3 stringValue] length] > 0) [defaults setObject:[emailVIP3 stringValue] forKey: @"emailVIP3"];
+    if ([[nameVIP3 stringValue] length] > 0) [defaults setObject:[nameVIP3 stringValue] forKey: @"nameVIP3"];
+    if ([[emailVIP4 stringValue] length] > 0) [defaults setObject:[emailVIP4 stringValue] forKey: @"emailVIP4"];
+    if ([[nameVIP4 stringValue] length] > 0) [defaults setObject:[nameVIP4 stringValue] forKey: @"nameVIP4"];
+    
+    [saveButton setTitle:NSLocalizedString(@"Saved", @"Text that appears if the save button was pressed")];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [saveButton setTitle:NSLocalizedString(@"Save", @"Text that appears if the save button was not pressed")];
+    });
     [defaults synchronize];
 }
 
@@ -353,7 +347,6 @@
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
-
 }
 
 - (NSInteger *)getWOEIDFromCityAndCountry: (NSString *) cityAndCountry {
