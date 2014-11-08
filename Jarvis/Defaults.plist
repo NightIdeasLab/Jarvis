@@ -20,13 +20,5 @@
 	<string>24</string>
 	<key>ForecastWeather</key>
 	<string>YES</string>
-	<key>UseCal</key>
-	<true/>
-	<key>UseWeather</key>
-	<false/>
-	<key>UseMail</key>
-	<false/>
-	<key>UseNewsQuotes</key>
-	<true/>
 </dict>
 </plist>
