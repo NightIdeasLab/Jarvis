@@ -28,22 +28,10 @@
 @synthesize popUpNameButton;
 @synthesize popUpTimeStyleButton;
 
-// Service button
-@synthesize iCalButton;
-@synthesize weatherButton;
-@synthesize mailButton;
-@synthesize newsButton;
+// Update
+@synthesize updateDateField;
+@synthesize profileDateField;
 
-// Mail
-@synthesize nameVIP1;
-@synthesize emailVIP1;
-@synthesize nameVIP2;
-@synthesize emailVIP2;
-@synthesize nameVIP3;
-@synthesize emailVIP3;
-@synthesize nameVIP4;
-@synthesize emailVIP4;
-@synthesize saveButton;
 // Weather
 @synthesize locationField;
 @synthesize mapWebView;
@@ -55,17 +43,13 @@
 @synthesize popUpTemperatureButton;
 @synthesize forecastButton;
 
-// Update
-@synthesize updateDateField;
-@synthesize profileDateField;
-
 #pragma mark -
 #pragma mark Class Methods
 
 - (void) awakeFromNib {
 	// reading from the plist file
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
+
 	// retriving the last update date and
 	// last profile sent date from plist file
 	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
@@ -73,18 +57,11 @@
 
 	// retriving latidude and
 	// longitude from plist file
-	double latitude = [defaults doubleForKey:@"latitudeCode"];
-	double longitude = [defaults doubleForKey:@"longitudeCode"];
+	double latitude = [defaults doubleForKey:@"Latitude"];
+	double longitude = [defaults doubleForKey:@"Longitude"];
 
-    BOOL useCal = [defaults boolForKey:@"UseCal"];
-    BOOL useWeather = [defaults boolForKey:@"UseWeather"];
-    BOOL useMail = [defaults boolForKey:@"UseMail"];
-    BOOL useNewsQuotes = [defaults boolForKey:@"UseNewsQuotes"];
-    
 	if ((latitude != 0) && (longitude != 0)) {
 		NSLog(@"latitude : %f", latitude);
-        
-        [mapWebView setShowsUserLocation: YES];
 	}
 	// checking and setting the last update date
 	// and last profile sent date into the interface
@@ -141,44 +118,13 @@
 		[readUserName setState:0];
 		[self changeStateOfName:self];
 	}
-    
-    if (useCal == YES) {
-        [iCalButton setState:1];
-    } else {
-        [iCalButton setState:0];
-    }
-    if (useWeather == YES) {
-        [weatherButton setState:1];
-    } else {
-        [weatherButton setState:0];
-    }
-    if (useMail == YES) {
-        [mailButton setState:1];
-        // setting the VIPs name and email addresses
-        if ([defaults objectForKey:@"emailVIP1"] != NULL) [emailVIP1 setStringValue:[defaults objectForKey:@"emailVIP1"]];
-        if ([defaults objectForKey:@"nameVIP1"] != NULL) [nameVIP1 setStringValue:[defaults objectForKey:@"nameVIP1"]];
-        if ([defaults objectForKey:@"emailVIP2"] != NULL) [emailVIP2 setStringValue:[defaults objectForKey:@"emailVIP2"]];
-        if ([defaults objectForKey:@"nameVIP2"] != NULL) [nameVIP2 setStringValue:[defaults objectForKey:@"nameVIP2"]];
-        if ([defaults objectForKey:@"emailVIP3"] != NULL) [emailVIP3 setStringValue:[defaults objectForKey:@"emailVIP3"]];
-        if ([defaults objectForKey:@"nameVIP3"] != NULL) [nameVIP3 setStringValue:[defaults objectForKey:@"nameVIP3"]];
-        if ([defaults objectForKey:@"emailVIP4"] != NULL) [emailVIP4 setStringValue:[defaults objectForKey:@"emailVIP4"]];
-        if ([defaults objectForKey:@"nameVIP4"] != NULL) [nameVIP4 setStringValue:[defaults objectForKey:@"nameVIP4"]];
-    } else {
-        [mailButton setState:0];
-        [emailVIP1 setEnabled:NO];
-        [emailVIP2 setEnabled:NO];
-        [emailVIP3 setEnabled:NO];
-        [emailVIP4 setEnabled:NO];
-        [nameVIP1 setEnabled:NO];
-        [nameVIP2 setEnabled:NO];
-        [nameVIP3 setEnabled:NO];
-        [nameVIP4 setEnabled:NO];
-    }
-    if (useNewsQuotes == YES) {
-        [newsButton setState:1];
-    } else {
-        [newsButton setState:0];
-    }
+	
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+	[locationManager stopUpdatingLocation];
+	//[locationManager release];
 }
 
 #pragma mark -
@@ -187,13 +133,11 @@
 - (void)setupToolbar{
 	[self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title")
 			image: [NSImage imageNamed:@"PrefGeneral"]];
-    [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title")
-			image: [NSImage imageNamed:@"PrefAccount"]];
 	[self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
 			image: [NSImage imageNamed:@"PrefWeather"]];
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
 			image: [NSImage imageNamed:@"PrefUpdate"]];
-    
+
 	//[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
 
 	//[self addFlexibleSpacer]; //added a space between the icons
@@ -201,108 +145,6 @@
 	// Optional configuration settings.
 	[self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
 	[self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
-}
-
-#pragma mark -
-#pragma mark General Methods
-
-- (IBAction)changeStateOfName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([readUserName state] == 1) {
-		[customNamePopUp setEnabled:YES];
-		[defaults setBool:YES forKey: @"ReadUserName"];
-		[popUpNameButton selectItemAtIndex:0];
-    } else {
-		[customName setEnabled:NO];
-		[customNamePopUp setEnabled:NO];
-		[defaults setBool:NO forKey: @"ReadUserName"];
-		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
-			[defaults setObject:@"None" forKey: @"UserName"];
-		}
-    }
-    [defaults synchronize];
-}
-
-- (IBAction)readUserName:(NSButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
-    
-	if (indexOfPopUp == 0 ) {
-		[defaults setObject:@"Short" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 1 ) {
-		[defaults setObject:@"Full" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 2) {
-		[customName setEnabled:YES];
-	}
-    [defaults synchronize];
-}
-
-- (IBAction)readCustomName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-	NSString *customNameText = [customName stringValue];
-    
-	if ([customNameText length] >0) {
-		[defaults setObject:customNameText forKey: @"UserName"];
-	}
-    [defaults synchronize];
-}
-
-- (IBAction)changeStateServices:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ([sender tag] == 1) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseCal"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseCal"];
-        }
-    } else if ([sender tag] == 2) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseWeather"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseWeather"];
-        }
-    } else if ([sender tag] == 3) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseMail"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseMail"];
-        }
-    } else if ([sender tag] == 4) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseNewsQuotes"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseNewsQuotes"];
-        }
-    }
-    [defaults synchronize];
-}
-
-#pragma mark -
-#pragma mark Mail Methods
-
-- (IBAction)saveVips:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    if ([[emailVIP1 stringValue] length] > 0) [defaults setObject:[emailVIP1 stringValue] forKey: @"emailVIP1"];
-    if ([[nameVIP1 stringValue] length] > 0) [defaults setObject:[nameVIP1 stringValue] forKey: @"nameVIP1"];
-    if ([[emailVIP2 stringValue] length] > 0) [defaults setObject:[emailVIP2 stringValue] forKey: @"emailVIP2"];
-    if ([[nameVIP2 stringValue] length] > 0) [defaults setObject:[nameVIP2 stringValue] forKey: @"nameVIP2"];
-    if ([[emailVIP3 stringValue] length] > 0) [defaults setObject:[emailVIP3 stringValue] forKey: @"emailVIP3"];
-    if ([[nameVIP3 stringValue] length] > 0) [defaults setObject:[nameVIP3 stringValue] forKey: @"nameVIP3"];
-    if ([[emailVIP4 stringValue] length] > 0) [defaults setObject:[emailVIP4 stringValue] forKey: @"emailVIP4"];
-    if ([[nameVIP4 stringValue] length] > 0) [defaults setObject:[nameVIP4 stringValue] forKey: @"nameVIP4"];
-    
-    [saveButton setTitle:NSLocalizedString(@"Saved", @"Text that appears if the save button was pressed")];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [saveButton setTitle:NSLocalizedString(@"Save", @"Text that appears if the save button was not pressed")];
-    });
-    [defaults synchronize];
 }
 
 #pragma mark -
@@ -347,6 +189,7 @@
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
+
 }
 
 - (NSInteger *)getWOEIDFromCityAndCountry: (NSString *) cityAndCountry {
@@ -362,6 +205,9 @@
 													  [NSString stringWithFormat:
 													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
 															NSUTF8StringEncoding error:nil];
+/*
+	NSLog(@"woeidcontent: %@", woeidContent);
+*/
 
 	if(woeidContent != nil) {
 		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
@@ -440,25 +286,23 @@
 
 -(void) updateMapWithLatitude: (double) latitude  AndLongitude: (double) longitude
 {
- 
-//    
-//// Load the HTML for displaying the Google map from a file and replace the
-//// format placeholders with our location data
-//NSString *htmlString = [NSString stringWithFormat:
-//						[NSString
-//						 stringWithContentsOfFile:
-//						 [[NSBundle mainBundle]
-//						  pathForResource:@"googleMaps" ofType:@"html"]
-//						 encoding:NSUTF8StringEncoding
-//						 error:NULL],
-//						latitude,
-//						longitude,
-//						latitude,
-//						longitude];
-//
-//
-//// Load the HTML in the WebView and set the labels
-//[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
+// Load the HTML for displaying the Google map from a file and replace the
+// format placeholders with our location data
+NSString *htmlString = [NSString stringWithFormat:
+						[NSString
+						 stringWithContentsOfFile:
+						 [[NSBundle mainBundle]
+						  pathForResource:@"googleMaps" ofType:@"html"]
+						 encoding:NSUTF8StringEncoding
+						 error:NULL],
+						latitude,
+						longitude,
+						latitude,
+						longitude];
+
+
+// Load the HTML in the WebView and set the labels
+[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
 
 #ifdef DEBUG
 	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f", latitude, longitude]];
@@ -469,12 +313,12 @@
 - (void) locationManager:(CLLocationManager *)manager
 	   didFailWithError:(NSError *)error
 {
-//	[[mapWebView mainFrame]
-//	 loadHTMLString:
-//	 [NSString stringWithFormat:
-//	  NSLocalizedString(@"Location manager failed with error: %@", nil),
-//	  [error localizedDescription]]
-//	 baseURL:nil];
+	[[mapWebView mainFrame]
+	 loadHTMLString:
+	 [NSString stringWithFormat:
+	  NSLocalizedString(@"Location manager failed with error: %@", nil),
+	  [error localizedDescription]]
+	 baseURL:nil];
 	[locationLabel setStringValue:@""];
 }
 
@@ -514,6 +358,52 @@
 
 }
 
+- (IBAction)changeStateOfName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([readUserName state] == 1) {
+		[customNamePopUp setEnabled:YES];
+		[defaults setBool:YES forKey: @"ReadUserName"];
+		[popUpNameButton selectItemAtIndex:0];
+    } else {
+		[customName setEnabled:NO];
+		[customNamePopUp setEnabled:NO];
+		[defaults setBool:NO forKey: @"ReadUserName"];
+		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
+			[defaults setObject:@"None" forKey: @"UserName"];
+		}
+
+    }
+}
+
+- (IBAction)readUserName:(NSButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
+
+	if (indexOfPopUp == 0 ) {
+		[defaults setObject:@"Short" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 1 ) {
+		[defaults setObject:@"Full" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 2) {
+		[customName setEnabled:YES];
+	}
+	
+}
+
+- (IBAction)readCustomName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	NSString *customNameText = [customName stringValue];
+
+	if ([customNameText length] >0) {
+		[defaults setObject:customNameText forKey: @"UserName"];
+	}
+}
+
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
@@ -523,7 +413,6 @@
 	} else if (indexOfTemperaturePopUp == 1 ) {
 		[defaults setObject:@"f" forKey: @"TemperatureStyle"];
 	}
-    [defaults synchronize];
 }
 
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
@@ -535,7 +424,6 @@
 	} else if (indexOfTimePopUp == 1 ) {
 		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
 	}
-    [defaults synchronize];
 }
 
 - (IBAction)forecastYesOrNo:(id)sender {
@@ -546,6 +434,8 @@
 	} else {
 		[defaults setBool:NO forKey: @"ForecastWeather"];
 	}
-	[defaults synchronize];
+	
 }
+
+
 @end

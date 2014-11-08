@@ -1,0 +1,39 @@
+
+The white box is a custom subclass of NSBox, the close button is custom subclass of NSButton. The image is just an NSImageView.
+
+Here's how I create the window:
+
+- (id)init {
+	nib=[[NSNib alloc] initWithNibNamed:@"About" bundle:nil];
+	if (![nib instantiateNibWithOwner:self topLevelObjects:0]) return nil;
+
+	self.window=[[DCAboutWindow alloc] initWithContentRect:[contents frame]
+											styleMask:NSBorderlessWindowMask
+											  backing:NSBackingStoreBuffered
+												defer:NO];
+	
+	[[self window] setHasShadow:YES];
+	[[self window] setContentView:contents];
+	[[self window] setContentSize:[contents frame].size];
+	[[self window] center];
+	[[self window] setLevel:NSFloatingWindowLevel];
+	[[self window] setOpaque:NO];
+	[[self window] setBackgroundColor:[NSColor clearColor]];
+	[[self window] setMovableByWindowBackground:YES];
+	return self;
+}
+
+Here's how I draw the white background box (in NSBox subclass):
+
+-(void)drawRect:(NSRect)dirtyRect
+{
+	NSRect windowRect=[self bounds];
+	NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:windowRect xRadius:12.0 yRadius:12.0];
+
+	// fill background	
+	NSColor *startColor  = [NSColor colorWithDeviceWhite:0.95 alpha:1.0];
+	NSColor *endColor    = [NSColor colorWithDeviceWhite:1.000 alpha:1.0];
+	NSGradient *gradient = [[NSGradient alloc] initWithColorsAndLocations:startColor, 0.0, endColor, 1.0, nil];
+	[[gradient autorelease] drawInBezierPath:path angle:90];
+
+}

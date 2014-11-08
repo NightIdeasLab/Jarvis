@@ -20,7 +20,6 @@
 #import <Sparkle/Sparkle.h>
 
 // Local Classes
-#import "AboutPanelController.h"
 #import "CalendarMethod.h"
 #import "ChangeLogController.h"
 #import "EmailMethod.h"
@@ -34,7 +33,6 @@
 {
     NSString * fConfigDirectory;
     NSUserDefaults * fDefaults;
-    NSUserDefaults * defaults;
     BOOL fQuitRequested;
     IBOutlet id outText;
     IBOutlet id window;
@@ -47,7 +45,6 @@
 
 - (NSWindow *)windowLM;
 
-- (IBAction)openAboutPanel:(id)sender;
 - (IBAction) openPreferences: (id) sender;
 - (IBAction) sendFeedBack: (id) sender;
 - (IBAction) openHomepage: (id) sender;
