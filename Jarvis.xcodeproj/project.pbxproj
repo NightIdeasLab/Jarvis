@@ -29,10 +29,6 @@
 		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
 		0094D444176A27340052079F /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D439176A27340052079F /* PrefUpdate.png */; };
 		0094D445176A27340052079F /* PrefUpdate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43A176A27340052079F /* PrefUpdate@2x.png */; };
-		0094D446176A27340052079F /* RSSAtom.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43C176A27340052079F /* RSSAtom.png */; };
-		0094D447176A27340052079F /* RSSAtom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43D176A27340052079F /* RSSAtom@2x.png */; };
-		0094D448176A27340052079F /* RSSAtomAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43E176A27340052079F /* RSSAtomAccount.png */; };
-		0094D449176A27340052079F /* RSSAtomAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43F176A27340052079F /* RSSAtomAccount@2x.png */; };
 		0094D44A176A27340052079F /* RSSAtomNotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D440176A27340052079F /* RSSAtomNotify.png */; };
 		0094D44B176A27340052079F /* RSSAtomNotify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D441176A27340052079F /* RSSAtomNotify@2x.png */; };
 		0094D44D176A27C50052079F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44C176A27C50052079F /* WebKit.framework */; };
@@ -115,10 +111,6 @@
 		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
 		0094D439176A27340052079F /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefUpdate.png; sourceTree = "<group>"; };
 		0094D43A176A27340052079F /* PrefUpdate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefUpdate@2x.png"; sourceTree = "<group>"; };
-		0094D43C176A27340052079F /* RSSAtom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSSAtom.png; sourceTree = "<group>"; };
-		0094D43D176A27340052079F /* RSSAtom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSSAtom@2x.png"; sourceTree = "<group>"; };
-		0094D43E176A27340052079F /* RSSAtomAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSSAtomAccount.png; sourceTree = "<group>"; };
-		0094D43F176A27340052079F /* RSSAtomAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSSAtomAccount@2x.png"; sourceTree = "<group>"; };
 		0094D440176A27340052079F /* RSSAtomNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSSAtomNotify.png; sourceTree = "<group>"; };
 		0094D441176A27340052079F /* RSSAtomNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSSAtomNotify@2x.png"; sourceTree = "<group>"; };
 		0094D44C176A27C50052079F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -227,10 +219,6 @@
 		0094D43B176A27340052079F /* Service Icons */ = {
 			isa = PBXGroup;
 			children = (
-				0094D43C176A27340052079F /* RSSAtom.png */,
-				0094D43D176A27340052079F /* RSSAtom@2x.png */,
-				0094D43E176A27340052079F /* RSSAtomAccount.png */,
-				0094D43F176A27340052079F /* RSSAtomAccount@2x.png */,
 				0094D440176A27340052079F /* RSSAtomNotify.png */,
 				0094D441176A27340052079F /* RSSAtomNotify@2x.png */,
 			);
@@ -422,7 +410,7 @@
 		00AF0DD11769FBBC00C00AE3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Night Ideas Lab Inc.";
 			};
 			buildConfigurationList = 00AF0DD41769FBBC00C00AE3 /* Build configuration list for PBXProject "Jarvis" */;
@@ -453,10 +441,6 @@
 				0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */,
 				0094D444176A27340052079F /* PrefUpdate.png in Resources */,
 				0094D445176A27340052079F /* PrefUpdate@2x.png in Resources */,
-				0094D446176A27340052079F /* RSSAtom.png in Resources */,
-				0094D447176A27340052079F /* RSSAtom@2x.png in Resources */,
-				0094D448176A27340052079F /* RSSAtomAccount.png in Resources */,
-				0094D449176A27340052079F /* RSSAtomAccount@2x.png in Resources */,
 				0094D44A176A27340052079F /* RSSAtomNotify.png in Resources */,
 				0094D44B176A27340052079F /* RSSAtomNotify@2x.png in Resources */,
 				00C7E6DE176B84D5008C2823 /* Defaults.plist in Resources */,
@@ -570,7 +554,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -603,7 +586,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -638,7 +620,7 @@
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -657,7 +639,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
