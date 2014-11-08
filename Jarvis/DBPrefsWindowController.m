@@ -30,7 +30,6 @@
    return @"Preferences";
 }
 
-
 #pragma mark -
 #pragma mark Setup & Teardown
 
@@ -69,9 +68,19 @@
     self.contentSubview = [[NSView alloc] initWithFrame:[[[self window] contentView] frame]];
     [self.contentSubview setAutoresizingMask:(NSViewMinYMargin | NSViewWidthSizable)];
     [[[self window] contentView] addSubview:self.contentSubview];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name:NSWindowWillCloseNotification object:self.window];
     [[self window] setShowsToolbarButton:NO];
 }
 
+- (void)windowWillClose:(NSNotification *)notification
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSTimeInterval timeInMiliseconds = [[NSDate date] timeIntervalSince1970];
+    [defaults setFloat:timeInMiliseconds forKey: @"PreferenceCloseTimeStamp"];
+    NSWindow *win = [notification object];
+    win = nil;
+    [defaults synchronize];
+}
 
 #pragma mark -
 #pragma mark Configuration
@@ -117,7 +126,6 @@
                              selector:@selector(toggleActivePreferenceView:)];
 }
 
-
 #pragma mark -
 #pragma mark Overriding Methods
 
@@ -154,7 +162,6 @@
     [super showWindow:sender];
 }
 
-
 #pragma mark -
 #pragma mark Toolbar
 
@@ -175,6 +182,8 @@
 }
 
 - (void)toggleActivePreferenceView:(NSToolbarItem *)toolbarItem{
+    // prints the name of the view
+    //NSLog(@"toolbar: %@", [toolbarItem itemIdentifier]);
 	[self displayViewForIdentifier:[toolbarItem itemIdentifier] animate:YES];
 }
 
@@ -223,7 +232,6 @@
     [[[self window] toolbar] setSelectedItemIdentifier:identifier];
     [self displayViewForIdentifier:identifier animate:animate];
 }
-
 
 #pragma mark -
 #pragma mark Cross-Fading Methods
@@ -303,5 +311,4 @@
         [super keyDown:theEvent];
     }
 }
-
 @end

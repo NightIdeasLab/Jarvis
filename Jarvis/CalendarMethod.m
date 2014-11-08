@@ -20,7 +20,7 @@
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
-        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"You do not have any appointments today!!!\n\n", @"This message will appear if you do not have any appointments")];
+        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou do not have any appointments today!!!\n\n", @"This message will appear if you do not have any appointments")];
     }
     else
     {
