@@ -14,7 +14,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     // Time and date
-    NSString *outputTimeAndDateText = [[NSString alloc] init]; // FIXME: i never read this var ??
+    NSString *outputTimeAndDateText = [[NSString alloc] init];
     NSCalendarDate *date = [NSCalendarDate calendarDate];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSString *userNameChoise = [defaults stringForKey: @"UserName"];

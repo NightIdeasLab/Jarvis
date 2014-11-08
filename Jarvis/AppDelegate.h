@@ -20,7 +20,6 @@
 #import <Sparkle/Sparkle.h>
 
 // Local Classes
-#import "AboutPanelController.h"
 #import "CalendarMethod.h"
 #import "ChangeLogController.h"
 #import "EmailMethod.h"
@@ -46,7 +45,6 @@
 
 - (NSWindow *)windowLM;
 
-- (IBAction)openAboutPanel:(id)sender;
 - (IBAction) openPreferences: (id) sender;
 - (IBAction) sendFeedBack: (id) sender;
 - (IBAction) openHomepage: (id) sender;

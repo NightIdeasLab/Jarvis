@@ -226,15 +226,6 @@ NSSpeechSynthesizer *synth;
     return menu;
 }
 
-- (IBAction)openAboutPanel:(id)sender {
-    //	Hide the scroller, in case they’re previously shown it.
-    //	In a real application, you wouldn’t need to do this.
-    [[AboutPanelController sharedInstance] setShowsScroller: NO];
-    
-    //	Show the panel
-    [[AboutPanelController sharedInstance] showPanel];
-}
-
 - (IBAction) openPreferences: (id) sender {
     // instantiate preferences window controller
     if (_preferencesController) {
@@ -307,65 +298,63 @@ NSSpeechSynthesizer *synth;
 }
 
 - (void) jarvis: (BOOL) speak {
-    @autoreleasepool {
-        NSString *outputText = [[NSString alloc] init];
-        
-        TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
-        
-        outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
+	NSString *outputText = [[NSString alloc] init];
+    
+    TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
+    
+    outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
 
-        CalendarMethod *calendar = [[CalendarMethod alloc] init];
-        
-        outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
-        outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
-        
-    #if !SLOW_INTERNET
-        
-        WeatherMethod *weather = [[WeatherMethod alloc] init];
+    CalendarMethod *calendar = [[CalendarMethod alloc] init];
+    
+   	outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
+    outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
+    
+#if !SLOW_INTERNET
+    
+    WeatherMethod *weather = [[WeatherMethod alloc] init];
 
-        NSDictionary *result = [weather retrieveWeather];
+	NSDictionary *result = [weather retrieveWeather];
 
-        outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
+    outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
 
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
-        NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-        NSImage *tempImage = [[NSImage alloc] initWithData:data];
-        [weatherImage setImage:tempImage];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
+	NSData *data = [[NSData alloc] initWithContentsOfURL:url];
+	NSImage *tempImage = [[NSImage alloc] initWithData:data];
+	[weatherImage setImage:tempImage];
 
-    #endif
+#endif
 
-        EmailMethod *email = [[EmailMethod alloc] init];
-        
-        outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-        
-    #if !SLOW_INTERNET
-        
-        NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
-        
-        // NYTimes
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
-        
-        // Daily Quote
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
-        
-    #endif
-        
-        [[NSURLCache sharedURLCache] removeAllCachedResponses];
-        
-        // If set to YES then the mainwindow will
-        // be on top of the other windows and there
-        // is no way to send it to the back
-        [window setFloatingPanel:NO];
-        
-        //Output
-        [outText setFont:[NSFont fontWithName:@"HelveticaNeue-Light" size:12]];
-        [outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
-        [outText setString:outputText];
+    EmailMethod *email = [[EmailMethod alloc] init];
+    
+    outputText = [outputText stringByAppendingString:[email retrieveEmail]];
+    
+#if !SLOW_INTERNET
+    
+    NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
+    
+    // NYTimes
+    outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
+    
+    // Daily Quote
+    outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
+    
+#endif
+    
+	[[NSURLCache sharedURLCache] removeAllCachedResponses];
+	
+    // If set to YES then the mainwindow will
+    // be on top of the other windows and there
+    // is no way to send it to the back
+	[window setFloatingPanel:NO];
+    
+    //Output
+	[outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
+	[outText setString:outputText];
 
-        if (speak) {
-            [synth startSpeakingString:outputText];	//for speaking the text
-        }
-    }
+	if (speak) {
+		[synth startSpeakingString:outputText];	//for speaking the text
+	}
+
 }
 
 @end
