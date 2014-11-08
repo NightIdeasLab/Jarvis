@@ -32,8 +32,6 @@
     NSString *htmlPath = [resourcesPath stringByAppendingString:@"/htdocs/ChangeLog.html"];
     [[changeLogWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:htmlPath]]];
 
-	
-
     /* this way i can load a normal file not as the htdocs */
    // NSURL *mainWebPageURL = [[NSBundle mainBundle] URLForResource:@"ChangeLog" withExtension:@"html"];
     

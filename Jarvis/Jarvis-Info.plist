@@ -21,11 +21,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.2</string>
+	<string>0.4.2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>4A2</string>
+	<string>4B2A</string>
 	<key>JRFeedbackURL</key>
 	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
 	<key>LSApplicationCategoryType</key>
@@ -38,16 +38,16 @@
 	<string>App</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUAutomaticallyUpdate</key>
+	<key>SUAllowsAutomaticUpdates</key>
 	<string>YES</string>
 	<key>SUEnableAutomaticChecks</key>
+	<string>YES</string>
+	<key>SUEnableSystemProfiling</key>
 	<string>YES</string>
 	<key>SUFeedURL</key>
 	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
-	<key>SUSendProfileInfo</key>
-	<string>YES</string>
 	<key>UIRequiresPersistentWiFi</key>
 	<true/>
 </dict>
