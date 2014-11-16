@@ -55,7 +55,6 @@
 #pragma mark -
 #pragma mark Weather var
 @property (assign, nonatomic) IBOutlet NSTextField *locationField;
-@property (assign) IBOutlet MKMapView *mapWebView;
 @property (assign, atomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) IBOutlet NSTextField *locationLabel;
 @property (assign) IBOutlet NSButton *findLocationButton;
@@ -87,8 +86,6 @@
 - (IBAction)changeStateAutomaticLocation:(id)sender;
 
 - (IBAction)findLocation:(id)sender;
-
-- (IBAction)openInDefaultBrowser:(id)sender;
 
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender;
 

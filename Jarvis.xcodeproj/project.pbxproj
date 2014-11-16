@@ -21,7 +21,6 @@
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
 		006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
-		006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		007A32071A06D803007AA895 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32051A06D803007AA895 /* PrefAccount.png */; };
 		007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32061A06D803007AA895 /* PrefAccount@2x.png */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
@@ -42,6 +41,8 @@
 		0094D45D176A28050052079F /* CalendarStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D45C176A28050052079F /* CalendarStore.framework */; };
 		0094D45F176A280D0052079F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D45E176A280D0052079F /* SystemConfiguration.framework */; };
 		0094D461176A28170052079F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D460176A28170052079F /* CoreAudio.framework */; };
+		009E88471A18195F00C0966B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009E88461A18195F00C0966B /* JavaScriptCore.framework */; };
+		00A909971A18217A001E4A83 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		00AF0DDD1769FBBC00C00AE3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */; };
 		00AF0DE71769FBBC00C00AE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00AF0DE51769FBBC00C00AE3 /* InfoPlist.strings */; };
 		00AF0DE91769FBBC00C00AE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DE81769FBBC00C00AE3 /* main.m */; };
@@ -55,7 +56,6 @@
 		00C7E6EC176B86C1008C2823 /* htdocs in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6EB176B86C1008C2823 /* htdocs */; };
 		00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6ED176B86FF008C2823 /* JarvisHelp */; };
 		00C7E6F1176B87FB008C2823 /* COPYING in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6F0176B87FB008C2823 /* COPYING */; };
-		00D54DC61A03B3FF00448DD3 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */; };
 		00E2C76C1790704500246636 /* DBPrefsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C7671790704500246636 /* DBPrefsWindowController.m */; };
 		00E2C76D1790704500246636 /* Preference pane.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 00E2C7681790704500246636 /* Preference pane.rtf */; };
 		00E2C76E1790704500246636 /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E2C76A1790704500246636 /* PreferencesController.m */; };
@@ -124,6 +124,7 @@
 		0094D45C176A28050052079F /* CalendarStore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CalendarStore.framework; path = System/Library/Frameworks/CalendarStore.framework; sourceTree = SDKROOT; };
 		0094D45E176A280D0052079F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0094D460176A28170052079F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		009E88461A18195F00C0966B /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		00AF0DD91769FBBC00C00AE3 /* Jarvis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jarvis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		00AF0DDF1769FBBC00C00AE3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -145,7 +146,6 @@
 		00C7E6EB176B86C1008C2823 /* htdocs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = htdocs; path = Jarvis/htdocs; sourceTree = "<group>"; };
 		00C7E6ED176B86FF008C2823 /* JarvisHelp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JarvisHelp; sourceTree = "<group>"; };
 		00C7E6F0176B87FB008C2823 /* COPYING */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = COPYING; path = Jarvis/COPYING; sourceTree = "<group>"; };
-		00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		00E2C7661790704500246636 /* DBPrefsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPrefsWindowController.h; sourceTree = "<group>"; };
 		00E2C7671790704500246636 /* DBPrefsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPrefsWindowController.m; sourceTree = "<group>"; };
 		00E2C7681790704500246636 /* Preference pane.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "Preference pane.rtf"; sourceTree = "<group>"; };
@@ -165,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00D54DC61A03B3FF00448DD3 /* ApplicationServices.framework in Frameworks */,
 				0094D451176A27D80052079F /* AddressBook.framework in Frameworks */,
 				0094D45D176A28050052079F /* CalendarStore.framework in Frameworks */,
 				00AF0DDD1769FBBC00C00AE3 /* Cocoa.framework in Frameworks */,
@@ -173,13 +172,14 @@
 				0094D44F176A27D10052079F /* CoreLocation.framework in Frameworks */,
 				0094D45B176A27FC0052079F /* CoreServices.framework in Frameworks */,
 				0094D459176A27F30052079F /* IOKit.framework in Frameworks */,
-				006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */,
+				009E88471A18195F00C0966B /* JavaScriptCore.framework in Frameworks */,
 				0094D455176A27E70052079F /* Security.framework in Frameworks */,
 				0094D457176A27E70052079F /* SecurityInterface.framework in Frameworks */,
 				0094D456176A27E70052079F /* SecurityFoundation.framework in Frameworks */,
 				0094D45F176A280D0052079F /* SystemConfiguration.framework in Frameworks */,
 				005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */,
 				0094D44D176A27C50052079F /* WebKit.framework in Frameworks */,
+				00A909971A18217A001E4A83 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +234,35 @@
 			name = Helpers;
 			sourceTree = "<group>";
 		};
+		00A909961A182136001E4A83 /* System Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0094D450176A27D80052079F /* AddressBook.framework */,
+				0094D45C176A28050052079F /* CalendarStore.framework */,
+				00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */,
+				0094D460176A28170052079F /* CoreAudio.framework */,
+				0094D44E176A27D10052079F /* CoreLocation.framework */,
+				0094D45A176A27FC0052079F /* CoreServices.framework */,
+				0094D458176A27F30052079F /* IOKit.framework */,
+				009E88461A18195F00C0966B /* JavaScriptCore.framework */,
+				0094D452176A27E70052079F /* Security.framework */,
+				0094D453176A27E70052079F /* SecurityFoundation.framework */,
+				0094D454176A27E70052079F /* SecurityInterface.framework */,
+				0094D45E176A280D0052079F /* SystemConfiguration.framework */,
+				0094D44C176A27C50052079F /* WebKit.framework */,
+			);
+			name = "System Frameworks";
+			sourceTree = "<group>";
+		};
+		00A909981A18221B001E4A83 /* Third Party Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				006829C518CCC65B00113D48 /* MapKit.framework */,
+				005491AD176A0590008A191D /* Sparkle.framework */,
+			);
+			name = "Third Party Frameworks";
+			sourceTree = "<group>";
+		};
 		00AF0DD01769FBBC00C00AE3 = {
 			isa = PBXGroup;
 			children = (
@@ -257,21 +286,8 @@
 		00AF0DDB1769FBBC00C00AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00D54DC51A03B3FF00448DD3 /* ApplicationServices.framework */,
-				0094D450176A27D80052079F /* AddressBook.framework */,
-				0094D45C176A28050052079F /* CalendarStore.framework */,
-				00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */,
-				0094D460176A28170052079F /* CoreAudio.framework */,
-				0094D44E176A27D10052079F /* CoreLocation.framework */,
-				0094D45A176A27FC0052079F /* CoreServices.framework */,
-				0094D458176A27F30052079F /* IOKit.framework */,
-				006829C518CCC65B00113D48 /* MapKit.framework */,
-				0094D452176A27E70052079F /* Security.framework */,
-				0094D453176A27E70052079F /* SecurityFoundation.framework */,
-				0094D454176A27E70052079F /* SecurityInterface.framework */,
-				005491AD176A0590008A191D /* Sparkle.framework */,
-				0094D45E176A280D0052079F /* SystemConfiguration.framework */,
-				0094D44C176A27C50052079F /* WebKit.framework */,
+				00A909981A18221B001E4A83 /* Third Party Frameworks */,
+				00A909961A182136001E4A83 /* System Frameworks */,
 				00AF0DDE1769FBBC00C00AE3 /* Other Frameworks */,
 			);
 			name = Frameworks;
