@@ -13,6 +13,7 @@
 
 }
 
+// TODO : might want to rename this one.
 @property (nonatomic, readonly) NSString *viewPrototypeName;
 @property (nonatomic, readonly) NSDictionary *options;
 

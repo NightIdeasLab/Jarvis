@@ -592,6 +592,8 @@ window.onwebkitanimationend =  function(event) {
   function setUserLocationLatitudeLongitude(lat, lng)
   {
       var latlng = new google.maps.LatLng(lat, lng);
+      setCenterCoordinateAnimated(lat, lng, true);
+      setUserLocationVisible(true);
       userLocationMarker.setCenter(latlng);
   }
   
@@ -862,7 +864,7 @@ window.onwebkitanimationend =  function(event) {
       
     map = null;
     try {
-        var latlng = new google.maps.LatLng(49.85770356304121, -97.1528089768459);
+        var latlng = new google.maps.LatLng(0, 0);
         var myOptions = {
           zoom: 13,
           center: latlng,
