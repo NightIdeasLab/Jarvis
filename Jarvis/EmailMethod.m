@@ -87,7 +87,7 @@
 }
 
 
--(void)checkForActiveAccount {
+-(void)checkForActiveMailAccount {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     NSAppleScript* script= [[NSAppleScript alloc] initWithSource:@"tell application \"Mail\" \nname of every account \nend tell"];
@@ -101,7 +101,7 @@
         [defaults setBool:YES forKey: @"UseMail"];
         [defaults synchronize];
     }
-    [defaults setBool:YES forKey: @"checkForActiveAccount"];
+    [defaults setBool:YES forKey: @"checkForActiveMailAccount"];
 
 }
 @end

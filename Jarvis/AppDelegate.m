@@ -293,7 +293,7 @@ NSSpeechSynthesizer *synth;
         const BOOL useMail = [defaults boolForKey: @"UseMail"];
         const BOOL useNews = [defaults boolForKey: @"UseNewsQuotes"];
     
-        const BOOL checkForActiveAccount = [defaults boolForKey: @"checkForActiveAccount"];
+        const BOOL checkForActiveMailAccount = [defaults boolForKey: @"checkForActiveMailAccount"];
     
         NSString *outputText = [[NSString alloc] init];
         
@@ -324,10 +324,10 @@ NSSpeechSynthesizer *synth;
             EmailMethod *email = [[EmailMethod alloc] init];
         
             outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-        } else if (!checkForActiveAccount) {
+        } else if (!checkForActiveMailAccount) {
             EmailMethod *email = [[EmailMethod alloc] init];
             
-            [email checkForActiveAccount];
+            [email checkForActiveMailAccount];
         }
     #if !SLOW_INTERNET
         if (useNews){

@@ -20,7 +20,6 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
-		006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		007A32071A06D803007AA895 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32051A06D803007AA895 /* PrefAccount.png */; };
 		007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32061A06D803007AA895 /* PrefAccount@2x.png */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
@@ -42,7 +41,6 @@
 		0094D45F176A280D0052079F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D45E176A280D0052079F /* SystemConfiguration.framework */; };
 		0094D461176A28170052079F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D460176A28170052079F /* CoreAudio.framework */; };
 		009E88471A18195F00C0966B /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 009E88461A18195F00C0966B /* JavaScriptCore.framework */; };
-		00A909971A18217A001E4A83 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
 		00AF0DDD1769FBBC00C00AE3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */; };
 		00AF0DE71769FBBC00C00AE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00AF0DE51769FBBC00C00AE3 /* InfoPlist.strings */; };
 		00AF0DE91769FBBC00C00AE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DE81769FBBC00C00AE3 /* main.m */; };
@@ -73,7 +71,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */,
 				005491AE176A0590008A191D /* Sparkle.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -102,7 +99,6 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
-		006829C518CCC65B00113D48 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Frameworks/MapKit.framework; sourceTree = "<group>"; };
 		007A32051A06D803007AA895 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefAccount.png; sourceTree = "<group>"; };
 		007A32061A06D803007AA895 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefAccount@2x.png"; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
@@ -179,7 +175,6 @@
 				0094D45F176A280D0052079F /* SystemConfiguration.framework in Frameworks */,
 				005491AF176A0AB3008A191D /* Sparkle.framework in Frameworks */,
 				0094D44D176A27C50052079F /* WebKit.framework in Frameworks */,
-				00A909971A18217A001E4A83 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +252,6 @@
 		00A909981A18221B001E4A83 /* Third Party Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				006829C518CCC65B00113D48 /* MapKit.framework */,
 				005491AD176A0590008A191D /* Sparkle.framework */,
 			);
 			name = "Third Party Frameworks";
@@ -642,7 +636,7 @@
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -661,7 +655,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

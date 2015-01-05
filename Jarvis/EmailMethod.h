@@ -15,6 +15,6 @@
 
 - (NSString *) retrieveEmail;
 
--(void)checkForActiveAccount;
+-(void)checkForActiveMailAccount;
 
 @end
