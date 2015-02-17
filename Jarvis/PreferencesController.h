@@ -7,11 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <CoreLocation/CoreLocation.h>
-#import <WebKit/WebKit.h>
+#import <MapKit/MapKit.h>
 #import "DBPrefsWindowController.h"
 
-@interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate >
+@class MKMapView;
+
+@interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate, MKMapViewDelegate, MKReverseGeocoderDelegate, MKGeocoderDelegate > {
+    NSNumber *circleRadius;
+    NSString *pinTitle;
+    NSArray *pinNames;
+    NSMutableArray *coreLocationPins;
+}
 
 #pragma mark -
 #pragma mark Preference var
@@ -51,6 +57,7 @@
 
 #pragma mark -
 #pragma mark Weather var
+@property (unsafe_unretained) IBOutlet MKMapView *mapView;
 @property (assign, nonatomic) IBOutlet NSTextField *locationField;
 @property (assign, atomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) IBOutlet NSTextField *locationLabel;
