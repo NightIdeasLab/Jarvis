@@ -17,7 +17,6 @@
 @property (nonatomic, readonly) NSString *viewPrototypeName;
 @property (nonatomic, readonly) NSDictionary *options;
 
-
 - (void)draw:(WebScriptObject *)overlayScriptObject;
 - (WebScriptObject *)overlayScriptObjectFromMapScriptObject:(WebScriptObject *)mapScriptObject;
 

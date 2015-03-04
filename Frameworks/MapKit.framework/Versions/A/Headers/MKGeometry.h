@@ -64,7 +64,6 @@ typedef CGFloat MKZoomScale;
 extern const MKMapSize MKMapSizeWorld;
 // The rect that contains every map point in the world.
 extern  const MKMapRect MKMapRectWorld;
-
  
 // Conversion between unprojected and projected coordinates
 extern  MKMapPoint MKMapPointForCoordinate(CLLocationCoordinate2D coordinate);
@@ -163,4 +162,4 @@ extern BOOL MKMapRectSpans180thMeridian(MKMapRect rect);
 // world.  The portion of the rect that lies inside the world rect can be 
 // determined with MKMapRectIntersection(rect, MKMapRectWorld).
 extern MKMapRect MKMapRectRemainder(MKMapRect rect);
- */
+*/

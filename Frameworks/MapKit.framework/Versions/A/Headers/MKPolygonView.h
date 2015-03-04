@@ -20,4 +20,3 @@
 @property (nonatomic, readonly) MKPolygon *polygon;
 
 @end
-

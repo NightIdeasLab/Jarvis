@@ -14,4 +14,5 @@ enum {
     MKMapTypeSatellite,
     MKMapTypeHybrid
 };
+
 typedef NSUInteger MKMapType;

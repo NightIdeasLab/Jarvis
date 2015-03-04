@@ -46,4 +46,5 @@
 //   - Result not found errors (permanent condition).  The result not found errors
 //     will have the domain MKErrorDomain and the code MKErrorPlacemarkNotFound
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error;
+
 @end

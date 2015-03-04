@@ -28,5 +28,7 @@
 	<false/>
 	<key>UseNewsQuotes</key>
 	<true/>
+	<key>AutomaticLocation</key>
+	<string>YES</string>
 </dict>
 </plist>

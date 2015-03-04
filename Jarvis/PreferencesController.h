@@ -13,10 +13,7 @@
 @class MKMapView;
 
 @interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate, MKMapViewDelegate, MKReverseGeocoderDelegate, MKGeocoderDelegate > {
-    NSNumber *circleRadius;
-    NSString *pinTitle;
-    NSArray *pinNames;
-    NSMutableArray *coreLocationPins;
+    BOOL showsUserLocationApp;
 }
 
 #pragma mark -

@@ -38,8 +38,6 @@
     // Annotations
     NSMapTable *annotationViews;
     NSMapTable *annotationScriptObjects;
-
-    
 }
 @property (nonatomic, assign) id <MKMapViewDelegate> delegate;
 
@@ -54,7 +52,6 @@
 @property(nonatomic, readonly) NSArray *overlays;
 @property(nonatomic, readonly) NSArray *annotations;
 @property(nonatomic, copy) NSArray *selectedAnnotations;
-
 
 - (void)setCenterCoordinate:(CLLocationCoordinate2D)coordinate animated:(BOOL)animated;
 - (void)setRegion:(MKCoordinateRegion)region animated:(BOOL)animated;
@@ -88,7 +85,6 @@
 
 @end
 
-
 @protocol MKMapViewDelegate <NSObject>
 @optional
 
@@ -115,7 +111,6 @@
 // Overlays
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay;
 - (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews;
-
 
 // iOS 4.0 additions:
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view;

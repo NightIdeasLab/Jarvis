@@ -18,4 +18,3 @@
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 
 @end
-
