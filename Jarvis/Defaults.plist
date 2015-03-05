@@ -8,18 +8,12 @@
 	<true/>
 	<key>FirstLaunch</key>
 	<integer>0</integer>
-	<key>DefaultLocation</key>
-	<integer>721943</integer>
 	<key>ReadUserName</key>
 	<true/>
 	<key>UserName</key>
 	<string>Short</string>
-	<key>TemperatureStyle</key>
-	<string>c</string>
 	<key>TimeStyle</key>
 	<string>24</string>
-	<key>ForecastWeather</key>
-	<string>YES</string>
 	<key>UseCal</key>
 	<true/>
 	<key>UseWeather</key>
@@ -29,6 +23,12 @@
 	<key>UseNewsQuotes</key>
 	<true/>
 	<key>AutomaticLocation</key>
+	<true/>
+	<key>openweathermapAPPID</key>
+	<string>a9c3ab5e3f270e35a36c1f18ef279909</string>
+	<key>TemperatureStyle</key>
+	<string>c</string>
+	<key>ForecastWeather</key>
 	<string>YES</string>
 </dict>
 </plist>

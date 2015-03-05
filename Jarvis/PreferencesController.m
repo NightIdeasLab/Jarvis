@@ -163,7 +163,7 @@
         [newsButton setState:0];
     }
 
-    if (automaticLocation) {
+    if (automaticLocation == YES) {
 		[mapView setShowsUserLocation: YES];
 		[mapView setDelegate: self];
 		[locationField setEnabled:NO];
@@ -320,6 +320,10 @@
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
+	
+	MKGeocoder *geocoderNoCoord = [[MKGeocoder alloc] initWithAddress:locationText];
+	geocoderNoCoord.delegate = self;
+	[geocoderNoCoord start];
 }
 
 - (IBAction)changeStateAutomaticLocation:(id)sender {
@@ -371,8 +375,22 @@
 	[defaults synchronize];
 }
 
+- (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate
+{
+	//NSLog(@"MKGeocoder found (%f, %f) for %@", coordinate.latitude, coordinate.longitude, geocoder.address);
+	CLLocationCoordinate2D coordinateE;
+	coordinateE.latitude = coordinate.longitude;
+	coordinateE.longitude = coordinate.latitude;
+	MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinateE];
+	reverseGeocoder.delegate = self;
+	[reverseGeocoder start];
+}
+
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
-{    
+{
+	//NSLog(@"loc: %@", placemark.locality);
+	//NSLog(@"country: %@", placemark.country);
+	//NSLog(@"code: %@", placemark.countryCode);
     if (placemark.locality != NULL && placemark.country != NULL && placemark.countryCode != NULL) {
         [mapView setShowsUserLocation: NO];
         // adding the location to the text box
