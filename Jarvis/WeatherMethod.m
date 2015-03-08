@@ -26,67 +26,30 @@
 	//BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 		
 	if(localityWeather != nil && countryCodeWeather != nil) {
-		//api.openweathermap.org/data/2.5/weather?q=London,uk
-		//weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
-		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=metric", localityWeather, countryCodeWeather]] encoding: NSUTF8StringEncoding error:nil];
-		//NSLog(@"weather: %@", weatherContent);
-		if(weatherContent != nil)
-		{			
+		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@&mode=xml", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
+		NSDictionary *weatherResponse = [NSDictionary dictionaryWithXMLString:weatherContent];
+		if (weatherResponse == NULL) {
 			NSError *error = NULL;
-			NSData *data = [weatherContent dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *json = [NSJSONSerialization
-                                  JSONObjectWithData:data
-                                  options:kNilOptions
-                                  error:&error];
-			//NSArray *resultArray = [json objectForKey:@"weather"];
-			//NSLog(@"weather: %@",resultArray);
-			NSString *currentTemperature = [[json objectForKey:@"main"] objectForKey:@"temp"];
-		//	NSString *currentTemperature = [[json objectForKey:@"main"] objectForKey:@"temp"];
-			NSData	*weatherData = [[json objectForKey:@"weather"] dataUsingEncoding:NSUTF8StringEncoding];
-            NSDictionary *weatherJson = [NSJSONSerialization
-                                  JSONObjectWithData:weatherData
-                                  options:kNilOptions
-                                  error:&error];
-			NSLog(@"weather: %@",weatherJson);
+			NSData *currentResponse = [weatherContent dataUsingEncoding:NSUTF8StringEncoding];
+			NSDictionary *weatherJson = [NSJSONSerialization
+										 JSONObjectWithData:currentResponse
+										 options:kNilOptions
+										 error:&error];
+			outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),[weatherJson objectForKey:@"message"]];
+		} else {			
+			NSString *currentIcon = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", [[weatherResponse objectForKey:@"weather"] objectForKey:@"_icon"]];
+			weatherImage = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: currentIcon]];
 			
+			NSString *currentWeather = [[weatherResponse objectForKey:@"weather"] objectForKey:@"_value"];
+			NSString *currentTemperature = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_value"];
+			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@", @""), currentWeather, localityWeather, currentTemperature]];
 			
-			NSString *currentWeather = @"";
-			NSString *countryName = @"";
+			NSString *todayMin = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_min"];
+			NSString *todayMax = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_max"];
 			
-			//currentWeather = [[weather componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
-			//currentWeather = [[currentWeather componentsSeparatedByString:@","] objectAtIndex:0];
-			
-			
-			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nThe weather in %@ is : %@", @""),localityWeather, currentTemperature]];
-			
-			NSLog(@"weather: %@", [[json objectForKey:@"main"] objectForKey:@"temp"]);
-			
-			weatherImage = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"http://openweathermap.org/img/w/10d.png"]];
-			
-			/*
-			cityName = [[weatherContent componentsSeparatedByString:@"<title>Yahoo! Weather - "] objectAtIndex:1];
-			cityName = [[cityName componentsSeparatedByString:@","] objectAtIndex:0];
-			stateName = [[weatherContent componentsSeparatedByString:@"region=\""] objectAtIndex:1];
-			stateName = [[stateName componentsSeparatedByString:@"\" "] objectAtIndex:0];
-			countryName = [[weatherContent componentsSeparatedByString:@"country=\""] objectAtIndex:1];
-			countryName = [[countryName componentsSeparatedByString:@"\"/>"] objectAtIndex:0];
-			weatherText = [[weatherContent componentsSeparatedByString:@"<b>Current Conditions:</b><br />"] objectAtIndex:1];
-			weatherText = [[weatherText componentsSeparatedByString:@"<BR />"] objectAtIndex:0];
-
-			if ([countryName isEqualToString:@"United States"]) {
-				outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nThe weather in %@, %@ is : ", @""),cityName, stateName]];
-			} else {
-				outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nThe weather in %@, %@ is : ", @""),cityName, countryName]];
-			}
-			
-			//Removing white spaces from the beginning or end of the string retrieved
-			NSString *trimmedString = [weatherText stringByTrimmingCharactersInSet:
-									   [NSCharacterSet whitespaceAndNewlineCharacterSet]];
-			
-			outputWeatherText = [outputWeatherText stringByAppendingString:trimmedString];
-			outputWeatherText = [outputWeatherText stringByAppendingString:@".\n"];
-			*/
+			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nToday High is: %@ and Low is %@ \n", @""), todayMax, todayMin]];
 		}
+		
 		/*
 		if (forecastState == YES) {
 			//Forecast for the next 5 days

@@ -21,6 +21,7 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
+		00741BEE1AACA06B00E69D76 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 00741BED1AACA06B00E69D76 /* XMLDictionary.m */; };
 		007A32071A06D803007AA895 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32051A06D803007AA895 /* PrefAccount.png */; };
 		007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32061A06D803007AA895 /* PrefAccount@2x.png */; };
 		007B00DF1A5EEC06002FC178 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
@@ -103,6 +104,8 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
+		00741BEC1AACA06B00E69D76 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		00741BED1AACA06B00E69D76 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		007A32051A06D803007AA895 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefAccount.png; sourceTree = "<group>"; };
 		007A32061A06D803007AA895 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefAccount@2x.png"; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
@@ -363,6 +366,8 @@
 		00CD557E176B9BC60057FC4A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				00741BEC1AACA06B00E69D76 /* XMLDictionary.h */,
+				00741BED1AACA06B00E69D76 /* XMLDictionary.m */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -517,6 +522,7 @@
 				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
 				006537C918917067005648C0 /* AboutPanelController.m in Sources */,
 				006537CB18917067005648C0 /* NSFancyPanel.m in Sources */,
+				00741BEE1AACA06B00E69D76 /* XMLDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
