@@ -314,9 +314,7 @@ NSSpeechSynthesizer *synth;
 
             outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
 
-            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
-            NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-            NSImage *tempImage = [[NSImage alloc] initWithData:data];
+            NSImage *tempImage = [[NSImage alloc] initWithData:[result objectForKey:@"weatherImage"]];
             [weatherImage setImage:tempImage];
         }
     #endif

@@ -345,9 +345,9 @@
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
 
 	if (indexOfTemperaturePopUp == 0 ) {
-		[defaults setObject:@"c" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"metric" forKey: @"TemperatureStyle"];
 	} else if (indexOfTemperaturePopUp == 1 ) {
-		[defaults setObject:@"f" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"imperial" forKey: @"TemperatureStyle"];
 	}
     [defaults synchronize];
 }
@@ -377,7 +377,6 @@
 
 - (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate
 {
-	//NSLog(@"MKGeocoder found (%f, %f) for %@", coordinate.latitude, coordinate.longitude, geocoder.address);
 	CLLocationCoordinate2D coordinateE;
 	coordinateE.latitude = coordinate.longitude;
 	coordinateE.longitude = coordinate.latitude;
@@ -388,21 +387,22 @@
 
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
-	//NSLog(@"loc: %@", placemark.locality);
-	//NSLog(@"country: %@", placemark.country);
-	//NSLog(@"code: %@", placemark.countryCode);
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
     if (placemark.locality != NULL && placemark.country != NULL && placemark.countryCode != NULL) {
         [mapView setShowsUserLocation: NO];
         // adding the location to the text box
 		NSString *locationText = [NSString stringWithFormat:@"%@, %@", placemark.country, placemark.locality];
 		NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
 		[locationLabel setStringValue:messageForLabel];
+		[defaults setObject:placemark.locality forKey: @"Locality"];
+		[defaults setObject:placemark.countryCode forKey: @"CountryCode"];
+		[defaults synchronize];
     }
 }
 
 - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
-    //NSLog(@"didUpdateUserLocation: %@", userLocation);
     if (showsUserLocationApp == NO) {
         CLLocationCoordinate2D coordinate;
         coordinate.latitude = userLocation.location.coordinate.latitude;
