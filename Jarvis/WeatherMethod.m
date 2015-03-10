@@ -28,6 +28,7 @@
 	if(localityWeather != nil && countryCodeWeather != nil) {
 		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@&mode=xml", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
 		NSDictionary *weatherResponse = [NSDictionary dictionaryWithXMLString:weatherContent];
+		NSLog(@"weath: %@", weatherContent);
 		if (weatherResponse == NULL) {
 			NSError *error = NULL;
 			NSData *currentResponse = [weatherContent dataUsingEncoding:NSUTF8StringEncoding];
@@ -49,7 +50,7 @@
 			
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nToday High is: %@ and Low is %@ \n", @""), todayMax, todayMin]];
 		}
-		
+		// i need to get the forecast of current day to get the high and low temp
 		/*
 		if (forecastState == YES) {
 			//Forecast for the next 5 days

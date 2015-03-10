@@ -21,17 +21,17 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
+		006A2F8B1AAF7BB800DD7D05 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F831AAF7BB800DD7D05 /* PrefAccount.png */; };
+		006A2F8C1AAF7BB800DD7D05 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F841AAF7BB800DD7D05 /* PrefAccount@2x.png */; };
+		006A2F8D1AAF7BB800DD7D05 /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F851AAF7BB800DD7D05 /* PrefGeneral.png */; };
+		006A2F8E1AAF7BB800DD7D05 /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F861AAF7BB800DD7D05 /* PrefGeneral@2x.png */; };
+		006A2F8F1AAF7BB800DD7D05 /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F871AAF7BB800DD7D05 /* PrefUpdate.png */; };
+		006A2F901AAF7BB800DD7D05 /* PrefUpdate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F881AAF7BB800DD7D05 /* PrefUpdate@2x.png */; };
+		006A2F911AAF7BB800DD7D05 /* PrefWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F891AAF7BB800DD7D05 /* PrefWeather.png */; };
+		006A2F921AAF7BB800DD7D05 /* PrefWeather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */; };
 		00741BEE1AACA06B00E69D76 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 00741BED1AACA06B00E69D76 /* XMLDictionary.m */; };
-		007A32071A06D803007AA895 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32051A06D803007AA895 /* PrefAccount.png */; };
-		007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 007A32061A06D803007AA895 /* PrefAccount@2x.png */; };
 		007B00DF1A5EEC06002FC178 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
-		0094D442176A27340052079F /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D437176A27340052079F /* PrefGeneral.png */; };
-		0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D438176A27340052079F /* PrefGeneral@2x.png */; };
-		0094D444176A27340052079F /* PrefUpdate.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D439176A27340052079F /* PrefUpdate.png */; };
-		0094D445176A27340052079F /* PrefUpdate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D43A176A27340052079F /* PrefUpdate@2x.png */; };
-		0094D44A176A27340052079F /* RSSAtomNotify.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D440176A27340052079F /* RSSAtomNotify.png */; };
-		0094D44B176A27340052079F /* RSSAtomNotify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0094D441176A27340052079F /* RSSAtomNotify@2x.png */; };
 		0094D44D176A27C50052079F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44C176A27C50052079F /* WebKit.framework */; };
 		0094D44F176A27D10052079F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44E176A27D10052079F /* CoreLocation.framework */; };
 		0094D451176A27D80052079F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D450176A27D80052079F /* AddressBook.framework */; };
@@ -49,8 +49,6 @@
 		00AF0DE91769FBBC00C00AE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DE81769FBBC00C00AE3 /* main.m */; };
 		00AF0DF01769FBBC00C00AE3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */; };
 		00AF0DF31769FBBD00C00AE3 /* App.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00AF0DF11769FBBD00C00AE3 /* App.xib */; };
-		00BD8A16178F37750042CCA5 /* PrefWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BD8A14178F37750042CCA5 /* PrefWeather.png */; };
-		00BD8A17178F37750042CCA5 /* PrefWeather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */; };
 		00C7E6DE176B84D5008C2823 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6DD176B84D5008C2823 /* Defaults.plist */; };
 		00C7E6E3176B8592008C2823 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6DF176B8592008C2823 /* dsa_pub.pem */; };
 		00C7E6E4176B8592008C2823 /* Jarvis.icns in Resources */ = {isa = PBXBuildFile; fileRef = 00C7E6E0176B8592008C2823 /* Jarvis.icns */; };
@@ -104,18 +102,18 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
+		006A2F831AAF7BB800DD7D05 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefAccount.png; path = Preference/PrefAccount.png; sourceTree = "<group>"; };
+		006A2F841AAF7BB800DD7D05 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefAccount@2x.png"; path = "Preference/PrefAccount@2x.png"; sourceTree = "<group>"; };
+		006A2F851AAF7BB800DD7D05 /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefGeneral.png; path = Preference/PrefGeneral.png; sourceTree = "<group>"; };
+		006A2F861AAF7BB800DD7D05 /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefGeneral@2x.png"; path = "Preference/PrefGeneral@2x.png"; sourceTree = "<group>"; };
+		006A2F871AAF7BB800DD7D05 /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefUpdate.png; path = Preference/PrefUpdate.png; sourceTree = "<group>"; };
+		006A2F881AAF7BB800DD7D05 /* PrefUpdate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefUpdate@2x.png"; path = "Preference/PrefUpdate@2x.png"; sourceTree = "<group>"; };
+		006A2F891AAF7BB800DD7D05 /* PrefWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefWeather.png; path = Preference/PrefWeather.png; sourceTree = "<group>"; };
+		006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefWeather@2x.png"; path = "Preference/PrefWeather@2x.png"; sourceTree = "<group>"; };
 		00741BEC1AACA06B00E69D76 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		00741BED1AACA06B00E69D76 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
-		007A32051A06D803007AA895 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefAccount.png; sourceTree = "<group>"; };
-		007A32061A06D803007AA895 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefAccount@2x.png"; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
-		0094D437176A27340052079F /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefGeneral.png; sourceTree = "<group>"; };
-		0094D438176A27340052079F /* PrefGeneral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefGeneral@2x.png"; sourceTree = "<group>"; };
-		0094D439176A27340052079F /* PrefUpdate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefUpdate.png; sourceTree = "<group>"; };
-		0094D43A176A27340052079F /* PrefUpdate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefUpdate@2x.png"; sourceTree = "<group>"; };
-		0094D440176A27340052079F /* RSSAtomNotify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSSAtomNotify.png; sourceTree = "<group>"; };
-		0094D441176A27340052079F /* RSSAtomNotify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSSAtomNotify@2x.png"; sourceTree = "<group>"; };
 		0094D44C176A27C50052079F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		0094D44E176A27D10052079F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		0094D450176A27D80052079F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -140,8 +138,6 @@
 		00AF0DEE1769FBBC00C00AE3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		00AF0DEF1769FBBC00C00AE3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		00AF0DF21769FBBD00C00AE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/App.xib; sourceTree = "<group>"; };
-		00BD8A14178F37750042CCA5 /* PrefWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PrefWeather.png; sourceTree = "<group>"; };
-		00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PrefWeather@2x.png"; sourceTree = "<group>"; };
 		00C7E6DD176B84D5008C2823 /* Defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Defaults.plist; sourceTree = "<group>"; };
 		00C7E6DF176B8592008C2823 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Jarvis/dsa_pub.pem; sourceTree = "<group>"; };
 		00C7E6E0176B8592008C2823 /* Jarvis.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Jarvis.icns; sourceTree = "<group>"; };
@@ -202,30 +198,28 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
+		006A2F821AAF7BA100DD7D05 /* Preference */ = {
+			isa = PBXGroup;
+			children = (
+				006A2F831AAF7BB800DD7D05 /* PrefAccount.png */,
+				006A2F841AAF7BB800DD7D05 /* PrefAccount@2x.png */,
+				006A2F851AAF7BB800DD7D05 /* PrefGeneral.png */,
+				006A2F861AAF7BB800DD7D05 /* PrefGeneral@2x.png */,
+				006A2F871AAF7BB800DD7D05 /* PrefUpdate.png */,
+				006A2F881AAF7BB800DD7D05 /* PrefUpdate@2x.png */,
+				006A2F891AAF7BB800DD7D05 /* PrefWeather.png */,
+				006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */,
+			);
+			name = Preference;
+			sourceTree = "<group>";
+		};
 		0094D436176A27340052079F /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				0094D43B176A27340052079F /* Service Icons */,
+				006A2F821AAF7BA100DD7D05 /* Preference */,
 				00485F7A188ADA2400EA4CC3 /* Name.pdf */,
-				0094D437176A27340052079F /* PrefGeneral.png */,
-				0094D438176A27340052079F /* PrefGeneral@2x.png */,
-				007A32051A06D803007AA895 /* PrefAccount.png */,
-				007A32061A06D803007AA895 /* PrefAccount@2x.png */,
-				00BD8A14178F37750042CCA5 /* PrefWeather.png */,
-				00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */,
-				0094D439176A27340052079F /* PrefUpdate.png */,
-				0094D43A176A27340052079F /* PrefUpdate@2x.png */,
 			);
 			path = Graphics;
-			sourceTree = "<group>";
-		};
-		0094D43B176A27340052079F /* Service Icons */ = {
-			isa = PBXGroup;
-			children = (
-				0094D440176A27340052079F /* RSSAtomNotify.png */,
-				0094D441176A27340052079F /* RSSAtomNotify@2x.png */,
-			);
-			path = "Service Icons";
 			sourceTree = "<group>";
 		};
 		00A04B9E176A15B500A3F3CE /* Helpers */ = {
@@ -458,20 +452,12 @@
 			files = (
 				00AF0DE71769FBBC00C00AE3 /* InfoPlist.strings in Resources */,
 				00AF0DF31769FBBD00C00AE3 /* App.xib in Resources */,
-				0094D442176A27340052079F /* PrefGeneral.png in Resources */,
-				0094D443176A27340052079F /* PrefGeneral@2x.png in Resources */,
-				0094D444176A27340052079F /* PrefUpdate.png in Resources */,
-				0094D445176A27340052079F /* PrefUpdate@2x.png in Resources */,
-				0094D44A176A27340052079F /* RSSAtomNotify.png in Resources */,
-				0094D44B176A27340052079F /* RSSAtomNotify@2x.png in Resources */,
 				00C7E6DE176B84D5008C2823 /* Defaults.plist in Resources */,
 				00C7E6E3176B8592008C2823 /* dsa_pub.pem in Resources */,
 				00C7E6E4176B8592008C2823 /* Jarvis.icns in Resources */,
 				00C7E6EC176B86C1008C2823 /* htdocs in Resources */,
 				00C7E6EE176B86FF008C2823 /* JarvisHelp in Resources */,
 				00C7E6F1176B87FB008C2823 /* COPYING in Resources */,
-				00BD8A16178F37750042CCA5 /* PrefWeather.png in Resources */,
-				00BD8A17178F37750042CCA5 /* PrefWeather@2x.png in Resources */,
 				00E2C76D1790704500246636 /* Preference pane.rtf in Resources */,
 				00F6E1F11793463C001E1F98 /* PreferencesController.xib in Resources */,
 				00F6E1F417934649001E1F98 /* JRFeedbackProvider.xib in Resources */,
@@ -479,8 +465,14 @@
 				00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */,
 				006537C118917049005648C0 /* AboutContent.rtf in Resources */,
 				006537C818917067005648C0 /* AboutPanel.xib in Resources */,
-				007A32071A06D803007AA895 /* PrefAccount.png in Resources */,
-				007A32081A06D803007AA895 /* PrefAccount@2x.png in Resources */,
+				006A2F8B1AAF7BB800DD7D05 /* PrefAccount.png in Resources */,
+				006A2F8C1AAF7BB800DD7D05 /* PrefAccount@2x.png in Resources */,
+				006A2F8D1AAF7BB800DD7D05 /* PrefGeneral.png in Resources */,
+				006A2F8E1AAF7BB800DD7D05 /* PrefGeneral@2x.png in Resources */,
+				006A2F8F1AAF7BB800DD7D05 /* PrefUpdate.png in Resources */,
+				006A2F901AAF7BB800DD7D05 /* PrefUpdate@2x.png in Resources */,
+				006A2F911AAF7BB800DD7D05 /* PrefWeather.png in Resources */,
+				006A2F921AAF7BB800DD7D05 /* PrefWeather@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
