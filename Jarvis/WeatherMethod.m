@@ -24,11 +24,27 @@
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
 	NSData *weatherImage = NULL;
 	//BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
-		
+	
 	if(localityWeather != nil && countryCodeWeather != nil) {
-		weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@&mode=xml", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
-		NSDictionary *weatherResponse = [NSDictionary dictionaryWithXMLString:weatherContent];
-		NSLog(@"weath: %@", weatherContent);
+		JSWeather *weather = [JSWeather sharedInstance];
+		[weather setTemperatureMetric:kJSFahrenheit];
+		[weather setDelegate:self];
+		
+		NSString *city = localityWeather;
+		NSString *state = countryCodeWeather;
+		
+		[weather queryForCurrentWeatherWithCity:city state:state block:^(JSCurrentWeatherObject *object, NSError *error) {
+			if (error) {
+				//[[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+				//return;
+				NSLog(@"error: %@", [error localizedDescription]);
+			}
+			
+			NSLog(@"%@", object.objects);
+		}];
+		
+		//weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@&mode=xml", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
+		NSDictionary *weatherResponse = nil;
 		if (weatherResponse == NULL) {
 			NSError *error = NULL;
 			NSData *currentResponse = [weatherContent dataUsingEncoding:NSUTF8StringEncoding];

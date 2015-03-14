@@ -1,0 +1,21 @@
+//
+//  JSWeatherConstants.m
+//  JSWeatherAPI
+//
+//  Created by John Setting on 12/4/14.
+//  Copyright (c) 2014 John Setting. All rights reserved.
+//
+
+#import "JSWeatherConstants.h"
+
+NSString * const kJSWeatherURL = @"http://openweathermap.org/";
+NSString * const kJSWeatherAPIURL = @"http://api.openweathermap.org/";
+NSString * const kJSWeatherAPITypeData = @"data/";
+NSString * const kJSWeatherAPITypeImage = @"img/w/";
+NSString * const kJSWeatherAPITypeHistory = @"history/";
+NSString * const kJSWeatherAPIVersion = @"2.5/";
+NSString * const kJSWeatherAPIQueryWeather = @"weather?q=";
+NSString * const kJSWeatherAPIQueryDailyForecast = @"forecast/daily?q=";
+NSString * const kJSWeatherAPIQueryDailyForecastCount = @"cnt=";
+NSString * const kJSWeatherAPIQueryHourlyForecast = @"forecast?q=";
+NSString * const kJSWeatherAPIQueryHistoricalData = @"city?q=";

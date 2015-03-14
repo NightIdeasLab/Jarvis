@@ -29,7 +29,15 @@
 		006A2F901AAF7BB800DD7D05 /* PrefUpdate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F881AAF7BB800DD7D05 /* PrefUpdate@2x.png */; };
 		006A2F911AAF7BB800DD7D05 /* PrefWeather.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F891AAF7BB800DD7D05 /* PrefWeather.png */; };
 		006A2F921AAF7BB800DD7D05 /* PrefWeather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */; };
-		00741BEE1AACA06B00E69D76 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 00741BED1AACA06B00E69D76 /* XMLDictionary.m */; };
+		00771B261AB482E10014A4F1 /* JSCurrentLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B161AB482E10014A4F1 /* JSCurrentLocation.m */; };
+		00771B271AB482E10014A4F1 /* JSCurrentWeatherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B181AB482E10014A4F1 /* JSCurrentWeatherObject.m */; };
+		00771B281AB482E10014A4F1 /* JSDailyForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B1A1AB482E10014A4F1 /* JSDailyForecastObject.m */; };
+		00771B291AB482E10014A4F1 /* JSHistoricalDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B1C1AB482E10014A4F1 /* JSHistoricalDataObject.m */; };
+		00771B2A1AB482E10014A4F1 /* JSHourlyForecastObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B1E1AB482E10014A4F1 /* JSHourlyForecastObject.m */; };
+		00771B2B1AB482E10014A4F1 /* JSWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B201AB482E10014A4F1 /* JSWeather.m */; };
+		00771B2C1AB482E10014A4F1 /* JSWeatherConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B221AB482E10014A4F1 /* JSWeatherConstants.m */; };
+		00771B2D1AB482E10014A4F1 /* JSWeatherUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B241AB482E10014A4F1 /* JSWeatherUtility.m */; };
+		00771B2E1AB482E10014A4F1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00771B251AB482E10014A4F1 /* LICENSE */; };
 		007B00DF1A5EEC06002FC178 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D44D176A27C50052079F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44C176A27C50052079F /* WebKit.framework */; };
@@ -110,8 +118,23 @@
 		006A2F881AAF7BB800DD7D05 /* PrefUpdate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefUpdate@2x.png"; path = "Preference/PrefUpdate@2x.png"; sourceTree = "<group>"; };
 		006A2F891AAF7BB800DD7D05 /* PrefWeather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefWeather.png; path = Preference/PrefWeather.png; sourceTree = "<group>"; };
 		006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefWeather@2x.png"; path = "Preference/PrefWeather@2x.png"; sourceTree = "<group>"; };
-		00741BEC1AACA06B00E69D76 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
-		00741BED1AACA06B00E69D76 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		00771B151AB482E10014A4F1 /* JSCurrentLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSCurrentLocation.h; path = JSWeatherAPI/JSCurrentLocation.h; sourceTree = "<group>"; };
+		00771B161AB482E10014A4F1 /* JSCurrentLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSCurrentLocation.m; path = JSWeatherAPI/JSCurrentLocation.m; sourceTree = "<group>"; };
+		00771B171AB482E10014A4F1 /* JSCurrentWeatherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSCurrentWeatherObject.h; path = JSWeatherAPI/JSCurrentWeatherObject.h; sourceTree = "<group>"; };
+		00771B181AB482E10014A4F1 /* JSCurrentWeatherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSCurrentWeatherObject.m; path = JSWeatherAPI/JSCurrentWeatherObject.m; sourceTree = "<group>"; };
+		00771B191AB482E10014A4F1 /* JSDailyForecastObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSDailyForecastObject.h; path = JSWeatherAPI/JSDailyForecastObject.h; sourceTree = "<group>"; };
+		00771B1A1AB482E10014A4F1 /* JSDailyForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSDailyForecastObject.m; path = JSWeatherAPI/JSDailyForecastObject.m; sourceTree = "<group>"; };
+		00771B1B1AB482E10014A4F1 /* JSHistoricalDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSHistoricalDataObject.h; path = JSWeatherAPI/JSHistoricalDataObject.h; sourceTree = "<group>"; };
+		00771B1C1AB482E10014A4F1 /* JSHistoricalDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSHistoricalDataObject.m; path = JSWeatherAPI/JSHistoricalDataObject.m; sourceTree = "<group>"; };
+		00771B1D1AB482E10014A4F1 /* JSHourlyForecastObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSHourlyForecastObject.h; path = JSWeatherAPI/JSHourlyForecastObject.h; sourceTree = "<group>"; };
+		00771B1E1AB482E10014A4F1 /* JSHourlyForecastObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSHourlyForecastObject.m; path = JSWeatherAPI/JSHourlyForecastObject.m; sourceTree = "<group>"; };
+		00771B1F1AB482E10014A4F1 /* JSWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSWeather.h; path = JSWeatherAPI/JSWeather.h; sourceTree = "<group>"; };
+		00771B201AB482E10014A4F1 /* JSWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSWeather.m; path = JSWeatherAPI/JSWeather.m; sourceTree = "<group>"; };
+		00771B211AB482E10014A4F1 /* JSWeatherConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSWeatherConstants.h; path = JSWeatherAPI/JSWeatherConstants.h; sourceTree = "<group>"; };
+		00771B221AB482E10014A4F1 /* JSWeatherConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSWeatherConstants.m; path = JSWeatherAPI/JSWeatherConstants.m; sourceTree = "<group>"; };
+		00771B231AB482E10014A4F1 /* JSWeatherUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSWeatherUtility.h; path = JSWeatherAPI/JSWeatherUtility.h; sourceTree = "<group>"; };
+		00771B241AB482E10014A4F1 /* JSWeatherUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSWeatherUtility.m; path = JSWeatherAPI/JSWeatherUtility.m; sourceTree = "<group>"; };
+		00771B251AB482E10014A4F1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = JSWeatherAPI/LICENSE; sourceTree = "<group>"; };
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D44C176A27C50052079F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -211,6 +234,30 @@
 				006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */,
 			);
 			name = Preference;
+			sourceTree = "<group>";
+		};
+		00771B141AB482D20014A4F1 /* JSWeatherAPI */ = {
+			isa = PBXGroup;
+			children = (
+				00771B151AB482E10014A4F1 /* JSCurrentLocation.h */,
+				00771B161AB482E10014A4F1 /* JSCurrentLocation.m */,
+				00771B171AB482E10014A4F1 /* JSCurrentWeatherObject.h */,
+				00771B181AB482E10014A4F1 /* JSCurrentWeatherObject.m */,
+				00771B191AB482E10014A4F1 /* JSDailyForecastObject.h */,
+				00771B1A1AB482E10014A4F1 /* JSDailyForecastObject.m */,
+				00771B1B1AB482E10014A4F1 /* JSHistoricalDataObject.h */,
+				00771B1C1AB482E10014A4F1 /* JSHistoricalDataObject.m */,
+				00771B1D1AB482E10014A4F1 /* JSHourlyForecastObject.h */,
+				00771B1E1AB482E10014A4F1 /* JSHourlyForecastObject.m */,
+				00771B1F1AB482E10014A4F1 /* JSWeather.h */,
+				00771B201AB482E10014A4F1 /* JSWeather.m */,
+				00771B211AB482E10014A4F1 /* JSWeatherConstants.h */,
+				00771B221AB482E10014A4F1 /* JSWeatherConstants.m */,
+				00771B231AB482E10014A4F1 /* JSWeatherUtility.h */,
+				00771B241AB482E10014A4F1 /* JSWeatherUtility.m */,
+				00771B251AB482E10014A4F1 /* LICENSE */,
+			);
+			name = JSWeatherAPI;
 			sourceTree = "<group>";
 		};
 		0094D436176A27340052079F /* Graphics */ = {
@@ -360,8 +407,7 @@
 		00CD557E176B9BC60057FC4A /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				00741BEC1AACA06B00E69D76 /* XMLDictionary.h */,
-				00741BED1AACA06B00E69D76 /* XMLDictionary.m */,
+				00771B141AB482D20014A4F1 /* JSWeatherAPI */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -473,6 +519,7 @@
 				006A2F901AAF7BB800DD7D05 /* PrefUpdate@2x.png in Resources */,
 				006A2F911AAF7BB800DD7D05 /* PrefWeather.png in Resources */,
 				006A2F921AAF7BB800DD7D05 /* PrefWeather@2x.png in Resources */,
+				00771B2E1AB482E10014A4F1 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +561,14 @@
 				008541B417925BEF0005A433 /* ChangeLogController.m in Sources */,
 				006537C918917067005648C0 /* AboutPanelController.m in Sources */,
 				006537CB18917067005648C0 /* NSFancyPanel.m in Sources */,
-				00741BEE1AACA06B00E69D76 /* XMLDictionary.m in Sources */,
+				00771B261AB482E10014A4F1 /* JSCurrentLocation.m in Sources */,
+				00771B271AB482E10014A4F1 /* JSCurrentWeatherObject.m in Sources */,
+				00771B281AB482E10014A4F1 /* JSDailyForecastObject.m in Sources */,
+				00771B291AB482E10014A4F1 /* JSHistoricalDataObject.m in Sources */,
+				00771B2A1AB482E10014A4F1 /* JSHourlyForecastObject.m in Sources */,
+				00771B2B1AB482E10014A4F1 /* JSWeather.m in Sources */,
+				00771B2C1AB482E10014A4F1 /* JSWeatherConstants.m in Sources */,
+				00771B2D1AB482E10014A4F1 /* JSWeatherUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
