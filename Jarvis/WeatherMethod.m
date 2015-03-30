@@ -38,11 +38,11 @@
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
 				return;
 			}
-			NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-			
-			[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-			[formatter setMaximumFractionDigits:2];
-			[formatter setRoundingMode: NSNumberFormatterRoundUp];
+//			NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//			
+//			[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+//			[formatter setMaximumFractionDigits:2];
+//			[formatter setRoundingMode: NSNumberFormatterRoundUp];
 			
 //			NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
 //			
@@ -54,11 +54,11 @@
 			weatherImage = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: currentIcon]];
 			
 			NSString *currentWeather = [object.objects objectForKey:@"weather"];
-			NSString *currentTemperature = [formatter stringFromNumber:[object.objects objectForKey:@"current_temp"]];
+			NSString *currentTemperature = [object.objects objectForKey:@"current_temp"];
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@", @""), currentWeather, localityWeather, currentTemperature]];
 			
-			NSString *todayMin = [formatter stringFromNumber:[object.objects objectForKey:@"min_temp"]];
-			NSString *todayMax = [formatter stringFromNumber:[object.objects objectForKey:@"max_temp"]];
+			NSString *todayMin = [object.objects objectForKey:@"min_temp"];
+			NSString *todayMax = [object.objects objectForKey:@"max_temp"];
 			
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nToday High is: %@ and Low is %@ \n", @""), todayMax, todayMin]];
 		}];

@@ -48,6 +48,7 @@
 
 	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	NSLog(@"data: %@", data);
+	NSLog(@"error: %@", error);
 	if (data != nil) {
 		if (error) {
 			completionBlock(nil, error);
