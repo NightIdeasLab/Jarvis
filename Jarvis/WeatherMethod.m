@@ -16,18 +16,18 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
     //Weather conditions
-    NSString *outputWeatherText = [[NSString alloc] init];
+    __block NSString *outputWeatherText = [[NSString alloc] init];
 	NSString *weatherContent = @"";
 	NSString *localityWeather = [defaults stringForKey: @"Locality"];
 	NSString *countryCodeWeather = [defaults stringForKey: @"CountryCode"];
 	NSString *openweathermapAPPID = [defaults stringForKey: @"openweathermapAPPID"];
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
-	NSData *weatherImage = NULL;
+	__block NSData *weatherImage = NULL;
 	//BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 	
 	if(localityWeather != nil && countryCodeWeather != nil) {
 		JSWeather *weather = [JSWeather sharedInstance];
-		[weather setTemperatureMetric:kJSFahrenheit];
+		[weather setTemperatureMetric:kJSCelsius];
 		[weather setDelegate:self];
 		
 		NSString *city = localityWeather;
@@ -35,37 +35,33 @@
 		
 		[weather queryForCurrentWeatherWithCity:city state:state block:^(JSCurrentWeatherObject *object, NSError *error) {
 			if (error) {
-				//[[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-				//return;
-				NSLog(@"error: %@", [error localizedDescription]);
+				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
+				return;
 			}
+			NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+			
+			[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+			[formatter setMaximumFractionDigits:2];
+			[formatter setRoundingMode: NSNumberFormatterRoundUp];
+			
+//			NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+//			
+//			[fmt setMaximumFractionDigits:2];
+//			NSLog(@"%@", [fmt stringFromNumber:[NSNumber numberWithFloat:25.342]]);
 			
 			NSLog(@"%@", object.objects);
-		}];
-		
-		//weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://api.openweathermap.org/data/2.5/weather?q=%@,%@&units=%@&APPID=%@&mode=xml", localityWeather, countryCodeWeather, temperatureType, openweathermapAPPID]] encoding: NSUTF8StringEncoding error:nil];
-		NSDictionary *weatherResponse = nil;
-		if (weatherResponse == NULL) {
-			NSError *error = NULL;
-			NSData *currentResponse = [weatherContent dataUsingEncoding:NSUTF8StringEncoding];
-			NSDictionary *weatherJson = [NSJSONSerialization
-										 JSONObjectWithData:currentResponse
-										 options:kNilOptions
-										 error:&error];
-			outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),[weatherJson objectForKey:@"message"]];
-		} else {			
-			NSString *currentIcon = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", [[weatherResponse objectForKey:@"weather"] objectForKey:@"_icon"]];
+			NSString *currentIcon = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", [object.objects objectForKey:@"image"]];
 			weatherImage = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: currentIcon]];
 			
-			NSString *currentWeather = [[weatherResponse objectForKey:@"weather"] objectForKey:@"_value"];
-			NSString *currentTemperature = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_value"];
+			NSString *currentWeather = [object.objects objectForKey:@"weather"];
+			NSString *currentTemperature = [formatter stringFromNumber:[object.objects objectForKey:@"current_temp"]];
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@", @""), currentWeather, localityWeather, currentTemperature]];
 			
-			NSString *todayMin = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_min"];
-			NSString *todayMax = [[weatherResponse objectForKey:@"temperature"] objectForKey:@"_max"];
+			NSString *todayMin = [formatter stringFromNumber:[object.objects objectForKey:@"min_temp"]];
+			NSString *todayMax = [formatter stringFromNumber:[object.objects objectForKey:@"max_temp"]];
 			
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nToday High is: %@ and Low is %@ \n", @""), todayMax, todayMin]];
-		}
+		}];
 		// i need to get the forecast of current day to get the high and low temp
 		/*
 		if (forecastState == YES) {

@@ -20,7 +20,7 @@
 {
     if (!(self = [super init])) return nil;
         
-    self.JSWeatherImage = [dict objectForKey:@"image"];
+    self.JSWeatherImage = [[[dict objectForKey:@"weather"] firstObject] objectForKey:@"icon"];
     self.JSWindDirection = [JSWeatherUtility handleWindDirection:[[dict objectForKey:@"deg"] floatValue]];
     self.JSWindDirectionFloat = [[dict objectForKey:@"deg"] floatValue];
     self.JSForecastDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"dt"] intValue]];
@@ -52,7 +52,7 @@
         self.JSDayForecastMorningTemperature = ([[[dict objectForKey:@"temp"] objectForKey:@"morn"] floatValue] - 273.15) * 1.800 + 32.00;
         self.JSDayForecastNightTemperature = ([[[dict objectForKey:@"temp"] objectForKey:@"night"] floatValue] - 273.15) * 1.800 + 32.00;
     }
-    
+	
     self.JSWeatherDescription = [[[[dict objectForKey:@"weather"] firstObject] objectForKey:@"description"] capitalizedString];
     self.objects = [NSDictionary dictionaryWithObjects:@[self.JSWeatherImage,
                                                          self.JSWindDirection,

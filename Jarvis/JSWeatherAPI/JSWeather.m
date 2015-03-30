@@ -36,75 +36,67 @@
 - (void)queryForCurrentWeatherWithCity:(NSString *)city state:(NSString *)state
                                  block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock
 {
-	NSLog(@"calling the function");
     NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@",
                         kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryWeather,city, state] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
-//	(NSData *)sendSynchronousRequest:(NSURLRequest *)request
-//								returningResponse:(NSURLResponse **)response
-//								error:(NSError **)error
 	NSError *error = nil;
 	NSHTTPURLResponse *response = nil;
 	NSURLRequest *request = [NSURLRequest
 							 requestWithURL:[NSURL URLWithString:query]
 							 cachePolicy:NSURLRequestReloadIgnoringCacheData
 							 timeoutInterval:5.0];
-	/*
-	NSString *urlString = TEST_CONNECTION;
-	NSError *error = nil;
-	NSHTTPURLResponse *response = nil;
-	NSURLRequest *request = [NSURLRequest
-							 requestWithURL:[NSURL URLWithString:urlString]
-							 cachePolicy:NSURLRequestReloadIgnoringCacheData
-							 timeoutInterval:5.0];
-	
-	
-	NSData *conn = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	*/
+
+	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+	NSLog(@"data: %@", data);
+	if (data != nil) {
+		if (error) {
+			completionBlock(nil, error);
+			return;
+		}
+		
+		NSMutableDictionary * json = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error]];
+		
+		if ([[json objectForKey:@"cod"] intValue] == 404) {
+			NSString *reason = @"Apparently, the city queried for has no data to return";
+			NSError *error = [NSError errorWithDomain:@"com.JSWeather.api"
+												 code:301
+											 userInfo:@{NSLocalizedFailureReasonErrorKey:reason, NSLocalizedFailureReasonErrorKey:reason,
+				NSLocalizedRecoverySuggestionErrorKey:@"Change the city"}];
+			completionBlock(nil, error);
+			return;
+		}
+		JSCurrentWeatherObject *object = [[JSCurrentWeatherObject alloc] initWithData:json temperatureConversion:self.temperatureMetric];
+		completionBlock(object, nil);
+		return;
+	}
+//	
+//	
+//	NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@",
+//                        kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryWeather,city, state] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    
 //    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:query]]
 //                                       queue:[NSOperationQueue mainQueue]
 //                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	NSLog(@"data: %@", data);
-		NSLog(@"request: %@", request);
-		NSLog(@"error: %@", error);
-	if (data != nil) {
-//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-                               NSLog(@"error: %@", error);
-							   if (error) {
-                                   completionBlock(nil, error);
-                                   return;
-                               }
-                               
-                               NSMutableDictionary * json = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error]];
-                               
-                               if ([[json objectForKey:@"cod"] intValue] == 404) {
-                                   NSString *reason = @"Apparently, the city queried for has no data to return";
-                                   NSError *error = [NSError errorWithDomain:@"com.JSWeather.api"
-                                                                        code:301
-                                                                    userInfo:@{NSLocalizedFailureReasonErrorKey:reason, NSLocalizedFailureReasonErrorKey:reason,
-                                                                               NSLocalizedRecoverySuggestionErrorKey:@"Change the city"}];
-                                   completionBlock(nil, error);
-                                   return;
-                               }
-                               
-                               NSDictionary *theWeather = [[json objectForKey:@"weather"] firstObject];
-                               
-							   NSLog(@"weather: %@", theWeather);
-							   
-                               NSString *query = [[NSString stringWithFormat:@"%@%@%@.png",
-                                                   kJSWeatherURL, kJSWeatherAPITypeImage, [theWeather objectForKey:@"icon"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-                               [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:query]]
-                                                                  queue:[NSOperationQueue mainQueue]
-                                                      completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-
-                                                          //[json setObject:[[NSImage alloc] initWithData:data] forKey:@"image"];
-                                                          JSCurrentWeatherObject *object = [[JSCurrentWeatherObject alloc] initWithData:json temperatureConversion:self.temperatureMetric];
-                                                          completionBlock(object, nil);
-                                                          return;
-                                                      }];
-                               return;
-                           }
+//                               if (error) {
+//                                   completionBlock(nil, error);
+//                                   return;
+//                               }
+//                               
+//                               NSMutableDictionary * json = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error]];
+//                               
+//                               if ([[json objectForKey:@"cod"] intValue] == 404) {
+//                                   NSString *reason = @"Apparently, the city queried for has no data to return";
+//                                   NSError *error = [NSError errorWithDomain:@"com.JSWeather.api"
+//                                                                        code:301
+//                                                                    userInfo:@{NSLocalizedFailureReasonErrorKey:reason, NSLocalizedFailureReasonErrorKey:reason,
+//									   NSLocalizedRecoverySuggestionErrorKey:@"Change the city"}];
+//                                   completionBlock(nil, error);
+//                                   return;
+//                               }
+//                               JSCurrentWeatherObject *object = [[JSCurrentWeatherObject alloc] initWithData:json temperatureConversion:self.temperatureMetric];
+//							   completionBlock(object, nil);
+//                               return;
+//                           }];
 }
 
 - (void)queryForDailyForecastWithNumberOfDays:(NSInteger)numberOfDays city:(NSString *)city state:(NSString *)state
@@ -121,7 +113,6 @@
         return;
     }
     
-    
     NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@&%@%li",
                         kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryDailyForecast,city, state, kJSWeatherAPIQueryDailyForecastCount, (long)numberOfDays] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
@@ -133,7 +124,6 @@
         
         completionBlock(theObjects, nil);
     }];
-    
 }
 
 - (void)queryForHourlyForecastWithCity:(NSString *)city state:(NSString *)state
@@ -208,7 +198,6 @@
                                                               }
                                                               //[[NSImage alloc] initWithData:[result objectForKey:@"weatherImage"]];
                                                               //[d setObject:[[NSImage alloc] imageWithData:data] forKey:@"image"];
-
                                                               
                                                               id object;
                                                               
@@ -230,8 +219,6 @@
                                                               }
                                                           }];
                                }
-                               
-                               
                            }];
 
 }

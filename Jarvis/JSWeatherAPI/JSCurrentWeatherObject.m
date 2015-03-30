@@ -15,7 +15,7 @@
 {
     if (!(self = [super init])) return nil;
     
-    self.JSWeatherImage = [dict objectForKey:@"image"];
+	self.JSWeatherImage = [[[dict objectForKey:@"weather"] firstObject] objectForKey:@"icon"];
     self.JSLocationName = [dict objectForKey:@"name"];
     self.JSHumidity = [[[dict objectForKey:@"main"] objectForKey:@"humidity"] intValue];
     self.JSPressure = [[[dict objectForKey:@"main"] objectForKey:@"pressure"] intValue];
@@ -34,7 +34,7 @@
         self.JSTemporaryMaxTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue] - 273.15) * 1.800 + 32.00;
         self.JSTemporaryMinTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_min"] floatValue] - 273.15) * 1.800 + 32.00;
     }
-    
+
     self.JSWeatherDescription = [[[[dict objectForKey:@"weather"] firstObject] objectForKey:@"description"] capitalizedString];
     self.JSWindDirection = [JSWeatherUtility handleWindDirection:[[[dict objectForKey:@"wind"] objectForKey:@"speed"] floatValue]];
     self.JSWindDirectionFloat = [[[dict objectForKey:@"wind"] objectForKey:@"speed"] floatValue];
@@ -43,7 +43,7 @@
     self.JSLocationLongitude = [[[dict objectForKey:@"coord"] objectForKey:@"lon"] floatValue];
     self.JSSunriseDate = [NSDate dateWithTimeIntervalSince1970:[[[dict objectForKey:@"sys"] objectForKey:@"sunrise"] intValue]];
     self.JSSunsetDate = [NSDate dateWithTimeIntervalSince1970:[[[dict objectForKey:@"sys"] objectForKey:@"sunset"] intValue]];
-    self.objects = [NSDictionary dictionaryWithObjects:@[//self.JSWeatherImage,
+    self.objects = [NSDictionary dictionaryWithObjects:@[self.JSWeatherImage,
                                                          self.JSLocationName,
                                                          [NSString stringWithFormat:@"%f", self.JSCloudiness],
                                                          [NSString stringWithFormat:@"%i", self.JSHumidity],

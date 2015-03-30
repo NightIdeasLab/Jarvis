@@ -15,7 +15,7 @@
 
 @property (nonatomic) NSDictionary *objects;
 //@property (nonatomic, copy) UIImage *JSWeatherImage;
-@property (nonatomic, copy) NSImage *JSWeatherImage;
+@property (nonatomic) NSString *JSWeatherImage;
 @property (nonatomic) NSString *JSWindDirection;
 @property (nonatomic) float JSWindDirectionFloat;
 @property (nonatomic) NSDate *JSForecastDate;
