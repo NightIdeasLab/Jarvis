@@ -16,7 +16,7 @@ For the moment the application can do:
 * Time and date
 * Calendar events
 * Reminders
-* Weather conditions with a 5 day forecast (from Yahoo!)
+* Weather conditions with a 5 day forecast (from OpenWeatherMap)
 * Unread email count and VIP email count (from Apple Mail app)
 * News headlines (from NYTimes)
 * Daily quotations (from BrainyQuote.com)
