@@ -78,6 +78,8 @@
     BOOL useMail = [defaults boolForKey:@"UseMail"];
     BOOL useNewsQuotes = [defaults boolForKey:@"UseNewsQuotes"];
 	BOOL automaticLocation = [defaults boolForKey:@"AutomaticLocation"];
+	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+	NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
     
 	// checking and setting the last update date
 	// and last profile sent date into the interface
@@ -95,13 +97,11 @@
 		[profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
 	}
 
-	if ([defaults boolForKey: @"ReadUserName"]) {
+	if ([defaults boolForKey:@"ReadUserName"]) {
 		[readUserName setState:1];
-
 		[self changeStateOfName:self];
 
-		NSString *userNameState = [defaults stringForKey: @"UserName"];
-		BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+		NSString *userNameState = [defaults stringForKey:@"UserName"];
 		
 		if ([userNameState isEqualToString:@"Short"]) {
 			[popUpNameButton selectItemAtIndex:0];
@@ -113,12 +113,6 @@
 			[popUpNameButton selectItemAtIndex:2];
 			[customName setEnabled:YES];
 			[customName setStringValue:userNameState];
-		}
-
-		if (forecastState == YES) {
-			[forecastButton setState:1];
-		} else {
-			[forecastButton setState:0];
 		}
 	} else {
 		[readUserName setState:0];
@@ -173,6 +167,20 @@
 		[automaticLocationCheckBox setState:0];
 		[locationField setEnabled:YES];
         [findLocationButton setEnabled:YES];
+	}
+
+	if (forecastState == YES) {
+		[forecastButton setState:1];
+	} else {
+		[forecastButton setState:0];
+	}
+	
+	if ([temperatureStyle isEqualToString:@"Celsius"]) {
+		[popUpTemperatureButton selectItemAtIndex:0];
+	} else 	if ([temperatureStyle isEqualToString:@"Kelvin"]) {
+		[popUpTemperatureButton selectItemAtIndex:1];
+	} else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
+		[popUpTemperatureButton selectItemAtIndex:2];
 	}
 }
 
@@ -345,9 +353,11 @@
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
 
 	if (indexOfTemperaturePopUp == 0 ) {
-		[defaults setObject:@"metric" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"Celsius" forKey: @"TemperatureStyle"];
 	} else if (indexOfTemperaturePopUp == 1 ) {
-		[defaults setObject:@"imperial" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"Kelvin" forKey: @"TemperatureStyle"];
+	} else if (indexOfTemperaturePopUp == 2 ) {
+		[defaults setObject:@"Fahrenheit" forKey: @"TemperatureStyle"];
 	}
     [defaults synchronize];
 }
@@ -385,6 +395,11 @@
 	[reverseGeocoder start];
 }
 
+- (void)geocoder:(MKGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    //NSLog(@"MKGeocoder didFailWithError: %@", error);
+}
+
 - (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -399,6 +414,11 @@
 		[defaults setObject:placemark.countryCode forKey: @"CountryCode"];
 		[defaults synchronize];
     }
+}
+
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    //NSLog(@"MKReverseGeocoder didFailWithError: %@", error);
 }
 
 - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation

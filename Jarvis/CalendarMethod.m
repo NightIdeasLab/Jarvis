@@ -20,13 +20,13 @@
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
-        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou do not have any appointments today!!!\n\n", @"This message will appear if you do not have any appointments")];
+        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have no events scheduled for today!!!\n\n", @"This message will appear if the user does not have any events today")];
     }
     else
     {
 		unsigned long eventsCount = [events count];
-		if (eventsCount==1) outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have one appointment today:\n", @"This message will appear if you have only one appointment.")];
-		else if (eventsCount>1) outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nYou have %ld appointments today:\n", @""), eventsCount]];
+		if (eventsCount==1) outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have one event today:\n", @"This message will appear if you have only one event.")];
+		else if (eventsCount>1) outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nYou have %ld events today:\n", @""), eventsCount]];
         for(int i=0; i<eventsCount; i++)
         {
             if([[events objectAtIndex:i] isAllDay])
@@ -58,7 +58,7 @@
     NSArray *tasks = [[CalCalendarStore defaultCalendarStore] tasksWithPredicate:predicate];
     if ([tasks count] == 0)
     {
-        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou do not have any reminders today!!!\n", @"")];
+        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou have no reminders scheduled for today!!!\n", @"")];
     }
     else
     {

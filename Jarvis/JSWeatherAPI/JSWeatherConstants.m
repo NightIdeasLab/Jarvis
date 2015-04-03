@@ -10,6 +10,8 @@
 
 NSString * const kJSWeatherURL = @"http://openweathermap.org/";
 NSString * const kJSWeatherAPIURL = @"http://api.openweathermap.org/";
+NSString * const kJSWeatherAPIAPPIDURL = @"&APPID=";
+NSString * const kJSWeatherAPIAPPID = @"a9c3ab5e3f270e35a36c1f18ef279909";
 NSString * const kJSWeatherAPITypeData = @"data/";
 NSString * const kJSWeatherAPITypeImage = @"img/w/";
 NSString * const kJSWeatherAPITypeHistory = @"history/";

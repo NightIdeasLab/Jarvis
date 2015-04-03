@@ -49,22 +49,22 @@
     self.JSCurrentWindDirectionBeginningFloat =[[[dict objectForKey:@"wind"] objectForKey:@"var_beg"] floatValue];
     self.JSCurrentWindDirectionEndingFloat = [[[dict objectForKey:@"wind"] objectForKey:@"var_end"] floatValue];
 
-    self.objects = [NSDictionary dictionaryWithObjects:@[[NSString stringWithFormat:@"%.2f", self.JSCloudiness],
+    self.objects = [NSDictionary dictionaryWithObjects:@[[NSString stringWithFormat:@"%.0f", self.JSCloudiness],
                                                          self.JSWeatherDate,
                                                          [NSString stringWithFormat:@"%i", self.JSHumidity],
-                                                         [NSString stringWithFormat:@"%.2f", self.JSPressure],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSPressure],
                                                          self.JSWeatherImage,
-                                                         [NSString stringWithFormat:@"%.2f", self.JSCurrentTemperature],
-                                                         [NSString stringWithFormat:@"%.2f", self.JSPossibleMaxTemperature],
-                                                         [NSString stringWithFormat:@"%.2f", self.JSPossibleMinTemperature],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSCurrentTemperature],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSPossibleMaxTemperature],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSPossibleMinTemperature],
                                                          self.JSWeatherDescription,
-                                                         [NSString stringWithFormat:@"%.2f", self.JSWindSpeed],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSWindSpeed],
                                                          self.JSCurrentWindDirection,
                                                          self.JSCurrentWindDirectionBeginning,
                                                          self.JSCurrentWindDirectionEnding,
-                                                         [NSString stringWithFormat:@"%.2f", self.JSCurrentWindDirectionFloat],
-                                                         [NSString stringWithFormat:@"%.2f", self.JSCurrentWindDirectionBeginningFloat],
-                                                         [NSString stringWithFormat:@"%.2f", self.JSCurrentWindDirectionEndingFloat]]
+                                                         [NSString stringWithFormat:@"%.0f", self.JSCurrentWindDirectionFloat],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSCurrentWindDirectionBeginningFloat],
+                                                         [NSString stringWithFormat:@"%.0f", self.JSCurrentWindDirectionEndingFloat]]
                                                forKeys:@[@"cloudiness",
                                                          @"date",
                                                          @"humidity",

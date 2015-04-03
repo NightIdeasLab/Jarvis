@@ -17,17 +17,21 @@
 	
     //Weather conditions
     __block NSString *outputWeatherText = [[NSString alloc] init];
-	NSString *weatherContent = @"";
 	NSString *localityWeather = [defaults stringForKey: @"Locality"];
 	NSString *countryCodeWeather = [defaults stringForKey: @"CountryCode"];
-	NSString *openweathermapAPPID = [defaults stringForKey: @"openweathermapAPPID"];
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
 	__block NSData *weatherImage = NULL;
 	//BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 	
 	if(localityWeather != nil && countryCodeWeather != nil) {
 		JSWeather *weather = [JSWeather sharedInstance];
-		[weather setTemperatureMetric:kJSCelsius];
+		if ([temperatureType isEqualToString:@"Celsius"]) {
+			[weather setTemperatureMetric:kJSCelsius];
+		} else 	if ([temperatureType isEqualToString:@"Kelvin"]) {
+			[weather setTemperatureMetric:kJSKelvin];
+		} else 	if ([temperatureType isEqualToString:@"Fahrenheit"]) {
+			[weather setTemperatureMetric:kJSFahrenheit];
+		}
 		[weather setDelegate:self];
 		
 		NSString *city = localityWeather;
@@ -38,20 +42,10 @@
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
 				return;
 			}
-//			NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-//			
-//			[formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-//			[formatter setMaximumFractionDigits:2];
-//			[formatter setRoundingMode: NSNumberFormatterRoundUp];
-			
-//			NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
-//			
-//			[fmt setMaximumFractionDigits:2];
-//			NSLog(@"%@", [fmt stringFromNumber:[NSNumber numberWithFloat:25.342]]);
 			
 			NSLog(@"%@", object.objects);
-			NSString *currentIcon = [NSString stringWithFormat:@"http://openweathermap.org/img/w/%@.png", [object.objects objectForKey:@"image"]];
-			weatherImage = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: currentIcon]];
+			NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"tiff"];
+			weatherImage = [[NSData alloc] initWithContentsOfFile:filePath];
 			
 			NSString *currentWeather = [object.objects objectForKey:@"weather"];
 			NSString *currentTemperature = [object.objects objectForKey:@"current_temp"];
@@ -66,7 +60,6 @@
 		/*
 		if (forecastState == YES) {
 			//Forecast for the next 5 days
-			// FIXME: the forcast is really ugly, redo it :)
 			weatherContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%@", woeidCodeWeather, temperatureType]] encoding: NSUTF8StringEncoding error:nil];
 
 			outputWeatherText = [outputWeatherText stringByAppendingString:NSLocalizedString(@"Forecast for the next 5 days: \n", @"")];

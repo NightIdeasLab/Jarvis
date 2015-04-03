@@ -10,6 +10,8 @@
 
 extern NSString * const kJSWeatherURL;
 extern NSString * const kJSWeatherAPIURL;
+extern NSString * const kJSWeatherAPIAPPIDURL;
+extern NSString * const kJSWeatherAPIAPPID;
 extern NSString * const kJSWeatherAPITypeData;
 extern NSString * const kJSWeatherAPITypeImage;
 extern NSString * const kJSWeatherAPITypeHistory;
