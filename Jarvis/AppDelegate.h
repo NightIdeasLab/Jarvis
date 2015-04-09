@@ -32,9 +32,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-    NSString * fConfigDirectory;
-    NSUserDefaults * fDefaults;
-    NSUserDefaults * defaults;
+    NSString *fConfigDirectory;
+    NSUserDefaults *fDefaults;
     BOOL fQuitRequested;
     IBOutlet id outText;
     IBOutlet id window;
@@ -58,7 +57,5 @@
 - (IBAction) stopSpeech: (id) sender;
 - (void) linkDonate: (id) sender;
 - (void) jarvis: (BOOL) speech;
-
-
 
 @end

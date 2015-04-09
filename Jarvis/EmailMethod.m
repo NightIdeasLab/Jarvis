@@ -101,7 +101,7 @@
         [defaults setBool:YES forKey: @"UseMail"];
         [defaults synchronize];
     }
-    [defaults setBool:YES forKey: @"checkForActiveMailAccount"];
+    [defaults setBool:YES forKey: @"CheckForActiveMailAccount"];
 }
 
 @end

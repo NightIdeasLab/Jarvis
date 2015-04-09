@@ -42,8 +42,6 @@
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
 				return;
 			}
-			
-			NSLog(@"%@", object.objects);
 			NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"tiff"];
 			weatherImage = [[NSData alloc] initWithContentsOfFile:filePath];
 			
@@ -56,6 +54,18 @@
 			
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nToday High is: %@ and Low is %@ \n", @""), todayMax, todayMin]];
 		}];
+		
+		[weather queryForDailyForecastWithNumberOfDays:1 city:city state:state block:^(NSArray *objects, NSError *error) {
+			if (error) {
+				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\Error retrieving min and max temp with error: %@ \n", @""),error];
+				return;
+			}
+			
+			for (JSDailyForecastObject * obj in objects) {
+				NSLog(@"%@", obj.objects);
+			}
+		}];
+		
 		// i need to get the forecast of current day to get the high and low temp
 		/*
 		if (forecastState == YES) {

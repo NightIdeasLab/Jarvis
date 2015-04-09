@@ -11,6 +11,9 @@
 #import "JSWeather.h"
 #import "JSWeatherUtility.h"
 
+
+#define WEATHER_REFRESH_TIME 900 //(60 * 60 * 24 * 7)
+
 @interface JSWeather() <JSCurrentLocationDelegate>
 @property (nonatomic, strong) JSCurrentLocation *JSLocation;
 @end
@@ -36,27 +39,36 @@
 - (void)queryForCurrentWeatherWithCity:(NSString *)city state:(NSString *)state
                                  block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock
 {
-    NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@",
-                        kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryWeather,city, state] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-	
+	NSData *data = nil;
 	NSError *error = nil;
 	NSHTTPURLResponse *response = nil;
-	NSURLRequest *request = [NSURLRequest
-							 requestWithURL:[NSURL URLWithString:query]
-							 cachePolicy:NSURLRequestReloadIgnoringCacheData
-							 timeoutInterval:5.0];
+	NSUserDefaults *fDefaults = [NSUserDefaults standardUserDefaults];
+	NSDate *lastRefreshDate = [fDefaults objectForKey: @"JSCurrentWeatherRefreshDate"];
+	const BOOL timePassed = !lastRefreshDate || (-1 * [lastRefreshDate timeIntervalSinceNow]) >= WEATHER_REFRESH_TIME;
 
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	NSLog(@"data: %@", data);
-	NSLog(@"error: %@", error);
-	if (data != nil) {
+	if (timePassed){
+		NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@",
+							kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryWeather,city, state] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
+		NSURLRequest *request = [NSURLRequest
+								 requestWithURL:[NSURL URLWithString:query]
+								 cachePolicy:NSURLRequestReloadIgnoringCacheData
+								 timeoutInterval:5.0];
+		
+		data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+		
 		if (error) {
 			completionBlock(nil, error);
 			return;
+		} else {
+			[fDefaults setObject: data forKey: @"JSCurrentWeatherData"];
+			[fDefaults setObject: [NSDate date] forKey: @"JSCurrentWeatherRefreshDate"];
 		}
-		
+	} else {
+		data = [fDefaults objectForKey: @"JSCurrentWeatherData"];
+	}
+	if (data != nil) {
 		NSMutableDictionary * json = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error]];
-		
 		if ([[json objectForKey:@"cod"] intValue] == 404) {
 			NSString *reason = @"Apparently, the city queried for has no data to return";
 			NSError *error = [NSError errorWithDomain:@"com.JSWeather.api"
@@ -70,34 +82,6 @@
 		completionBlock(object, nil);
 		return;
 	}
-//	
-//	
-//	NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@",
-//                        kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryWeather,city, state] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    
-//    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:query]]
-//                                       queue:[NSOperationQueue mainQueue]
-//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
-//                               if (error) {
-//                                   completionBlock(nil, error);
-//                                   return;
-//                               }
-//                               
-//                               NSMutableDictionary * json = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error]];
-//                               
-//                               if ([[json objectForKey:@"cod"] intValue] == 404) {
-//                                   NSString *reason = @"Apparently, the city queried for has no data to return";
-//                                   NSError *error = [NSError errorWithDomain:@"com.JSWeather.api"
-//                                                                        code:301
-//                                                                    userInfo:@{NSLocalizedFailureReasonErrorKey:reason, NSLocalizedFailureReasonErrorKey:reason,
-//									   NSLocalizedRecoverySuggestionErrorKey:@"Change the city"}];
-//                                   completionBlock(nil, error);
-//                                   return;
-//                               }
-//                               JSCurrentWeatherObject *object = [[JSCurrentWeatherObject alloc] initWithData:json temperatureConversion:self.temperatureMetric];
-//							   completionBlock(object, nil);
-//                               return;
-//                           }];
 }
 
 - (void)queryForDailyForecastWithNumberOfDays:(NSInteger)numberOfDays city:(NSString *)city state:(NSString *)state
@@ -162,7 +146,6 @@
 
 - (void)executeQuery:(NSString *)query forClassType:(id)classType block:(void(^)(NSArray *theObjects, NSError *error))completionBlock
 {
-    
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:query]]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error){
@@ -224,14 +207,12 @@
 
 }
 
-
 - (void)JSCurrentLocation:(JSCurrentLocation *)object didFailToReceiveLocation:(NSError *)error
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(JSWeather:didReceiveCurrentLocationError:)]) {
         [self.delegate JSWeather:self didReceiveCurrentLocationError:error];
     }
 }
-
 
 - (void)JSCurrentLocation:(JSCurrentLocation *)object didReceiveLocation:(NSDictionary *)location
 {
