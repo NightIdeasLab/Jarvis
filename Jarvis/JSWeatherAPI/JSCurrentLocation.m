@@ -5,12 +5,17 @@
 //  Created by John Setting on 12/4/14.
 //  Copyright (c) 2014 John Setting. All rights reserved.
 //
+//  Modified by Gabriel Ulici on 10/4/15.
+//  Copyright (c) 2015 Night Ideas Lab. All rights reserved.
+//
 
 #import "JSCurrentLocation.h"
 
 @interface JSCurrentLocation() <CLLocationManagerDelegate>
+
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLGeocoder *geocoder;
+
 @end
 
 @implementation JSCurrentLocation
@@ -21,7 +26,6 @@
     return self;
 }
 
-
 + (id)sharedInstance
 {
     static dispatch_once_t once;
@@ -29,7 +33,6 @@
     dispatch_once(&once, ^{ instance = [[JSCurrentLocation alloc] init]; });
     return instance;
 }
-
 
 - (void)getCurrentLocation
 {
@@ -91,6 +94,5 @@
         }
     }];
 }
-
 
 @end

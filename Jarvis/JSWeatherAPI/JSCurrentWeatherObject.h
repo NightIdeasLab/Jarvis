@@ -5,16 +5,17 @@
 //  Created by John Setting on 12/4/14.
 //  Copyright (c) 2014 John Setting. All rights reserved.
 //
+//  Modified by Gabriel Ulici on 10/4/15.
+//  Copyright (c) 2015 Night Ideas Lab. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
-//#import <UIKit/UIKit.h>
 
 @interface JSCurrentWeatherObject : NSObject
 - (id)initWithData:(NSDictionary *)dict;
 - (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion;
 
 @property (nonatomic) NSDictionary *objects;
-//@property (nonatomic, copy) UIImage *JSWeatherImage;
 @property (nonatomic) NSString *JSWeatherImage;
 @property (nonatomic) NSString *JSLocationName;
 @property (nonatomic) float JSCloudiness;
@@ -31,4 +32,5 @@
 @property (nonatomic) NSDate *JSSunsetDate;
 @property (nonatomic) float JSLocationLongitude;
 @property (nonatomic) float JSLocationLatitude;
+
 @end

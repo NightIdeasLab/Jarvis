@@ -5,6 +5,9 @@
 //  Created by John Setting on 12/4/14.
 //  Copyright (c) 2014 John Setting. All rights reserved.
 //
+//  Modified by Gabriel Ulici on 10/4/15.
+//  Copyright (c) 2015 Night Ideas Lab. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 
@@ -23,6 +26,3 @@ extern NSString * const kJSWeatherAPIQueryHourlyForecast;
 extern NSString * const kJSWeatherAPIQueryHistoricalData;
 
 typedef void (^JSWeatherBlock)(NSArray *objects, NSError *error);
-
-
-

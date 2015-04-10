@@ -80,9 +80,6 @@
             }
         }
     }
-//    } else {
-//       outputEmailText = [outputEmailText stringByAppendingString:NSLocalizedString(@"\nPlease setup the mail!!!\n", @"")];
-//    }
     return outputEmailText;
 }
 

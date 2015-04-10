@@ -12,7 +12,6 @@
 @interface WeatherMethod : NSObject <JSWeatherDelegate>
 
 
-//- (NSString *) retrieveWeather;
 -(NSDictionary *) retrieveWeather;
 
 @end

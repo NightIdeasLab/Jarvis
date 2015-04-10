@@ -5,9 +5,11 @@
 //  Created by John Setting on 12/5/14.
 //  Copyright (c) 2014 John Setting. All rights reserved.
 //
+//  Modified by Gabriel Ulici on 10/4/15.
+//  Copyright (c) 2015 Night Ideas Lab. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
-//#import <UIKit/UIKit.h>
 
 @interface JSHistoricalDataObject : NSObject
 - (id)initWithData:(NSDictionary *)dict;
@@ -22,7 +24,6 @@
 @property (nonatomic) float JSPossibleMaxTemperature;
 @property (nonatomic) float JSPossibleMinTemperature;
 @property (nonatomic) NSString *JSWeatherDescription;
-//@property (nonatomic) UIImage *JSWeatherImage;
 @property (nonatomic) NSImage *JSWeatherImage;
 @property (nonatomic) NSString *JSCurrentWindDirection;
 @property (nonatomic) NSString *JSCurrentWindDirectionBeginning;
@@ -31,4 +32,5 @@
 @property (nonatomic) float JSCurrentWindDirectionBeginningFloat;
 @property (nonatomic) float JSCurrentWindDirectionEndingFloat;
 @property (nonatomic) float JSWindSpeed;
+
 @end

@@ -5,6 +5,9 @@
 //  Created by John Setting on 12/5/14.
 //  Copyright (c) 2014 John Setting. All rights reserved.
 //
+//  Modified by Gabriel Ulici on 10/4/15.
+//  Copyright (c) 2015 Night Ideas Lab. All rights reserved.
+//
 
 #import "JSHistoricalDataObject.h"
 #import "JSWeatherUtility.h"
@@ -18,7 +21,6 @@
 - (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion
 {
     if (!(self = [super init])) return nil;
-
     
     self.JSCloudiness = [[[dict objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
     self.JSWeatherDate = [NSDate dateWithTimeIntervalSince1970:[[dict objectForKey:@"dt"] intValue]];
@@ -84,4 +86,5 @@
                                                          ]];
     return self;
 }
+
 @end

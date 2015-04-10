@@ -94,6 +94,7 @@ NSSpeechSynthesizer *synth;
     // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:)
                                                      forEventClass: kCoreEventClass andEventID: kAEOpenContents];
+#if !DEBUG
     // shamelessly ask for donations
     if ([fDefaults boolForKey: @"WarningDonate"]) {
         const BOOL firstLaunch = [fDefaults boolForKey: @"FirstLaunch"];
@@ -125,6 +126,7 @@ NSSpeechSynthesizer *synth;
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
+#endif	
 }
 
 - (BOOL) applicationShouldHandleReopen: (NSApplication *) app hasVisibleWindows: (BOOL) visibleWindows {
@@ -189,7 +191,6 @@ NSSpeechSynthesizer *synth;
     [self linkDonate: self];
 }
 
-// FIXME: It has a leak release the text
 - (IBAction) updateJarvis: (id) sender {
 	[synth stopSpeaking];
 	[outText setString:@"Updating your report..."];

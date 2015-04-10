@@ -20,7 +20,7 @@
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
-        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have no events scheduled for today!!!\n", @"This message will appear if the user does not have any events today")];
+        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have no events scheduled for today!\n", @"This message will appear if the user does not have any events today")];
     }
     else
     {
@@ -58,7 +58,7 @@
     NSArray *tasks = [[CalCalendarStore defaultCalendarStore] tasksWithPredicate:predicate];
     if ([tasks count] == 0)
     {
-        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou have no reminders scheduled for today!!!\n", @"")];
+        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou have no reminders scheduled for today!\n", @"")];
     }
     else
     {
