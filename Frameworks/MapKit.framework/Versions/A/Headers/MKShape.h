@@ -18,5 +18,4 @@
 @property (copy) NSString *title;
 @property (copy) NSString *subtitle;
 
-
 @end

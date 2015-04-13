@@ -28,7 +28,6 @@
 - (id)initWithAddress:(NSString *)anAddress;
 - (id)initWithAddress:(NSString *)anAddress nearCoordinate:(CLLocationCoordinate2D)aCoordinate;
 
-
 // A MKGeocoder object should only be started once.
 - (void)start;
 - (void)cancel;

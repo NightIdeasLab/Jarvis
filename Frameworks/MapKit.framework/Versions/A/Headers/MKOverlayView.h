@@ -16,8 +16,6 @@
 
 @property (nonatomic, readonly) id <MKOverlay> overlay;
 
-
 - (id)initWithOverlay:(id <MKOverlay>)anOverlay;
-
 
 @end

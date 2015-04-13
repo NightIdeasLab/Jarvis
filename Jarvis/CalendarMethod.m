@@ -20,60 +20,60 @@
     NSArray *events = [[CalCalendarStore defaultCalendarStore] eventsWithPredicate:predicate];
     if ([events count] == 0)
     {
+<<<<<<< HEAD
         outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"You do not have any appointments today!!!\n\n", @"This message will appear if you do not have any appointments")];
+=======
+        outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have no events scheduled for today!\n", @"This message will appear if the user does not have any events today")];
+>>>>>>> version-0.4.3
     }
     else
     {
-        for(int i=0; i<[events count]; i++)
+		unsigned long eventsCount = [events count];
+		if (eventsCount==1) outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"\nYou have one event today:\n", @"This message will appear if you have only one event.")];
+		else if (eventsCount>1) outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\nYou have %ld events today:\n", @""), eventsCount]];
+        for(int i=0; i<eventsCount; i++)
         {
             if([[events objectAtIndex:i] isAllDay])
             {
-                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"There is, ", @"")];
+                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"All day ", @"")];
                 outputCalendarText = [outputCalendarText stringByAppendingString:[[events objectAtIndex:i] title]];
-                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@", all day", @"")];
             }
             else
             {
-                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"There is, ", @"")];
-                outputCalendarText = [outputCalendarText stringByAppendingString:[[events objectAtIndex:i] title]];
-                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@", at ", @"")];
-                NSCalendarDate *eventDate = [[[events objectAtIndex:i] startDate] dateWithCalendarFormat:nil timeZone:nil];
-                if([eventDate minuteOfHour]<10)
+				NSCalendarDate *eventDate = [[[events objectAtIndex:i] startDate] dateWithCalendarFormat:nil timeZone:nil];
+                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"At ", @"")];
+				if([eventDate minuteOfHour]<10)
                     outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:@"%ld:0%ld", [eventDate hourOfDay], [eventDate minuteOfHour]]];
                 else
                     outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:@"%ld:%ld", [eventDate hourOfDay], [eventDate minuteOfHour]]];
+                outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@" there is ", @"")];
+				outputCalendarText = [outputCalendarText stringByAppendingString:[[events objectAtIndex:i] title]];  
             }
-            outputCalendarText = [outputCalendarText stringByAppendingString:@"\n\n"]; // Added double spaces for formating reasons
+            outputCalendarText = [outputCalendarText stringByAppendingString:@"\n"];
         }
     }
-    
-
     return outputCalendarText;
-    
 }
 
 - (NSString *) retrieveReminders {
-    
     // Reminders
     NSString *outputRemindersText = [[NSString alloc] init];
     NSPredicate *predicate = [CalCalendarStore taskPredicateWithCalendars:[[CalCalendarStore defaultCalendarStore] calendars]];
     NSArray *tasks = [[CalCalendarStore defaultCalendarStore] tasksWithPredicate:predicate];
     if ([tasks count] == 0)
     {
-        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"You do not have any reminders today!!!\n", @"")];
+        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou have no reminders scheduled for today!\n", @"")];
     }
     else
     {
         for(int i=0; i<[tasks count]; i++)
         {
-            outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"You need to ", @"")];
+            outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou need to ", @"")];
             outputRemindersText = [outputRemindersText stringByAppendingString:[[tasks objectAtIndex:i] title]];
             outputRemindersText = [outputRemindersText stringByAppendingString:@".\n"];
         }
     }
-    
     return outputRemindersText;
-    
 }
 
 @end

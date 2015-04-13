@@ -47,6 +47,7 @@
 								   "];
 	
     returnDescriptor = [scriptObject executeAndReturnError: &errorDict];
+<<<<<<< HEAD
 	outputEmailText = [outputEmailText stringByAppendingString:@"\n"];
 	outputEmailText = [outputEmailText stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
 	
@@ -71,3 +72,47 @@
 }
 
 @end
+=======
+    if(returnDescriptor != NULL){
+        outputEmailText = [outputEmailText stringByAppendingString:@"\n"];
+        outputEmailText = [outputEmailText stringByAppendingString:[[[returnDescriptor stringValue] componentsSeparatedByString:@"###"] objectAtIndex:0]];
+        
+        //VIP email count
+        unsigned long mailCount;
+        NSString * senderList = [[returnDescriptor stringValue] lowercaseString];
+        if ([vipNames count] > 0){
+            for(int i=0; i<[vipNames count]; i++) {
+                mailCount = 0;
+                for(int j=0; j<[[vipAddresses objectAtIndex:i] count]; j++)
+                {
+                    if([senderList rangeOfString:[[vipAddresses objectAtIndex:i] objectAtIndex:j]].location != NSNotFound)
+                    {mailCount = mailCount + [[senderList componentsSeparatedByString: [[vipAddresses objectAtIndex:i] objectAtIndex:j]] count] - 1;}
+                }
+                if (mailCount==1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them is from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
+                else if (mailCount>1) outputEmailText = [outputEmailText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"%d of them are from %@.\n", @""), mailCount, [vipNames objectAtIndex:i]]];
+            }
+        }
+    }
+    return outputEmailText;
+}
+
+
+-(void)checkForActiveMailAccount {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSAppleScript* script= [[NSAppleScript alloc] initWithSource:@"tell application \"Mail\" \nname of every account \nend tell"];
+    NSDictionary* scriptError = nil;
+    NSAppleEventDescriptor* descriptor=[script executeAndReturnError:&scriptError];
+    if(scriptError)
+    {
+        [defaults setBool:NO forKey: @"UseMail"];
+        [defaults synchronize];
+    } else if (descriptor){
+        [defaults setBool:YES forKey: @"UseMail"];
+        [defaults synchronize];
+    }
+    [defaults setBool:YES forKey: @"CheckForActiveMailAccount"];
+}
+
+@end
+>>>>>>> version-0.4.3

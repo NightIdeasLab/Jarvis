@@ -15,4 +15,3 @@
 + (MKPolyline *)polylineWithCoordinates:(CLLocationCoordinate2D *)coords count:(NSUInteger)count;
 
 @end
-

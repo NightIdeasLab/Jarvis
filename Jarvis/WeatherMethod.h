@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSWeather.h"
 
-@interface WeatherMethod : NSObject
+@interface WeatherMethod : NSObject <JSWeatherDelegate>
 
 
-//- (NSString *) retrieveWeather;
 -(NSDictionary *) retrieveWeather;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "PreferencesController.h"
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
 
 @implementation PreferencesController
 
@@ -33,8 +35,8 @@
 @synthesize profileDateField;
 
 // Weather
+@synthesize mapView;
 @synthesize locationField;
-@synthesize mapWebView;
 @synthesize locationManager;
 @synthesize locationLabel;
 @synthesize findLocationButton;
@@ -55,6 +57,7 @@
 	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
 	NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
 
+<<<<<<< HEAD
 	// retriving latidude and
 	// longitude from plist file
 	double latitude = [defaults doubleForKey:@"latitudeCode"];
@@ -65,6 +68,16 @@
         
         [mapWebView setShowsUserLocation: YES];
 	}
+=======
+    BOOL useCal = [defaults boolForKey:@"UseCal"];
+    BOOL useWeather = [defaults boolForKey:@"UseWeather"];
+    BOOL useMail = [defaults boolForKey:@"UseMail"];
+    BOOL useNewsQuotes = [defaults boolForKey:@"UseNewsQuotes"];
+	BOOL automaticLocation = [defaults boolForKey:@"AutomaticLocation"];
+	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+	NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
+    
+>>>>>>> version-0.4.3
 	// checking and setting the last update date
 	// and last profile sent date into the interface
 	if ([updateDate.description length] > 0) {
@@ -81,23 +94,11 @@
 		[profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
 	}
 
-	// FIXME: Close the location manager when the pref window closes
-	// TODO: load the weather stuff only when the wether view is active
-	//       and releasing them when switching from it
-	/* 	Weather Stuff retriving the location */
-//	locationManager = [[CLLocationManager alloc] init];
-//	locationManager.delegate = self;
-//	[locationManager startUpdatingLocation];
-
-//	[self changeStateAutomaticLocation:self];
-
-	if ([defaults boolForKey: @"ReadUserName"]) {
+	if ([defaults boolForKey:@"ReadUserName"]) {
 		[readUserName setState:1];
-
 		[self changeStateOfName:self];
 
-		NSString *userNameState = [defaults stringForKey: @"UserName"];
-		BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+		NSString *userNameState = [defaults stringForKey:@"UserName"];
 		
 		if ([userNameState isEqualToString:@"Short"]) {
 			[popUpNameButton selectItemAtIndex:0];
@@ -110,22 +111,83 @@
 			[customName setEnabled:YES];
 			[customName setStringValue:userNameState];
 		}
-
-		if (forecastState == YES) {
-			[forecastButton setState:1];
-		} else {
-			[forecastButton setState:0];
-		}
 	} else {
 		[readUserName setState:0];
 		[self changeStateOfName:self];
 	}
+<<<<<<< HEAD
 	
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
 	
+=======
+    
+    if (useCal == YES) {
+        [iCalButton setState:1];
+    } else {
+        [iCalButton setState:0];
+    }
+    if (useWeather == YES) {
+        [weatherButton setState:1];
+    } else {
+        [weatherButton setState:0];
+    }
+    if (useMail == YES) {
+        [mailButton setState:1];
+        // setting the VIPs name and email addresses
+        if ([defaults objectForKey:@"emailVIP1"] != NULL) [emailVIP1 setStringValue:[defaults objectForKey:@"emailVIP1"]];
+        if ([defaults objectForKey:@"nameVIP1"] != NULL) [nameVIP1 setStringValue:[defaults objectForKey:@"nameVIP1"]];
+        if ([defaults objectForKey:@"emailVIP2"] != NULL) [emailVIP2 setStringValue:[defaults objectForKey:@"emailVIP2"]];
+        if ([defaults objectForKey:@"nameVIP2"] != NULL) [nameVIP2 setStringValue:[defaults objectForKey:@"nameVIP2"]];
+        if ([defaults objectForKey:@"emailVIP3"] != NULL) [emailVIP3 setStringValue:[defaults objectForKey:@"emailVIP3"]];
+        if ([defaults objectForKey:@"nameVIP3"] != NULL) [nameVIP3 setStringValue:[defaults objectForKey:@"nameVIP3"]];
+        if ([defaults objectForKey:@"emailVIP4"] != NULL) [emailVIP4 setStringValue:[defaults objectForKey:@"emailVIP4"]];
+        if ([defaults objectForKey:@"nameVIP4"] != NULL) [nameVIP4 setStringValue:[defaults objectForKey:@"nameVIP4"]];
+    } else {
+        [mailButton setState:0];
+        [emailVIP1 setEnabled:NO];
+        [emailVIP2 setEnabled:NO];
+        [emailVIP3 setEnabled:NO];
+        [emailVIP4 setEnabled:NO];
+        [nameVIP1 setEnabled:NO];
+        [nameVIP2 setEnabled:NO];
+        [nameVIP3 setEnabled:NO];
+        [nameVIP4 setEnabled:NO];
+    }
+    if (useNewsQuotes == YES) {
+        [newsButton setState:1];
+    } else {
+        [newsButton setState:0];
+    }
+
+    if (automaticLocation == YES) {
+		[mapView setShowsUserLocation: YES];
+		[mapView setDelegate: self];
+		[locationField setEnabled:NO];
+        [findLocationButton setEnabled:NO];
+		[automaticLocationCheckBox setState:1];
+	} else {
+		[automaticLocationCheckBox setState:0];
+		[locationField setEnabled:YES];
+        [findLocationButton setEnabled:YES];
+	}
+
+	if (forecastState == YES) {
+		[forecastButton setState:1];
+	} else {
+		[forecastButton setState:0];
+	}
+	
+	if ([temperatureStyle isEqualToString:@"Celsius"]) {
+		[popUpTemperatureButton selectItemAtIndex:0];
+	} else 	if ([temperatureStyle isEqualToString:@"Kelvin"]) {
+		[popUpTemperatureButton selectItemAtIndex:1];
+	} else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
+		[popUpTemperatureButton selectItemAtIndex:2];
+	}
+>>>>>>> version-0.4.3
 }
 
 #pragma mark -
@@ -154,29 +216,8 @@
 #pragma mark -
 #pragma mark WOIED
 
-- (NSInteger *)getWOEIDfromlatitude: (double) latitude andLongitude: (double) longitude {
-
-	NSString *flickrKEY = @"ca5edb0f6f046f0e9e1ee43dd49277e4";
-	NSString *woeidCode = @"";
-	NSString *woeidContent = @"";
-	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
-													  [NSString stringWithFormat:
-													   @"http://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=%@&lat=%f&lon=%f",flickrKEY,latitude, longitude]] encoding:NSUTF8StringEncoding error:nil];
-
-	if(woeidContent != nil) {
-		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
-		woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
-	}
-	else {
-		NSLog(@"The woeid cannot be retrieved!!!");
-	}
-
-	//NSLog(@"Flickr woeid responce: %@",woeidCode);
-
-    return 0;
-}
-
 - (IBAction)findLocation:(id)sender {
+	[mapView showAddress:[locationField stringValue]];
 	// retrieves the City and Country
 	NSString *locationText = [locationField stringValue];
 	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
@@ -184,12 +225,12 @@
 	if ([locationText length] >0) {
 		// Displays the user his location
 		[locationLabel setStringValue:messageForLabel];
-		[self getWOEIDFromCityAndCountry:locationText];
 	}
 	else {
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
+<<<<<<< HEAD
 
 }
 
@@ -238,124 +279,26 @@
 
 - (void)saveCodeData:(NSString *) aWoeidCode longitude:(NSString *) aLongitudeCode latitude:(NSString *) aLatitudeCode{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+=======
+>>>>>>> version-0.4.3
 	
-    [defaults setObject:aWoeidCode forKey: @"woeidCode"];
-	[defaults setObject:aLongitudeCode forKey: @"longitudeCode"];
-	[defaults setObject:aLatitudeCode forKey: @"latitudeCode"];
-
-	[defaults synchronize];
-}
-
-#pragma mark -
-#pragma mark WOIED functions  for LAT & LON
-
-+ (double)latitudeRangeForLocation:(CLLocation *)aLocation {
-	const double M = 6367000.0; // approximate average meridional radius of curvature of earth
-	const double metersToLatitude = 1.0 / ((M_PI / 180.0) * M);
-	const double accuracyToWindowScale = 4.0;
-
-	return aLocation.horizontalAccuracy * metersToLatitude * accuracyToWindowScale;
-}
-
-+ (double)longitudeRangeForLocation:(CLLocation *)aLocation {
-	double latitudeRange =
-    [PreferencesController latitudeRangeForLocation:aLocation];
-
-	return latitudeRange * cos(aLocation.coordinate.latitude * M_PI / 180.0);
-}
-
-- (void) locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-           fromLocation:(CLLocation *)oldLocation
-{
-	// Ignore updates where nothing we care about changed
-	if (newLocation.coordinate.longitude == oldLocation.coordinate.longitude &&
-		newLocation.coordinate.latitude == oldLocation.coordinate.latitude &&
-		newLocation.horizontalAccuracy == oldLocation.horizontalAccuracy)
-	{
-		return;
-	}
-
-	//NSLog(@"Latitude: %f , longitude: %f , and new location : %@", newLocation.coordinate.latitude,newLocation.coordinate.longitude,newLocation);
-
-[self updateMapWithLatitude:newLocation.coordinate.latitude AndLongitude:newLocation.coordinate.longitude];
-
-}
-
--(void) updateMapWithLatitude: (double) latitude  AndLongitude: (double) longitude
-{
- 
-//    
-//// Load the HTML for displaying the Google map from a file and replace the
-//// format placeholders with our location data
-//NSString *htmlString = [NSString stringWithFormat:
-//						[NSString
-//						 stringWithContentsOfFile:
-//						 [[NSBundle mainBundle]
-//						  pathForResource:@"googleMaps" ofType:@"html"]
-//						 encoding:NSUTF8StringEncoding
-//						 error:NULL],
-//						latitude,
-//						longitude,
-//						latitude,
-//						longitude];
-//
-//
-//// Load the HTML in the WebView and set the labels
-//[[mapWebView mainFrame] loadHTMLString:htmlString baseURL:nil];
-
-#ifdef DEBUG
-	[locationLabel setStringValue:[NSString stringWithFormat:@"%f, %f", latitude, longitude]];
-#endif
-
-}
-
-- (void) locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error
-{
-//	[[mapWebView mainFrame]
-//	 loadHTMLString:
-//	 [NSString stringWithFormat:
-//	  NSLocalizedString(@"Location manager failed with error: %@", nil),
-//	  [error localizedDescription]]
-//	 baseURL:nil];
-	[locationLabel setStringValue:@""];
-}
-
-#pragma mark -
-#pragma mark Other Functions
-
-- (void)windowWillTerminate:(NSNotification *)aNotification {
-	[locationManager stopUpdatingLocation];
-	//[locationManager release];
-}
-
-- (IBAction)openInDefaultBrowser:(id)sender {
-	CLLocation *currentLocation = locationManager.location;
-
-	NSURL *externalBrowserURL = [NSURL URLWithString:[NSString stringWithFormat:
-													  @"http://maps.google.com/maps?q=%f,%f&ll=%f,%fspn=%f,%f",
-													  currentLocation.coordinate.latitude,
-													  currentLocation.coordinate.longitude,
-													  currentLocation.coordinate.latitude,
-													  currentLocation.coordinate.longitude,
-													  [PreferencesController latitudeRangeForLocation:currentLocation],
-													  [PreferencesController longitudeRangeForLocation:currentLocation]]];
-
-	[[NSWorkspace sharedWorkspace] openURL:externalBrowserURL];
+	MKGeocoder *geocoderNoCoord = [[MKGeocoder alloc] initWithAddress:locationText];
+	geocoderNoCoord.delegate = self;
+	[geocoderNoCoord start];
 }
 
 - (IBAction)changeStateAutomaticLocation:(id)sender {
-
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
     if ([automaticLocationCheckBox state] == 1) {
         [locationField setEnabled:NO];
         [findLocationButton setEnabled:NO];
-
+		[defaults setBool:YES forKey: @"AutomaticLocation"];
     } else {
         [locationField setEnabled:YES];
         [findLocationButton setEnabled:YES];
+		[defaults setBool:NO forKey: @"AutomaticLocation"];
     }
-
 }
 
 - (IBAction)changeStateOfName:(id)sender {
@@ -409,9 +352,11 @@
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
 
 	if (indexOfTemperaturePopUp == 0 ) {
-		[defaults setObject:@"c" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"Celsius" forKey: @"TemperatureStyle"];
 	} else if (indexOfTemperaturePopUp == 1 ) {
-		[defaults setObject:@"f" forKey: @"TemperatureStyle"];
+		[defaults setObject:@"Kelvin" forKey: @"TemperatureStyle"];
+	} else if (indexOfTemperaturePopUp == 2 ) {
+		[defaults setObject:@"Fahrenheit" forKey: @"TemperatureStyle"];
 	}
 }
 
@@ -437,5 +382,60 @@
 	
 }
 
+<<<<<<< HEAD
 
 @end
+=======
+- (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate
+{
+	CLLocationCoordinate2D coordinateE;
+	coordinateE.latitude = coordinate.longitude;
+	coordinateE.longitude = coordinate.latitude;
+	MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinateE];
+	reverseGeocoder.delegate = self;
+	[reverseGeocoder start];
+}
+
+- (void)geocoder:(MKGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    //NSLog(@"MKGeocoder didFailWithError: %@", error);
+}
+
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+    if (placemark.locality != NULL && placemark.country != NULL && placemark.countryCode != NULL) {
+        [mapView setShowsUserLocation: NO];
+        // adding the location to the text box
+		NSString *locationText = [NSString stringWithFormat:@"%@, %@", placemark.country, placemark.locality];
+		NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
+		[locationLabel setStringValue:messageForLabel];
+		[defaults setObject:placemark.locality forKey: @"Locality"];
+		[defaults setObject:placemark.countryCode forKey: @"CountryCode"];
+		[defaults synchronize];
+    }
+}
+
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    //NSLog(@"MKReverseGeocoder didFailWithError: %@", error);
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation
+{
+    if (showsUserLocationApp == NO) {
+        CLLocationCoordinate2D coordinate;
+        coordinate.latitude = userLocation.location.coordinate.latitude;
+        coordinate.longitude = userLocation.location.coordinate.longitude;
+        MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinate];
+        reverseGeocoder.delegate = self;
+        [reverseGeocoder start];
+        if (userLocation.location.coordinate.latitude && userLocation.location.coordinate.longitude) {
+            showsUserLocationApp = YES;
+        }
+    }
+}
+
+@end
+>>>>>>> version-0.4.3

@@ -8,16 +8,27 @@
 	<true/>
 	<key>FirstLaunch</key>
 	<integer>0</integer>
-	<key>DefaultLocation</key>
-	<integer>721943</integer>
 	<key>ReadUserName</key>
 	<true/>
 	<key>UserName</key>
 	<string>Short</string>
-	<key>TemperatureStyle</key>
-	<string>c</string>
 	<key>TimeStyle</key>
 	<string>24</string>
+<<<<<<< HEAD
+=======
+	<key>UseCal</key>
+	<true/>
+	<key>UseWeather</key>
+	<false/>
+	<key>UseMail</key>
+	<false/>
+	<key>UseNewsQuotes</key>
+	<true/>
+	<key>AutomaticLocation</key>
+	<true/>
+	<key>TemperatureStyle</key>
+	<string>Celsius</string>
+>>>>>>> version-0.4.3
 	<key>ForecastWeather</key>
 	<string>YES</string>
 </dict>

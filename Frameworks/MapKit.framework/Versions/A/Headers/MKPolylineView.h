@@ -19,4 +19,3 @@
 @property (nonatomic, readonly) MKPolyline *polyline;
 
 @end
-

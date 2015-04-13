@@ -16,7 +16,6 @@ enum {
 };
 typedef NSUInteger MKPinAnnotationColor;
 
-
 @interface MKPinAnnotationView : MKAnnotationView
 {
     MKPinAnnotationColor pinColor;
@@ -27,4 +26,3 @@ typedef NSUInteger MKPinAnnotationColor;
 @property (nonatomic) BOOL animatesDrop;
 
 @end
-

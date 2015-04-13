@@ -1,5 +1,6 @@
 A TODO list
 
+<<<<<<< HEAD
 Version 0.4.3
 - on/off switch for these features in the preferences menu
 - VIP mail
@@ -9,6 +10,8 @@ Version 0.4.3
 - Weather forecast is not really that nice. Change it a bit!
 - feedback panel is not working.
 
+=======
+>>>>>>> version-0.4.3
 Version 0.4.4
 - To make a better rss feed reader and add even a refresh rate with growl notifications if the news change.
 - Implement a automatic refresh for everything.

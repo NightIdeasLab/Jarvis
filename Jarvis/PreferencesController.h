@@ -7,14 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <CoreLocation/CoreLocation.h>
-#import <WebKit/WebKit.h>
 #import <MapKit/MapKit.h>
 #import "DBPrefsWindowController.h"
 
 @class MKMapView;
 
-@interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate, MKMapViewDelegate >
+@interface PreferencesController : DBPrefsWindowController < CLLocationManagerDelegate, MKMapViewDelegate, MKReverseGeocoderDelegate, MKGeocoderDelegate > {
+    BOOL showsUserLocationApp;
+}
 
 #pragma mark -
 #pragma mark Preference var
@@ -43,8 +43,8 @@
 
 #pragma mark -
 #pragma mark Weather var
+@property (unsafe_unretained) IBOutlet MKMapView *mapView;
 @property (assign, nonatomic) IBOutlet NSTextField *locationField;
-@property (assign) IBOutlet MKMapView *mapWebView;
 @property (assign, atomic) CLLocationManager *locationManager;
 @property (assign, nonatomic) IBOutlet NSTextField *locationLabel;
 @property (assign) IBOutlet NSButton *findLocationButton;
@@ -67,8 +67,6 @@
 - (IBAction)changeStateAutomaticLocation:(id)sender;
 
 - (IBAction)findLocation:(id)sender;
-
-- (IBAction)openInDefaultBrowser:(id)sender;
 
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender;
 

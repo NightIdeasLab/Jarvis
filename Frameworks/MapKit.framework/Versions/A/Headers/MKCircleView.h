@@ -19,6 +19,4 @@
 
 - (id)initWithCircle:(MKCircle *)circle;
 
-
-
 @end

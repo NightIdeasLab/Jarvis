@@ -23,9 +23,20 @@
     
     // Make us the controller
     [(NSFancyPanel *)panelToDisplay setController:self];
-
+	
+	
+//	rgba(48, 48, 48, 0.9)
+	float red = 0.2f;
+	float green = 0.2f;
+	float blue = 0.2f;
+	float alpha = 1.0f;
+	
+	NSColor *rgb = [NSColor colorWithDeviceRed:red green:green blue:blue alpha:alpha];
+	
     //	Tweak esthetics, making it all white and with a shadow
-    [panelToDisplay setBackgroundColor:[NSColor whiteColor]];
+//    [panelToDisplay setBackgroundColor:[NSColor whiteColor]];
+	[panelToDisplay setOpaque:NO]; 
+	[panelToDisplay setBackgroundColor:rgb];
     [panelToDisplay setHasShadow:YES];
 
     [panelToDisplay setBecomesKeyOnlyIfNeeded:NO];
