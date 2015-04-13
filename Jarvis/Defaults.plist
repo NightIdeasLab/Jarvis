@@ -14,8 +14,6 @@
 	<string>Short</string>
 	<key>TimeStyle</key>
 	<string>24</string>
-<<<<<<< HEAD
-=======
 	<key>UseCal</key>
 	<true/>
 	<key>UseWeather</key>
@@ -28,7 +26,6 @@
 	<true/>
 	<key>TemperatureStyle</key>
 	<string>Celsius</string>
->>>>>>> version-0.4.3
 	<key>ForecastWeather</key>
 	<string>YES</string>
 </dict>

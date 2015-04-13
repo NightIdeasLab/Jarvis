@@ -35,11 +35,22 @@
 @property (assign) IBOutlet NSButton *customNamePopUp;
 @property (unsafe_unretained) IBOutlet NSPopUpButton *popUpNameButton;
 @property (unsafe_unretained) IBOutlet NSPopUpButton *popUpTimeStyleButton;
+@property (unsafe_unretained) IBOutlet NSButton *iCalButton;
+@property (unsafe_unretained) IBOutlet NSButton *weatherButton;
+@property (unsafe_unretained) IBOutlet NSButton *mailButton;
+@property (unsafe_unretained) IBOutlet NSButton *newsButton;
 
 #pragma mark -
-#pragma mark Update var
-@property (assign, nonatomic) IBOutlet NSTextField *updateDateField;
-@property (assign, nonatomic) IBOutlet NSTextField *profileDateField;
+#pragma mark Mail var
+@property (unsafe_unretained) IBOutlet NSTextField *nameVIP1;
+@property (unsafe_unretained) IBOutlet NSTextField *emailVIP1;
+@property (unsafe_unretained) IBOutlet NSTextField *nameVIP2;
+@property (unsafe_unretained) IBOutlet NSTextField *emailVIP2;
+@property (unsafe_unretained) IBOutlet NSTextField *nameVIP3;
+@property (unsafe_unretained) IBOutlet NSTextField *emailVIP3;
+@property (unsafe_unretained) IBOutlet NSTextField *nameVIP4;
+@property (unsafe_unretained) IBOutlet NSTextField *emailVIP4;
+@property (unsafe_unretained) IBOutlet NSButton *saveButton;
 
 #pragma mark -
 #pragma mark Weather var
@@ -54,6 +65,11 @@
 @property (assign) IBOutlet NSButton *automaticLocationCheckBox;
 @property (unsafe_unretained) IBOutlet NSButton *forecastButton;
 
+#pragma mark -
+#pragma mark Update var
+@property (assign, nonatomic) IBOutlet NSTextField *updateDateField;
+@property (assign, nonatomic) IBOutlet NSTextField *profileDateField;
+
 // General
 - (IBAction)changeStateOfName:(id)sender;
 
@@ -61,6 +77,10 @@
 
 - (IBAction)readCustomName:(id)sender;
 
+- (IBAction)changeStateServices:(id)sender;
+
+// Mail
+- (IBAction)saveVips:(id)sender;
 // Weather
 
 // Finds the WOEID code for the location that the user inputs
@@ -73,5 +93,7 @@
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
 
 - (IBAction)forecastYesOrNo:(id)sender;
+
+
 
 @end

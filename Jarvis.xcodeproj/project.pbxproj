@@ -56,10 +56,6 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
-<<<<<<< HEAD
-		006829C618CCC65B00113D48 /* MapKit.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
-		006829C718CCC67A00113D48 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006829C518CCC65B00113D48 /* MapKit.framework */; };
-=======
 		006A2F8B1AAF7BB800DD7D05 /* PrefAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F831AAF7BB800DD7D05 /* PrefAccount.png */; };
 		006A2F8C1AAF7BB800DD7D05 /* PrefAccount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F841AAF7BB800DD7D05 /* PrefAccount@2x.png */; };
 		006A2F8D1AAF7BB800DD7D05 /* PrefGeneral.png in Resources */ = {isa = PBXBuildFile; fileRef = 006A2F851AAF7BB800DD7D05 /* PrefGeneral.png */; };
@@ -78,7 +74,6 @@
 		00771B2D1AB482E10014A4F1 /* JSWeatherUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 00771B241AB482E10014A4F1 /* JSWeatherUtility.m */; };
 		00771B2E1AB482E10014A4F1 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00771B251AB482E10014A4F1 /* LICENSE */; };
 		007B00DF1A5EEC06002FC178 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 005491AD176A0590008A191D /* Sparkle.framework */; };
->>>>>>> version-0.4.3
 		008541B417925BEF0005A433 /* ChangeLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 008541B217925BEF0005A433 /* ChangeLogController.m */; };
 		0094D44D176A27C50052079F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44C176A27C50052079F /* WebKit.framework */; };
 		0094D44F176A27D10052079F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0094D44E176A27D10052079F /* CoreLocation.framework */; };
@@ -184,9 +179,6 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
-		006829C518CCC65B00113D48 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Frameworks/MapKit.framework; sourceTree = "<group>"; };
-=======
 		006A2F831AAF7BB800DD7D05 /* PrefAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefAccount.png; path = Preference/PrefAccount.png; sourceTree = "<group>"; };
 		006A2F841AAF7BB800DD7D05 /* PrefAccount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PrefAccount@2x.png"; path = "Preference/PrefAccount@2x.png"; sourceTree = "<group>"; };
 		006A2F851AAF7BB800DD7D05 /* PrefGeneral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PrefGeneral.png; path = Preference/PrefGeneral.png; sourceTree = "<group>"; };
@@ -212,7 +204,6 @@
 		00771B231AB482E10014A4F1 /* JSWeatherUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSWeatherUtility.h; path = JSWeatherAPI/JSWeatherUtility.h; sourceTree = "<group>"; };
 		00771B241AB482E10014A4F1 /* JSWeatherUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSWeatherUtility.m; path = JSWeatherAPI/JSWeatherUtility.m; sourceTree = "<group>"; };
 		00771B251AB482E10014A4F1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = JSWeatherAPI/LICENSE; sourceTree = "<group>"; };
->>>>>>> version-0.4.3
 		008541B117925BEF0005A433 /* ChangeLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogController.h; sourceTree = "<group>"; };
 		008541B217925BEF0005A433 /* ChangeLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeLogController.m; sourceTree = "<group>"; };
 		0094D44C176A27C50052079F /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -302,18 +293,6 @@
 		0014456A1ACF298F005EE942 /* Weather */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				0094D43B176A27340052079F /* Service Icons */,
-				00485F7A188ADA2400EA4CC3 /* Name.pdf */,
-				0094D437176A27340052079F /* PrefGeneral.png */,
-				0094D438176A27340052079F /* PrefGeneral@2x.png */,
-				0094D439176A27340052079F /* PrefUpdate.png */,
-				0094D43A176A27340052079F /* PrefUpdate@2x.png */,
-				00BD8A14178F37750042CCA5 /* PrefWeather.png */,
-				00BD8A15178F37750042CCA5 /* PrefWeather@2x.png */,
-			);
-			path = Graphics;
-=======
 				0014456B1ACF298F005EE942 /* 01d.png */,
 				0014456C1ACF298F005EE942 /* 01d@2x.png */,
 				0014456D1ACF298F005EE942 /* 01n.png */,
@@ -367,7 +346,6 @@
 				006A2F8A1AAF7BB800DD7D05 /* PrefWeather@2x.png */,
 			);
 			name = Preference;
->>>>>>> version-0.4.3
 			sourceTree = "<group>";
 		};
 		00771B141AB482D20014A4F1 /* JSWeatherAPI */ = {
@@ -465,25 +443,8 @@
 		00AF0DDB1769FBBC00C00AE3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-				0094D450176A27D80052079F /* AddressBook.framework */,
-				0094D45C176A28050052079F /* CalendarStore.framework */,
-				00AF0DDC1769FBBC00C00AE3 /* Cocoa.framework */,
-				0094D460176A28170052079F /* CoreAudio.framework */,
-				0094D44E176A27D10052079F /* CoreLocation.framework */,
-				0094D45A176A27FC0052079F /* CoreServices.framework */,
-				0094D458176A27F30052079F /* IOKit.framework */,
-				006829C518CCC65B00113D48 /* MapKit.framework */,
-				0094D452176A27E70052079F /* Security.framework */,
-				0094D453176A27E70052079F /* SecurityFoundation.framework */,
-				0094D454176A27E70052079F /* SecurityInterface.framework */,
-				005491AD176A0590008A191D /* Sparkle.framework */,
-				0094D45E176A280D0052079F /* SystemConfiguration.framework */,
-				0094D44C176A27C50052079F /* WebKit.framework */,
-=======
 				00A909981A18221B001E4A83 /* Third Party Frameworks */,
 				00A909961A182136001E4A83 /* System Frameworks */,
->>>>>>> version-0.4.3
 				00AF0DDE1769FBBC00C00AE3 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -661,8 +622,6 @@
 				00485F7B188ADA2400EA4CC3 /* Name.pdf in Resources */,
 				006537C118917049005648C0 /* AboutContent.rtf in Resources */,
 				006537C818917067005648C0 /* AboutPanel.xib in Resources */,
-<<<<<<< HEAD
-=======
 				006A2F8B1AAF7BB800DD7D05 /* PrefAccount.png in Resources */,
 				006A2F8C1AAF7BB800DD7D05 /* PrefAccount@2x.png in Resources */,
 				006A2F8D1AAF7BB800DD7D05 /* PrefGeneral.png in Resources */,
@@ -708,7 +667,6 @@
 				001445B01ACF298F005EE942 /* 50d@2x.png in Resources */,
 				001445B11ACF298F005EE942 /* 50n.png in Resources */,
 				001445B21ACF298F005EE942 /* 50n@2x.png in Resources */,
->>>>>>> version-0.4.3
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,13 +792,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-<<<<<<< HEAD
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-=======
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
->>>>>>> version-0.4.3
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = "";
 				VALID_ARCHS = x86_64;
@@ -869,16 +823,11 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-<<<<<<< HEAD
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
-=======
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = "";
 				VALID_ARCHS = x86_64;
->>>>>>> version-0.4.3
 			};
 			name = Release;
 		};
@@ -897,15 +846,11 @@
 				GCC_VERSION = "";
 				GENERATE_PROFILING_CODE = YES;
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-<<<<<<< HEAD
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-=======
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "";
->>>>>>> version-0.4.3
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -927,15 +872,11 @@
 				GCC_PREFIX_HEADER = "Jarvis/Jarvis-Prefix.pch";
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "Jarvis/Jarvis-Info.plist";
-<<<<<<< HEAD
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-=======
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = "";
->>>>>>> version-0.4.3
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "";

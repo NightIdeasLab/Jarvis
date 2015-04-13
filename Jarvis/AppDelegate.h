@@ -32,13 +32,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
-<<<<<<< HEAD
-    NSString * fConfigDirectory;
-    NSUserDefaults * fDefaults;
-=======
     NSString *fConfigDirectory;
     NSUserDefaults *fDefaults;
->>>>>>> version-0.4.3
     BOOL fQuitRequested;
     IBOutlet id outText;
     IBOutlet id window;

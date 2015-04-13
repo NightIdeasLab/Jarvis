@@ -15,9 +15,6 @@
 
 - (NSString *) retrieveEmail;
 
-<<<<<<< HEAD
-=======
 -(void)checkForActiveMailAccount;
 
->>>>>>> version-0.4.3
 @end

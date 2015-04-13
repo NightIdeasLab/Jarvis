@@ -30,10 +30,22 @@
 @synthesize popUpNameButton;
 @synthesize popUpTimeStyleButton;
 
-// Update
-@synthesize updateDateField;
-@synthesize profileDateField;
+// Service button
+@synthesize iCalButton;
+@synthesize weatherButton;
+@synthesize mailButton;
+@synthesize newsButton;
 
+// Mail
+@synthesize nameVIP1;
+@synthesize emailVIP1;
+@synthesize nameVIP2;
+@synthesize emailVIP2;
+@synthesize nameVIP3;
+@synthesize emailVIP3;
+@synthesize nameVIP4;
+@synthesize emailVIP4;
+@synthesize saveButton;
 // Weather
 @synthesize mapView;
 @synthesize locationField;
@@ -44,6 +56,10 @@
 @synthesize temperaturePopUp;
 @synthesize popUpTemperatureButton;
 @synthesize forecastButton;
+
+// Update
+@synthesize updateDateField;
+@synthesize profileDateField;
 
 #pragma mark -
 #pragma mark Class Methods
@@ -57,18 +73,6 @@
 	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
 	NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
 
-<<<<<<< HEAD
-	// retriving latidude and
-	// longitude from plist file
-	double latitude = [defaults doubleForKey:@"latitudeCode"];
-	double longitude = [defaults doubleForKey:@"longitudeCode"];
-
-	if ((latitude != 0) && (longitude != 0)) {
-		NSLog(@"latitude : %f", latitude);
-        
-        [mapWebView setShowsUserLocation: YES];
-	}
-=======
     BOOL useCal = [defaults boolForKey:@"UseCal"];
     BOOL useWeather = [defaults boolForKey:@"UseWeather"];
     BOOL useMail = [defaults boolForKey:@"UseMail"];
@@ -77,7 +81,6 @@
 	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 	NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
     
->>>>>>> version-0.4.3
 	// checking and setting the last update date
 	// and last profile sent date into the interface
 	if ([updateDate.description length] > 0) {
@@ -115,14 +118,6 @@
 		[readUserName setState:0];
 		[self changeStateOfName:self];
 	}
-<<<<<<< HEAD
-	
-}
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification
-{
-	
-=======
     
     if (useCal == YES) {
         [iCalButton setState:1];
@@ -187,7 +182,6 @@
 	} else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
 		[popUpTemperatureButton selectItemAtIndex:2];
 	}
->>>>>>> version-0.4.3
 }
 
 #pragma mark -
@@ -196,11 +190,13 @@
 - (void)setupToolbar{
 	[self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title")
 			image: [NSImage imageNamed:@"PrefGeneral"]];
+    [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title")
+			image: [NSImage imageNamed:@"PrefAccount"]];
 	[self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
 			image: [NSImage imageNamed:@"PrefWeather"]];
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
 			image: [NSImage imageNamed:@"PrefUpdate"]];
-
+    
 	//[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
 
 	//[self addFlexibleSpacer]; //added a space between the icons
@@ -208,6 +204,108 @@
 	// Optional configuration settings.
 	[self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
 	[self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
+}
+
+#pragma mark -
+#pragma mark General Methods
+
+- (IBAction)changeStateOfName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	
+	if ([readUserName state] == 1) {
+		[customNamePopUp setEnabled:YES];
+		[defaults setBool:YES forKey: @"ReadUserName"];
+		[popUpNameButton selectItemAtIndex:0];
+    } else {
+		[customName setEnabled:NO];
+		[customNamePopUp setEnabled:NO];
+		[defaults setBool:NO forKey: @"ReadUserName"];
+		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
+			[defaults setObject:@"None" forKey: @"UserName"];
+		}
+    }
+    [defaults synchronize];
+}
+
+- (IBAction)readUserName:(NSButton *)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
+    
+	if (indexOfPopUp == 0 ) {
+		[defaults setObject:@"Short" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 1 ) {
+		[defaults setObject:@"Full" forKey: @"UserName"];
+		[customName setEnabled:NO];
+		[customName setStringValue:@""];
+	} else if (indexOfPopUp == 2) {
+		[customName setEnabled:YES];
+	}
+    [defaults synchronize];
+}
+
+- (IBAction)readCustomName:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+	NSString *customNameText = [customName stringValue];
+    
+	if ([customNameText length] >0) {
+		[defaults setObject:customNameText forKey: @"UserName"];
+	}
+    [defaults synchronize];
+}
+
+- (IBAction)changeStateServices:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([sender tag] == 1) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseCal"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseCal"];
+        }
+    } else if ([sender tag] == 2) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseWeather"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseWeather"];
+        }
+    } else if ([sender tag] == 3) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseMail"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseMail"];
+        }
+    } else if ([sender tag] == 4) {
+        if ([sender state]==NSOffState){
+            [defaults setBool:NO forKey: @"UseNewsQuotes"];
+        } else if ([sender state]==NSOnState){
+            [defaults setBool:YES forKey: @"UseNewsQuotes"];
+        }
+    }
+    [defaults synchronize];
+}
+
+#pragma mark -
+#pragma mark Mail Methods
+
+- (IBAction)saveVips:(id)sender {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([[emailVIP1 stringValue] length] > 0) [defaults setObject:[emailVIP1 stringValue] forKey: @"emailVIP1"];
+    if ([[nameVIP1 stringValue] length] > 0) [defaults setObject:[nameVIP1 stringValue] forKey: @"nameVIP1"];
+    if ([[emailVIP2 stringValue] length] > 0) [defaults setObject:[emailVIP2 stringValue] forKey: @"emailVIP2"];
+    if ([[nameVIP2 stringValue] length] > 0) [defaults setObject:[nameVIP2 stringValue] forKey: @"nameVIP2"];
+    if ([[emailVIP3 stringValue] length] > 0) [defaults setObject:[emailVIP3 stringValue] forKey: @"emailVIP3"];
+    if ([[nameVIP3 stringValue] length] > 0) [defaults setObject:[nameVIP3 stringValue] forKey: @"nameVIP3"];
+    if ([[emailVIP4 stringValue] length] > 0) [defaults setObject:[emailVIP4 stringValue] forKey: @"emailVIP4"];
+    if ([[nameVIP4 stringValue] length] > 0) [defaults setObject:[nameVIP4 stringValue] forKey: @"nameVIP4"];
+    
+    [saveButton setTitle:NSLocalizedString(@"Saved", @"Text that appears if the save button was pressed")];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [saveButton setTitle:NSLocalizedString(@"Save", @"Text that appears if the save button was not pressed")];
+    });
+    [defaults synchronize];
 }
 
 #pragma mark -
@@ -230,57 +328,6 @@
 		// If the user will not write a city and country then we will display this message
 		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
 	}
-<<<<<<< HEAD
-
-}
-
-- (NSInteger *)getWOEIDFromCityAndCountry: (NSString *) cityAndCountry {
-	// TODO: remove the white spaces in cityAndCountry and replace it with %20 the normal HTML white space
-	cityAndCountry =[cityAndCountry stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-
-	NSString *flickrKEY = @"ca5edb0f6f046f0e9e1ee43dd49277e4";
-	NSString *woeidCode = @"";
-	NSString *latitudeCode = @"";
-	NSString *longitudeCode = @"";
-	NSString *woeidContent = @"";
-	woeidContent = [NSString stringWithContentsOfURL:[NSURL URLWithString:
-													  [NSString stringWithFormat:
-													   @"http://api.flickr.com/services/rest/?method=flickr.places.find&api_key=%@&query=%@",flickrKEY,cityAndCountry]] encoding:
-															NSUTF8StringEncoding error:nil];
-
-	if(woeidContent != nil) {
-		woeidCode = [[woeidContent componentsSeparatedByString:@"woeid=\""] objectAtIndex:1];
-		woeidCode = [[woeidCode componentsSeparatedByString:@"\""] objectAtIndex:0];
-		latitudeCode = [[woeidContent componentsSeparatedByString:@"latitude=\""] objectAtIndex:1];
-		latitudeCode = [[latitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
-		longitudeCode = [[woeidContent componentsSeparatedByString:@"longitude=\""] objectAtIndex:1];
-		longitudeCode = [[longitudeCode componentsSeparatedByString:@"\""] objectAtIndex:0];
-    }
-	else {
-		NSLog(@"The woeid cannot be retrieved!!!");
-	}
-
-	[self saveCodeData:woeidCode longitude:longitudeCode latitude:latitudeCode];
-
-/*
-	NSLog(@"Flickr woeid respornce: %@",woeidCode);
-	NSLog(@"Flickr latitude respornce: %@",latitudeCode);
-	NSLog(@"Flickr longitude respornce: %@",longitudeCode);
-*/
-	
-	double latitudeDouble = [latitudeCode doubleValue];
-
-	double longitudeDouble = [longitudeCode doubleValue];
-
-	[self updateMapWithLatitude: latitudeDouble AndLongitude: longitudeDouble];
-
-	return 0;
-}
-
-- (void)saveCodeData:(NSString *) aWoeidCode longitude:(NSString *) aLongitudeCode latitude:(NSString *) aLatitudeCode{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-=======
->>>>>>> version-0.4.3
 	
 	MKGeocoder *geocoderNoCoord = [[MKGeocoder alloc] initWithAddress:locationText];
 	geocoderNoCoord.delegate = self;
@@ -301,52 +348,6 @@
     }
 }
 
-- (IBAction)changeStateOfName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([readUserName state] == 1) {
-		[customNamePopUp setEnabled:YES];
-		[defaults setBool:YES forKey: @"ReadUserName"];
-		[popUpNameButton selectItemAtIndex:0];
-    } else {
-		[customName setEnabled:NO];
-		[customNamePopUp setEnabled:NO];
-		[defaults setBool:NO forKey: @"ReadUserName"];
-		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
-			[defaults setObject:@"None" forKey: @"UserName"];
-		}
-
-    }
-}
-
-- (IBAction)readUserName:(NSButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
-
-	if (indexOfPopUp == 0 ) {
-		[defaults setObject:@"Short" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 1 ) {
-		[defaults setObject:@"Full" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 2) {
-		[customName setEnabled:YES];
-	}
-	
-}
-
-- (IBAction)readCustomName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-	NSString *customNameText = [customName stringValue];
-
-	if ([customNameText length] >0) {
-		[defaults setObject:customNameText forKey: @"UserName"];
-	}
-}
-
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
@@ -358,6 +359,7 @@
 	} else if (indexOfTemperaturePopUp == 2 ) {
 		[defaults setObject:@"Fahrenheit" forKey: @"TemperatureStyle"];
 	}
+    [defaults synchronize];
 }
 
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
@@ -369,6 +371,7 @@
 	} else if (indexOfTimePopUp == 1 ) {
 		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
 	}
+    [defaults synchronize];
 }
 
 - (IBAction)forecastYesOrNo:(id)sender {
@@ -379,13 +382,9 @@
 	} else {
 		[defaults setBool:NO forKey: @"ForecastWeather"];
 	}
-	
+	[defaults synchronize];
 }
 
-<<<<<<< HEAD
-
-@end
-=======
 - (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate
 {
 	CLLocationCoordinate2D coordinateE;
@@ -438,4 +437,3 @@
 }
 
 @end
->>>>>>> version-0.4.3

@@ -13,7 +13,7 @@
 #define DONATE_URL  @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
-#define SLOW_INTERNET 0 // TODO: 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
+#define SLOW_INTERNET 0 // 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
 
 NSSpeechSynthesizer *synth;
 
@@ -52,72 +52,20 @@ NSSpeechSynthesizer *synth;
         // initializing the preference plist
         fDefaults = [NSUserDefaults standardUserDefaults];
 		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"UserName" options:( NSKeyValueObservingOptionOld |
+												forKeyPath:@"PreferenceCloseTimeStamp" options:( NSKeyValueObservingOptionOld |
 																				 NSKeyValueObservingOptionNew )
 												   context:NULL];
-
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"TemperatureStyle" options:( NSKeyValueObservingOptionOld |
-																				NSKeyValueObservingOptionNew )
-												   context:NULL];
-
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"TimeStyle" options:( NSKeyValueObservingOptionOld |
-																				NSKeyValueObservingOptionNew )
-												   context:NULL];
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"ForecastWeather" options:( NSKeyValueObservingOptionOld |
-																				 NSKeyValueObservingOptionNew )
-												   context:NULL];
-
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
         // initializing the update system
-<<<<<<< HEAD
-        [[SUUpdater sharedUpdater] setDelegate: self]; // FIXME: trows a c++ exception
-=======
         [SUUpdater sharedUpdater];
->>>>>>> version-0.4.3
     }
     return self;
 }
 
 // KVO handler
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-<<<<<<< HEAD
-					   change:(NSDictionary *)change context:(void *)context
-{
-	// detect the change for the weather code
-    if([keyPath isEqualToString:@"woeidCode"])
-    {
-        NSString *oldWoeidCode = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString *newWoeidCode = [change objectForKey:NSKeyValueChangeNewKey];
-
-	#if DEBUG
-		NSLog(@"old C: %@", oldWoeidCode);
-		NSLog(@"new C: %@", newWoeidCode);
-	#endif
-
-		if (newWoeidCode != oldWoeidCode) {
-			//[self jarvis:NO];
-			[self updateJarvisNOSpeech];
-		}
-    }
-
-	// detect the change for the user name
-	if([keyPath isEqualToString:@"UserName"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the time style
-	if([keyPath isEqualToString:@"TimeStyle"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the temperature style
-	if([keyPath isEqualToString:@"TemperatureStyle"]) [self updateJarvisNOSpeech];
-
-	// detect the change for the forecast
-	if([keyPath isEqualToString:@"ForecastWeather"]) [self updateJarvisNOSpeech];
-
-=======
 					   change:(NSDictionary *)change context:(void *)context {
 	// detect the close the preference window
 	if([keyPath isEqualToString:@"PreferenceCloseTimeStamp"]) {
@@ -125,7 +73,6 @@ NSSpeechSynthesizer *synth;
            [self updateJarvisNOSpeech];
         });
     }
->>>>>>> version-0.4.3
 }
 
 - (void) awakeFromNib {
@@ -134,7 +81,7 @@ NSSpeechSynthesizer *synth;
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
 #endif
     // allocationg the SpeechSyntesizer
-	synth = [[NSSpeechSynthesizer alloc] init]; // FIXME: trows a c++ exception
+	synth = [[NSSpeechSynthesizer alloc] init];
 	[self jarvis:YES];
 }
 
@@ -176,11 +123,6 @@ NSSpeechSynthesizer *synth;
                 [self linkDonate: self];
             if (allowNeverAgain)
                 [fDefaults setBool: ([[alert suppressionButton] state] != NSOnState) forKey: @"WarningDonate"];
-<<<<<<< HEAD
-            
-            //[alert release];
-=======
->>>>>>> version-0.4.3
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
@@ -217,8 +159,7 @@ NSSpeechSynthesizer *synth;
     if (_preferencesController) {
         //[_preferencesController release];
         _preferencesController = nil;
-    }
-    
+    }    
     // init from nib but the real initialization happens in the
     // PreferencesWindowController setupToolbar method
     _preferencesController = [[PreferencesController alloc] initWithWindowNibName:@"PreferencesController"];
@@ -240,7 +181,6 @@ NSSpeechSynthesizer *synth;
 
 - (IBAction) openChangeLog: (id) sender {
     if (_changeLogController) {
-        //[_changeLogController release];
         _changeLogController = nil;
     }
     _changeLogController = [[ChangeLogController alloc] initWithWindowNibName:@"ChangeLogController"];
@@ -279,55 +219,15 @@ NSSpeechSynthesizer *synth;
 
 - (void) jarvis: (BOOL) speak {
     @autoreleasepool {
-<<<<<<< HEAD
-=======
         fDefaults = [NSUserDefaults standardUserDefaults];
         const BOOL useCal = [fDefaults boolForKey: @"UseCal"];
         const BOOL useWeather = [fDefaults boolForKey: @"UseWeather"];
         const BOOL useMail = [fDefaults boolForKey: @"UseMail"];
         const BOOL useNews = [fDefaults boolForKey: @"UseNewsQuotes"];
         const BOOL checkForActiveMailAccount = [fDefaults boolForKey: @"CheckForActiveMailAccount"];
->>>>>>> version-0.4.3
         NSString *outputText = [[NSString alloc] init];
         TimeAndDateMethod *timeAndDate = [[TimeAndDateMethod alloc] init];
         outputText = [outputText stringByAppendingString:[timeAndDate retrieveTimeAndDate]];
-<<<<<<< HEAD
-
-        CalendarMethod *calendar = [[CalendarMethod alloc] init];
-        
-        outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
-        outputText = [outputText stringByAppendingString:[calendar retrieveReminders]];
-        
-    #if !SLOW_INTERNET
-        
-        WeatherMethod *weather = [[WeatherMethod alloc] init];
-
-        NSDictionary *result = [weather retrieveWeather];
-
-        outputText = [outputText stringByAppendingString:[result objectForKey:@"outputWeatherText"]];
-
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@",[result objectForKey:@"weatherImage"]]];
-        NSData *data = [[NSData alloc] initWithContentsOfURL:url];
-        NSImage *tempImage = [[NSImage alloc] initWithData:data];
-        [weatherImage setImage:tempImage];
-
-    #endif
-
-        EmailMethod *email = [[EmailMethod alloc] init];
-        
-        outputText = [outputText stringByAppendingString:[email retrieveEmail]];
-        
-    #if !SLOW_INTERNET
-        
-        NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
-        
-        // NYTimes
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
-        
-        // Daily Quote
-        outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
-        
-=======
         if (useCal) {
             CalendarMethod *calendar = [[CalendarMethod alloc] init];
             outputText = [outputText stringByAppendingString:[calendar retrieveiCalEvents]];
@@ -357,9 +257,7 @@ NSSpeechSynthesizer *synth;
             // Daily Quote
             outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
         }
->>>>>>> version-0.4.3
     #endif
-        
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
         // If set to YES then the mainwindow will
         // be on top of the other windows and there
@@ -370,15 +268,10 @@ NSSpeechSynthesizer *synth;
         [outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
         [outText setString:outputText];
         if (speak) {
-<<<<<<< HEAD
-            [synth startSpeakingString:outputText];	//for speaking the text
-=======
 	#if !DEBUG
             [synth startSpeakingString:outputText];	//for speaking the text
 	#endif
->>>>>>> version-0.4.3
         }
     }
 }
-
 @end

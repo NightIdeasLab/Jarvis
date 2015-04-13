@@ -23,19 +23,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.4.2.2</string>
+	<string>0.4.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-<<<<<<< HEAD
-	<string>4B2B</string>
-	<key>JRFeedbackURL</key>
-	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.utilities</string>
-=======
 	<string>4C3</string>
->>>>>>> version-0.4.3
 	<key>LSMinimumSystemVersion</key>
 	<string>${MACOSX_DEPLOYMENT_TARGET}</string>
 	<key>UIRequiresPersistentWiFi</key>
@@ -47,23 +39,20 @@
 	<key>CFBundleHelpBookName</key>
 	<string>Jarvis Help</string>
 	<key>SUAllowsAutomaticUpdates</key>
-	<string>YES</string>
+	<true/>
+	<key>SUAutomaticallyUpdate</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
-	<string>YES</string>
+	<true/>
 	<key>SUEnableSystemProfiling</key>
-	<string>YES</string>
+	<true/>
 	<key>SUFeedURL</key>
 	<string>http://jarvisapp.tk/profile/profileInfo.php</string>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
-<<<<<<< HEAD
-	<key>UIRequiresPersistentWiFi</key>
-	<true/>
-=======
 	<key>SUSendProfileInfo</key>
 	<true/>
 	<key>JRFeedbackURL</key>
 	<string>http://jarvisapp.tk/profile/jrfeedback.php</string>
->>>>>>> version-0.4.3
 </dict>
 </plist>
