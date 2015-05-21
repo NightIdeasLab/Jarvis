@@ -2,6 +2,7 @@ A TODO list
 
 Version 0.4.4
 - To make a better rss feed reader and add even a refresh rate with growl notifications if the news change.
+- For the VIPs create a table view and the possibility to add as many VIPs as the user wants
 - Implement a automatic refresh for everything.
 
 Version 0.4.5
@@ -11,7 +12,6 @@ Version 0.4.5
 
 a) Important|Urgent|Bugs
 
-- Test/fix the tracking, and add even a refresh rate with growl notifications if tracking changed.
 - Speech Recognition
 
 b) Features
@@ -20,11 +20,10 @@ b) Features
 
 d) Unknown
 
-- Create a Setup only the first time when the user opens the app to set up weather and to turn on or off what he wants.
 - Add iCloud sync (preferences, accounts)
 - Integrate it with Notification Center (Mountain Lion)
 - Add localizations
 - Darrin idea "if server-based, could this be part of a distributed system that uses something like ChatScript for conversation/verbal interaction, Jarvis as a "handler", a database for long-term memory, Google for speech recognition, etc?"
 - weather:
 	option for short version of the forecast ( only present day )
-	if possible Feels like, Humidity, visibility and UV index (Yahoo weather app for Iphone has this info i suppose be possible to get the same info from the website)
+	if possible Feels like, Humidity, visibility and UV index
