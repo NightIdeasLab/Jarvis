@@ -23,7 +23,7 @@ test:
 ci:
 	for i in {7..11} ; do \
 		if xcrun --sdk "macosx10.$$i" --show-sdk-path 2> /dev/null ; then \
-			xcodebuild -sdk "macosx10.$$i" -scheme Jarvis -configuration Debug || exit 1 ; \
+			xcodebuild -sdk "macosx10.$$i" -configuration Debug || exit 1 ; \
 		fi ; \
 	done
 

@@ -2,6 +2,8 @@
 
 # This software is still in beta version.
 
+[![Build Status](https://travis-ci.org/NightIdeasLab/Jarvis.svg)](https://travis-ci.org/NightIdeasLab/Jarvis)
+
 [ChangeLog](http://goo.gl/0GUKo).
 
 ![Screenshot](/JarvisHelp/images/Jarvis_screenshot.png)
