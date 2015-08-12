@@ -1,7 +1,7 @@
 A TODO list
 
 Version 0.4.4
-- To make a better rss feed reader and add even a refresh rate with growl notifications if the news change.
+- To make a better rss feed reader
 - For the VIPs create a table view and the possibility to add as many VIPs as the user wants
 - Implement a automatic refresh for everything.
 
@@ -10,13 +10,9 @@ Version 0.4.5
 - Create a menu bar icon and menu and a preferences option to show/hide the menu bar item or hide de icon in the dock.
 - Retrieve even the Priority of a Reminder.
 
-a) Important|Urgent|Bugs
-
-- Speech Recognition
-
 b) Features
-- To make tabs for twitter/Facebook
 - The startup/logged in time (the total processes running, etc)
+- Speech Recognition
 
 d) Unknown
 

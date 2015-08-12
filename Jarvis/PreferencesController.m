@@ -192,8 +192,10 @@
 			image: [NSImage imageNamed:@"PrefGeneral"]];
     [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title")
 			image: [NSImage imageNamed:@"PrefAccount"]];
-	[self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
+    [self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
 			image: [NSImage imageNamed:@"PrefWeather"]];
+	[self addView:self.newsPreferenceView label: NSLocalizedString(@"News&Quotes", @"News Window title")
+			image: [NSImage imageNamed:@"PrefNews"]];
     [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
 			image: [NSImage imageNamed:@"PrefUpdate"]];
     

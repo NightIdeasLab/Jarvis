@@ -76,13 +76,12 @@ NSSpeechSynthesizer *synth;
 }
 
 - (void) awakeFromNib {
+    // if the internet is slow show this text first
+    [outText setString:@"Updating your report..."];
     [windowLM makeKeyAndOrderFront:self];
 #if DEBUG
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
 #endif
-    // allocationg the SpeechSyntesizer
-	synth = [[NSSpeechSynthesizer alloc] init];
-	[self jarvis:YES];
 }
 
 - (void) applicationWillFinishLaunching: (NSNotification *) aNotification {
@@ -126,7 +125,10 @@ NSSpeechSynthesizer *synth;
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
-#endif	
+#endif
+    // allocationg the SpeechSyntesizer
+	synth = [[NSSpeechSynthesizer alloc] init];
+    [self jarvis:YES];
 }
 
 - (BOOL) applicationShouldHandleReopen: (NSApplication *) app hasVisibleWindows: (BOOL) visibleWindows {
