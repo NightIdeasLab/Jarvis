@@ -2,7 +2,8 @@
 
 @implementation RSSAtomAccount
 
-+ (void)load { [Account registerClass:self]; }
+// Copied from https://github.com/nfarina/feeds with modifications
+
 + (NSString *)friendlyAccountName { return @"RSS/Atom"; }
 + (BOOL)requiresDomain { return YES; }
 + (NSString *)domainLabel { return @"Feed URL:"; }
@@ -10,13 +11,11 @@
 + (NSString *)domainSuffix { return @""; }
 + (NSString *)domainPlaceholder { return @"example.com"; }
 
-- (void)validateWithPassword:(NSString *)password {
-
-    NSString *fixedDomain = self.domain;
+- (void)validateLink:(NSString *)fixedDomain {
     
     // prepend http:// if no scheme was specified
     if (![fixedDomain containsString:@"://"])
-        fixedDomain = [@"http://" stringByAppendingString:self.domain];
+        fixedDomain = [@"http://" stringByAppendingString:fixedDomain];
     else if ([fixedDomain beginsWithString:@"feed://"]) // sometimes
         fixedDomain = [fixedDomain stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"];
     else if ([fixedDomain beginsWithString:@"feed:http://"]) // never seen, but possible
@@ -27,9 +26,9 @@
     NSURLRequest *URLRequest;
     
     // just try fetching the given feed
-    if (self.username.length)
-        URLRequest = [NSURLRequest requestWithURLString:fixedDomain username:self.username password:password];
-    else
+//    if (self.username.length)
+//        URLRequest = [NSURLRequest requestWithURLString:fixedDomain username:self.username password:password];
+//    else
         URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fixedDomain]];
     
     self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
@@ -80,7 +79,7 @@
             NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
             
             if (href.length) {
-                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title account:self];
+                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
                 if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
@@ -91,7 +90,7 @@
             NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
             
             if (href.length) {
-                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title account:self];
+                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
                 if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
@@ -99,7 +98,6 @@
         if (foundFeeds.count)
             self.feeds = foundFeeds;
         else {
-            [self.delegate account:self validationDidFailWithMessage:@"Could not discover any feeds at the given URL. Try specifying the complete URL to the feed." field:AccountFailingFieldDomain];
             return;
         }
     }
@@ -110,34 +108,25 @@
         
         if (items == nil) {
             NSString *message = [NSString stringWithFormat:@"Could not parse the given feed. Error: %@", error.localizedDescription];
-            [self.delegate account:self validationDidFailWithMessage:message field:AccountFailingFieldUnknown];
+            NSLog(@"error message: %@", message);
             return;
         }
         
-        Feed *feed = [Feed feedWithURLString:self.request.request.URL.absoluteString title:(title ?: @"All Items") account:self];
-        
-        if (self.username.length)
-            feed.requiresBasicAuth = YES;
+        Feed *feed = [Feed feedWithURLString:self.request.request.URL.absoluteString title:(title ?: @"All Items")];
         
         self.feeds = @[feed];
     }
-    
-    [self.delegate account:self validationDidCompleteWithNewPassword:nil];
 }
 
 - (void)feedRequestError:(NSError *)error {
     
     // if we got a 401, then we can try basic auth if we ask you for your username and password
-    if (error.code == 401 && !self.username.length)
-        [self.delegate account:self validationDidRequireUsernameAndPasswordWithMessage:@"This feed requires a username/password."];
-    else if (error.code == 401 && self.username.length)
-        [self.delegate account:self validationDidRequireUsernameAndPasswordWithMessage:@"Could not access the given feed. Please check your username and password."];
-    else if (error.code == 404 && self.username.length)
-        [self.delegate account:self validationDidFailWithMessage:@"Could not access the given feed. Please check the URL, username, or password." field:AccountFailingFieldUnknown];
+    if (error.code == 401)
+        NSLog(@"This feed requires a username/password.");
     else if (error.code == 404)
-        [self.delegate account:self validationDidFailWithMessage:@"Could not access the given feed. The server reports that the URL could not be found." field:AccountFailingFieldDomain];
+        NSLog(@"Could not access the given feed. The server reports that the URL could not be found.");
     else
-        [self.delegate account:self validationDidFailWithMessage:error.localizedDescription field:AccountFailingFieldUnknown];
+        NSLog(@"Could not access the given feed. Unknown error %@", error.localizedDescription);
 }
 
 @end

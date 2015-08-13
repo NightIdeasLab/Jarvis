@@ -40,7 +40,7 @@
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
 				return;
 			}
-			NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"tiff"];
+			NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"png"];
 			weatherImage = [[NSData alloc] initWithContentsOfFile:filePath];
 			
 			NSString *currentWeather = [object.objects objectForKey:@"weather"];

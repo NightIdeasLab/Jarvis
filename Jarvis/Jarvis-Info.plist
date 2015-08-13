@@ -10,8 +10,6 @@
 	<string>JarvisHelp</string>
 	<key>CFBundleHelpBookName</key>
 	<string>Jarvis Help</string>
-	<key>CFBundleIconFile</key>
-	<string>Jarvis.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.NightIdeasLab.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>

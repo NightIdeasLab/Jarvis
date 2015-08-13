@@ -46,6 +46,7 @@
 @synthesize nameVIP4;
 @synthesize emailVIP4;
 @synthesize saveButton;
+
 // Weather
 @synthesize mapView;
 @synthesize locationField;
@@ -56,6 +57,12 @@
 @synthesize temperaturePopUp;
 @synthesize popUpTemperatureButton;
 @synthesize forecastButton;
+
+// News&Quotes
+@synthesize newsLink;
+@synthesize newsLinkOutput;
+@synthesize newsLinkOutputImage;
+@synthesize newsLinkOutputProgress;
 
 // Update
 @synthesize updateDateField;
@@ -182,6 +189,11 @@
 	} else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
 		[popUpTemperatureButton selectItemAtIndex:2];
 	}
+    
+    [newsLinkOutputProgress stopAnimation:nil];
+    newsLinkOutputImage.hidden = YES;
+    newsLinkOutputProgress.hidden = YES;
+    newsLinkOutput.hidden = YES;
 }
 
 #pragma mark -
@@ -436,6 +448,24 @@
             showsUserLocationApp = YES;
         }
     }
+}
+
+- (IBAction)newsLinkChange:(id)sender {
+	// retrieves the City and Country
+	NSString *newsLinkText = [newsLink stringValue];
+	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Finding feeds…", @"Message after the user inseted the news link")];
+    
+	if ([newsLinkText length] >0) {
+        self.newsLinkOutputProgress.hidden = NO;
+        self.newsLinkOutput.hidden = NO;
+        [self.newsLinkOutputProgress startAnimation:nil];
+		// Displays the user his location
+		[newsLinkOutput setStringValue:messageForLabel];
+	} else {
+        self.newsLinkOutput.hidden = NO;
+		// If the user will not write a link then we will display this message
+		[newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
+	}
 }
 
 @end

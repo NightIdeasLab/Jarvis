@@ -42,13 +42,13 @@
     [self.locationManager setDelegate:self];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-    
+/*
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         //[self.locationManager requestWhenInUseAuthorization];
     } else if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         //[self.locationManager requestAlwaysAuthorization];
     }
-    
+*/
     [self.locationManager startUpdatingLocation];
 }
 

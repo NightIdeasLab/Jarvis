@@ -76,8 +76,11 @@ NSSpeechSynthesizer *synth;
 }
 
 - (void) awakeFromNib {
+    // setting the font and color
+    [outText setFont:[NSFont fontWithName:@"HelveticaNeue-Light" size:12]];
+    [outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
     // if the internet is slow show this text first
-    [outText setString:@"Updating your report..."];
+    [outText setString:@"Starting up..."];
     [windowLM makeKeyAndOrderFront:self];
 #if DEBUG
 	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
@@ -266,8 +269,6 @@ NSSpeechSynthesizer *synth;
         // is no way to send it to the back
         [window setFloatingPanel:NO];
         //Output
-        [outText setFont:[NSFont fontWithName:@"HelveticaNeue-Light" size:12]];
-        [outText setTextColor:[NSColor colorWithDeviceWhite:0.95 alpha:1]];
         [outText setString:outputText];
         if (speak) {
 	#if !DEBUG

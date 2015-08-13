@@ -12,7 +12,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES" HUD="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="390" y="204" width="500" height="500"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <value key="minSize" type="size" width="300" height="300"/>
             <view key="contentView" id="538">
                 <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
@@ -55,7 +55,7 @@
                             <constraint firstAttribute="width" constant="96" id="dU9-Q7-6hX"/>
                         </constraints>
                         <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="Jarvis" imagePosition="overlaps" alignment="center" imageScaling="axesIndependently" inset="2" id="677">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
@@ -797,6 +797,6 @@
         <userDefaultsController id="782"/>
     </objects>
     <resources>
-        <image name="Jarvis" width="256" height="256"/>
+        <image name="Jarvis" width="512" height="512"/>
     </resources>
 </document>

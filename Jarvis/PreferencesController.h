@@ -61,9 +61,16 @@
 @property (assign) IBOutlet NSButton *findLocationButton;
 @property (unsafe_unretained) IBOutlet NSPopUpButton *popUpTemperatureButton;
 @property (assign) IBOutlet NSButton *temperaturePopUp;
-
 @property (assign) IBOutlet NSButton *automaticLocationCheckBox;
 @property (unsafe_unretained) IBOutlet NSButton *forecastButton;
+
+
+#pragma mark -
+#pragma mark News&Quotes var
+@property (weak) IBOutlet NSTextField *newsLink;
+@property (weak) IBOutlet NSTextField *newsLinkOutput;
+@property (weak) IBOutlet NSImageView *newsLinkOutputImage;
+@property (weak) IBOutlet NSProgressIndicator *newsLinkOutputProgress;
 
 #pragma mark -
 #pragma mark Update var
@@ -81,8 +88,8 @@
 
 // Mail
 - (IBAction)saveVips:(id)sender;
-// Weather
 
+// Weather
 // Finds the WOEID code for the location that the user inputs
 - (IBAction)changeStateAutomaticLocation:(id)sender;
 
@@ -94,6 +101,7 @@
 
 - (IBAction)forecastYesOrNo:(id)sender;
 
+- (IBAction)newsLinkChange:(id)sender;
 
 
 @end
