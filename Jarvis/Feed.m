@@ -177,6 +177,7 @@ NSDate *AutoFormatDate(NSString *dateString) {
 //    if (username) context[@"username"] = username;
 //    if (password) context[@"password"] = password;
     
+    NSLog(@"URL: %@", URLRequest);
     self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:(id<SMWebRequestDelegate>)[self class] context:context];
     [self.request addTarget:self action:@selector(refreshComplete:) forRequestEvents:SMWebRequestEventComplete];
     [self.request addTarget:self action:@selector(refreshError:) forRequestEvents:SMWebRequestEventError];

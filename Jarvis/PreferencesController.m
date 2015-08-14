@@ -164,6 +164,7 @@
         [newsButton setState:0];
     }
 
+    // TODO: if the user does not uses the weather do not look for his location.
     if (automaticLocation == YES) {
 		[mapView setShowsUserLocation: YES];
 		[mapView setDelegate: self];
@@ -466,6 +467,46 @@
 		// If the user will not write a link then we will display this message
 		[newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
 	}
+    
+    RSSAtomAccount *rssFeed = [[RSSAtomAccount alloc] init];
+    [rssFeed validateLink:newsLinkText];
 }
 
+- (void)validationDidFailWithMessage:(NSString *)message {
+    
+    [self.newsLinkOutputProgress stopAnimation:nil];
+    [self.newsLinkOutputProgress setHidden:YES];
+    
+    [self.newsLinkOutputImage setHidden:NO];
+    [self.newsLinkOutput setStringValue:message];
+}
+/*
+- (void)account:(Account *)account validationDidCompleteWithNewPassword:(NSString *)password {
+    DDLogInfo(@"Validation completed for account %@.", self.selectedAccount);
+    [self.findFeedsProgress stopAnimation:nil];
+    [self.findFeedsProgress setHidden:YES];
+    [self.findFeedsLabel setHidden:YES];
+    
+    if ([account.feeds isEqualToArray:self.oldFeeds]) {
+        // if nothing has changed, keep our old feed objects to preserve non-retained references from any existing FeedItems.
+        account.feeds = self.oldFeeds;
+    }
+    else {
+        DDLogInfo(@"Available feeds changed! Saving accounts.");
+        
+        // copy over the disabled flag for accounts we already had
+        for (Feed *feed in account.feeds) {
+            NSUInteger index = [self.oldFeeds indexOfObject:feed];
+            if (index != NSNotFound) {
+                Feed *old = self.oldFeeds[index];
+                feed.disabled = old.disabled;
+            }
+        }
+        
+        [Account saveAccounts];
+    }
+    
+    self.feedsTableView.dataSource = account;
+}
+*/
 @end

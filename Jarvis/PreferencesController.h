@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <MapKit/MapKit.h>
 #import "DBPrefsWindowController.h"
+#import "RSSAtomAccount.h"
 
 @class MKMapView;
 

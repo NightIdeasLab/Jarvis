@@ -24,12 +24,7 @@
         fixedDomain = [fixedDomain stringByReplacingOccurrencesOfString:@"feed:https://" withString:@"https://"];
     
     NSURLRequest *URLRequest;
-    
-    // just try fetching the given feed
-//    if (self.username.length)
-//        URLRequest = [NSURLRequest requestWithURLString:fixedDomain username:self.username password:password];
-//    else
-        URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fixedDomain]];
+    URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:fixedDomain]];
     
     self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
     [self.request addTarget:self action:@selector(feedRequestComplete:) forRequestEvents:SMWebRequestEventComplete];
@@ -51,7 +46,6 @@
             [URL.path endsWithString:@".html"] || [URL.path endsWithString:@".html"])
             looksLikeHtml = YES;
     }
-
     // looks like HTML? are you SURE?
     if (looksLikeHtml) {
         
@@ -94,10 +88,10 @@
                 if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
-        
         if (foundFeeds.count)
             self.feeds = foundFeeds;
         else {
+            //[self.delegate account:self validationDidFailWithMessage:@"Could not discover any feeds at the given URL. Try specifying the complete URL to the feed." field:AccountFailingFieldDomain];
             return;
         }
     }
@@ -116,11 +110,16 @@
         
         self.feeds = @[feed];
     }
+    
+ //   [self.delegate account:self validationDidCompleteWithNewPassword:nil];
 }
 
 - (void)feedRequestError:(NSError *)error {
-    
+    // TODO: handle the errors..
     // if we got a 401, then we can try basic auth if we ask you for your username and password
+    // [self.delegate account:self validationDidRequireUsernameAndPasswordWithMessage:@"This feed requires a username/password."];
+    // [self.delegate account:self validationDidFailWithMessage:error.localizedDescription field:AccountFailingFieldUnknown];
+    [self.delegate validationDidFailWithMessage:@"This feed requires a username/password."];
     if (error.code == 401)
         NSLog(@"This feed requires a username/password.");
     else if (error.code == 404)
