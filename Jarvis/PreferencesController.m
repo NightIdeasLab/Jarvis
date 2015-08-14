@@ -451,34 +451,45 @@
     }
 }
 
+- (void)startSpinning {
+    newsLinkOutputProgress.hidden = NO;
+    [newsLinkOutputProgress startAnimation:self];
+//    isSpinning = YES;
+}
+
+- (void)stopSpinning {
+    [newsLinkOutputProgress stopAnimation:self];
+    newsLinkOutputProgress.hidden = YES;
+//    isSpinning = NO;
+}
+
 - (IBAction)newsLinkChange:(id)sender {
 	// retrieves the City and Country
 	NSString *newsLinkText = [newsLink stringValue];
 	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Finding feeds…", @"Message after the user inseted the news link")];
     
 	if ([newsLinkText length] >0) {
-        self.newsLinkOutputProgress.hidden = NO;
-        self.newsLinkOutput.hidden = NO;
-        [self.newsLinkOutputProgress startAnimation:nil];
+        [self startSpinning];
+        newsLinkOutput.hidden = NO;
 		// Displays the user his location
 		[newsLinkOutput setStringValue:messageForLabel];
 	} else {
-        self.newsLinkOutput.hidden = NO;
+        newsLinkOutput.hidden = NO;
 		// If the user will not write a link then we will display this message
 		[newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
 	}
-    
     RSSAtomAccount *rssFeed = [[RSSAtomAccount alloc] init];
     [rssFeed validateLink:newsLinkText];
 }
 
 - (void)validationDidFailWithMessage:(NSString *)message {
-    
-    [self.newsLinkOutputProgress stopAnimation:nil];
-    [self.newsLinkOutputProgress setHidden:YES];
-    
+    NSLog(@"validationDidFailWithMessage: %@", message);
+
+    NSLog(@"newsLinkOutputProgress is hidden1: %hhd", self.newsLinkOutputProgress.isHidden);
+    [self stopSpinning];
+    NSLog(@"newsLinkOutputProgress is hidden2: %hhd", self.newsLinkOutputProgress.isHidden);
     [self.newsLinkOutputImage setHidden:NO];
-    [self.newsLinkOutput setStringValue:message];
+    [newsLinkOutput setStringValue:@"mata"];
 }
 /*
 - (void)account:(Account *)account validationDidCompleteWithNewPassword:(NSString *)password {

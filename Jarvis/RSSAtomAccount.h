@@ -1,3 +1,4 @@
+#import "PreferencesController.h"
 #import "NSString+English.h"
 #import "NSURLRequest+Authorization.h"
 #import "SMWebRequest/SMWebRequest.h"

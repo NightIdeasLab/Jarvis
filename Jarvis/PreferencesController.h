@@ -102,7 +102,13 @@
 
 - (IBAction)forecastYesOrNo:(id)sender;
 
+- (void)startSpinning;
+
+- (void)stopSpinning;
+
 - (IBAction)newsLinkChange:(id)sender;
+
+- (void)validationDidFailWithMessage:(NSString *)message;
 
 
 @end

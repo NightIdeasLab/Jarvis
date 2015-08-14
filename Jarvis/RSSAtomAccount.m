@@ -119,13 +119,14 @@
     // if we got a 401, then we can try basic auth if we ask you for your username and password
     // [self.delegate account:self validationDidRequireUsernameAndPasswordWithMessage:@"This feed requires a username/password."];
     // [self.delegate account:self validationDidFailWithMessage:error.localizedDescription field:AccountFailingFieldUnknown];
-    [self.delegate validationDidFailWithMessage:@"This feed requires a username/password."];
+    PreferencesController *prefPointer = [[PreferencesController alloc] init];
     if (error.code == 401)
         NSLog(@"This feed requires a username/password.");
-    else if (error.code == 404)
+    else if (error.code == 404) {
         NSLog(@"Could not access the given feed. The server reports that the URL could not be found.");
-    else
-        NSLog(@"Could not access the given feed. Unknown error %@", error.localizedDescription);
+    } else {
+        [prefPointer validationDidFailWithMessage:error.localizedDescription];
+    }
 }
 
 @end
