@@ -191,10 +191,10 @@
 		[popUpTemperatureButton selectItemAtIndex:2];
 	}
     
-    [newsLinkOutputProgress stopAnimation:nil];
-    newsLinkOutputImage.hidden = YES;
-    newsLinkOutputProgress.hidden = YES;
-    newsLinkOutput.hidden = YES;
+//    [self.newsLinkOutputProgress stopAnimation:nil];
+    self.newsLinkOutputImage.hidden = YES;
+    self.newsLinkOutputProgress.hidden = YES;
+    self.newsLinkOutput.hidden = YES;
 }
 
 #pragma mark -
@@ -451,14 +451,24 @@
     }
 }
 
-- (void)startSpinning {
-    newsLinkOutputProgress.hidden = NO;
-    [newsLinkOutputProgress startAnimation:self];
+- (void)animateSpinniner:(BOOL) flag {
+    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
+    [self.newsLinkOutputProgress setUsesThreadedAnimation:NO];
+    if (flag) {
+        self.newsLinkOutputProgress.hidden = NO;
+        [self.newsLinkOutputProgress startAnimation:nil];
+    } else {
+        self.newsLinkOutputProgress.hidden = YES;
+        [self.newsLinkOutputProgress stopAnimation:nil];
+    }
 //    isSpinning = YES;
 }
 
 - (void)stopSpinning {
-    [newsLinkOutputProgress stopAnimation:self];
+    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
+    [newsLinkOutputProgress setUsesThreadedAnimation:NO];
+    [newsLinkOutputProgress setIndeterminate:NO];
+    [newsLinkOutputProgress stopAnimation:newsLinkOutputProgress];
     newsLinkOutputProgress.hidden = YES;
 //    isSpinning = NO;
 }
@@ -469,7 +479,7 @@
 	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Finding feeds…", @"Message after the user inseted the news link")];
     
 	if ([newsLinkText length] >0) {
-        [self startSpinning];
+        [self animateSpinniner:YES];
         newsLinkOutput.hidden = NO;
 		// Displays the user his location
 		[newsLinkOutput setStringValue:messageForLabel];
@@ -483,12 +493,13 @@
 }
 
 - (void)validationDidFailWithMessage:(NSString *)message {
-    NSLog(@"validationDidFailWithMessage: %@", message);
-
+    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
     NSLog(@"newsLinkOutputProgress is hidden1: %hhd", self.newsLinkOutputProgress.isHidden);
-    [self stopSpinning];
+    [self animateSpinniner:NO];
+    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
     NSLog(@"newsLinkOutputProgress is hidden2: %hhd", self.newsLinkOutputProgress.isHidden);
     [self.newsLinkOutputImage setHidden:NO];
+    NSLog(@"newsLinkOutput: %@", self.newsLinkOutput);
     [newsLinkOutput setStringValue:@"mata"];
 }
 /*
