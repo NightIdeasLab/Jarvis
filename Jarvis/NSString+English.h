@@ -1,3 +1,4 @@
+// Copied from https://github.com/nfarina/feeds with modifications
 
 BOOL NSEqualStrings(NSString *aString, NSString *bString);
 BOOL NSEqualObjects(id a, id b);

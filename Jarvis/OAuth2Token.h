@@ -1,3 +1,5 @@
+// Copied from https://github.com/nfarina/feeds with modifications
+
 #import "NSData+ObjectFromJSONData.h"
 #import "NSDictionary+JSONString.h"
 #import "NSString+ObjectFromJSONString.h"

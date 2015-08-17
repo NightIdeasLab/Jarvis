@@ -87,6 +87,7 @@
 	BOOL automaticLocation = [defaults boolForKey:@"AutomaticLocation"];
 	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
 	NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
+    NSURL *userURL = [defaults URLForKey:@"userURL"];
     
 	// checking and setting the last update date
 	// and last profile sent date into the interface
@@ -131,11 +132,6 @@
     } else {
         [iCalButton setState:0];
     }
-    if (useWeather == YES) {
-        [weatherButton setState:1];
-    } else {
-        [weatherButton setState:0];
-    }
     if (useMail == YES) {
         [mailButton setState:1];
         // setting the VIPs name and email addresses
@@ -158,40 +154,45 @@
         [nameVIP3 setEnabled:NO];
         [nameVIP4 setEnabled:NO];
     }
+    if (useWeather == YES) {
+        [weatherButton setState:1];
+        if (automaticLocation == YES) {
+            [mapView setShowsUserLocation: YES];
+            [mapView setDelegate: self];
+            [locationField setEnabled:NO];
+            [findLocationButton setEnabled:NO];
+            [automaticLocationCheckBox setState:1];
+        } else {
+            [automaticLocationCheckBox setState:0];
+            [locationField setEnabled:YES];
+            [findLocationButton setEnabled:YES];
+        }
+        if ([temperatureStyle isEqualToString:@"Celsius"]) {
+            [popUpTemperatureButton selectItemAtIndex:0];
+        } else 	if ([temperatureStyle isEqualToString:@"Kelvin"]) {
+            [popUpTemperatureButton selectItemAtIndex:1];
+        } else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
+            [popUpTemperatureButton selectItemAtIndex:2];
+        }
+        if (forecastState == YES) {
+            [forecastButton setState:1];
+        } else {
+            [forecastButton setState:0];
+        }
+    } else {
+        [weatherButton setState:0];
+        [automaticLocationCheckBox setState:0];
+        [automaticLocationCheckBox setEnabled:NO];
+        [popUpTemperatureButton setEnabled:NO];
+        [locationField setEnabled:NO];
+        [findLocationButton setEnabled:NO];
+    }
     if (useNewsQuotes == YES) {
         [newsButton setState:1];
+        if (userURL != NULL) [newsLink setStringValue:[userURL absoluteString]];
     } else {
         [newsButton setState:0];
     }
-
-    // TODO: if the user does not uses the weather do not look for his location.
-    if (automaticLocation == YES) {
-		[mapView setShowsUserLocation: YES];
-		[mapView setDelegate: self];
-		[locationField setEnabled:NO];
-        [findLocationButton setEnabled:NO];
-		[automaticLocationCheckBox setState:1];
-	} else {
-		[automaticLocationCheckBox setState:0];
-		[locationField setEnabled:YES];
-        [findLocationButton setEnabled:YES];
-	}
-
-	if (forecastState == YES) {
-		[forecastButton setState:1];
-	} else {
-		[forecastButton setState:0];
-	}
-	
-	if ([temperatureStyle isEqualToString:@"Celsius"]) {
-		[popUpTemperatureButton selectItemAtIndex:0];
-	} else 	if ([temperatureStyle isEqualToString:@"Kelvin"]) {
-		[popUpTemperatureButton selectItemAtIndex:1];
-	} else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
-		[popUpTemperatureButton selectItemAtIndex:2];
-	}
-    
-//    [self.newsLinkOutputProgress stopAnimation:nil];
     self.newsLinkOutputImage.hidden = YES;
     self.newsLinkOutputProgress.hidden = YES;
     self.newsLinkOutput.hidden = YES;
@@ -452,7 +453,6 @@
 }
 
 - (void)animateSpinniner:(BOOL) flag {
-    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
     [self.newsLinkOutputProgress setUsesThreadedAnimation:NO];
     if (flag) {
         self.newsLinkOutputProgress.hidden = NO;
@@ -462,15 +462,6 @@
         [self.newsLinkOutputProgress stopAnimation:nil];
     }
 //    isSpinning = YES;
-}
-
-- (void)stopSpinning {
-    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
-    [newsLinkOutputProgress setUsesThreadedAnimation:NO];
-    [newsLinkOutputProgress setIndeterminate:NO];
-    [newsLinkOutputProgress stopAnimation:newsLinkOutputProgress];
-    newsLinkOutputProgress.hidden = YES;
-//    isSpinning = NO;
 }
 
 - (IBAction)newsLinkChange:(id)sender {
@@ -488,47 +479,145 @@
 		// If the user will not write a link then we will display this message
 		[newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
 	}
-    RSSAtomAccount *rssFeed = [[RSSAtomAccount alloc] init];
-    [rssFeed validateLink:newsLinkText];
+    [self validateURLLink:newsLinkText];
 }
 
-- (void)validationDidFailWithMessage:(NSString *)message {
-    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
-    NSLog(@"newsLinkOutputProgress is hidden1: %hhd", self.newsLinkOutputProgress.isHidden);
-    [self animateSpinniner:NO];
-    NSLog(@"newsLinkOutputProgress: %@", self.newsLinkOutputProgress);
-    NSLog(@"newsLinkOutputProgress is hidden2: %hhd", self.newsLinkOutputProgress.isHidden);
-    [self.newsLinkOutputImage setHidden:NO];
-    NSLog(@"newsLinkOutput: %@", self.newsLinkOutput);
-    [newsLinkOutput setStringValue:@"mata"];
-}
-/*
-- (void)account:(Account *)account validationDidCompleteWithNewPassword:(NSString *)password {
-    DDLogInfo(@"Validation completed for account %@.", self.selectedAccount);
-    [self.findFeedsProgress stopAnimation:nil];
-    [self.findFeedsProgress setHidden:YES];
-    [self.findFeedsLabel setHidden:YES];
+- (void)validateURLLink:(NSString *)URL {
     
-    if ([account.feeds isEqualToArray:self.oldFeeds]) {
-        // if nothing has changed, keep our old feed objects to preserve non-retained references from any existing FeedItems.
-        account.feeds = self.oldFeeds;
-    }
-    else {
-        DDLogInfo(@"Available feeds changed! Saving accounts.");
+    // prepend http:// if no scheme was specified
+    if (![URL containsString:@"://"])
+        URL = [@"http://" stringByAppendingString:URL];
+    else if ([URL beginsWithString:@"feed://"]) // sometimes
+        URL = [URL stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"];
+    else if ([URL beginsWithString:@"feed:http://"]) // never seen, but possible
+        URL = [URL stringByReplacingOccurrencesOfString:@"feed:http://" withString:@"http://"];
+    else if ([URL beginsWithString:@"feed:https://"]) // never seen, but possible
+        URL = [URL stringByReplacingOccurrencesOfString:@"feed:https://" withString:@"https://"];
+    
+    NSURLRequest *URLRequest;
+    URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
+    
+    self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
+    [self.request addTarget:self action:@selector(feedRequestComplete:) forRequestEvents:SMWebRequestEventComplete];
+    [self.request addTarget:self action:@selector(feedRequestError:) forRequestEvents:SMWebRequestEventError];
+    [self.request start];
+}
+
+- (void)feedRequestComplete:(NSData *)data {
+    
+    NSURL *URL = self.request.response.URL; // the final URL of this resource (after any redirects)
+    
+    // did this request return HTML?
+    BOOL looksLikeHtml = NO;
+    
+    if ([self.request.response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSString *contentType = [(NSHTTPURLResponse *)self.request.response allHeaderFields][@"Content-Type"];
         
-        // copy over the disabled flag for accounts we already had
-        for (Feed *feed in account.feeds) {
-            NSUInteger index = [self.oldFeeds indexOfObject:feed];
-            if (index != NSNotFound) {
-                Feed *old = self.oldFeeds[index];
-                feed.disabled = old.disabled;
+        if ([contentType isEqualToString:@"text/html"] || [contentType beginsWithString:@"text/html;"] ||
+            [URL.path endsWithString:@".html"] || [URL.path endsWithString:@".html"])
+            looksLikeHtml = YES;
+    }
+    // looks like HTML? are you SURE?
+    if (looksLikeHtml) {
+        
+        // peek at the first few bytes of the response
+        if (data.length >= 5) {
+            NSString *prefix = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 5)] encoding:NSASCIIStringEncoding];
+            if ([prefix isEqualToString:@"<?xml"])
+                looksLikeHtml = NO; // nope, it's secretly XML! seen this with Zillow's mortgage rates RSS feed
+        }
+    }
+    
+    if (looksLikeHtml) {
+        
+        // Look for feeds in the returned HTML page .
+        
+        NSMutableArray *foundFeeds = [NSMutableArray array];
+        
+        TFHpple *html = [[TFHpple alloc] initWithHTMLData:data];
+        NSArray *rssLinks = [html searchWithXPathQuery:@"//link[@type='application/rss+xml']"];
+        NSArray *atomLinks = [html searchWithXPathQuery:@"//link[@type='application/atom+xml']"];
+        
+        for (TFHppleElement *link in rssLinks) {
+            NSString *href = (link.attributes)[@"href"];
+            NSString *title = (link.attributes)[@"title"] ?: @"RSS Feed";
+            NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
+            
+            if (href.length) {
+                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
+                if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
         
-        [Account saveAccounts];
+        for (TFHppleElement *link in atomLinks) {
+            NSString *href = (link.attributes)[@"href"];
+            NSString *title = (link.attributes)[@"title"] ?: @"Atom Feed";
+            NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
+            
+            if (href.length) {
+                Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
+                NSLog(@"%@",feed.URL);
+                if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
+            }
+        }
+        if (foundFeeds.count)
+            self.feeds = foundFeeds;
+        else {
+            [self validationDidFailWithMessage:@"Could not discover any feeds at the given URL. Try specifying the complete URL to the feed."];
+            return;
+        }
     }
-    
-    self.feedsTableView.dataSource = account;
+    else {
+        // make sure we can parse this feed, and snag the title if we can!
+        NSString *title; NSError *error;
+        NSArray *items = [Feed feedItemsWithData:data discoveredTitle:&title error:&error];
+        if (items == nil) {
+            NSString *message = [NSString stringWithFormat:@"Could not parse the given feed. Error: %@", error.localizedDescription];
+            [self validationDidFailWithMessage:message];
+            return;
+        }
+        Feed *feed = [Feed feedWithURLString:self.request.request.URL.absoluteString title:(title ?: @"All Items")];
+        self.feeds = @[feed];
+    }
+    [self validationDidComplete:URL];
 }
-*/
+
+- (void)feedRequestError:(NSError *)error {
+    if (error.code == 401)
+        [self validationDidFailWithMessage:@"This feed requires a username/password."];
+    else if (error.code == 404) {
+        [self validationDidFailWithMessage:@"Could not access the given feed. The server reports that the URL could not be found."];
+    } else {
+        [self validationDidFailWithMessage:error.localizedDescription];
+    }
+}
+
+- (void)validationDidFailWithMessage:(NSString *)message {
+    [self animateSpinniner:NO];
+    [self.newsLinkOutputImage setHidden:NO];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"error" ofType:@"png"];
+    NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+    [self.newsLinkOutputImage setImage:img];
+    [newsLinkOutput setStringValue:message];
+}
+
+- (void)validationDidComplete:(NSURL *)userURL {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *NewRSSURL;
+    [self animateSpinniner:NO];
+    [self.newsLinkOutputImage setHidden:NO];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"success" ofType:@"png"];
+    NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
+    [self.newsLinkOutputImage setImage:img];
+    [newsLinkOutput setStringValue:@"Validation completed."];
+
+    NSLog(@"feeds: %@", self.feeds);
+    for (Feed *item in self.feeds) {
+        NewRSSURL = item.URL;
+    }
+    [defaults setURL:NewRSSURL forKey: @"RSSURL"];
+    [defaults setURL:userURL forKey: @"userURL"];
+    [defaults synchronize];
+}
+
 @end

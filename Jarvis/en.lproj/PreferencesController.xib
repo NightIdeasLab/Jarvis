@@ -29,7 +29,7 @@
                 <outlet property="nameVIP4" destination="599" id="611"/>
                 <outlet property="newsButton" destination="521" id="530"/>
                 <outlet property="newsLink" destination="CrL-bW-Wbm" id="Vav-xJ-igR"/>
-                <outlet property="newsLinkOutput" destination="Fd6-YB-n0A" id="Vvo-TA-mHo"/>
+                <outlet property="newsLinkOutput" destination="NS6-vX-gEZ" id="uE9-Xl-31Q"/>
                 <outlet property="newsLinkOutputImage" destination="Qu0-fJ-1cY" id="FzB-fz-DZb"/>
                 <outlet property="newsLinkOutputProgress" destination="EIg-Sk-oOU" id="qg3-w5-cbb"/>
                 <outlet property="newsPreferenceView" destination="12" id="132"/>
@@ -499,24 +499,24 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fd6-YB-n0A">
-                    <rect key="frame" x="61" y="122" width="334" height="17"/>
+                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="EIg-Sk-oOU">
+                    <rect key="frame" x="25" y="122" width="16" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output" id="WJP-gO-RrJ">
+                </progressIndicator>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qu0-fJ-1cY">
+                    <rect key="frame" x="20" y="91" width="38" height="47"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="success" id="IdT-lO-AIN"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NS6-vX-gEZ">
+                    <rect key="frame" x="63" y="70" width="332" height="68"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Output" id="tMp-ry-gii">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <progressIndicator hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="EIg-Sk-oOU">
-                    <rect key="frame" x="25" y="122" width="16" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                </progressIndicator>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qu0-fJ-1cY">
-                    <rect key="frame" x="20" y="118" width="28" height="24"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSStatusUnavailable" id="IdT-lO-AIN"/>
-                </imageView>
             </subviews>
         </customView>
         <customView id="13" userLabel="Daily Quotations">
@@ -809,6 +809,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="NSStatusUnavailable" width="16" height="16"/>
+        <image name="success" width="512" height="512"/>
     </resources>
 </document>

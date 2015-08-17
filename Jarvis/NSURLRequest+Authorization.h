@@ -1,3 +1,5 @@
+// Copied from https://github.com/nfarina/feeds with modifications
+
 #import "NSString+Base64.h"
 #import "OAuth2Token.h"
 

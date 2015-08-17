@@ -22,7 +22,7 @@
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
     [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
-    [request setValue:@"Feeds (http://feedsapp.com)" forHTTPHeaderField:@"User-Agent"]; // basecamp wants this for instance
+    [request setValue:@"Jarvis (http://nightideas.com/jarvis)" forHTTPHeaderField:@"User-Agent"]; // basecamp wants this for instance
     return request;
 }
 

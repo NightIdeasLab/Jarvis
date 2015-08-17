@@ -9,7 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import <MapKit/MapKit.h>
 #import "DBPrefsWindowController.h"
-#import "RSSAtomAccount.h"
+// for rss
+#import "NSString+English.h"
+#import "NSURLRequest+Authorization.h"
+#import "SMWebRequest/SMWebRequest.h"
+#import "Hpple/TFHpple.h"
+#import "Feed.h"
 
 @class MKMapView;
 
@@ -68,6 +73,8 @@
 
 #pragma mark -
 #pragma mark News&Quotes var
+@property (nonatomic, copy) NSArray *feeds;
+@property (nonatomic, strong) SMWebRequest *request, *tokenRequest;
 @property (weak) IBOutlet NSTextField *newsLink;
 @property (weak) IBOutlet NSTextField *newsLinkOutput;
 @property (weak) IBOutlet NSImageView *newsLinkOutputImage;
@@ -101,10 +108,6 @@
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
 
 - (IBAction)forecastYesOrNo:(id)sender;
-
-- (void)startSpinning;
-
-- (void)stopSpinning;
 
 - (IBAction)newsLinkChange:(id)sender;
 

@@ -1,3 +1,5 @@
+// Copied from https://github.com/nfarina/feeds with modifications
+
 #import "SMXMLDocument.h"
 #import "ISO8601DateFormatter.h"
 #import "NSString+English.h"

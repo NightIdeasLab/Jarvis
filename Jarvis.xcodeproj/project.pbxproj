@@ -20,7 +20,6 @@
 		006537C818917067005648C0 /* AboutPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 006537C218917067005648C0 /* AboutPanel.xib */; };
 		006537C918917067005648C0 /* AboutPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C418917067005648C0 /* AboutPanelController.m */; };
 		006537CB18917067005648C0 /* NSFancyPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 006537C718917067005648C0 /* NSFancyPanel.m */; };
-		006AC5D71B7CCE35004D57EE /* RSSAtomAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AC5D61B7CCE35004D57EE /* RSSAtomAccount.m */; };
 		006AC5DA1B7CD2DB004D57EE /* NSString+English.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AC5D91B7CD2DB004D57EE /* NSString+English.m */; };
 		006AC5E21B7CD3B0004D57EE /* NSURLRequest+Authorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AC5DE1B7CD3B0004D57EE /* NSURLRequest+Authorization.m */; };
 		006AC5E31B7CD3B0004D57EE /* OAuth2Token.m in Sources */ = {isa = PBXBuildFile; fileRef = 006AC5E01B7CD3B0004D57EE /* OAuth2Token.m */; };
@@ -119,8 +118,6 @@
 		006537C418917067005648C0 /* AboutPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanelController.m; sourceTree = "<group>"; };
 		006537C618917067005648C0 /* NSFancyPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSFancyPanel.h; sourceTree = "<group>"; };
 		006537C718917067005648C0 /* NSFancyPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSFancyPanel.m; sourceTree = "<group>"; };
-		006AC5D51B7CCE35004D57EE /* RSSAtomAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSAtomAccount.h; sourceTree = "<group>"; };
-		006AC5D61B7CCE35004D57EE /* RSSAtomAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSAtomAccount.m; sourceTree = "<group>"; };
 		006AC5D81B7CD2DB004D57EE /* NSString+English.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+English.h"; sourceTree = "<group>"; };
 		006AC5D91B7CD2DB004D57EE /* NSString+English.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+English.m"; sourceTree = "<group>"; };
 		006AC5DD1B7CD3B0004D57EE /* NSURLRequest+Authorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLRequest+Authorization.h"; sourceTree = "<group>"; };
@@ -260,15 +257,6 @@
 				00E2C7671790704500246636 /* DBPrefsWindowController.m */,
 			);
 			name = Preferences;
-			sourceTree = "<group>";
-		};
-		006AC5D41B7CCE18004D57EE /* RSSNews */ = {
-			isa = PBXGroup;
-			children = (
-				006AC5D51B7CCE35004D57EE /* RSSAtomAccount.h */,
-				006AC5D61B7CCE35004D57EE /* RSSAtomAccount.m */,
-			);
-			name = RSSNews;
 			sourceTree = "<group>";
 		};
 		006AC5ED1B7CD5DF004D57EE /* Hpple */ = {
@@ -504,7 +492,6 @@
 			isa = PBXGroup;
 			children = (
 				00771B141AB482D20014A4F1 /* JSWeatherAPI */,
-				006AC5D41B7CCE18004D57EE /* RSSNews */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -668,7 +655,6 @@
 				006AC6051B7CDCC8004D57EE /* NSDictionary+JSONString.m in Sources */,
 				00771B2B1AB482E10014A4F1 /* JSWeather.m in Sources */,
 				006AC60B1B7CE760004D57EE /* Feed.m in Sources */,
-				006AC5D71B7CCE35004D57EE /* RSSAtomAccount.m in Sources */,
 				006AC6121B7CE870004D57EE /* ISO8601DateFormatter.m in Sources */,
 				00771B2C1AB482E10014A4F1 /* JSWeatherConstants.m in Sources */,
 				00771B2D1AB482E10014A4F1 /* JSWeatherUtility.m in Sources */,
