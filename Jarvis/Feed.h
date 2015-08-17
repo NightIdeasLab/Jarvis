@@ -3,6 +3,7 @@
 #import "SMXMLDocument.h"
 #import "ISO8601DateFormatter.h"
 #import "NSString+English.h"
+#import "NSString+Base64.h"
 #import "NSDate+InternetDateTime.h"
 #import "SMWebRequest.h"
 #import "NSURLRequest+Authorization.h"
@@ -32,9 +33,6 @@ NSDate *AutoFormatDate(NSString *dateString);
 - (NSDictionary *)dictionaryRepresentation;
 
 + (NSArray *)feedItemsWithData:(NSData *)data discoveredTitle:(NSString **)title error:(NSError **)error;
-
-- (void)refresh;
-- (void)refreshWithURL:(NSURL *)refreshURL; // some accounts (like basecamp next) append things like "since=" to the "base" URL
 
 @end
 

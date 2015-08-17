@@ -1,6 +1,6 @@
 #import "Feed.h"
 
-#define MAX_FEED_ITEMS 50
+#define MAX_FEED_ITEMS 5
 
 NSString *kFeedUpdatedNotification = @"FeedUpdatedNotification";
 
@@ -149,74 +149,17 @@ NSDate *AutoFormatDate(NSString *dateString) {
         return NO;
 }
 
-- (void)refresh { [self refreshWithURL:self.URL]; }
-
-- (void)refreshWithURL:(NSURL *)refreshURL {
-    NSMutableURLRequest *URLRequest;
-    
-    //NSString *domain = self.account.domain, *username = self.account.username, *password = self.account.findPassword;
-    
-    if (self.requiresBasicAuth) // this feed requires the secure user/pass we stored in the keychain
-        URLRequest = [NSMutableURLRequest requestWithURL:refreshURL];
-    else if ([refreshURL user] && [refreshURL password]) // maybe the user/pass is built into the URL already? (this is the case for services like Basecamp that use "tokens" built into the URL)
-        URLRequest = [NSMutableURLRequest requestWithURL:refreshURL username:[refreshURL user] password:[refreshURL password]];
-    else // just a normal URL.
-        URLRequest = [NSMutableURLRequest requestWithURL:refreshURL];
-    
-    // add any additional request headers
-    for (NSString *field in self.requestHeaders)
-        [URLRequest setValue:(self.requestHeaders)[field] forHTTPHeaderField:field];
-    
-    URLRequest.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData; // goes without saying that we only care about fresh data for Feeds
-    
-    // build a useful context of extra data for custom feed processors like Trello and Beanstalk. Since those processors may need to fetch
-    // additional data from their respective APIs, they may need the account usernamd and password, if applicable.
-    NSMutableDictionary *context = [NSMutableDictionary dictionary];
-//    context[@"accountClass"] = [self.account class];
-//    if (domain) context[@"domain"] = domain;
-//    if (username) context[@"username"] = username;
-//    if (password) context[@"password"] = password;
-    
-    self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:(id<SMWebRequestDelegate>)[self class] context:context];
-    [self.request addTarget:self action:@selector(refreshComplete:) forRequestEvents:SMWebRequestEventComplete];
-    [self.request addTarget:self action:@selector(refreshError:) forRequestEvents:SMWebRequestEventError];
-    [self.request start];
-}
-
-// This method is called on a background thread. Don't touch your instance members!
-/*
-+ (id)webRequest:(SMWebRequest *)webRequest resultObjectForData:(NSData *)data context:(NSDictionary *)context {
-
-    Class accountClass = context[@"accountClass"];
-    NSString *domain = context[@"domain"];
-    NSString *username = context[@"username"];
-    NSString *password = context[@"password"];
-    
-    if ([(id)accountClass respondsToSelector:@selector(itemsForRequest:data:domain:username:password:)])
-        return [accountClass itemsForRequest:webRequest data:data domain:domain username:username password:password];
-    
-    NSError *error = nil;
-    NSArray *items = [self feedItemsWithData:data discoveredTitle:NULL error:&error];
-    
-    if (error) {
-        DDLogError(@"Error parsing XML feed result for %@ - %@", webRequest.request.URL, error);
-        return nil;
-    }
-
-    return items;
-}
-*/
 + (NSArray *)feedItemsWithData:(NSData *)data discoveredTitle:(NSString **)title error:(NSError **)error {
     
     // try parsing the XML first
     SMXMLDocument *document = [SMXMLDocument documentWithData:data error:error];
     if ((*error)) return nil;
-
+    
     NSMutableArray *items = [NSMutableArray array];
     
     // are we speaking RSS or ATOM here?
     if ([document.root.name isEqual:@"rss"]) {
-    
+        
         if (title) *title = [document.root valueWithPath:@"channel.title"];
         
         NSArray *itemsXml = [[document.root childNamed:@"channel"] childrenNamed:@"item"];
@@ -236,85 +179,12 @@ NSDate *AutoFormatDate(NSString *dateString) {
     else {
         NSString *message = [NSString stringWithFormat:@"Unknown feed root element: <%@>", document.root.name];
         if (error) *error = [NSError errorWithDomain:@"Feed" code:0 userInfo:
-                  @{NSLocalizedDescriptionKey: message}];
+                             @{NSLocalizedDescriptionKey: message}];
         return nil;
     }
     
     if (error) *error = nil;
     return items;
-}
-
-
-- (void)refreshComplete:(NSArray *)newItems {
-
-    if (!newItems) {
-        // TODO: problem refreshing the feed!
-        return;
-    }
-    
-    // if we have existing items, merge the new ones in
-    if (self.items) {
-        NSMutableArray *merged = [NSMutableArray array];
-        
-        if (self.incremental) {
-
-            // populate the final set, newest item to oldest.
-            
-            for (FeedItem *newItem in newItems) {
-                NSLog(@"NEW ITEM FOR FEED %@: %@", self.URL, newItem);
-                [merged addObject:newItem];
-            }
-
-            for (FeedItem *oldItem in self.items) {
-                int i = (int)[newItems indexOfObject:oldItem]; // have we updated this item?
-                if (i < 0)
-                    [merged addObject:oldItem];
-            }
-            
-            // necessary for incremental feeds where we keep collecting items
-            while (merged.count > MAX_FEED_ITEMS) [merged removeLastObject];
-        }
-        else {
-            for (FeedItem *newItem in newItems) {
-                int i = (int)[self.items indexOfObject:newItem];
-                if (i >= 0)
-                    [merged addObject:(self.items)[i]]; // preserve existing item
-                else {
-                    NSLog(@"NEW ITEM FOR FEED %@: %@", self.URL, newItem);
-                    [merged addObject:newItem];
-                }
-            }
-        }
-
-        self.items = merged;
-        
-        // mark as notified any item that was "created" by ourself, because we don't need to be reminded about stuff we did ourself.
-        for (FeedItem *item in self.items) {
-            if ([(item.authorIdentifier ?: item.author) isEqual:self.author]) // prefer authorIdentifier if present
-                item.authoredByMe = YES;
-            
-            if (item.authoredByMe)
-                item.notified = item.viewed = YES;
-        }
-    }
-    else {
-        NSLog(@"ALL NEW ITEMS FOR FEED %@", self.URL);
-        self.items = newItems;
-
-        // don't notify about the initial fetch, or we'll have a shitload of growl popups
-        for (FeedItem *item in self.items)
-            item.notified = item.viewed = YES;
-    }
-    
-    // link them back to us
-    for (FeedItem *item in self.items)
-        item.feed = self;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kFeedUpdatedNotification object:self];
-}
-
-- (void)refreshError:(NSError *)error {
-    NSLog(@"Error: %@", error);
 }
 
 @end

@@ -610,8 +610,6 @@
     NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
     [self.newsLinkOutputImage setImage:img];
     [newsLinkOutput setStringValue:@"Validation completed."];
-
-    NSLog(@"feeds: %@", self.feeds);
     for (Feed *item in self.feeds) {
         NewRSSURL = item.URL;
     }

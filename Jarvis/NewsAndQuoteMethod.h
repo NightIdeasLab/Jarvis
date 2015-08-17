@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SMWebRequest/SMWebRequest.h"
+#import "Feed.h"
 
 @interface NewsAndQuoteMethod : NSObject
 
-- (NSString *) retrieveNYTimes;
+@property (nonatomic, strong) SMWebRequest *request, *tokenRequest;
+
+- (NSString *) retrieveRSSItems;
 
 - (NSString *) retrieveDailyQuote;
 

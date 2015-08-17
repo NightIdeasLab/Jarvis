@@ -258,7 +258,7 @@ NSSpeechSynthesizer *synth;
         if (useNews){
             NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
             // NYTimes
-            outputText = [outputText stringByAppendingString:[newsAndQuote retrieveNYTimes]];
+            outputText = [outputText stringByAppendingString:[newsAndQuote retrieveRSSItems]];
             // Daily Quote
             outputText = [outputText stringByAppendingString:[newsAndQuote retrieveDailyQuote]];
         }
