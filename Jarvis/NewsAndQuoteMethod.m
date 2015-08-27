@@ -8,7 +8,15 @@
 
 #import "NewsAndQuoteMethod.h"
 
+@interface NewsAndQuoteMethod ()
+
+@property (nonatomic, assign) NSString* feedItems;
+@property (nonatomic, assign) BOOL aHasCompleted;
+
+@end
+
 @implementation NewsAndQuoteMethod
+
 
 - (NSString *) retrieveRSSItems
 {    
@@ -17,7 +25,21 @@
     NSString *outputNewsText = [[NSString alloc] init];
     NSURL *userURL = [defaults URLForKey:@"RSSURL"];
     if(userURL != NULL) {
-        [self refreshWithURL:userURL];
+//        [self refreshWithURL:userURL];
+//        [self performSelectorOnMainThread:@selector(refreshWithURL:)
+//                                             withObject:userURL
+//                                          waitUntilDone:TRUE];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshWithURL:userURL];
+                NSLog(@"mata: %@", self.feedItems);
+            //            if (!self.aHasCompleted)
+//            {
+//                NSLog(@"B running without A having run yet!, %@", self);
+
+//            }
+            
+        });
+        
     } else {
         NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
         if(quoteContent1!=nil)
@@ -187,7 +209,7 @@
         }
     }
     else {
-        NSLog(@"ALL NEW ITEMS FOR FEED %@", feed.URL);
+        //NSLog(@"ALL NEW ITEMS FOR FEED %@", feed.URL);
         feed.items = newItems;
         
         // don't notify about the initial fetch, or we'll have a shitload of growl popups
@@ -195,15 +217,32 @@
             item.notified = item.viewed = YES;
     }
  
+    [self validationDidComplete:feed];
 //    for (FeedItem *item in feed.items) {
 //        item.feed = feed;
 //    }
     
-    for (int i = 1; i <= 2; i++)
+//    for (int i = 1; i <= 5; i++)
+//    {
+//        FeedItem *item = [feed.items objectAtIndex:i];
+//        NSLog(@"item: %@", item.title);
+//    }
+    
+}
+
+- (NSString *)validationDidComplete:(Feed *)feedsItems {
+    
+    self.feedItems = [self.feedItems stringByAppendingString:NSLocalizedString(@"\nToday's headlines:\n", @"")];
+    
+    for (int i = 1; i <= 1; i++)
     {
-        FeedItem *item = [feed.items objectAtIndex:i];
-        NSLog(@"%@", item.title);
+        FeedItem *item = [feedsItems.items objectAtIndex:i];
+        self.feedItems = [self.feedItems stringByAppendingString:item.title];
+        self.feedItems = [self.feedItems stringByAppendingString:@".\n"];
+        NSLog(@"feeed: %@", item.title);
     }
+    self.aHasCompleted = YES;
+    return self.feedItems;
 }
 
 - (void)refreshError:(NSError *)error {
