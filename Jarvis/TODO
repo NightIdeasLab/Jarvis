@@ -4,6 +4,8 @@ Version 0.4.4
 - To make a better rss feed reader
 - For the VIPs create a table view and the possibility to add as many VIPs as the user wants
 - Implement a automatic refresh for everything.
+- if the weather is enabled and after that disabled then the image is still loded...solution every time clear the image....
+- when getting the weather we do not get the currente temp or the highs and the lows
 
 Version 0.4.5
 - Welcome screen on first launch
