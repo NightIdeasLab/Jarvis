@@ -16,7 +16,7 @@
  */
 #define USE_GROWL FALSE
 
-typedef enum {
+typedef enum: NSInteger {
     JRFeedbackController_BugReport,
     JRFeedbackController_FeatureRequest,
     JRFeedbackController_SupportRequest,

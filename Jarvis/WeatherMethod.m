@@ -47,7 +47,7 @@
 			NSString *currentTemperature = [object.objects objectForKey:@"current_temp"];
 			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@ ˚.", @""), currentWeather, localityWeather, currentTemperature]];
 		}];
-		
+
 		[weather queryForDailyForecastWithNumberOfDays:1 city:city state:state block:^(NSArray *objects, NSError *error) {
 			if (error) {
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\Error retrieving min and max temp with error: %@ \n", @""),error];
