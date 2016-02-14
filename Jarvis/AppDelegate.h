@@ -30,8 +30,7 @@
 #import "TimeAndDateMethod.h"
 #import "WeatherMethod.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-{
+@interface AppDelegate : NSObject <NSApplicationDelegate> {
     NSString *fConfigDirectory;
     NSUserDefaults *fDefaults;
     BOOL fQuitRequested;

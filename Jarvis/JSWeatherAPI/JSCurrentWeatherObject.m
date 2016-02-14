@@ -15,16 +15,15 @@
 
 @implementation JSCurrentWeatherObject
 
-- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion
-{
+- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion {
     if (!(self = [super init])) return nil;
-    
-	self.JSWeatherImage = [[[dict objectForKey:@"weather"] firstObject] objectForKey:@"icon"];
+
+    self.JSWeatherImage = [[[dict objectForKey:@"weather"] firstObject] objectForKey:@"icon"];
     self.JSLocationName = [dict objectForKey:@"name"];
     self.JSHumidity = [[[dict objectForKey:@"main"] objectForKey:@"humidity"] intValue];
     self.JSPressure = [[[dict objectForKey:@"main"] objectForKey:@"pressure"] intValue];
     self.JSCloudiness = [[[dict objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
-    
+
     if (conversion == kJSKelvin || !conversion) {
         self.JSCurrentTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp"] floatValue];
         self.JSTemporaryMaxTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue];
@@ -82,8 +81,7 @@
     return self;
 }
 
-- (id)initWithData:(NSDictionary *)dict
-{
+- (id)initWithData:(NSDictionary *)dict {
     return [self initWithData:dict temperatureConversion:kJSKelvin];
 }
 

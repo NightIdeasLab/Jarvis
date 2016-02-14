@@ -13,8 +13,7 @@
 
 @implementation JSWeatherUtility
 
-+ (NSString *)handleWindDirection:(float)d
-{
++ (NSString *)handleWindDirection:(float)d {
     if (d >= 348.75 || d < 11.25) return @"N";
     if (d >= 11.25 || d < 33.75) return @"NNE";
     if (d >= 33.75 || d < 56.25) return @"NE";

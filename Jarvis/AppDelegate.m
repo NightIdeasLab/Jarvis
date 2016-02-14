@@ -10,7 +10,7 @@
 #import <Sparkle/Sparkle.h>
 #import <IOKit/IOMessage.h>
 
-#define DONATE_URL  @"http://goo.gl/YzTfe"
+#define DONATE_URL @"http://goo.gl/YzTfe"
 #define DONATE_NAG_TIME (60 * 60 * 24 * 7)
 
 #define SLOW_INTERNET 0 // 1 for YES 0 otherwise. Sometimes my internet connection suckes, in this way i can still code :)
@@ -25,7 +25,7 @@ NSSpeechSynthesizer *synth;
 
 - (NSWindow *) windowLM {
     // returns the main window
-	return windowLM;
+    return windowLM;
 }
 
 + (void) initialize {
@@ -34,27 +34,21 @@ NSSpeechSynthesizer *synth;
     if ([apps count] > 1) {
         NSAlert * alert = [[NSAlert alloc] init];
         [alert addButtonWithTitle: NSLocalizedString(@"OK", "Jarvis already running alert -> button")];
-        [alert setMessageText: NSLocalizedString(@"Jarvis is already running.",
-                                                 "Jarvis already running alert -> title")];
-        [alert setInformativeText: NSLocalizedString(@"There is already a copy of Jarvis running. "
-                                                     "This copy cannot be opened until that instance is quit.", "Jarvis already running alert -> message")];
+        [alert setMessageText: NSLocalizedString(@"Jarvis is already running.", "Jarvis already running alert -> title")];
+        [alert setInformativeText: NSLocalizedString(@"There is already a copy of Jarvis running. " "This copy cannot be opened until that instance is quit.", "Jarvis already running alert -> message")];
         [alert setAlertStyle: NSCriticalAlertStyle];
         [alert runModal];
         //kill ourselves right away
         exit(0);
     }
-    [[NSUserDefaults standardUserDefaults] registerDefaults: [NSDictionary dictionaryWithContentsOfFile:
-                                                              [[NSBundle mainBundle] pathForResource: @"Defaults" ofType: @"plist"]]];
+    [[NSUserDefaults standardUserDefaults] registerDefaults: [NSDictionary dictionaryWithContentsOfFile: [[NSBundle mainBundle] pathForResource: @"Defaults" ofType: @"plist"]]];
 }
 
 - (id) init {
     if ((self = [super init])) {
         // initializing the preference plist
         fDefaults = [NSUserDefaults standardUserDefaults];
-		[[NSUserDefaults standardUserDefaults] addObserver:self
-												forKeyPath:@"PreferenceCloseTimeStamp" options:( NSKeyValueObservingOptionOld |
-																				 NSKeyValueObservingOptionNew )
-												   context:NULL];
+        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"PreferenceCloseTimeStamp" options:( NSKeyValueObservingOptionOld |NSKeyValueObservingOptionNew ) context:NULL];
         // upgrading from old version clear recent items
         [[NSDocumentController sharedDocumentController] clearRecentDocuments: nil];
         [NSApp setDelegate: self];
@@ -65,13 +59,10 @@ NSSpeechSynthesizer *synth;
 }
 
 // KVO handler
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-					   change:(NSDictionary *)change context:(void *)context {
-	// detect the close the preference window
-	if([keyPath isEqualToString:@"PreferenceCloseTimeStamp"]) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-           [self updateJarvisNOSpeech];
-        });
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    // detect the close the preference window
+    if([keyPath isEqualToString:@"PreferenceCloseTimeStamp"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{ [self updateJarvisNOSpeech]; });
     }
 }
 
@@ -83,7 +74,7 @@ NSSpeechSynthesizer *synth;
     [outText setString:@"Starting up..."];
     [windowLM makeKeyAndOrderFront:self];
 #if DEBUG
-	NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
+    NSLog(@"I have indeed been uploaded, sir. We're online and ready.");
 #endif
 }
 
@@ -94,8 +85,7 @@ NSSpeechSynthesizer *synth;
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     [NSApp setServicesProvider: self];
     // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
-    [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:)
-                                                     forEventClass: kCoreEventClass andEventID: kAEOpenContents];
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:) forEventClass: kCoreEventClass andEventID: kAEOpenContents];
 #if !DEBUG
     // shamelessly ask for donations
     if ([fDefaults boolForKey: @"WarningDonate"]) {
@@ -106,41 +96,32 @@ NSSpeechSynthesizer *synth;
             [fDefaults setObject: [NSDate date] forKey: @"DonateAskDate"];
             NSAlert * alert = [[NSAlert alloc] init];
             [alert setMessageText: NSLocalizedString(@"Support open-source indie software", "Donation beg -> title")];
-            NSString * donateMessage = [NSString stringWithFormat: @"%@\n\n%@",
-                                        NSLocalizedString(@"Jarvis is a personal assistent application."
-                                                          " A lot of time and effort have gone into development, coding, and refinement."
-                                                          " If you enjoy using it, please consider showing your love with a donation.", "Donation beg -> message"),
-                                        NSLocalizedString(@"Donate or not, there will be no difference to your experience.", "Donation beg -> message")];
+            NSString * donateMessage = [NSString stringWithFormat: @"%@\n\n%@", NSLocalizedString(@"Jarvis is a personal assistent application." " A lot of time and effort have gone into development, coding, and refinement." " If you enjoy using it, please consider showing your love with a donation.", "Donation beg -> message"), NSLocalizedString(@"Donate or not, there will be no difference to your experience.", "Donation beg -> message")];
             [alert setInformativeText: donateMessage];
             [alert setAlertStyle: NSInformationalAlertStyle];
             [alert addButtonWithTitle: NSLocalizedString(@"Donate", "Donation beg -> button")];
             NSButton * noDonateButton = [alert addButtonWithTitle: NSLocalizedString(@"Nope", "Donation beg -> button")];
-            [noDonateButton setKeyEquivalent: @"\e"]; //escape key
-            const BOOL allowNeverAgain = lastDonateDate != nil; //hide the "don't show again" check the first time - give them time to try the app
+            [noDonateButton setKeyEquivalent: @"\e"]; // escape key
+            const BOOL allowNeverAgain = lastDonateDate != nil; // hide the "don't show again" check the first time - give them time to try the app
             [alert setShowsSuppressionButton: allowNeverAgain];
-            if (allowNeverAgain)
-                [[alert suppressionButton] setTitle: NSLocalizedString(@"Don't bug me about this ever again.", "Donation beg -> button")];
+            if (allowNeverAgain) [[alert suppressionButton] setTitle: NSLocalizedString(@"Don't bug me about this ever again.", "Donation beg -> button")];
             const NSInteger donateResult = [alert runModal];
-            if (donateResult == NSAlertFirstButtonReturn)
-                [self linkDonate: self];
-            if (allowNeverAgain)
-                [fDefaults setBool: ([[alert suppressionButton] state] != NSOnState) forKey: @"WarningDonate"];
+            if (donateResult == NSAlertFirstButtonReturn) [self linkDonate: self];
+            if (allowNeverAgain) [fDefaults setBool: ([[alert suppressionButton] state] != NSOnState) forKey: @"WarningDonate"];
             [fDefaults setBool: NO forKey: @"FirstLaunch"];
         }
     }
 #endif
     // allocationg the SpeechSyntesizer
-	synth = [[NSSpeechSynthesizer alloc] init];
+    synth = [[NSSpeechSynthesizer alloc] init];
     [self jarvis:YES];
 }
 
 - (BOOL) applicationShouldHandleReopen: (NSApplication *) app hasVisibleWindows: (BOOL) visibleWindows {
     // If we close the main window this will
     // make it reappear if we press the dock icon
-    if(visibleWindows == NO) {
-        [windowLM makeKeyAndOrderFront:self];
-	}
-	return YES;
+    if(visibleWindows == NO) [windowLM makeKeyAndOrderFront:self];
+    return YES;
 }
 
 - (NSMenu *) applicationDockMenu: (NSApplication *) sender {
@@ -152,10 +133,10 @@ NSSpeechSynthesizer *synth;
 }
 
 - (IBAction)openAboutPanel:(id)sender {
-    //	Hide the scroller, in case they’re previously shown it.
-    //	In a real application, you wouldn’t need to do this.
+    // Hide the scroller, in case they’re previously shown it.
+    // In a real application, you wouldn’t need to do this.
     [[AboutPanelController sharedInstance] setShowsScroller: NO];
-    //	Show the panel
+    // Show the panel
     [[AboutPanelController sharedInstance] showPanel];
 }
 
@@ -185,9 +166,7 @@ NSSpeechSynthesizer *synth;
 }
 
 - (IBAction) openChangeLog: (id) sender {
-    if (_changeLogController) {
-        _changeLogController = nil;
-    }
+    if (_changeLogController) _changeLogController = nil;
     _changeLogController = [[ChangeLogController alloc] initWithWindowNibName:@"ChangeLogController"];
     [_changeLogController showWindow:nil];
 }
@@ -197,21 +176,21 @@ NSSpeechSynthesizer *synth;
 }
 
 - (IBAction) updateJarvis: (id) sender {
-	[synth stopSpeaking];
-	[outText setString:@"Updating your report..."];
-	[outText setNeedsDisplay:YES];
-	[outText displayIfNeeded];
-	[outText setNeedsDisplay:NO];
-	[self jarvis:YES];
+    [synth stopSpeaking];
+    [outText setString:@"Updating your report..."];
+    [outText setNeedsDisplay:YES];
+    [outText displayIfNeeded];
+    [outText setNeedsDisplay:NO];
+    [self jarvis:YES];
 }
 
 - (void) updateJarvisNOSpeech {
-	[synth stopSpeaking];
-	[outText setString:@"Updating your report..."];
-	[outText setNeedsDisplay:YES];
-	[outText displayIfNeeded];
-	[outText setNeedsDisplay:NO];
-	[self jarvis:YES];
+    [synth stopSpeaking];
+    [outText setString:@"Updating your report..."];
+    [outText setNeedsDisplay:YES];
+    [outText displayIfNeeded];
+    [outText setNeedsDisplay:NO];
+    [self jarvis:YES];
 }
 
 - (IBAction) stopSpeech: (id) sender {
@@ -255,7 +234,7 @@ NSSpeechSynthesizer *synth;
             [email checkForActiveMailAccount];
         }
     #if !SLOW_INTERNET
-        if (useNews){
+        if (useNews) {
             NewsAndQuoteMethod *newsAndQuote = [[NewsAndQuoteMethod alloc] init];
             // NYTimes
             outputText = [outputText stringByAppendingString:[newsAndQuote retrieveRSSItems]];
@@ -271,10 +250,11 @@ NSSpeechSynthesizer *synth;
         //Output
         [outText setString:outputText];
         if (speak) {
-	#if !DEBUG
+    #if !DEBUG
             [synth startSpeakingString:outputText];	//for speaking the text
-	#endif
+    #endif
         }
     }
 }
+
 @end

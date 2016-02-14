@@ -14,13 +14,11 @@
 #import "JSWeather.h"
 
 @implementation JSHourlyForecastObject
-- (id)initWithData:(NSDictionary *)dict
-{
+- (id)initWithData:(NSDictionary *)dict {
     return [self initWithData:dict temperatureConversion:kJSKelvin];
 }
 
-- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion
-{
+- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion {
     if (!(self = [super init])) return nil;
     self.JSWeatherImage = [dict objectForKey:@"image"];
     self.JSCloudiness = [[[dict objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
@@ -29,7 +27,7 @@
     self.JSHumidity = [[[dict objectForKey:@"main"] objectForKey:@"humidity"] intValue];
     self.JSPressure = [[[dict objectForKey:@"main"] objectForKey:@"pressure"] floatValue];
     self.JSSealevel = [[[dict objectForKey:@"main"] objectForKey:@"sea_level"] floatValue];
-    
+
     if (conversion == kJSKelvin || !conversion) {
         self.JSCurrentTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp"] floatValue];
         self.JSPossibleMaxTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue];
@@ -43,7 +41,7 @@
         self.JSPossibleMaxTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue] - 273.15) * 1.800 + 32.00;
         self.JSPossibleMinTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_min"] floatValue] - 273.15) * 1.800 + 32.00;
     }
-    
+
     self.JSRain = [[[dict objectForKey:@"rain"] objectForKey:@"3h"] floatValue];
     self.JSWeatherDescription = [[[[dict objectForKey:@"weather"] firstObject] objectForKey:@"description"] capitalizedString];
     self.JSWindDirection = [JSWeatherUtility handleWindDirection:[[[dict objectForKey:@"wind"] objectForKey:@"deg"] floatValue]];

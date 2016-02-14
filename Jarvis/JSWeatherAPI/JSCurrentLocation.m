@@ -20,75 +20,58 @@
 
 @implementation JSCurrentLocation
 
-- (id)init
-{
+- (id)init {
     if (!(self = [super init])) return nil;
     return self;
 }
 
-+ (id)sharedInstance
-{
++ (id)sharedInstance {
     static dispatch_once_t once;
     static JSCurrentLocation *instance;
     dispatch_once(&once, ^{ instance = [[JSCurrentLocation alloc] init]; });
     return instance;
 }
 
-- (void)getCurrentLocation
-{
+- (void)getCurrentLocation {
     self.locationManager = [[CLLocationManager alloc] init];
     self.geocoder = [[CLGeocoder alloc] init];
-    
+
     [self.locationManager setDelegate:self];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager setDistanceFilter:kCLDistanceFilterNone];
-/*
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        //[self.locationManager requestWhenInUseAuthorization];
-    } else if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        //[self.locationManager requestAlwaysAuthorization];
-    }
-*/
     [self.locationManager startUpdatingLocation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(JSCurrentLocation:didFailToReceiveLocation:)]) {
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(JSCurrentLocation:didFailToReceiveLocation:)])
         [self.delegate JSCurrentLocation:self didFailToReceiveLocation:error];
-    }
-    
+
     [manager stopUpdatingLocation];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     // Get the most recent location found
     CLLocation *currentLocation = [locations objectAtIndex:[locations count] - 1];
-    
     // Convert CLLocation to a readable text
     [self.geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
         [manager stopUpdatingLocation];
-        
+
         if (error) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(JSCurrentLocation:didFailToReceiveLocation:)]) {
+            if (self.delegate && [self.delegate respondsToSelector:@selector(JSCurrentLocation:didFailToReceiveLocation:)])
                 [self.delegate JSCurrentLocation:self didFailToReceiveLocation:error];
-            }
             return;
         }
-        
+
         if ([placemarks count] > 0) {
             CLPlacemark * placemark = [placemarks lastObject];
             //float latitude = placemark.location.coordinate.latitude;
             //float longitude = placemark.location.coordinate.longitude;
             NSString *city = placemark.locality;
             NSString *state = placemark.administrativeArea;
-
             // We want to receive the latitude and longitude of the
             // current location to get the current locations weather
             if (self.delegate && [self.delegate respondsToSelector:@selector(JSCurrentLocation:didReceiveLocation:)]) {
-                [self.delegate JSCurrentLocation:self didReceiveLocation:@{@"city" : city,
-                                                                           @"state" : state}];
+                [self.delegate JSCurrentLocation:self didReceiveLocation:@{@"city" : city, @"state" : state}];
             }
             return;
         }

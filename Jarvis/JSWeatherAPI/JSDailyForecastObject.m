@@ -19,10 +19,9 @@
     return [self initWithData:dict temperatureConversion:kJSKelvin];
 }
 
-- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion
-{
+- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion {
     if (!(self = [super init])) return nil;
-        
+
     self.JSWeatherImage = [[[dict objectForKey:@"weather"] firstObject] objectForKey:@"icon"];
     self.JSWindDirection = [JSWeatherUtility handleWindDirection:[[dict objectForKey:@"deg"] floatValue]];
     self.JSWindDirectionFloat = [[dict objectForKey:@"deg"] floatValue];

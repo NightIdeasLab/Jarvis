@@ -72,61 +72,56 @@
 #pragma mark Class Methods
 
 - (void) awakeFromNib {
-	// reading from the plist file
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
-	// retriving the last update date and
-	// last profile sent date from plist file
-	NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
-	NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
+    // reading from the plist file
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // retriving the last update date and
+    // last profile sent date from plist file
+    NSDate *updateDate = [defaults objectForKey:@"SULastCheckTime"];
+    NSDate *profileDate = [defaults objectForKey:@"SULastProfileSubmissionDate"];
 
     BOOL useCal = [defaults boolForKey:@"UseCal"];
     BOOL useWeather = [defaults boolForKey:@"UseWeather"];
     BOOL useMail = [defaults boolForKey:@"UseMail"];
     BOOL useNewsQuotes = [defaults boolForKey:@"UseNewsQuotes"];
-	BOOL automaticLocation = [defaults boolForKey:@"AutomaticLocation"];
-	BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
-	NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
+    BOOL automaticLocation = [defaults boolForKey:@"AutomaticLocation"];
+    BOOL forecastState = [defaults boolForKey:@"ForecastWeather"];
+    NSString *temperatureStyle = [defaults stringForKey:@"TemperatureStyle"];
     NSURL *userURL = [defaults URLForKey:@"userURL"];
-    
-	// checking and setting the last update date
-	// and last profile sent date into the interface
-	if ([updateDate.description length] > 0) {
-		[updateDateField setObjectValue:updateDate];
-	}
-	else {
-		[updateDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where no check for update")];
-	}
 
-	if ([profileDate.description length] > 0) {
-		[profileDateField setObjectValue:profileDate];
-	}
-	else {
-		[profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
-	}
+    // checking and setting the last update date
+    // and last profile sent date into the interface
+    if ([updateDate.description length] > 0)
+        [updateDateField setObjectValue:updateDate];
+    else
+        [updateDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where no check for update")];
 
-	if ([defaults boolForKey:@"ReadUserName"]) {
-		[readUserName setState:1];
-		[self changeStateOfName:self];
+    if ([profileDate.description length] > 0)
+        [profileDateField setObjectValue:profileDate];
+    else
+        [profileDateField setStringValue:NSLocalizedString(@"Never", @"Text that appears if there where not sent any profile data")];
 
-		NSString *userNameState = [defaults stringForKey:@"UserName"];
-		
-		if ([userNameState isEqualToString:@"Short"]) {
-			[popUpNameButton selectItemAtIndex:0];
-			[customName setEnabled:NO];
-		} else if ([userNameState isEqualToString:@"Full"]) {
-			[popUpNameButton selectItemAtIndex:1];
-			[customName setEnabled:NO];
-		} else {
-			[popUpNameButton selectItemAtIndex:2];
-			[customName setEnabled:YES];
-			[customName setStringValue:userNameState];
-		}
-	} else {
-		[readUserName setState:0];
-		[self changeStateOfName:self];
-	}
-    
+    if ([defaults boolForKey:@"ReadUserName"]) {
+        [readUserName setState:1];
+        [self changeStateOfName:self];
+
+        NSString *userNameState = [defaults stringForKey:@"UserName"];
+
+        if ([userNameState isEqualToString:@"Short"]) {
+            [popUpNameButton selectItemAtIndex:0];
+            [customName setEnabled:NO];
+        } else if ([userNameState isEqualToString:@"Full"]) {
+            [popUpNameButton selectItemAtIndex:1];
+            [customName setEnabled:NO];
+        } else {
+            [popUpNameButton selectItemAtIndex:2];
+            [customName setEnabled:YES];
+            [customName setStringValue:userNameState];
+        }
+    } else {
+        [readUserName setState:0];
+        [self changeStateOfName:self];
+    }
+
     if (useCal == YES) {
         [iCalButton setState:1];
     } else {
@@ -167,18 +162,17 @@
             [locationField setEnabled:YES];
             [findLocationButton setEnabled:YES];
         }
-        if ([temperatureStyle isEqualToString:@"Celsius"]) {
+        if ([temperatureStyle isEqualToString:@"Celsius"])
             [popUpTemperatureButton selectItemAtIndex:0];
-        } else 	if ([temperatureStyle isEqualToString:@"Kelvin"]) {
+        else if ([temperatureStyle isEqualToString:@"Kelvin"])
             [popUpTemperatureButton selectItemAtIndex:1];
-        } else 	if ([temperatureStyle isEqualToString:@"Fahrenheit"]) {
+        else if ([temperatureStyle isEqualToString:@"Fahrenheit"])
             [popUpTemperatureButton selectItemAtIndex:2];
-        }
-        if (forecastState == YES) {
+
+        if (forecastState == YES)
             [forecastButton setState:1];
-        } else {
+        else
             [forecastButton setState:0];
-        }
     } else {
         [weatherButton setState:0];
         [automaticLocationCheckBox setState:0];
@@ -202,114 +196,88 @@
 #pragma mark Toolbar Configuration
 
 - (void)setupToolbar{
-	[self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title")
-			image: [NSImage imageNamed:@"PrefGeneral"]];
-    [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title")
-			image: [NSImage imageNamed:@"PrefAccount"]];
-    [self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title")
-			image: [NSImage imageNamed:@"PrefWeather"]];
-	[self addView:self.newsPreferenceView label: NSLocalizedString(@"News&Quotes", @"News Window title")
-			image: [NSImage imageNamed:@"PrefNews"]];
-    [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title")
-			image: [NSImage imageNamed:@"PrefUpdate"]];
-    
-	//[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
-
-	//[self addFlexibleSpacer]; //added a space between the icons
-
-	// Optional configuration settings.
-	[self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
-	[self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
+    [self addView:self.generalPreferenceView label: NSLocalizedString(@"General", @"General Window title") image: [NSImage imageNamed:@"PrefGeneral"]];
+    [self addView:self.emailPreferenceView label: NSLocalizedString(@"Email & VIP", @"Email & VIP Window title") image: [NSImage imageNamed:@"PrefAccount"]];
+    [self addView:self.weatherPreferenceView label: NSLocalizedString(@"Weather", @"Weather Window title") image: [NSImage imageNamed:@"PrefWeather"]];
+    [self addView:self.newsPreferenceView label: NSLocalizedString(@"News&Quotes", @"News Window title") image: [NSImage imageNamed:@"PrefNews"]];
+    [self addView:self.updatePreferenceView label: NSLocalizedString(@"Update", @"Update Window title") image: [NSImage imageNamed:@"PrefUpdate"]];
+    //[self addView:self.generalPreferenceView label:@"General" imageName:@"NSGeneral"];
+    //[self addFlexibleSpacer]; //added a space between the icons
+    // Optional configuration settings.
+    [self setCrossFade:[[NSUserDefaults standardUserDefaults] boolForKey:@"fade"]];
+    [self setShiftSlowsAnimation:[[NSUserDefaults standardUserDefaults] boolForKey:@"shiftSlowsAnimation"]];
 }
 
 #pragma mark -
 #pragma mark General Methods
 
 - (IBAction)changeStateOfName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	if ([readUserName state] == 1) {
-		[customNamePopUp setEnabled:YES];
-		[defaults setBool:YES forKey: @"ReadUserName"];
-		[popUpNameButton selectItemAtIndex:0];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    if ([readUserName state] == 1) {
+        [customNamePopUp setEnabled:YES];
+        [defaults setBool:YES forKey: @"ReadUserName"];
+        [popUpNameButton selectItemAtIndex:0];
     } else {
-		[customName setEnabled:NO];
-		[customNamePopUp setEnabled:NO];
-		[defaults setBool:NO forKey: @"ReadUserName"];
-		if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"]) {
-			[defaults setObject:@"None" forKey: @"UserName"];
-		}
+        [customName setEnabled:NO];
+        [customNamePopUp setEnabled:NO];
+        [defaults setBool:NO forKey: @"ReadUserName"];
+        if ([[defaults stringForKey:@"UserName"] isNotEqualTo:@"None"])
+            [defaults setObject:@"None" forKey: @"UserName"];
     }
     [defaults synchronize];
 }
 
 - (IBAction)readUserName:(NSButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
-    
-	if (indexOfPopUp == 0 ) {
-		[defaults setObject:@"Short" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 1 ) {
-		[defaults setObject:@"Full" forKey: @"UserName"];
-		[customName setEnabled:NO];
-		[customName setStringValue:@""];
-	} else if (indexOfPopUp == 2) {
-		[customName setEnabled:YES];
-	}
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger indexOfPopUp = [popUpNameButton indexOfSelectedItem];
+
+    if (indexOfPopUp == 0 ) {
+        [defaults setObject:@"Short" forKey: @"UserName"];
+        [customName setEnabled:NO];
+        [customName setStringValue:@""];
+    } else if (indexOfPopUp == 1 ) {
+        [defaults setObject:@"Full" forKey: @"UserName"];
+        [customName setEnabled:NO];
+        [customName setStringValue:@""];
+    } else if (indexOfPopUp == 2) {
+        [customName setEnabled:YES];
+    }
     [defaults synchronize];
 }
 
 - (IBAction)readCustomName:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-	NSString *customNameText = [customName stringValue];
-    
-	if ([customNameText length] >0) {
-		[defaults setObject:customNameText forKey: @"UserName"];
-	}
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *customNameText = [customName stringValue];
+
+    if ([customNameText length] >0) [defaults setObject:customNameText forKey: @"UserName"];
     [defaults synchronize];
 }
 
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger indexOfTimePopUp = [popUpTimeStyleButton indexOfSelectedItem];
-    
-    if (indexOfTimePopUp == 0 ) {
-        [defaults setObject:@"24" forKey: @"TimeStyle"];
-    } else if (indexOfTimePopUp == 1 ) {
-        [defaults setObject:@"am/pm" forKey: @"TimeStyle"];
-    }
+
+    if (indexOfTimePopUp == 0 ) [defaults setObject:@"24" forKey: @"TimeStyle"];
+    else if (indexOfTimePopUp == 1 ) [defaults setObject:@"am/pm" forKey: @"TimeStyle"];
+
     [defaults synchronize];
 }
 
 - (IBAction)changeStateServices:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([sender tag] == 1) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseCal"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseCal"];
-        }
+        if ([sender state]==NSOffState) [defaults setBool:NO forKey: @"UseCal"];
+        else if ([sender state]==NSOnState) [defaults setBool:YES forKey: @"UseCal"];
     } else if ([sender tag] == 2) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseWeather"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseWeather"];
-        }
+        if ([sender state]==NSOffState) [defaults setBool:NO forKey: @"UseWeather"];
+        else if ([sender state]==NSOnState) [defaults setBool:YES forKey: @"UseWeather"];
     } else if ([sender tag] == 3) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseMail"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseMail"];
-        }
+        if ([sender state]==NSOffState) [defaults setBool:NO forKey: @"UseMail"];
+        else if ([sender state]==NSOnState) [defaults setBool:YES forKey: @"UseMail"];
     } else if ([sender tag] == 4) {
-        if ([sender state]==NSOffState){
-            [defaults setBool:NO forKey: @"UseNewsQuotes"];
-        } else if ([sender state]==NSOnState){
-            [defaults setBool:YES forKey: @"UseNewsQuotes"];
-        }
+        if ([sender state]==NSOffState)[defaults setBool:NO forKey: @"UseNewsQuotes"];
+        else if ([sender state]==NSOnState) [defaults setBool:YES forKey: @"UseNewsQuotes"];
     }
     [defaults synchronize];
 }
@@ -318,8 +286,8 @@
 #pragma mark Mail Methods
 
 - (IBAction)saveVips:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     if ([[emailVIP1 stringValue] length] > 0) [defaults setObject:[emailVIP1 stringValue] forKey: @"emailVIP1"];
     if ([[nameVIP1 stringValue] length] > 0) [defaults setObject:[nameVIP1 stringValue] forKey: @"nameVIP1"];
     if ([[emailVIP2 stringValue] length] > 0) [defaults setObject:[emailVIP2 stringValue] forKey: @"emailVIP2"];
@@ -328,7 +296,7 @@
     if ([[nameVIP3 stringValue] length] > 0) [defaults setObject:[nameVIP3 stringValue] forKey: @"nameVIP3"];
     if ([[emailVIP4 stringValue] length] > 0) [defaults setObject:[emailVIP4 stringValue] forKey: @"emailVIP4"];
     if ([[nameVIP4 stringValue] length] > 0) [defaults setObject:[nameVIP4 stringValue] forKey: @"nameVIP4"];
-    
+
     [saveButton setTitle:NSLocalizedString(@"Saved", @"Text that appears if the save button was pressed")];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [saveButton setTitle:NSLocalizedString(@"Save", @"Text that appears if the save button was not pressed")];
@@ -340,106 +308,92 @@
 #pragma mark Weather Methods
 
 - (IBAction)findLocation:(id)sender {
-	[mapView showAddress:[locationField stringValue]];
-	// retrieves the City and Country
-	NSString *locationText = [locationField stringValue];
-	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
+    [mapView showAddress:[locationField stringValue]];
+    // retrieves the City and Country
+    NSString *locationText = [locationField stringValue];
+    NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
 
-	if ([locationText length] >0) {
-		// Displays the user his location
-		[locationLabel setStringValue:messageForLabel];
-	}
-	else {
-		// If the user will not write a city and country then we will display this message
-		[locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
-	}
+    if ([locationText length] >0) {
+        // Displays the user his location
+        [locationLabel setStringValue:messageForLabel];
+    } else {
+        // If the user will not write a city and country then we will display this message
+        [locationLabel setStringValue:NSLocalizedString(@"Please enter a City and Country.", @"Message that appeareas if the user did not inserted his location")];
+    }
 	
-	MKGeocoder *geocoderNoCoord = [[MKGeocoder alloc] initWithAddress:locationText];
-	geocoderNoCoord.delegate = self;
-	[geocoderNoCoord start];
+    MKGeocoder *geocoderNoCoord = [[MKGeocoder alloc] initWithAddress:locationText];
+    geocoderNoCoord.delegate = self;
+    [geocoderNoCoord start];
 }
 
 - (IBAction)changeStateAutomaticLocation:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
     if ([automaticLocationCheckBox state] == 1) {
         [locationField setEnabled:NO];
         [findLocationButton setEnabled:NO];
-		[defaults setBool:YES forKey: @"AutomaticLocation"];
+        [defaults setBool:YES forKey: @"AutomaticLocation"];
     } else {
         [locationField setEnabled:YES];
         [findLocationButton setEnabled:YES];
-		[defaults setBool:NO forKey: @"AutomaticLocation"];
+        [defaults setBool:NO forKey: @"AutomaticLocation"];
     }
 }
 
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger indexOfTemperaturePopUp = [popUpTemperatureButton indexOfSelectedItem];
 
-	if (indexOfTemperaturePopUp == 0 ) {
-		[defaults setObject:@"Celsius" forKey: @"TemperatureStyle"];
-	} else if (indexOfTemperaturePopUp == 1 ) {
-		[defaults setObject:@"Kelvin" forKey: @"TemperatureStyle"];
-	} else if (indexOfTemperaturePopUp == 2 ) {
-		[defaults setObject:@"Fahrenheit" forKey: @"TemperatureStyle"];
-	}
+    if (indexOfTemperaturePopUp == 0 ) [defaults setObject:@"Celsius" forKey: @"TemperatureStyle"];
+    else if (indexOfTemperaturePopUp == 1 ) [defaults setObject:@"Kelvin" forKey: @"TemperatureStyle"];
+    else if (indexOfTemperaturePopUp == 2 ) [defaults setObject:@"Fahrenheit" forKey: @"TemperatureStyle"];
+
     [defaults synchronize];
 }
 
 - (IBAction)forecastYesOrNo:(id)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	if ([forecastButton state] == 1) {
-		[defaults setBool:YES forKey: @"ForecastWeather"];
-	} else {
-		[defaults setBool:NO forKey: @"ForecastWeather"];
-	}
-	[defaults synchronize];
+    if ([forecastButton state] == 1) [defaults setBool:YES forKey: @"ForecastWeather"];
+    else [defaults setBool:NO forKey: @"ForecastWeather"];
+
+    [defaults synchronize];
 }
 
-- (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate
-{
-	CLLocationCoordinate2D coordinateE;
-	coordinateE.latitude = coordinate.longitude;
-	coordinateE.longitude = coordinate.latitude;
-	MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinateE];
-	reverseGeocoder.delegate = self;
-	[reverseGeocoder start];
+- (void)geocoder:(MKGeocoder *)geocoder didFindCoordinate:(CLLocationCoordinate2D)coordinate {
+    CLLocationCoordinate2D coordinateE;
+    coordinateE.latitude = coordinate.longitude;
+    coordinateE.longitude = coordinate.latitude;
+    MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinateE];
+    reverseGeocoder.delegate = self;
+    [reverseGeocoder start];
 }
 
-- (void)geocoder:(MKGeocoder *)geocoder didFailWithError:(NSError *)error
-{
+- (void)geocoder:(MKGeocoder *)geocoder didFailWithError:(NSError *)error {
     //NSLog(@"MKGeocoder didFailWithError: %@", error);
 }
 
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFindPlacemark:(MKPlacemark *)placemark {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
     if (placemark.locality != NULL && placemark.country != NULL && placemark.countryCode != NULL) {
         [mapView setShowsUserLocation: NO];
         // adding the location to the text box
-//        NSLog(@"place: %@", placemark);
-		NSString *locationText = [NSString stringWithFormat:@"%@, %@", placemark.country, placemark.locality];
-		NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
-		[locationLabel setStringValue:messageForLabel];
-		[defaults setObject:placemark.locality forKey: @"Locality"];
-		[defaults setObject:placemark.countryCode forKey: @"CountryCode"];
-//        [defaults setObject:placemark.locality forKey: @"Locality"];
-//        [defaults setObject:placemark.locality forKey: @"Locality"];
-		[defaults synchronize];
+        NSString *locationText = [NSString stringWithFormat:@"%@, %@", placemark.country, placemark.locality];
+        NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
+        [locationLabel setStringValue:messageForLabel];
+        [defaults setObject:placemark.locality forKey: @"Locality"];
+        [defaults setObject:placemark.countryCode forKey: @"CountryCode"];
+        [defaults synchronize];
     }
 }
 
-- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error
-{
+- (void)reverseGeocoder:(MKReverseGeocoder *)geocoder didFailWithError:(NSError *)error {
     //NSLog(@"MKReverseGeocoder didFailWithError: %@", error);
 }
 
-- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation
-{
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
     if (showsUserLocationApp == NO) {
         CLLocationCoordinate2D coordinate;
@@ -452,12 +406,12 @@
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.roundingIncrement = [NSNumber numberWithDouble:0.01];
         formatter.numberStyle = NSNumberFormatterDecimalStyle;
-        
+
         NSDictionary *userCoordinate=@{@"lat":[formatter stringFromNumber:lat],@"long":[formatter stringFromNumber:lon]};
-        
+
         [defaults setObject:userCoordinate forKey:@"userCoordinate"];
         [defaults synchronize];
-        
+
         MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinate];
         reverseGeocoder.delegate = self;
         [reverseGeocoder start];
@@ -476,29 +430,27 @@
         self.newsLinkOutputProgress.hidden = YES;
         [self.newsLinkOutputProgress stopAnimation:nil];
     }
-//    isSpinning = YES;
 }
 
 - (IBAction)newsLinkChange:(id)sender {
-	// retrieves the City and Country
-	NSString *newsLinkText = [newsLink stringValue];
-	NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Finding feeds…", @"Message after the user inseted the news link")];
-    
+    // retrieves the City and Country
+    NSString *newsLinkText = [newsLink stringValue];
+    NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Finding feeds…", @"Message after the user inseted the news link")];
+
 	if ([newsLinkText length] >0) {
         [self animateSpinniner:YES];
         newsLinkOutput.hidden = NO;
-		// Displays the user his location
-		[newsLinkOutput setStringValue:messageForLabel];
+        // Displays the user his location
+        [newsLinkOutput setStringValue:messageForLabel];
 	} else {
         newsLinkOutput.hidden = NO;
-		// If the user will not write a link then we will display this message
-		[newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
+        // If the user will not write a link then we will display this message
+        [newsLinkOutput setStringValue:NSLocalizedString(@"Please enter a link.", @"Message that appeareas if the user did not inserted his link")];
 	}
     [self validateURLLink:newsLinkText];
 }
 
 - (void)validateURLLink:(NSString *)URL {
-    
     // prepend http:// if no scheme was specified
     if (![URL containsString:@"://"])
         URL = [@"http://" stringByAppendingString:URL];
@@ -508,10 +460,10 @@
         URL = [URL stringByReplacingOccurrencesOfString:@"feed:http://" withString:@"http://"];
     else if ([URL beginsWithString:@"feed:https://"]) // never seen, but possible
         URL = [URL stringByReplacingOccurrencesOfString:@"feed:https://" withString:@"https://"];
-    
+
     NSURLRequest *URLRequest;
     URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
-    
+
     self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
     [self.request addTarget:self action:@selector(feedRequestComplete:) forRequestEvents:SMWebRequestEventComplete];
     [self.request addTarget:self action:@selector(feedRequestError:) forRequestEvents:SMWebRequestEventError];
@@ -519,22 +471,18 @@
 }
 
 - (void)feedRequestComplete:(NSData *)data {
-    
     NSURL *URL = self.request.response.URL; // the final URL of this resource (after any redirects)
-    
     // did this request return HTML?
     BOOL looksLikeHtml = NO;
-    
+
     if ([self.request.response isKindOfClass:[NSHTTPURLResponse class]]) {
         NSString *contentType = [(NSHTTPURLResponse *)self.request.response allHeaderFields][@"Content-Type"];
-        
+
         if ([contentType isEqualToString:@"text/html"] || [contentType beginsWithString:@"text/html;"] ||
-            [URL.path endsWithString:@".html"] || [URL.path endsWithString:@".html"])
-            looksLikeHtml = YES;
+            [URL.path endsWithString:@".html"] || [URL.path endsWithString:@".html"]) looksLikeHtml = YES;
     }
     // looks like HTML? are you SURE?
     if (looksLikeHtml) {
-        
         // peek at the first few bytes of the response
         if (data.length >= 5) {
             NSString *prefix = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(0, 5)] encoding:NSASCIIStringEncoding];
@@ -542,47 +490,45 @@
                 looksLikeHtml = NO; // nope, it's secretly XML! seen this with Zillow's mortgage rates RSS feed
         }
     }
-    
+
     if (looksLikeHtml) {
-        
         // Look for feeds in the returned HTML page .
-        
         NSMutableArray *foundFeeds = [NSMutableArray array];
-        
+
         TFHpple *html = [[TFHpple alloc] initWithHTMLData:data];
         NSArray *rssLinks = [html searchWithXPathQuery:@"//link[@type='application/rss+xml']"];
         NSArray *atomLinks = [html searchWithXPathQuery:@"//link[@type='application/atom+xml']"];
-        
+
         for (TFHppleElement *link in rssLinks) {
             NSString *href = (link.attributes)[@"href"];
             NSString *title = (link.attributes)[@"title"] ?: @"RSS Feed";
             NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
-            
+
             if (href.length) {
                 Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
                 if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
-        
+
         for (TFHppleElement *link in atomLinks) {
             NSString *href = (link.attributes)[@"href"];
             NSString *title = (link.attributes)[@"title"] ?: @"Atom Feed";
             NSURL *url = [NSURL URLWithString:href relativeToURL:URL];
-            
+
             if (href.length) {
                 Feed *feed = [Feed feedWithURLString:url.absoluteString title:title];
                 NSLog(@"%@",feed.URL);
                 if (![foundFeeds containsObject:feed]) [foundFeeds addObject:feed]; // check for duplicates
             }
         }
+
         if (foundFeeds.count)
             self.feeds = foundFeeds;
         else {
             [self validationDidFailWithMessage:@"Could not discover any feeds at the given URL. Try specifying the complete URL to the feed."];
             return;
         }
-    }
-    else {
+    } else {
         // make sure we can parse this feed, and snag the title if we can!
         NSString *title; NSError *error;
         NSArray *items = [Feed feedItemsWithData:data discoveredTitle:&title error:&error];
@@ -625,9 +571,9 @@
     NSImage *img = [[NSImage alloc] initWithContentsOfFile:path];
     [self.newsLinkOutputImage setImage:img];
     [newsLinkOutput setStringValue:@"Validation completed."];
-    for (Feed *item in self.feeds) {
+    for (Feed *item in self.feeds)
         NewRSSURL = item.URL;
-    }
+
     [defaults setURL:NewRSSURL forKey: @"RSSURL"];
     [defaults setURL:userURL forKey: @"userURL"];
     [defaults synchronize];

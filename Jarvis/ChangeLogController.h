@@ -10,7 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @interface ChangeLogController : NSWindowController {
-	IBOutlet id windowCL;
+    IBOutlet id windowCL;
 }
 
 @property (assign) IBOutlet WebView *changeLogWebView;

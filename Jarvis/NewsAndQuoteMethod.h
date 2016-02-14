@@ -15,7 +15,6 @@
 @property (nonatomic, strong) SMWebRequest *request, *tokenRequest;
 
 - (NSString *) retrieveRSSItems;
-
 - (NSString *) retrieveDailyQuote;
 
 @end

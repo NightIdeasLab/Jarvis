@@ -13,7 +13,7 @@
  will include the GrowlApplicationBridge.h file required, and post a Growl message when
  the feedback is sent.
  NOTE: you must add an entry to your Growl Dict plist to register this new message
- */
+*/
 #define USE_GROWL FALSE
 
 typedef enum: NSInteger {
@@ -30,32 +30,26 @@ typedef enum: NSInteger {
     IBOutlet NSComboBox *emailAddressComboBox;
     IBOutlet NSProgressIndicator *progress;
     IBOutlet NSSegmentedControl *segmentedControl;
-    
+
     IBOutlet NSButton *cancelButton;
     IBOutlet NSButton *sendButton;
-    
+
     NSAttributedString *sectionStrings[JRFeedbackController_SectionCount];
-    
+
     JRFeedbackController_Section currentSection;
     BOOL includeContactInfo;
 }
 
 + (void)showFeedback;
 + (void)showFeedbackWithBugDetails:(NSString *)details;
-
 - (BOOL)includeContactInfo;
 - (void)setIncludeContactInfo:(BOOL)flag;
-
 - (IBAction)switchSectionAction:(NSSegmentedControl*)sender;
 - (IBAction)submitAction:(id)sender;
 - (IBAction)cancelAction:(id)sender;
 - (void)postFeedback:(NSString*)systemProfile;
 - (void)setTextViewStringTo:(NSString *)details;
-
-- (void)displayAlertMessage:(NSString *)message 
-		withInformativeText:(NSString *)text 
-			  andAlertStyle:(NSAlertStyle)alertStyle;
-
+- (void)displayAlertMessage:(NSString *)message withInformativeText:(NSString *)text andAlertStyle:(NSAlertStyle)alertStyle;
 - (void)showWindow:(id)sender;
 
 @end

@@ -18,8 +18,7 @@
     return [self initWithData:dict temperatureConversion:kJSKelvin];
 }
 
-- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion
-{
+- (id)initWithData:(NSDictionary *)dict temperatureConversion:(NSInteger)conversion {
     if (!(self = [super init])) return nil;
     
     self.JSCloudiness = [[[dict objectForKey:@"clouds"] objectForKey:@"all"] floatValue];
@@ -27,7 +26,7 @@
     self.JSHumidity = [[[dict objectForKey:@"main"] objectForKey:@"humidity"] intValue];
     self.JSPressure = [[[dict objectForKey:@"main"] objectForKey:@"pressure"] floatValue];
     self.JSWeatherImage = [dict objectForKey:@"image"];
-    
+
     if (conversion == kJSKelvin || !conversion) {
         self.JSCurrentTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp"] floatValue];
         self.JSPossibleMaxTemperature = [[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue];
@@ -41,7 +40,7 @@
         self.JSPossibleMaxTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_max"] floatValue] - 273.15) * 1.800 + 32.00;
         self.JSPossibleMinTemperature = ([[[dict objectForKey:@"main"] objectForKey:@"temp_min"] floatValue] - 273.15) * 1.800 + 32.00;
     }
-    
+
     self.JSWeatherDescription = [[[[dict objectForKey:@"weather"] firstObject] objectForKey:@"description"] capitalizedString];
     self.JSWindSpeed = [[[dict objectForKey:@"wind"] objectForKey:@"speed"] floatValue];
     self.JSCurrentWindDirection = [JSWeatherUtility handleWindDirection:[[[dict objectForKey:@"wind"] objectForKey:@"deg"] floatValue]];

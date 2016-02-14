@@ -64,8 +64,7 @@ enum {
  @param state The state/country/region that the client is wanting to receive weather for 
  (e.g 'CA' for Canada, 'CA' for California, or 'GB' for Great Britain)
  */
-- (void)queryForCurrentWeatherWithCity:(NSString *)city state:(NSString *)state
-                                 block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
+- (void)queryForCurrentWeatherWithCity:(NSString *)city state:(NSString *)state block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
 
 /*!
  @abstract Queries the OpenWeatherMap API for the locations current weather.
@@ -75,8 +74,7 @@ enum {
  @param latitude The latitude that the client is wanting to receive weather for (e.g '44.43')
  @param longitude The longitude that the client is wanting to receive weather for (e.g '26.11')
  */
-- (void)queryForCurrentWeatherWithCoordinate:(NSNumber *)latitude longitude:(NSNumber *)longitude
-                                 block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
+- (void)queryForCurrentWeatherWithCoordinate:(NSNumber *)latitude longitude:(NSNumber *)longitude block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
 
 /*!
  @abstract Queries the OpenWeatherMap API for the locations daily forecast weather.
@@ -88,8 +86,7 @@ enum {
  @param state The state/country/region that the client is wanting to receive weather for
  (e.g 'CA' for Canada, 'CA' for California, or 'GB' for Great Britain)
  */
-- (void)queryForDailyForecastWithNumberOfDays:(NSInteger)numberOfDays city:(NSString *)city state:(NSString *)state
-                                        block:(JSWeatherBlock)block;
+- (void)queryForDailyForecastWithNumberOfDays:(NSInteger)numberOfDays city:(NSString *)city state:(NSString *)state block:(JSWeatherBlock)block;
 
 /*!
  @abstract Queries the OpenWeatherMap API for the locations daily forecast weather.
@@ -100,8 +97,7 @@ enum {
  @param latitude The latitude that the client is wanting to receive weather for (e.g '44.43')
  @param longitude The longitude that the client is wanting to receive weather for (e.g '26.11')
  */
-- (void)queryForDailyForecastCoordWithNumberOfDays:(NSInteger)numberOfDays latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude
-                                        block:(JSWeatherBlock)block;
+- (void)queryForDailyForecastCoordWithNumberOfDays:(NSInteger)numberOfDays latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude block:(JSWeatherBlock)block;
 
 /*!
  @abstract Queries the OpenWeatherMap API for the locations hourly forecast weather.
@@ -112,8 +108,7 @@ enum {
  @param state The state/country/region that the client is wanting to receive weather for
  (e.g 'CA' for Canada, 'CA' for California, or 'GB' for Great Britain)
  */
-- (void)queryForHourlyForecastWithCity:(NSString *)city state:(NSString *)state
-                                 block:(JSWeatherBlock)block;
+- (void)queryForHourlyForecastWithCity:(NSString *)city state:(NSString *)state block:(JSWeatherBlock)block;
 
 /*!
  @abstract Queries the OpenWeatherMap API for the locations historical data weather.
@@ -124,8 +119,8 @@ enum {
  @param state The state/country/region that the client is wanting to receive weather for
  (e.g 'CA' for Canada, 'CA' for California, or 'GB' for Great Britain)
  */
-- (void)queryForHistoricalDataWithCity:(NSString *)city state:(NSString *)state
-                                 block:(JSWeatherBlock)block;
+- (void)queryForHistoricalDataWithCity:(NSString *)city state:(NSString *)state block:(JSWeatherBlock)block;
+
 @end
 
 @protocol JSWeatherDelegate <NSObject>

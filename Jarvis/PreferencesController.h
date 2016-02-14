@@ -70,7 +70,6 @@
 @property (assign) IBOutlet NSButton *automaticLocationCheckBox;
 @property (unsafe_unretained) IBOutlet NSButton *forecastButton;
 
-
 #pragma mark -
 #pragma mark News&Quotes var
 @property (nonatomic, copy) NSArray *feeds;
@@ -87,11 +86,8 @@
 
 // General
 - (IBAction)changeStateOfName:(id)sender;
-
 - (IBAction)readUserName:(NSButton *)sender;
-
 - (IBAction)readCustomName:(id)sender;
-
 - (IBAction)changeStateServices:(id)sender;
 
 // Mail
@@ -100,18 +96,11 @@
 // Weather
 // Finds the WOEID code for the location that the user inputs
 - (IBAction)changeStateAutomaticLocation:(id)sender;
-
 - (IBAction)findLocation:(id)sender;
-
 - (IBAction)changeTemperatureStyle:(NSPopUpButton *)sender;
-
 - (IBAction)changeTimeStyle:(NSPopUpButton *)sender;
-
 - (IBAction)forecastYesOrNo:(id)sender;
-
 - (IBAction)newsLinkChange:(id)sender;
-
 - (void)validationDidFailWithMessage:(NSString *)message;
-
 
 @end
