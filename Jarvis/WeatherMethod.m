@@ -20,6 +20,10 @@
 	NSString *countryCodeWeather = [defaults stringForKey: @"CountryCode"];
 	NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
 	__block NSData *weatherImage = NULL;
+    
+    NSDictionary *userCoordinate=[[NSUserDefaults standardUserDefaults] objectForKey:@"userCoordinate"];
+    NSNumber *userLatitude = [userCoordinate objectForKey:@"lat"];
+    NSNumber *userLongitude = [userCoordinate objectForKey:@"long"];
 	
 	if(localityWeather != nil && countryCodeWeather != nil) {
 		JSWeather *weather = [JSWeather sharedInstance];
@@ -31,28 +35,27 @@
 			[weather setTemperatureMetric:kJSFahrenheit];
 		}
 		[weather setDelegate:self];
-		
-		NSString *city = localityWeather;
-		NSString *state = countryCodeWeather;
-		
-		[weather queryForCurrentWeatherWithCity:city state:state block:^(JSCurrentWeatherObject *object, NSError *error) {
-			if (error) {
-				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
-				return;
-			}
-			NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"png"];
-			weatherImage = [[NSData alloc] initWithContentsOfFile:filePath];
-			
-			NSString *currentWeather = [object.objects objectForKey:@"weather"];
-			NSString *currentTemperature = [object.objects objectForKey:@"current_temp"];
-			outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@ ˚.", @""), currentWeather, localityWeather, currentTemperature]];
-		}];
+        
+        [weather queryForCurrentWeatherWithCoordinate:userLatitude longitude:userLongitude block:^(JSCurrentWeatherObject *object, NSError *error) {
+            if (error) {
+                outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\nWeather %@ \n", @""),error];
+                return;
+            }
+            
+            NSString *filePath = [[NSBundle mainBundle] pathForResource:[object.objects objectForKey:@"image"] ofType:@"png"];
+            weatherImage = [[NSData alloc] initWithContentsOfFile:filePath];
+            
+            NSString *currentWeather = [object.objects objectForKey:@"weather"];
+            NSString *currentTemperature = [object.objects objectForKey:@"current_temp"];
+            outputWeatherText = [outputWeatherText stringByAppendingString:[NSString stringWithFormat:NSLocalizedString(@"\n%@ in %@ with current temperature %@ ˚.", @""), currentWeather, localityWeather, currentTemperature]];
+        }];
 
-		[weather queryForDailyForecastWithNumberOfDays:1 city:city state:state block:^(NSArray *objects, NSError *error) {
+		[weather queryForDailyForecastCoordWithNumberOfDays:1 latitude:userLatitude longitude:userLongitude block:^(NSArray *objects, NSError *error) {
 			if (error) {
 				outputWeatherText = [NSString stringWithFormat:NSLocalizedString(@"\Error retrieving min and max temp with error: %@ \n", @""),error];
 				return;
 			}
+            
 			for (JSDailyForecastObject * obj in objects) {
 				NSString *todayMin = [obj.objects objectForKey:@"min"];
 				NSString *todayMax = [obj.objects objectForKey:@"max"];

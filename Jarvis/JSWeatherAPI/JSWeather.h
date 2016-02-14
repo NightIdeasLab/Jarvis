@@ -68,6 +68,17 @@ enum {
                                  block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
 
 /*!
+ @abstract Queries the OpenWeatherMap API for the locations current weather.
+ 
+ @discussion The current weather of the location passed will be returned within the block. The state parameter is very flexible.
+ 
+ @param latitude The latitude that the client is wanting to receive weather for (e.g '44.43')
+ @param longitude The longitude that the client is wanting to receive weather for (e.g '26.11')
+ */
+- (void)queryForCurrentWeatherWithCoordinate:(NSNumber *)latitude longitude:(NSNumber *)longitude
+                                 block:(void (^)(JSCurrentWeatherObject *object, NSError *error))completionBlock;
+
+/*!
  @abstract Queries the OpenWeatherMap API for the locations daily forecast weather.
  
  @discussion The daily forecast weather of the location passed will be returned within the block. The state parameter is very flexible.
@@ -78,6 +89,18 @@ enum {
  (e.g 'CA' for Canada, 'CA' for California, or 'GB' for Great Britain)
  */
 - (void)queryForDailyForecastWithNumberOfDays:(NSInteger)numberOfDays city:(NSString *)city state:(NSString *)state
+                                        block:(JSWeatherBlock)block;
+
+/*!
+ @abstract Queries the OpenWeatherMap API for the locations daily forecast weather.
+ 
+ @discussion The daily forecast weather of the location passed will be returned within the block. The state parameter is very flexible.
+ 
+ @param numberOfDays Specify the number of days you would like to receive forecasts for. You may only specify a number between 1 and 16. (e.g 9 will get you the next 8 days' forecasts for those days including the current day
+ @param latitude The latitude that the client is wanting to receive weather for (e.g '44.43')
+ @param longitude The longitude that the client is wanting to receive weather for (e.g '26.11')
+ */
+- (void)queryForDailyForecastCoordWithNumberOfDays:(NSInteger)numberOfDays latitude:(NSNumber *)latitude longitude:(NSNumber *)longitude
                                         block:(JSWeatherBlock)block;
 
 /*!

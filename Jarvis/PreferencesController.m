@@ -272,6 +272,18 @@
     [defaults synchronize];
 }
 
+- (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger indexOfTimePopUp = [popUpTimeStyleButton indexOfSelectedItem];
+    
+    if (indexOfTimePopUp == 0 ) {
+        [defaults setObject:@"24" forKey: @"TimeStyle"];
+    } else if (indexOfTimePopUp == 1 ) {
+        [defaults setObject:@"am/pm" forKey: @"TimeStyle"];
+    }
+    [defaults synchronize];
+}
+
 - (IBAction)changeStateServices:(id)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([sender tag] == 1) {
@@ -327,9 +339,6 @@
 #pragma mark -
 #pragma mark Weather Methods
 
-#pragma mark -
-#pragma mark WOIED
-
 - (IBAction)findLocation:(id)sender {
 	[mapView showAddress:[locationField stringValue]];
 	// retrieves the City and Country
@@ -378,18 +387,6 @@
     [defaults synchronize];
 }
 
-- (IBAction)changeTimeStyle:(NSPopUpButton *)sender {
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	NSInteger indexOfTimePopUp = [popUpTimeStyleButton indexOfSelectedItem];
-
-	if (indexOfTimePopUp == 0 ) {
-		[defaults setObject:@"24" forKey: @"TimeStyle"];
-	} else if (indexOfTimePopUp == 1 ) {
-		[defaults setObject:@"am/pm" forKey: @"TimeStyle"];
-	}
-    [defaults synchronize];
-}
-
 - (IBAction)forecastYesOrNo:(id)sender {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
@@ -423,11 +420,14 @@
     if (placemark.locality != NULL && placemark.country != NULL && placemark.countryCode != NULL) {
         [mapView setShowsUserLocation: NO];
         // adding the location to the text box
+//        NSLog(@"place: %@", placemark);
 		NSString *locationText = [NSString stringWithFormat:@"%@, %@", placemark.country, placemark.locality];
 		NSString *messageForLabel = [[NSString alloc] initWithFormat:NSLocalizedString(@"Your location is: %@", @"Message after the user inseted his location"), locationText];
 		[locationLabel setStringValue:messageForLabel];
 		[defaults setObject:placemark.locality forKey: @"Locality"];
 		[defaults setObject:placemark.countryCode forKey: @"CountryCode"];
+//        [defaults setObject:placemark.locality forKey: @"Locality"];
+//        [defaults setObject:placemark.locality forKey: @"Locality"];
 		[defaults synchronize];
     }
 }
@@ -439,10 +439,25 @@
 
 - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)userLocation
 {
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     if (showsUserLocationApp == NO) {
         CLLocationCoordinate2D coordinate;
         coordinate.latitude = userLocation.location.coordinate.latitude;
         coordinate.longitude = userLocation.location.coordinate.longitude;
+        // save user coordinate to user pref
+        NSNumber *lat = [NSNumber numberWithDouble:coordinate.latitude];
+        NSNumber *lon = [NSNumber numberWithDouble:coordinate.longitude];
+        // formating the float to have only two decimals
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        formatter.roundingIncrement = [NSNumber numberWithDouble:0.01];
+        formatter.numberStyle = NSNumberFormatterDecimalStyle;
+        
+        NSDictionary *userCoordinate=@{@"lat":[formatter stringFromNumber:lat],@"long":[formatter stringFromNumber:lon]};
+        
+        [defaults setObject:userCoordinate forKey:@"userCoordinate"];
+        [defaults synchronize];
+        
         MKReverseGeocoder *reverseGeocoder = [[MKReverseGeocoder alloc] initWithCoordinate: coordinate];
         reverseGeocoder.delegate = self;
         [reverseGeocoder start];
