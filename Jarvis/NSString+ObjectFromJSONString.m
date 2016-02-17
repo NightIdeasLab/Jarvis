@@ -11,11 +11,10 @@
 
 @implementation NSString (ObjectFromJSONString)
 
-- (id)objectFromJSONString
-{
-	NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+- (id)objectFromJSONString {
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
 
-	return [jsonData objectFromJSONData];
+    return [jsonData objectFromJSONData];
 }
 
 @end

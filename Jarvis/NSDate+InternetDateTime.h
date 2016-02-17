@@ -21,8 +21,7 @@ typedef enum {
 // Get date from RFC3339 or RFC822 string
 // - A format/specification hint can be used to speed up, 
 //   otherwise both will be attempted in order to get a date
-+ (NSDate *)dateFromInternetDateTimeString:(NSString *)dateString 
-                                formatHint:(DateFormatHint)hint;
++ (NSDate *)dateFromInternetDateTimeString:(NSString *)dateString formatHint:(DateFormatHint)hint;
 
 // Get date from a string using a specific date specification
 + (NSDate *)dateFromRFC3339String:(NSString *)dateString;

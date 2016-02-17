@@ -9,26 +9,17 @@
 // NSWindow will refuse to become the main window unless it has a title bar.
 // Overriding lets us become the main window anyway.
 //
-- (BOOL)canBecomeMainWindow
-{
+- (BOOL)canBecomeMainWindow {
     return YES;
 }
 
 // Much like above method.
-- (BOOL)canBecomeKeyWindow
-{
+- (BOOL)canBecomeKeyWindow {
     return YES;
 }
 
 // Ask our delegate if it wants to handle keystroke or mouse events before we route them.
-- (void)sendEvent:(NSEvent *)theEvent
-{
-    //	Offer key-down events to the delegats
-//    if ([theEvent type] == NSKeyDown)
-//        if (self.controller)
-//            if ([self.controller handlesKeyDown:theEvent inWindow:self])
-//                return;
-
+- (void)sendEvent:(NSEvent *)theEvent {
     //	Offer mouse-down events (lefty or righty) to the delegate
     if (([theEvent type] == NSLeftMouseDown) || ([theEvent type] == NSRightMouseDown))
         if (!self.controller)
@@ -40,4 +31,3 @@
 }
 
 @end
-

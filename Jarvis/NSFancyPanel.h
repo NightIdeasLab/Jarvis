@@ -5,12 +5,10 @@
 - (BOOL)handlesMouseDown:(NSEvent *)mouseDown inWindow:(NSWindow *)window;
 @end
 
-@interface NSFancyPanel : NSPanel
-{
+@interface NSFancyPanel : NSPanel {
     id<NSFancyPanelController> controller;
 }
 
 @property (assign, nonatomic) id<NSFancyPanelController> controller;
 
 @end
-

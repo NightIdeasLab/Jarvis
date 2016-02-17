@@ -32,7 +32,7 @@ static NSDateFormatter *_internetDateTimeFormatter = nil;
 // Get a date from a string - hint can be used to speed up
 + (NSDate *)dateFromInternetDateTimeString:(NSString *)dateString formatHint:(DateFormatHint)hint {
     //[dateString retain]; // Keep dateString around a while (for thread-safety)
-	NSDate *date = nil;
+    NSDate *date = nil;
     if (dateString) {
         if (hint != DateFormatHintRFC3339) {
             // Try RFC822 first
@@ -44,8 +44,7 @@ static NSDateFormatter *_internetDateTimeFormatter = nil;
             if (!date) date = [NSDate dateFromRFC822String:dateString];
         }
     }
-    //[dateString release]; // Finished with date string
-	return date;
+    return date;
 }
 
 // See http://www.faqs.org/rfcs/rfc822.html
@@ -94,10 +93,8 @@ static NSDateFormatter *_internetDateTimeFormatter = nil;
                 }
             }
             //if (!date) DDLogVerbose(@"Could not parse RFC822 date: \"%@\" Possible invalid format.", dateString);
-            
         }
     }
-    //[dateString release]; // Finished with date string
     return date;
 }
 
@@ -108,17 +105,13 @@ static NSDateFormatter *_internetDateTimeFormatter = nil;
     if (dateString) {
         NSDateFormatter *dateFormatter = [NSDate internetDateTimeFormatter];
         @synchronized(dateFormatter) {
-            
             // Process date
             NSString *RFC3339String = [[NSString stringWithString:dateString] uppercaseString];
             RFC3339String = [RFC3339String stringByReplacingOccurrencesOfString:@"Z" withString:@"-0000"];
             // Remove colon in timezone as it breaks NSDateFormatter in iOS 4+.
             // - see https://devforums.apple.com/thread/45837
             if (RFC3339String.length > 20) {
-                RFC3339String = [RFC3339String stringByReplacingOccurrencesOfString:@":" 
-                                                                         withString:@"" 
-                                                                            options:0
-                                                                              range:NSMakeRange(20, RFC3339String.length-20)];
+                RFC3339String = [RFC3339String stringByReplacingOccurrencesOfString:@":" withString:@"" options:0 range:NSMakeRange(20, RFC3339String.length-20)];
             }
             if (!date) { // 1996-12-19T16:39:57-0800
                 [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"]; 
@@ -133,7 +126,6 @@ static NSDateFormatter *_internetDateTimeFormatter = nil;
                 date = [dateFormatter dateFromString:RFC3339String];
             }
             //if (!date) DDLogVerbose(@"Could not parse RFC3339 date: \"%@\" Possible invalid format.", dateString);
-            
         }
     }
     //[dateString release]; // Finished with date string

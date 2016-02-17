@@ -3,10 +3,9 @@
 @implementation NSURLRequest (Authorization)
 
 + (NSMutableURLRequest *)requestWithURL:(NSURL *)URL username:(NSString *)username password:(NSString *)password {
-    
     NSString *loginString = [NSString stringWithFormat:@"%@:%@", username, password];
     NSString *authHeader = [@"Basic " stringByAppendingString:[loginString base64EncodedString]];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
     [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
     return request;
@@ -17,9 +16,8 @@
 }
 
 + (NSMutableURLRequest *)requestWithURL:(NSURL *)URL OAuth2Token:(OAuth2Token *)token; {
-    
     NSString *authHeader = [@"Bearer " stringByAppendingString:token.access_token];
-    
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:URL];
     [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
     [request setValue:@"Jarvis (http://nightideas.com/jarvis)" forHTTPHeaderField:@"User-Agent"]; // basecamp wants this for instance

@@ -1,6 +1,19 @@
 A TODO list
 
 Version 0.4.4
+- Add language to the weather
+You can use lang parameter to get the output in your language. We support the following languages that you can use with the corresponded lang values: English - en, Russian - ru, Italian - it, Spanish - es (or sp), Ukrainian - uk (or ua), German - de, Portuguese - pt, Romanian - ro, Polish - pl, Finnish - fi, Dutch - nl, French - fr, Bulgarian - bg, Swedish - sv (or se), Chinese Traditional - zh_tw, Chinese Simplified - zh (or zh_cn), Turkish - tr, Croatian - hr, Catalan - ca
+API call:
+
+http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&lang={lang}
+Parameters:
+
+lang language code
+Examples of API calls:
+
+http://api.openweathermap.org/data/2.5/forecast/daily?id=524901&lang=zh_cn
+
+
 - To make a better rss feed reader
 - For the VIPs create a table view and the possibility to add as many VIPs as the user wants
 - Implement a automatic refresh for everything.
