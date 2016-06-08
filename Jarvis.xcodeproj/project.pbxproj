@@ -553,7 +553,7 @@
 		00AF0DD11769FBBC00C00AE3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Night Ideas Lab Inc.";
 				TargetAttributes = {
 					00AF0DD81769FBBC00C00AE3 = {

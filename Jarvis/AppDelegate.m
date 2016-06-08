@@ -85,7 +85,7 @@ NSSpeechSynthesizer *synth;
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
     [NSApp setServicesProvider: self];
     // register for dock icon drags (has to be in applicationDidFinishLaunching: to work)
-    [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:) forEventClass: kCoreEventClass andEventID: kAEOpenContents];
+//    [[NSAppleEventManager sharedAppleEventManager] setEventHandler: self andSelector: @selector(handleOpenContentsEvent:replyEvent:) forEventClass: kCoreEventClass andEventID: kAEOpenContents];
 #if !DEBUG
     // shamelessly ask for donations
     if ([fDefaults boolForKey: @"WarningDonate"]) {
@@ -249,6 +249,7 @@ NSSpeechSynthesizer *synth;
         [window setFloatingPanel:NO];
         //Output
         [outText setString:outputText];
+
         if (speak) {
     #if !DEBUG
             [synth startSpeakingString:outputText];	//for speaking the text

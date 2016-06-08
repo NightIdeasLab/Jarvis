@@ -406,7 +406,8 @@
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
         formatter.roundingIncrement = [NSNumber numberWithDouble:0.01];
         formatter.numberStyle = NSNumberFormatterDecimalStyle;
-
+        [formatter setDecimalSeparator:@"."];  
+        
         NSDictionary *userCoordinate=@{@"lat":[formatter stringFromNumber:lat],@"long":[formatter stringFromNumber:lon]};
 
         [defaults setObject:userCoordinate forKey:@"userCoordinate"];
@@ -452,22 +453,24 @@
 
 - (void)validateURLLink:(NSString *)URL {
     // prepend http:// if no scheme was specified
-    if (![URL containsString:@"://"])
-        URL = [@"http://" stringByAppendingString:URL];
-    else if ([URL beginsWithString:@"feed://"]) // sometimes
-        URL = [URL stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"];
-    else if ([URL beginsWithString:@"feed:http://"]) // never seen, but possible
-        URL = [URL stringByReplacingOccurrencesOfString:@"feed:http://" withString:@"http://"];
-    else if ([URL beginsWithString:@"feed:https://"]) // never seen, but possible
-        URL = [URL stringByReplacingOccurrencesOfString:@"feed:https://" withString:@"https://"];
+    if ((unsigned long)(URL.length) > 0) {
+        if (![URL containsString:@"://"])
+            URL = [@"http://" stringByAppendingString:URL];
+        else if ([URL beginsWithString:@"feed://"]) // sometimes
+            URL = [URL stringByReplacingOccurrencesOfString:@"feed://" withString:@"http://"];
+        else if ([URL beginsWithString:@"feed:http://"]) // never seen, but possible
+            URL = [URL stringByReplacingOccurrencesOfString:@"feed:http://" withString:@"http://"];
+        else if ([URL beginsWithString:@"feed:https://"]) // never seen, but possible
+            URL = [URL stringByReplacingOccurrencesOfString:@"feed:https://" withString:@"https://"];
 
-    NSURLRequest *URLRequest;
-    URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
+        NSURLRequest *URLRequest;
+        URLRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:URL]];
 
-    self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
-    [self.request addTarget:self action:@selector(feedRequestComplete:) forRequestEvents:SMWebRequestEventComplete];
-    [self.request addTarget:self action:@selector(feedRequestError:) forRequestEvents:SMWebRequestEventError];
-    [self.request start];
+        self.request = [SMWebRequest requestWithURLRequest:URLRequest delegate:nil context:NULL];
+        [self.request addTarget:self action:@selector(feedRequestComplete:) forRequestEvents:SMWebRequestEventComplete];
+        [self.request addTarget:self action:@selector(feedRequestError:) forRequestEvents:SMWebRequestEventError];
+        [self.request start];
+    }
 }
 
 - (void)feedRequestComplete:(NSData *)data {

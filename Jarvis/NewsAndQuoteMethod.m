@@ -22,20 +22,23 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *outputNewsText = [[NSString alloc] init];
     NSURL *userURL = [defaults URLForKey:@"RSSURL"];
-    if(userURL != NULL) {
-//        [self refreshWithURL:userURL];
+
+    if (userURL != NULL) {
+        [self refreshWithURL:userURL];
 //        [self performSelectorOnMainThread:@selector(refreshWithURL:)
 //                                             withObject:userURL
 //                                          waitUntilDone:TRUE];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self refreshWithURL:userURL];
-                NSLog(@"mata: %@", self.feedItems);
-            //            if (!self.aHasCompleted)
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self refreshWithURL:userURL];
+//                NSLog(@"mata: %@", self.feedItems);
+//            if (!self.aHasCompleted)
 //            {
 //                NSLog(@"B running without A having run yet!, %@", self);
-
+//
+//            } else {
+//                NSLog(@"A has run!, %@", self);
 //            }
-        });
+//        });
     } else {
         NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
         if(quoteContent1!=nil) {
@@ -48,6 +51,7 @@
 
         [[NSURLCache sharedURLCache] removeAllCachedResponses];
     }
+
     return outputNewsText;
 }
 
@@ -147,6 +151,7 @@
 - (void)refreshComplete:(NSArray *)newItems {
     Feed *feed = [[Feed alloc] init];
     NSString *outputNewsText = [[NSString alloc] init];
+
     if (!newItems) {
         // TODO: problem refreshing the feed!
         return;
@@ -197,7 +202,7 @@
         }
     }
     else {
-        //NSLog(@"ALL NEW ITEMS FOR FEED %@", feed.URL);
+//        NSLog(@"ALL NEW ITEMS FOR FEED %@", feed.URL);
         feed.items = newItems;
 
         // don't notify about the initial fetch, or we'll have a shitload of growl popups
@@ -206,27 +211,32 @@
     }
 
     [self validationDidComplete:feed];
-//    for (FeedItem *item in feed.items) {
-//        item.feed = feed;
-//    }
+    
+    for (FeedItem *item in feed.items) {
+        item.feed = feed;
+    }
 
-//    for (int i = 1; i <= 5; i++)
-//    {
-//        FeedItem *item = [feed.items objectAtIndex:i];
+    for (int i = 0; i <= 4; i++) {
+        FeedItem *item = [feed.items objectAtIndex:i];
 //        NSLog(@"item: %@", item.title);
-//    }
+        outputNewsText = [outputNewsText stringByAppendingString:item.title];
+        outputNewsText = [outputNewsText stringByAppendingString:@".\n"];
+    }
+    
+//    NSLog(@"outputNewsText %@", outputNewsText);
+//    [newsText setString:outputNewsText];
 
 }
 
 - (NSString *)validationDidComplete:(Feed *)feedsItems {
     self.feedItems = [self.feedItems stringByAppendingString:NSLocalizedString(@"\nToday's headlines:\n", @"")];
 
-    for (int i = 1; i <= 1; i++) {
-        FeedItem *item = [feedsItems.items objectAtIndex:i];
-        self.feedItems = [self.feedItems stringByAppendingString:item.title];
-        self.feedItems = [self.feedItems stringByAppendingString:@".\n"];
-        NSLog(@"feeed: %@", item.title);
-    }
+//    for (int i = 0; i <= 4; i++) {
+//        FeedItem *item = [feedsItems.items objectAtIndex:i];
+//        self.feedItems = [self.feedItems stringByAppendingString:item.title];
+//        self.feedItems = [self.feedItems stringByAppendingString:@".\n"];
+//        NSLog(@"feeed: %@", item.title);
+//    }
     self.aHasCompleted = YES;
     return self.feedItems;
 }

@@ -16,7 +16,6 @@
     //Weather conditions
     __block NSString *outputWeatherText = [[NSString alloc] init];
     NSString *localityWeather = [defaults stringForKey: @"Locality"];
-    NSString *countryCodeWeather = [defaults stringForKey: @"CountryCode"];
     NSString *temperatureType = [defaults stringForKey: @"TemperatureStyle"];
     __block NSData *weatherImage = NULL;
     
@@ -24,7 +23,7 @@
     NSNumber *userLatitude = [userCoordinate objectForKey:@"lat"];
     NSNumber *userLongitude = [userCoordinate objectForKey:@"long"];
 	
-    if (localityWeather != nil && countryCodeWeather != nil) {
+    if (userLatitude != nil && userLongitude != nil) {
         JSWeather *weather = [JSWeather sharedInstance];
         
         if ([temperatureType isEqualToString:@"Celsius"]) {

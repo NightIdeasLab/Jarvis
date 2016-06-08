@@ -49,7 +49,6 @@
 
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:query] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-
         if (error) {
             completionBlock(nil, error);
             return;
@@ -89,8 +88,8 @@
         NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@", kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryCoordinates, kJSWeatherAPIQueryLatitude, latitude, kJSWeatherAPIQueryLongitude, longitude, kJSWeatherAPIAPPIDURL, kJSWeatherAPIAPPID] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
         NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:query] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-
+        data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
         if (error) {
             completionBlock(nil, error);
             return;
@@ -133,7 +132,6 @@
 
     if (timePassed) {
         NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@,%@&%@%li", kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryDailyForecast,city, state, kJSWeatherAPIQueryDailyForecastCount, (long)numberOfDays] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
         [self executeQuery:query block:^(NSData *queryResponse, NSError *error) {
             if (error) {
                 completionBlock(nil, error);
@@ -164,6 +162,7 @@
     NSString *keyForForecastData = [NSString stringWithFormat:@"JSDailyForecastData%ld", (long)numberOfDays];
     NSDate *lastRefreshDate = [fDefaults objectForKey:keyForForecastRefreshDate];
     const BOOL timePassed = !lastRefreshDate || (-1 * [lastRefreshDate timeIntervalSinceNow]) >= WEATHER_REFRESH_TIME;
+
     if (timePassed) {
         NSString *query = [[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@&%@%li%@%@", kJSWeatherAPIURL, kJSWeatherAPITypeData, kJSWeatherAPIVersion, kJSWeatherAPIQueryDailyForecastCoord, kJSWeatherAPIQueryLatitude, latitude, kJSWeatherAPIQueryLongitude, longitude, kJSWeatherAPIQueryDailyForecastCount, (long)numberOfDays, kJSWeatherAPIAPPIDURL, kJSWeatherAPIAPPID] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
