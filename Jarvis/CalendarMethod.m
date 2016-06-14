@@ -28,6 +28,9 @@
             if ([[events objectAtIndex:i] isAllDay]) {
                 outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"All day ", @"")];
                 outputCalendarText = [outputCalendarText stringByAppendingString:[[events objectAtIndex:i] title]];
+                // if the title has a dot at the end
+                if(![[[events objectAtIndex:i] title] hasSuffix:@"."])
+                    outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@".", @"")];
             } else {
                 NSCalendarDate *eventDate = [[[events objectAtIndex:i] startDate] dateWithCalendarFormat:nil timeZone:nil];
                 outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@"At ", @"")];
@@ -35,6 +38,9 @@
                 else outputCalendarText = [outputCalendarText stringByAppendingString:[NSString stringWithFormat:@"%ld:%ld", [eventDate hourOfDay], [eventDate minuteOfHour]]];
                 outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@" there is ", @"")];
                 outputCalendarText = [outputCalendarText stringByAppendingString:[[events objectAtIndex:i] title]];
+                // if the title has a dot at the end
+                if(![[[events objectAtIndex:i] title] hasSuffix:@"."])
+                    outputCalendarText = [outputCalendarText stringByAppendingString:NSLocalizedString(@".", @"")];
             }
             outputCalendarText = [outputCalendarText stringByAppendingString:@"\n"];
         }
@@ -50,11 +56,25 @@
     if ([tasks count] == 0) {
         outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou have no reminders scheduled for today!\n", @"")];
     } else {
+        // TODO: add the priority when Apple fix the naming
         for(int i=0; i<[tasks count]; i++) {
-            outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou need to ", @"")];
-            outputRemindersText = [outputRemindersText stringByAppendingString:[[tasks objectAtIndex:i] title]];
-            outputRemindersText = [outputRemindersText stringByAppendingString:@".\n"];
+            if (![[tasks objectAtIndex:i] completedDate]) {
+                outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@"\nYou need to ", @"")];
+                outputRemindersText = [outputRemindersText stringByAppendingString:[[tasks objectAtIndex:i] title]];
+                // if the title has a dot at the end
+                if(![[[tasks objectAtIndex:i] title] hasSuffix:@"."])
+                    outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@".", @"")];
+
+                if ([[tasks objectAtIndex:i] notes]) {
+                    outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@" Notes for reminder: ", @"")];
+                    outputRemindersText = [outputRemindersText stringByAppendingString:[[tasks objectAtIndex:i] notes]];
+                    // if the title has a dot at the end
+                    if(![[[tasks objectAtIndex:i] notes] hasSuffix:@"."])
+                        outputRemindersText = [outputRemindersText stringByAppendingString:NSLocalizedString(@".", @"")];
+                }
+            }
         }
+        outputRemindersText = [outputRemindersText stringByAppendingString:@"\n"];
     }
     return outputRemindersText;
 }
