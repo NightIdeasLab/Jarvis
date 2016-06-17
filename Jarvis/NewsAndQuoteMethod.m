@@ -24,21 +24,10 @@
     NSURL *userURL = [defaults URLForKey:@"RSSURL"];
 
     if (userURL != NULL) {
-        [self refreshWithURL:userURL];
-//        [self performSelectorOnMainThread:@selector(refreshWithURL:)
-//                                             withObject:userURL
-//                                          waitUntilDone:TRUE];
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self refreshWithURL:userURL];
-//                NSLog(@"mata: %@", self.feedItems);
-//            if (!self.aHasCompleted)
-//            {
-//                NSLog(@"B running without A having run yet!, %@", self);
-//
-//            } else {
-//                NSLog(@"A has run!, %@", self);
-//            }
-//        });
+//        [self refreshWithURL:userURL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self refreshWithURL:userURL];
+        });
     } else {
         NSString * quoteContent1 = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://feeds.nytimes.com/nyt/rss/HomePage"] encoding: NSUTF8StringEncoding error:nil];
         if(quoteContent1!=nil) {
@@ -150,7 +139,6 @@
 
 - (void)refreshComplete:(NSArray *)newItems {
     Feed *feed = [[Feed alloc] init];
-    NSString *outputNewsText = [[NSString alloc] init];
 
     if (!newItems) {
         // TODO: problem refreshing the feed!
@@ -177,17 +165,15 @@
             // necessary for incremental feeds where we keep collecting items
             //while (merged.count > MAX_FEED_ITEMS) [merged removeLastObject];
         } else {
-            /*
-            for (FeedItem *newItem in newItems) {
-                int i = (int)[feed.feed indexOfObject:newItem];
-                if (i >= 0)
-                    [merged addObject:(feed.items)[i]]; // preserve existing item
-                else {
-                    NSLog(@"NEW ITEM FOR FEED %@: %@", feed.URL, newItem);
-                    [merged addObject:newItem];
-                }
-            }
-             */
+//            for (FeedItem *newItem in newItems) {
+//                int i = (int)[feed.feed indexOfObject:newItem];
+//                if (i >= 0)
+//                    [merged addObject:(feed.items)[i]];  // preserve existing item
+//                else {
+//                    NSLog(@"NEW ITEM FOR FEED %@: %@", feed.URL, newItem);
+//                    [merged addObject:newItem];
+//                }
+//            }
         }
 
         feed.items = merged;
@@ -202,42 +188,41 @@
         }
     }
     else {
-//        NSLog(@"ALL NEW ITEMS FOR FEED %@", feed.URL);
         feed.items = newItems;
 
         // don't notify about the initial fetch, or we'll have a shitload of growl popups
         for (FeedItem *item in feed.items)
             item.notified = item.viewed = YES;
     }
-
-    [self validationDidComplete:feed];
-    
-    for (FeedItem *item in feed.items) {
+    // link them back to us
+    for (FeedItem *item in feed.items)
         item.feed = feed;
-    }
-
-    for (int i = 0; i <= 4; i++) {
+    
+    for (int i = 0; i <= [feed.items count] - 1; i++) {
         FeedItem *item = [feed.items objectAtIndex:i];
-//        NSLog(@"item: %@", item.title);
-        outputNewsText = [outputNewsText stringByAppendingString:item.title];
-        outputNewsText = [outputNewsText stringByAppendingString:@".\n"];
+        NSLog(@"item: %@", item.title);
+//        outputNewsText = [outputNewsText stringByAppendingString:item.title];
+//        outputNewsText = [outputNewsText stringByAppendingString:@".\n"];
     }
     
-//    NSLog(@"outputNewsText %@", outputNewsText);
-//    [newsText setString:outputNewsText];
-
+    //    NSLog(@"outputNewsText %@", outputNewsText);
+    //    [newsText setString:outputNewsText];
+    
+    [self validationDidComplete:feed];
 }
 
 - (NSString *)validationDidComplete:(Feed *)feedsItems {
     self.feedItems = [self.feedItems stringByAppendingString:NSLocalizedString(@"\nToday's headlines:\n", @"")];
 
-//    for (int i = 0; i <= 4; i++) {
-//        FeedItem *item = [feedsItems.items objectAtIndex:i];
-//        self.feedItems = [self.feedItems stringByAppendingString:item.title];
-//        self.feedItems = [self.feedItems stringByAppendingString:@".\n"];
+    for (int i = 0; i <= 4; i++) {
+        FeedItem *item = [feedsItems.items objectAtIndex:i];
+        self.feedItems = [self.feedItems stringByAppendingString:item.title];
+        self.feedItems = [self.feedItems stringByAppendingString:@".\n"];
 //        NSLog(@"feeed: %@", item.title);
-//    }
-    self.aHasCompleted = YES;
+    }
+
+//    NSLog(@"feeed: %@", self.feedItems);
+    
     return self.feedItems;
 }
 

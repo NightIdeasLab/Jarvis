@@ -45,7 +45,7 @@
 
 - (NSWindow *)windowLM;
 
-- (IBAction)openAboutPanel:(id)sender;
+- (IBAction)openAboutPanel: (id)sender;
 - (IBAction) openPreferences: (id) sender;
 - (IBAction) sendFeedBack: (id) sender;
 - (IBAction) openHomepage: (id) sender;
